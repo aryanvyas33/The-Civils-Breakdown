@@ -1,4 +1,4 @@
-# UPSC PYQ Vault 📚⚡
+# The Civils Breakdown 📚⚡
 
 A comprehensive, intelligent search and analytical engine for UPSC Civil Services Examination (CSE) Previous Year Questions (PYQs). Built with Next.js 14, TypeScript, Tailwind CSS, and powered by Gemini & Firebase.
 
@@ -39,8 +39,8 @@ A comprehensive, intelligent search and analytical engine for UPSC Civil Service
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/<your-username>/upsc-pyq-vault.git
-   cd upsc-pyq-vault
+   git clone https://github.com/aryanvyas33/The-Civils-Breakdown.git
+   cd The-Civils-Breakdown
    ```
 
 2. **Install dependencies**:
