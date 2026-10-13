@@ -6,13 +6,19 @@ import { Mail, Check, Copy } from 'lucide-react';
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
-  const contactEmail = 'theupscbreakdown@gmail.com';
+  const contactEmail = 'thecivilsbreakdown@gmail.com';
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(contactEmail).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    });
+    if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(contactEmail)
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2500);
+        })
+        .catch(() => {
+          setCopied(false);
+        });
+    }
   };
 
   return (
@@ -33,11 +39,11 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-3 mb-3 group">
               <img
                 src="/prism_logo_mark.png"
-                alt="The UPSC Breakdown"
+                alt="The Civils Breakdown"
                 className="h-10 w-auto object-contain filter drop-shadow-[2px_2px_0px_rgba(42,42,42,0.3)] group-hover:scale-105 transition-transform"
               />
               <span className="font-vt font-bold text-2xl uppercase text-retro-border tracking-wide">
-                THE_UPSC_BREAKDOWN
+                THE_CIVILS_BREAKDOWN
               </span>
             </Link>
             <p className="font-space text-xs text-retro-border/80 max-w-sm leading-relaxed mb-4">
@@ -111,10 +117,10 @@ export default function Footer() {
         {/* Bottom Meta Row */}
         <div className="pt-6 flex flex-col md:flex-row justify-between items-center text-xs font-space text-gray-500 gap-4">
           <div className="shrink-0">
-            © {new Date().getFullYear()} The UPSC Breakdown (theupscbreakdown.com) · All rights reserved.
+            © {new Date().getFullYear()} The Civils Breakdown (thecivilsbreakdown.com) · All rights reserved.
           </div>
           <div className="text-[11px] max-w-xl text-center md:text-right leading-relaxed">
-            The UPSC Breakdown is an independent educational platform and is not affiliated with, authorized, or endorsed by the Union Public Service Commission.
+            The Civils Breakdown is an independent educational platform and is not affiliated with, authorized, or endorsed by the Union Public Service Commission (UPSC).
           </div>
         </div>
 

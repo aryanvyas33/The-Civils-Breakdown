@@ -1,26 +1,27 @@
 const fs = require('fs');
 
-const formattedTopics = JSON.parse(fs.readFileSync('formatted_59_topics.json', 'utf8'));
+const formattedTopics = JSON.parse(fs.readFileSync('src/data/ca-topics.json', 'utf8'));
 
-// Read existing HTML template or build it cleanly
-const htmlPath = 'wireframes/12-current-affairs-priority-tracker.html';
-let html = fs.readFileSync(htmlPath, 'utf8');
-
-// Separate Band A topics (Ranks 1 to 35) and Band B/C topics (Ranks 36 to 59)
+// Separate Band A topics (Ranks 1 to 45) and Band B/C topics (Ranks 46 to 76)
 const bandATopics = formattedTopics.filter(t => t.band === 'bandA');
 const bandBTopics = formattedTopics.filter(t => t.band !== 'bandA');
 
 console.log('Band A:', bandATopics.length);
 console.log('Band B/C:', bandBTopics.length);
 
-// Let's create an injector script to update the data and UI elements
 const newScriptContent = `
-  // Authoritative 59-Topic Dataset (Updated up to September 2026)
+  // Authoritative 76-Topic Dataset (January to September 2026)
   const TOPICS_DATA = ${JSON.stringify(formattedTopics, null, 2)};
 
   // State Management
-  const TOTAL_A = 35;
+  const TOTAL_A = 45;
+  const TOTAL_QUICK = 31;
+  const WEIGHT_A = 1.0;
+  const WEIGHT_QUICK = 0.5;
+  const TOTAL_PTS = 60.5;
+
   let doneSet = new Set();
+  let quickDoneSet = new Set();
   let currentMonthFilter = 'all';
   let currentPaperFilter = 'all';
   let currentTierFilter = 'all';
@@ -49,12 +50,22 @@ const newScriptContent = `
 
   // Update Progress Meters
   function updateProgress() {
-    const done = doneSet.size;
-    const pct = Math.round((done / TOTAL_A) * 100);
-    document.getElementById('progCount').textContent = \`\${done} / \${TOTAL_A}\`;
-    document.getElementById('progFill').style.width = \`\${pct}%\`;
-    document.getElementById('stickyFill').style.width = \`\${pct}%\`;
-    document.getElementById('stickyPct').textContent = \`\${done} / \${TOTAL_A} Must-Cover done (\${pct}%)\`;
+    const doneA = doneSet.size;
+    const doneQuick = quickDoneSet.size;
+    const currentPts = (doneA * WEIGHT_A) + (doneQuick * WEIGHT_QUICK);
+    const pct = Math.min(100, Math.round((currentPts / TOTAL_PTS) * 100));
+
+    const progCountEl = document.getElementById('progCount');
+    if (progCountEl) progCountEl.textContent = \`\${doneA} / \${TOTAL_A}\`;
+
+    const progFillEl = document.getElementById('progFill');
+    if (progFillEl) progFillEl.style.width = \`\${pct}%\`;
+
+    const stickyFillEl = document.getElementById('stickyFill');
+    if (stickyFillEl) stickyFillEl.style.width = \`\${pct}%\`;
+
+    const stickyPctEl = document.getElementById('stickyPct');
+    if (stickyPctEl) stickyPctEl.textContent = \`\${doneA} / \${TOTAL_A} Must-Cover done (\${pct}%)\`;
 
     const msgs = [
       'Start with Rank #1 below — just 45 mins per topic!',
@@ -62,11 +73,12 @@ const newScriptContent = `
       'Nice work! Core themes being locked into your memory vault.',
       'Halfway through Must-Cover themes — solid competitive edge!',
       'Great discipline! Over 70% of high-probability themes covered.',
-      'Almost done with Band A topics across all 6 months!',
-      '🎉 All 35 Must-Cover themes mastered! Ready for answer writing.'
+      'Almost done with Band A topics across all 9 months!',
+      '🎉 All 45 Must-Cover themes mastered! Ready for answer writing.'
     ];
-    const idx = Math.min(Math.floor((done / TOTAL_A) * (msgs.length - 1)), msgs.length - 1);
-    document.getElementById('progMsg').textContent = msgs[idx];
+    const idx = Math.min(Math.floor((doneA / TOTAL_A) * (msgs.length - 1)), msgs.length - 1);
+    const progMsgEl = document.getElementById('progMsg');
+    if (progMsgEl) progMsgEl.textContent = msgs[idx];
   }
 
   // Switch Paper for a Specific Topic Card (Interactive Multi-Paper Angle)
@@ -75,7 +87,6 @@ const newScriptContent = `
     if (!topic) return;
     topic.selectedPaper = selectedPaper;
 
-    // Update active paper pill buttons on this card
     const card = document.querySelector(\`.topic-card[data-id="\${topicId}"]\`);
     if (!card) return;
     
@@ -87,19 +98,16 @@ const newScriptContent = `
       }
     });
 
-    // Update the Syllabus Pointer text
     const pointerEl = card.querySelector('.syllabus-pointer-text');
     if (pointerEl) {
       pointerEl.textContent = topic.syllabusPointers[selectedPaper] || topic.syllabusPointers[topic.primaryPaper];
     }
 
-    // Update the Syllabus Pointer label tag
     const headerLabel = card.querySelector('.syllabus-pointer-header span');
     if (headerLabel) {
       headerLabel.textContent = \`OFFICIAL SYLLABUS POINTER // \${selectedPaper}\`;
     }
 
-    // Update the Plain English Exam Angle Hook
     const hookEl = card.querySelector('.card-hook');
     if (hookEl) {
       hookEl.innerHTML = topic.paperAngles[selectedPaper] || topic.paperAngles[topic.primaryPaper];
@@ -109,17 +117,16 @@ const newScriptContent = `
   // Render Band A Cards
   function renderCards() {
     const container = document.getElementById('topicListA');
+    if (!container) return;
     let html = '';
 
-    // Only render Band A topics in the primary card deck
     const bandAList = TOPICS_DATA.filter(t => t.band === 'bandA');
 
     bandAList.forEach(t => {
-      const activePaper = t.selectedPaper;
+      const activePaper = t.selectedPaper || t.primaryPaper;
       const syllabusText = t.syllabusPointers[activePaper] || t.syllabusPointers[t.primaryPaper];
       const angleText = t.paperAngles[activePaper] || t.paperAngles[t.primaryPaper];
 
-      // Build interactive paper pills
       let paperPillsHtml = '';
       t.papers.forEach(p => {
         const isActive = p === activePaper;
@@ -153,7 +160,6 @@ const newScriptContent = `
 
             <div class="card-title">\${t.title}</div>
 
-            <!-- Prominently displayed official syllabus pointer -->
             <div class="syllabus-pointer-box">
               <div class="syllabus-pointer-header">
                 <span>OFFICIAL SYLLABUS POINTER // \${activePaper}</span>
@@ -162,7 +168,6 @@ const newScriptContent = `
               <div class="syllabus-pointer-text">\${syllabusText}</div>
             </div>
 
-            <!-- Plain English Exam Angle Hook -->
             <div class="card-hook">
               \${angleText}
             </div>
@@ -184,6 +189,7 @@ const newScriptContent = `
   // Render Band B & C Quick Reads
   function renderQuickReads() {
     const container = document.getElementById('quickReadsContainer');
+    if (!container) return;
     let html = '';
     const quickList = TOPICS_DATA.filter(t => t.band !== 'bandA');
 
@@ -214,7 +220,7 @@ const newScriptContent = `
   // Filter Handlers
   function setMonthFilter(month) {
     currentMonthFilter = month;
-    ['all','apr','may','jun','jul','aug','sep'].forEach(m => {
+    ['all','jan','feb','mar','apr','may','jun','jul','aug','sep'].forEach(m => {
       const btn = document.getElementById(\`f-month-\${m}\`);
       if (btn) btn.classList.remove('active');
     });
@@ -261,7 +267,6 @@ const newScriptContent = `
 
       card.style.display = (showMonth && showPaper && showTier) ? 'grid' : 'none';
 
-      // If user selected a specific paper (e.g. GS1), automatically set that card's view to that paper
       if (currentPaperFilter !== 'all' && papers.includes(currentPaperFilter)) {
         const id = parseInt(card.dataset.id, 10);
         switchTopicPaper(id, currentPaperFilter);
@@ -281,46 +286,46 @@ const newScriptContent = `
       item.style.display = (showMonth && showPaper && showTier) ? 'flex' : 'none';
     });
 
-    // Show/Hide Section Headings based on Tier filter
     const sectionA = document.getElementById('sectionHeadingA');
     const sectionB = document.getElementById('sectionB');
-    if (currentTierFilter === 'bandB' || currentTierFilter === 'bandC') {
-      sectionA.style.display = 'none';
-      sectionB.style.display = 'block';
-      document.getElementById('qrList').classList.add('open');
-      document.getElementById('qrArrowIcon').textContent = '▲ HIDE LIST';
-    } else if (currentTierFilter === 'bandA') {
-      sectionA.style.display = 'flex';
-      sectionB.style.display = 'none';
-    } else {
-      sectionA.style.display = 'flex';
-      sectionB.style.display = 'block';
+    if (sectionA && sectionB) {
+      if (currentTierFilter === 'bandB' || currentTierFilter === 'bandC') {
+        sectionA.style.display = 'none';
+        sectionB.style.display = 'block';
+        const qrList = document.getElementById('qrList');
+        if (qrList) qrList.classList.add('open');
+        const arrow = document.getElementById('qrArrowIcon');
+        if (arrow) arrow.textContent = '▲ HIDE LIST';
+      } else if (currentTierFilter === 'bandA') {
+        sectionA.style.display = 'flex';
+        sectionB.style.display = 'none';
+      } else {
+        sectionA.style.display = 'flex';
+        sectionB.style.display = 'block';
+      }
     }
   }
 
-  // Toggle Dropdown Explainer
   function toggleModelExplainer() {
     const body = document.getElementById('explainerBody');
     const btn = document.getElementById('explainerToggleBtn');
     const arrow = document.getElementById('explainerArrowIcon');
-    body.classList.toggle('open');
-    btn.classList.toggle('open');
-    if (body.classList.contains('open')) {
-      arrow.textContent = '▲ CLICK TO COLLAPSE';
-    } else {
-      arrow.textContent = '▼ CLICK TO EXPAND';
+    if (body) body.classList.toggle('open');
+    if (btn) btn.classList.toggle('open');
+    if (arrow) {
+      arrow.textContent = body && body.classList.contains('open') ? '▲ CLICK TO COLLAPSE' : '▼ CLICK TO EXPAND';
     }
   }
 
-  // Toggle Quick Reads Accordion
   function toggleQuickReads() {
     const list = document.getElementById('qrList');
     const arrow = document.getElementById('qrArrowIcon');
-    list.classList.toggle('open');
-    arrow.textContent = list.classList.contains('open') ? '▲ HIDE LIST' : '▼ SHOW LIST';
+    if (list) list.classList.toggle('open');
+    if (arrow) {
+      arrow.textContent = list && list.classList.contains('open') ? '▲ HIDE LIST' : '▼ SHOW LIST';
+    }
   }
 
-  // Initial Load
   document.addEventListener('DOMContentLoaded', () => {
     renderCards();
     renderQuickReads();
@@ -329,4 +334,4 @@ const newScriptContent = `
 `;
 
 fs.writeFileSync('scripts/generated_script.js', newScriptContent);
-console.log('Generated script written!');
+console.log('Generated script written for 76 topics!');

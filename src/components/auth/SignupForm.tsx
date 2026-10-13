@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import GoogleAuthButton from './GoogleAuthButton';
 import PasswordStrengthBar from './PasswordStrengthBar';
@@ -11,7 +12,8 @@ interface SignupFormProps {
 }
 
 export default function SignupForm({ onSwitchToLogin }: SignupFormProps) {
-  const { signupWithPassword, loginWithGoogle, errorMessage, setErrorMessage } = useAuth();
+  const router = useRouter();
+  const { signupWithPassword, loginWithGoogle, errorMessage, setErrorMessage, closeAuthModal } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -52,21 +54,24 @@ export default function SignupForm({ onSwitchToLogin }: SignupFormProps) {
     return (
       <div className="p-6 text-center flex flex-col items-center">
         <div className="w-14 h-14 bg-retro-mint text-white border-3 border-retro-border flex items-center justify-center mb-4 shadow-retro">
-          <CheckCircle2 className="w-8 h-8 text-[#0D9488]" />
+          <CheckCircle2 className="w-8 h-8 text-white" />
         </div>
         <h3 className="font-vt text-3xl uppercase text-retro-border mb-2">
           Vault Account Created!
         </h3>
         <p className="font-space text-xs text-retro-border/80 max-w-sm mb-6 leading-relaxed">
           We sent a verification link to <strong className="text-retro-border">{email}</strong>.
-          Click the link in your email to verify and start syncing your vault.
+          Click the link in your email to verify and start syncing your vault across devices.
         </p>
         <button
           type="button"
-          onClick={onSwitchToLogin}
-          className="bg-retro-accent text-white border-2 border-retro-accent py-2 px-6 font-vt text-lg shadow-retro hover:bg-[#d05948] transition-all"
+          onClick={() => {
+            closeAuthModal();
+            router.push('/saved');
+          }}
+          className="bg-retro-accent text-white border-2 border-retro-accent py-2 px-6 font-vt text-lg shadow-retro hover:bg-[#d05948] transition-all cursor-pointer"
         >
-          ▶ PROCEED TO LOGIN
+          ▶ GO TO MY VAULT →
         </button>
       </div>
     );

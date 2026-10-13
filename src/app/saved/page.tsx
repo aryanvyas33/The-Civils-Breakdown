@@ -14,7 +14,7 @@ import { useAuth } from '@/hooks/useAuth';
 import SyncNudgeBanner from '@/components/auth/SyncNudgeBanner';
 
 export default function SavedQuestionsPage() {
-  const { isAuthenticated, lastSyncedAt, isSyncing } = useAuth();
+  const { isAuthenticated, lastSyncedAt, isSyncing, syncStatus } = useAuth();
   const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
   const [notes, setNotes] = useState<NoteEntry[]>([]);
   const [metaNotes, setMetaNotes] = useState<MetaNoteEntry[]>([]);
@@ -117,12 +117,21 @@ export default function SavedQuestionsPage() {
 
       {/* Cloud Sync Status (Authenticated) or Nudge (Guest) */}
       {isAuthenticated ? (
-        <div className="mb-6 bg-[#EDF7F5] border-2 border-[#0D9488] p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-space text-xs text-[#0D9488] shadow-retro-sm">
+        <div className={`mb-6 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-space text-xs shadow-retro-sm border-2 ${
+          syncStatus === 'error'
+            ? 'bg-[#FFF0EE] border-retro-accent text-retro-accent'
+            : 'bg-[#EDF7F5] border-[#0D9488] text-[#0D9488]'
+        }`}>
           <div className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#0D9488] animate-pulse" />
+            <span className={`w-2.5 h-2.5 rounded-full ${
+              syncStatus === 'error'
+                ? 'bg-retro-accent'
+                : 'bg-[#0D9488] animate-pulse'
+            }`} />
             <span className="font-bold">
-              Cloud sync active —{' '}
-              {isSyncing
+              {syncStatus === 'error'
+                ? 'Sync interrupted — changes are saved locally offline'
+                : isSyncing
                 ? 'Syncing vault...'
                 : lastSyncedAt
                 ? `Last synced ${new Date(lastSyncedAt).toLocaleTimeString()}`
@@ -137,7 +146,7 @@ export default function SavedQuestionsPage() {
             onClick={() => window.dispatchEvent(new Event('pyq-vault-sync-trigger'))}
             className="underline font-bold hover:text-retro-border cursor-pointer self-start sm:self-auto"
           >
-            Sync now
+            {syncStatus === 'error' ? 'Retry sync' : 'Sync now'}
           </button>
         </div>
       ) : (

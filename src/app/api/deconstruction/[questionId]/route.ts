@@ -30,6 +30,10 @@ export async function GET(
   const question = getQuestionById(questionId);
   const aiItem = getAIDeconstruction(questionId);
 
+  const cacheHeaders = {
+    'Cache-Control': 'public, max-age=31536000, immutable',
+  };
+
   // 1. Check if curated high-detail blueprint exists
   const curated = getCuratedDeconstruction(questionId);
   if (curated) {
@@ -38,7 +42,7 @@ export async function GET(
       data: aiItem || null,
       deconstruction: curated,
     };
-    return NextResponse.json(payload);
+    return NextResponse.json(payload, { headers: cacheHeaders });
   }
 
   // 2. Check modern AI deconstruction dataset (1,131 questions)
@@ -49,7 +53,7 @@ export async function GET(
       data: aiItem,
       deconstruction: adapted,
     };
-    return NextResponse.json(payload);
+    return NextResponse.json(payload, { headers: cacheHeaders });
   }
 
   // 3. Fallback to precomputed structural dataset if available
@@ -62,7 +66,7 @@ export async function GET(
       data: null,
       deconstruction: adapted,
     };
-    return NextResponse.json(payload);
+    return NextResponse.json(payload, { headers: cacheHeaders });
   }
 
   // 4. Fallback synthesis from question data
@@ -73,7 +77,7 @@ export async function GET(
       data: null,
       deconstruction: synthesized,
     };
-    return NextResponse.json(payload);
+    return NextResponse.json(payload, { headers: cacheHeaders });
   }
 
   return NextResponse.json({ error: 'Question not found' }, { status: 404 });

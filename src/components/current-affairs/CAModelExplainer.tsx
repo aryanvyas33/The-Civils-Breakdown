@@ -239,23 +239,23 @@ export default function CAModelExplainer() {
             {/* Box 4: Weighted Progress Model */}
             <div className="bg-[#FAF8F2] border-[1.5px] border-[#2A2A2A] p-3.5 text-xs font-sans">
               <div className="font-vt text-xl text-[#2A2A2A] mb-1.5">
-                // ⚖️ WEIGHTED CA PROGRESS FORMULA (47.0 TOTAL PTS)
+                // ⚖️ WEIGHTED CA PROGRESS FORMULA (60.5 TOTAL PTS)
               </div>
               <p className="text-[#444] leading-relaxed mb-2">
                 Quick Reads are directly included in your progress bar, calibrated by their study investment:
               </p>
               <div className="flex flex-col gap-1.5">
                 <div className="bg-white border border-[#2A2A2A] p-1.5 flex justify-between items-center font-mono text-[0.72rem]">
-                  <span><strong>★ Band A (Must-Cover):</strong> 35 Topics × 1.0x</span>
-                  <span className="text-[#0D9488] font-bold">35.0 PTS MAX</span>
+                  <span><strong>★ Band A (Must-Cover):</strong> 45 Topics × 1.0x</span>
+                  <span className="text-[#0D9488] font-bold">45.0 PTS MAX</span>
                 </div>
                 <div className="bg-white border border-[#2A2A2A] p-1.5 flex justify-between items-center font-mono text-[0.72rem]">
-                  <span><strong>📖 Quick Reads (Band B/C):</strong> 24 Topics × 0.5x</span>
-                  <span className="text-[#4A90E2] font-bold">12.0 PTS MAX</span>
+                  <span><strong>📖 Quick Reads (Band B/C):</strong> 31 Topics × 0.5x</span>
+                  <span className="text-[#4A90E2] font-bold">15.5 PTS MAX</span>
                 </div>
               </div>
               <div className="mt-2 font-mono text-[0.68rem] text-[#666]">
-                Σ Total Score = 47.0 Points (100% Mains Coverage). Completing a Quick Read gives +0.5 pts, rewarding reading without diluting Band A mastery.
+                Σ Total Score = 60.5 Points (100% Mains Coverage). Completing a Quick Read gives +0.5 pts, rewarding reading without diluting Band A mastery.
               </div>
             </div>
           </div>

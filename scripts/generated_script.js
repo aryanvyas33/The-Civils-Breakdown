@@ -1,5 +1,5 @@
 
-  // Authoritative 59-Topic Dataset (Updated up to September 2026)
+  // Authoritative 76-Topic Dataset (January to September 2026)
   const TOPICS_DATA = [
   {
     "id": 2,
@@ -28,6 +28,11 @@
     "paperAngles": {
       "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Art 280, 270, 275; 41% divisible pool; cesses and surcharges; local-body grants; GST</em>. Exam Priority: Full note + 2 practised answers + data/case.",
       "GS3": "<strong>GS3 Economic/Tech Angle:</strong> Focus on fiscal sustainability, Capex allocations, supply-chain resilience, and macroeconomic stability."
+    },
+    "recentUpdate": {
+      "month": "Sep 2026",
+      "tag": "PERSISTENCE BOOSTED (RANK #1 HELD)",
+      "text": "Southern States Finance Ministers Conclave issues joint memorandum seeking statutory cap on cesses/surcharges; 16th FC confirms vertical devolution study."
     }
   },
   {
@@ -60,6 +65,11 @@
       "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>Paris Agreement; CBDR-RC; CCTS; CBAM; Art 6 markets; net zero 2070; COP33 bid withdrawn</em>. Exam Priority: Full note + 2 practised answers + data/case.",
       "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
       "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    },
+    "recentUpdate": {
+      "month": "Aug 2026",
+      "tag": "NEW STATUTORY REGULATION",
+      "text": "Draft Carbon Credit Trading Scheme (CCTS) compliance rules notified; India submits revised 2035 targets ahead of COP30."
     }
   },
   {
@@ -81,13 +91,13 @@
     "index": 98,
     "tier": "Tier 1",
     "prepDepth": "Full note + 2 practised answers + data/case",
-    "staticCore": "VB-G RAM G Act 2025: 125 days; 60:40 Centre-State; normative allocation on 16th FC parameters; 60-day farm pause; DBT",
+    "staticCore": "VB-G RAM G Act 2025: 125 days; 60:40 Centre-State (90:10 NE and Himalayan); normative allocation on 16th FC parameters; 60-day farm-season pause; fixed ceiling vs demand-driven MGNREGA; DBT",
     "syllabusPointers": {
       "GS2": "GS2: Welfare schemes for vulnerable sections; related laws, institutions, bodies",
       "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
     },
     "paperAngles": {
-      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>VB-G RAM G Act 2025: 125 days; 60:40 Centre-State; normative allocation on 16th FC parameters; 60-day farm pause; DBT</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>VB-G RAM G Act 2025: 125 days; 60:40 Centre-State (90:10 NE and Himalayan); normative allocation on 16th FC parameters; 60-day farm-season pause; fixed ceiling vs demand-driven MGNREGA; DBT</em>. Exam Priority: Full note + 2 practised answers + data/case.",
       "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
     }
   },
@@ -142,13 +152,13 @@
     "index": 97,
     "tier": "Tier 1",
     "prepDepth": "Full note + 2 practised answers + data/case",
-    "staticCore": "IWT 1960; Neutral Expert versus Court of Arbitration; fundamental change of circumstances (VCLT); Chenab and Jhelum projects; Ganges Water Treaty 2026",
+    "staticCore": "IWT 1960; Neutral Expert versus Court of Arbitration; fundamental change of circumstances (VCLT); Chenab and Jhelum projects; Ganges Water Treaty due to lapse in December 2026 (my knowledge: verify)",
     "syllabusPointers": {
       "GS2": "GS2: India and its neighbourhood: relations",
       "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
     },
     "paperAngles": {
-      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>IWT 1960; Neutral Expert versus Court of Arbitration; fundamental change of circumstances (VCLT); Chenab and Jhelum projects; Ganges Water Treaty 2026</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>IWT 1960; Neutral Expert versus Court of Arbitration; fundamental change of circumstances (VCLT); Chenab and Jhelum projects; Ganges Water Treaty due to lapse in December 2026 (my knowledge: verify)</em>. Exam Priority: Full note + 2 practised answers + data/case.",
       "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
     }
   },
@@ -298,7 +308,7 @@
     "syllabusPointers": {
       "GS2": "GS2: Issues relating to poverty and hunger",
       "GS1": "GS1: Salient features of Indian society; Social empowerment and developmental issues.",
-      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+      "GS4": "GS4: Aptitude and foundational values for civil service: empathy, tolerance, compassion towards the weaker sections."
     },
     "paperAngles": {
       "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>NFSA 2013; AAY 35 kg per household today; Arts 21 and 47; PDS; 2011 Census coverage; DBT and e-KYC exclusion</em>. Exam Priority: Full note + 2 practised answers + data/case.",
@@ -404,6 +414,7 @@
     "papers": [
       "GS3",
       "GS4",
+      "GS1",
       "GS2"
     ],
     "selectedPaper": "GS3",
@@ -416,11 +427,13 @@
     "staticCore": "Art 355; Citizenship Act 1955 s6A; Immigration and Foreigners Act 2025; Sarbananda Sonowal (2005); Census",
     "syllabusPointers": {
       "GS3": "GS3: Security challenges and management in border areas",
+      "GS1": "GS1: Salient features of Indian society; Social empowerment and developmental issues.",
       "GS2": "GS2: Functions and responsibilities of the Union and the States; Government policies and interventions.",
       "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
     },
     "paperAngles": {
       "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>Art 355; Citizenship Act 1955 s6A; Immigration and Foreigners Act 2025; Sarbananda Sonowal (2005); Census</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
       "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design.",
       "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
     }
@@ -510,8 +523,40 @@
     }
   },
   {
-    "id": 1,
+    "id": 72,
     "rank": 18,
+    "paperRank": 8,
+    "month": "Jan 2026",
+    "monthShort": "Jan",
+    "title": "Employment quality, female labour participation and gig work: what the Economic Survey shows",
+    "primaryPaper": "GS3",
+    "papers": [
+      "GS3",
+      "GS4",
+      "GS1"
+    ],
+    "selectedPaper": "GS3",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "68.6%",
+    "index": 88,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "PLFS; female labour force participation; informal employment; Code on Social Security 2020; platform work; skilling; AI and jobs",
+    "syllabusPointers": {
+      "GS3": "GS3: Indian economy: issues relating to planning, mobilisation of resources, growth, development and employment",
+      "GS1": "GS1: Salient features of Indian society; Social empowerment and developmental issues.",
+      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+    },
+    "paperAngles": {
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>PLFS; female labour force participation; informal employment; Code on Social Security 2020; platform work; skilling; AI and jobs</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
+    "id": 1,
+    "rank": 19,
     "paperRank": 10,
     "month": "Apr 2026",
     "monthShort": "Apr",
@@ -543,7 +588,7 @@
   },
   {
     "id": 3,
-    "rank": 19,
+    "rank": 20,
     "paperRank": 2,
     "month": "Apr 2026",
     "monthShort": "Apr",
@@ -572,7 +617,7 @@
   },
   {
     "id": 52,
-    "rank": 20,
+    "rank": 21,
     "paperRank": 11,
     "month": "Aug 2026",
     "monthShort": "Aug",
@@ -600,9 +645,38 @@
     }
   },
   {
+    "id": 71,
+    "rank": 22,
+    "paperRank": 12,
+    "month": "Jan 2026",
+    "monthShort": "Jan",
+    "title": "India-EU FTA: market access, CBAM and the sensitive-sector carve-outs",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS3"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "67.3%",
+    "index": 87,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "FTAs and the WTO; EU CBAM; rules of origin; services and mobility chapters; MFN assurance; green hydrogen; dairy and farm protection",
+    "syllabusPointers": {
+      "GS2": "GS2: Bilateral, regional and global groupings and agreements involving or affecting India; effects of policies of developed countries on India's interests",
+      "GS3": "GS3: Infrastructure: energy, ports; Effects of liberalisation on the economy and trade balance."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>FTAs and the WTO; EU CBAM; rules of origin; services and mobility chapters; MFN assurance; green hydrogen; dairy and farm protection</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS3": "<strong>GS3 Economic/Tech Angle:</strong> Focus on fiscal sustainability, Capex allocations, supply-chain resilience, and macroeconomic stability."
+    }
+  },
+  {
     "id": 9,
-    "rank": 21,
-    "paperRank": 8,
+    "rank": 23,
+    "paperRank": 9,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Energy security amid Hormuz disruption: import dependence, SPR and diversification",
@@ -627,8 +701,8 @@
   },
   {
     "id": 41,
-    "rank": 22,
-    "paperRank": 12,
+    "rank": 24,
+    "paperRank": 13,
     "month": "Jun 2026",
     "monthShort": "Jun",
     "title": "Examination integrity: NEET-UG 2026 leak, the NTA and the Public Examinations Amendment Act",
@@ -644,20 +718,20 @@
     "index": 86,
     "tier": "Tier 1",
     "prepDepth": "Full note + 2 practised answers + data/case",
-    "staticCore": "Public Examinations (Prevention of Unfair Means) Act 2024; NTA reform; Arts 14 and 21; statutory fast-track courts",
+    "staticCore": "Public Examinations (Prevention of Unfair Means) Act 2024; NTA reform (the 2024 expert committee: verify its name); Arts 14 and 21; the 2024 leak",
     "syllabusPointers": {
       "GS2": "GS2: Issues relating to development and management of social sector services: health, education, human resources",
-      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+      "GS4": "GS4: Probity in governance, public service integrity, anti-corruption, and code of conduct."
     },
     "paperAngles": {
-      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Public Examinations (Prevention of Unfair Means) Act 2024; NTA reform; Arts 14 and 21; statutory fast-track courts</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Public Examinations (Prevention of Unfair Means) Act 2024; NTA reform (the 2024 expert committee: verify its name); Arts 14 and 21; the 2024 leak</em>. Exam Priority: Full note + 2 practised answers + data/case.",
       "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
     }
   },
   {
     "id": 46,
-    "rank": 23,
-    "paperRank": 13,
+    "rank": 25,
+    "paperRank": 14,
     "month": "Jul 2026",
     "monthShort": "Jul",
     "title": "India's Indo-Pacific and economic-security partnerships: Japan, Indonesia, Australia, New Zealand",
@@ -685,8 +759,8 @@
   },
   {
     "id": 27,
-    "rank": 24,
-    "paperRank": 9,
+    "rank": 26,
+    "paperRank": 10,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Great Nicobar project: strategic development versus tribal rights and ecology",
@@ -694,8 +768,8 @@
     "papers": [
       "GS3",
       "GS4",
-      "GS2",
-      "GS1"
+      "GS1",
+      "GS2"
     ],
     "selectedPaper": "GS3",
     "band": "bandA",
@@ -720,8 +794,8 @@
   },
   {
     "id": 49,
-    "rank": 25,
-    "paperRank": 14,
+    "rank": 27,
+    "paperRank": 15,
     "month": "Jul 2026",
     "monthShort": "Jul",
     "title": "Simultaneous elections: the 129th Amendment Bill and JPC scrutiny",
@@ -736,18 +810,18 @@
     "index": 84,
     "tier": "Tier 1",
     "prepDepth": "Full note + 2 practised answers + data/case",
-    "staticCore": "Constitution (129th Amendment) Bill 2024 (Arts 82A, 83, 172, 327); UT Laws (Amendment) Bill 2024; Kovind committee",
+    "staticCore": "Constitution (129th Amendment) Bill 2024 (Arts 82A, 83, 172, 327); UT Laws (Amendment) Bill 2024; Kovind committee (March 2024); federalism and basic structure; ECI readiness",
     "syllabusPointers": {
       "GS2": "GS2: Indian Constitution: historical underpinnings, evolution, features, amendments, significant provisions and basic structure"
     },
     "paperAngles": {
-      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Constitution (129th Amendment) Bill 2024 (Arts 82A, 83, 172, 327); UT Laws (Amendment) Bill 2024; Kovind committee</em>. Exam Priority: Full note + 2 practised answers + data/case."
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Constitution (129th Amendment) Bill 2024 (Arts 82A, 83, 172, 327); UT Laws (Amendment) Bill 2024; Kovind committee (March 2024); federalism and basic structure; ECI readiness</em>. Exam Priority: Full note + 2 practised answers + data/case."
     }
   },
   {
     "id": 13,
-    "rank": 26,
-    "paperRank": 10,
+    "rank": 28,
+    "paperRank": 11,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Left Wing Extremism: lessons from the Naxal-free declaration",
@@ -778,8 +852,8 @@
   },
   {
     "id": 10,
-    "rank": 27,
-    "paperRank": 11,
+    "rank": 29,
+    "paperRank": 12,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Nuclear power expansion to 100 GW by 2047: private entry, liability and safety",
@@ -807,8 +881,8 @@
   },
   {
     "id": 28,
-    "rank": 28,
-    "paperRank": 15,
+    "rank": 30,
+    "paperRank": 16,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Prolonged pre-trial detention and UAPA bail: liberty versus national security",
@@ -836,8 +910,8 @@
   },
   {
     "id": 53,
-    "rank": 29,
-    "paperRank": 16,
+    "rank": 31,
+    "paperRank": 17,
     "month": "Aug 2026",
     "monthShort": "Aug",
     "title": "MMDR Amendment Act 2026: mineral taxation and Union-State fiscal federalism",
@@ -865,8 +939,8 @@
   },
   {
     "id": 54,
-    "rank": 30,
-    "paperRank": 17,
+    "rank": 32,
+    "paperRank": 18,
     "month": "Aug 2026",
     "monthShort": "Aug",
     "title": "Tribunals Reforms Bill 2026: National Tribunals Commission and executive-judiciary balance",
@@ -893,9 +967,102 @@
     }
   },
   {
+    "id": 66,
+    "rank": 33,
+    "paperRank": 13,
+    "month": "Feb 2026",
+    "monthShort": "Feb",
+    "title": "Union Budget 2026-27: fiscal consolidation, debt sustainability and the quality of spending",
+    "primaryPaper": "GS3",
+    "papers": [
+      "GS3",
+      "GS2"
+    ],
+    "selectedPaper": "GS3",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "57.4%",
+    "index": 80,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "FRBM Act 2003; fiscal deficit versus debt anchor; revenue deficit; capex multiplier; Finance Commission transfers; tax buoyancy",
+    "syllabusPointers": {
+      "GS3": "GS3: Indian economy: mobilisation of resources, growth; government budgeting",
+      "GS2": "GS2: Government policies and interventions in various sectors; Executive accountability and institutional design."
+    },
+    "paperAngles": {
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>FRBM Act 2003; fiscal deficit versus debt anchor; revenue deficit; capex multiplier; Finance Commission transfers; tax buoyancy</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design."
+    }
+  },
+  {
+    "id": 68,
+    "rank": 34,
+    "paperRank": 14,
+    "month": "Feb 2026",
+    "monthShort": "Feb",
+    "title": "India AI Impact Summit 2026: New Delhi Declaration and the shape of India's AI governance",
+    "primaryPaper": "GS3",
+    "papers": [
+      "GS3",
+      "GS4",
+      "GS2"
+    ],
+    "selectedPaper": "GS3",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "56.0%",
+    "index": 79,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "IndiaAI Mission; compute and GPU access; voluntary versus binding AI governance; data governance; Global South leadership; Pax Silica",
+    "syllabusPointers": {
+      "GS3": "GS3: Science and technology: developments and their applications and effects in everyday life; awareness in IT, computers",
+      "GS2": "GS2: Government policies and interventions in various sectors; Executive accountability and institutional design.",
+      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+    },
+    "paperAngles": {
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>IndiaAI Mission; compute and GPU access; voluntary versus binding AI governance; data governance; Global South leadership; Pax Silica</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
+    "id": 73,
+    "rank": 35,
+    "paperRank": 19,
+    "month": "Jan 2026",
+    "monthShort": "Jan",
+    "title": "UGC equity regulations 2026: caste discrimination on campus and the Supreme Court's stay",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS4",
+      "GS1"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "56.0%",
+    "index": 79,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "Arts 14, 15(4), 16, 17, 21; Abeda Salim Tadvi v. Union of India (Rohith Vemula and Payal Tadvi cases); UGC Act 1956; anti-ragging regulations 2009; sub-classification",
+    "syllabusPointers": {
+      "GS2": "GS2: Issues relating to development and management of social sector services: education; mechanisms for protection of vulnerable sections",
+      "GS1": "GS1: Salient features of Indian society; Social empowerment and developmental issues.",
+      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Arts 14, 15(4), 16, 17, 21; Abeda Salim Tadvi v. Union of India (Rohith Vemula and Payal Tadvi cases); UGC Act 1956; anti-ragging regulations 2009; sub-classification</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
     "id": 56,
-    "rank": 31,
-    "paperRank": 18,
+    "rank": 36,
+    "paperRank": 20,
     "month": "Sep 2026",
     "monthShort": "Sep",
     "title": "Election Commission's independence: the appointment law before a Constitution Bench",
@@ -923,8 +1090,8 @@
   },
   {
     "id": 12,
-    "rank": 32,
-    "paperRank": 12,
+    "rank": 37,
+    "paperRank": 15,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Semiconductors and electronics manufacturing: ISM 2.0, mobile-phone scheme and strategic-sector policy",
@@ -952,8 +1119,8 @@
   },
   {
     "id": 39,
-    "rank": 33,
-    "paperRank": 19,
+    "rank": 38,
+    "paperRank": 21,
     "month": "Jun 2026",
     "monthShort": "Jun",
     "title": "Regulating foreign-funded NGOs: FCRA Amendment Rules 2026 and civil-society space",
@@ -961,7 +1128,8 @@
     "papers": [
       "GS2",
       "GS4",
-      "GS1"
+      "GS1",
+      "GS3"
     ],
     "selectedPaper": "GS2",
     "band": "bandA",
@@ -974,18 +1142,20 @@
     "syllabusPointers": {
       "GS2": "GS2: Development processes and the development industry: the role of NGOs, SHGs, various groups and associations, donors, charities",
       "GS1": "GS1: Salient features of Indian society; Social empowerment and developmental issues.",
+      "GS3": "GS3: Indian economy and issues relating to planning, resource mobilisation, growth and development.",
       "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
     },
     "paperAngles": {
       "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>FCRA 2010 and 2020 amendment; Art 19(1)(c); sovereignty and public order; Rule 17B; purpose- and state-specific registration</em>. Exam Priority: Full note + 2 practised answers + data/case.",
       "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
+      "GS3": "<strong>GS3 Economic/Tech Angle:</strong> Focus on fiscal sustainability, Capex allocations, supply-chain resilience, and macroeconomic stability.",
       "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
     }
   },
   {
     "id": 40,
-    "rank": 34,
-    "paperRank": 20,
+    "rank": 39,
+    "paperRank": 22,
     "month": "Jun 2026",
     "monthShort": "Jun",
     "title": "Religious freedom and constitutional morality: the nine-judge Sabarimala reference",
@@ -1012,9 +1182,96 @@
     }
   },
   {
+    "id": 62,
+    "rank": 40,
+    "paperRank": 23,
+    "month": "Mar 2026",
+    "monthShort": "Mar",
+    "title": "Scheduled Caste status and religious conversion: Chinthada Anand v. State of Andhra Pradesh",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS4",
+      "GS1"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "53.0%",
+    "index": 77,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "Constitution (Scheduled Castes) Order 1950 para 3; Arts 15, 16, 25, 341; Dalit Christians and Muslims demand; Ranganath Misra Commission; reservation and conversion",
+    "syllabusPointers": {
+      "GS2": "GS2: Mechanisms, laws, institutions and bodies for vulnerable sections; salient features of the Indian Constitution",
+      "GS1": "GS1: Salient features of Indian society; Social empowerment, communalism, regionalism and secularism.",
+      "GS4": "GS4: Aptitude and foundational values for civil service: empathy, tolerance, compassion towards the weaker sections."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Constitution (Scheduled Castes) Order 1950 para 3; Arts 15, 16, 25, 341; Dalit Christians and Muslims demand; Ranganath Misra Commission; reservation and conversion</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
+    "id": 70,
+    "rank": 41,
+    "paperRank": 24,
+    "month": "Feb 2026",
+    "monthShort": "Feb",
+    "title": "Citizenship (Amendment) Act 2019 challenge: secularism, Article 14 and the Assam question",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS4"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "53.0%",
+    "index": 77,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "Citizenship Act 1955 s6B; Arts 5-11, 14, 15, 25; CAA Rules 2024; Assam Accord; NRC; Sonowal; basic structure (secularism)",
+    "syllabusPointers": {
+      "GS2": "GS2: Indian Constitution: significant provisions and basic structure; Parliament; issues relating to citizenship",
+      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Citizenship Act 1955 s6B; Arts 5-11, 14, 15, 25; CAA Rules 2024; Assam Accord; NRC; Sonowal; basic structure (secularism)</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
+    "id": 75,
+    "rank": 42,
+    "paperRank": 25,
+    "month": "Jan 2026",
+    "monthShort": "Jan",
+    "title": "Central agencies versus State police: ED v. State of West Bengal and the federal limits of investigation",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "53.0%",
+    "index": 77,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "Entry 2 and 80 of Lists II and I; s6 DSPE Act (State consent); PMLA 2002; Art 131; Art 142; rule of law; federal comity",
+    "syllabusPointers": {
+      "GS2": "GS2: Functions and responsibilities of the Union and the States; separation of powers; dispute redressal mechanisms"
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Entry 2 and 80 of Lists II and I; s6 DSPE Act (State consent); PMLA 2002; Art 131; Art 142; rule of law; federal comity</em>. Exam Priority: Full note + 2 practised answers + data/case."
+    }
+  },
+  {
     "id": 22,
-    "rank": 35,
-    "paperRank": 13,
+    "rank": 43,
+    "paperRank": 16,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Human spaceflight and commercial space: Gaganyaan progress",
@@ -1038,9 +1295,76 @@
     }
   },
   {
+    "id": 64,
+    "rank": 44,
+    "paperRank": 26,
+    "month": "Mar 2026",
+    "monthShort": "Mar",
+    "title": "Jal Jeevan Mission extended to 2028: from tap connections to service delivery",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS4",
+      "GS1",
+      "GS3"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "51.5%",
+    "index": 76,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "Jal Jeevan Mission (2019); Art 21 and drinking water; Panchayati Raj (Eleventh Schedule); water quality; operation and maintenance; Jal Shakti",
+    "syllabusPointers": {
+      "GS2": "GS2: Government policies and interventions for development in various sectors; issues relating to poverty and hunger; health",
+      "GS1": "GS1: Salient features of Indian society; Social empowerment, communalism, regionalism and secularism.",
+      "GS3": "GS3: Infrastructure: rural drinking water, public utilities and investment models.",
+      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Jal Jeevan Mission (2019); Art 21 and drinking water; Panchayati Raj (Eleventh Schedule); water quality; operation and maintenance; Jal Shakti</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
+      "GS3": "<strong>GS3 Economic/Tech Angle:</strong> Focus on fiscal sustainability, Capex allocations, supply-chain resilience, and macroeconomic stability.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
+    "id": 69,
+    "rank": 45,
+    "paperRank": 27,
+    "month": "Feb 2026",
+    "monthShort": "Feb",
+    "title": "Urban Challenge Fund and municipal finance: market-linked urban renewal",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS1",
+      "GS3"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandA",
+    "effort": "DEEP DIVE",
+    "prob": "51.5%",
+    "index": 76,
+    "tier": "Tier 1",
+    "prepDepth": "Full note + 2 practised answers + data/case",
+    "staticCore": "74th Amendment; municipal bonds; own-source revenue; 16th Finance Commission local-body grants; credit guarantee; PPP",
+    "syllabusPointers": {
+      "GS2": "GS2: Issues and challenges pertaining to the federal structure; local-level finance; urbanisation",
+      "GS1": "GS1: Urbanisation: problems and remedies, sustainable habitat and municipal infrastructure.",
+      "GS3": "GS3: Indian economy and issues relating to planning, resource mobilisation, growth and development."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>74th Amendment; municipal bonds; own-source revenue; 16th Finance Commission local-body grants; credit guarantee; PPP</em>. Exam Priority: Full note + 2 practised answers + data/case.",
+      "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
+      "GS3": "<strong>GS3 Economic/Tech Angle:</strong> Focus on fiscal sustainability, Capex allocations, supply-chain resilience, and macroeconomic stability."
+    }
+  },
+  {
     "id": 51,
-    "rank": 36,
-    "paperRank": 14,
+    "rank": 46,
+    "paperRank": 17,
     "month": "Jul 2026",
     "monthShort": "Jul",
     "title": "MSME ecosystem: credit guarantees, the TReDS mandate and the MSME Development (Amendment) Bill",
@@ -1068,8 +1392,8 @@
   },
   {
     "id": 43,
-    "rank": 37,
-    "paperRank": 15,
+    "rank": 47,
+    "paperRank": 18,
     "month": "Jun 2026",
     "monthShort": "Jun",
     "title": "AI in the justice system: draft Supreme Court AI rules, hallucinated citations and accountability",
@@ -1089,7 +1413,7 @@
     "staticCore": "Advocates Act 1961; Bar Council of India; Art 21 and fair trial; IT Act; AI governance guidelines",
     "syllabusPointers": {
       "GS3": "GS3: Science and technology: developments and their applications and effects in everyday life",
-      "GS2": "GS2: Functions and responsibilities of the Union and the States; Government policies and interventions.",
+      "GS2": "GS2: Government policies and interventions in various sectors; Executive accountability and institutional design.",
       "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
     },
     "paperAngles": {
@@ -1099,9 +1423,70 @@
     }
   },
   {
+    "id": 60,
+    "rank": 48,
+    "paperRank": 28,
+    "month": "Mar 2026",
+    "monthShort": "Mar",
+    "title": "Transgender Persons (Protection of Rights) Amendment 2026: identity, self-identification and the medical board",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS4",
+      "GS1"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandB",
+    "effort": "QUICK READ",
+    "prob": "47.0%",
+    "index": 73,
+    "tier": "Tier 1",
+    "prepDepth": "1-page note + 1 practised answer",
+    "staticCore": "NALSA v. Union of India (2014); Transgender Persons Act 2019; Arts 14, 15, 19, 21; self-identification versus state-defined categories; Navtej Johar (2018)",
+    "syllabusPointers": {
+      "GS2": "GS2: Mechanisms, laws, institutions and bodies constituted for the protection and betterment of vulnerable sections",
+      "GS1": "GS1: Salient features of Indian society; Social empowerment, communalism, regionalism and secularism.",
+      "GS4": "GS4: Aptitude and foundational values for civil service: empathy, tolerance, compassion towards the weaker sections."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>NALSA v. Union of India (2014); Transgender Persons Act 2019; Arts 14, 15, 19, 21; self-identification versus state-defined categories; Navtej Johar (2018)</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS1": "<strong>GS1 Societal/Geographical Angle:</strong> Examine demography, societal stratification, regional divergence, and grassroots impacts.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
+    "id": 74,
+    "rank": 49,
+    "paperRank": 29,
+    "month": "Jan 2026",
+    "monthShort": "Jan",
+    "title": "Justice Varma inquiry: impeachment procedure, the Speaker's role and judicial accountability",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS4"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandB",
+    "effort": "QUICK READ",
+    "prob": "47.0%",
+    "index": 73,
+    "tier": "Tier 1",
+    "prepDepth": "1-page note + 1 practised answer",
+    "staticCore": "Arts 124(4)-(5), 217, 218; Judges (Inquiry) Act 1968 s3; in-house procedure (K. Veeraswami, 1991); NJAC (2015); collegium; removal by address of both Houses",
+    "syllabusPointers": {
+      "GS2": "GS2: Executive and Judiciary: structure, organisation, functioning; separation of powers; judicial accountability",
+      "GS4": "GS4: Probity in governance, public service integrity, anti-corruption, and code of conduct."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Arts 124(4)-(5), 217, 218; Judges (Inquiry) Act 1968 s3; in-house procedure (K. Veeraswami, 1991); NJAC (2015); collegium; removal by address of both Houses</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
     "id": 15,
-    "rank": 38,
-    "paperRank": 21,
+    "rank": 50,
+    "paperRank": 30,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Neighbourhood and Indian Ocean diplomacy: Sri Lanka, Myanmar, Mauritius, Seychelles, diaspora",
@@ -1126,8 +1511,8 @@
   },
   {
     "id": 31,
-    "rank": 39,
-    "paperRank": 22,
+    "rank": 51,
+    "paperRank": 31,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Judicial pendency and the ordinance route: raising Supreme Court strength to 38",
@@ -1142,18 +1527,18 @@
     "index": 71,
     "tier": "Tier 2",
     "prepDepth": "1-page note + 1 practised answer",
-    "staticCore": "Art 124(1); Art 123 (ordinance power); Supreme Court (Number of Judges) Act 1956; sanctioned strength 38",
+    "staticCore": "Art 124(1); Art 123 (ordinance power); Supreme Court (Number of Judges) Act 1956; sanctioned strength 33 to 37 excluding the CJI, i.e. 38 in all",
     "syllabusPointers": {
       "GS2": "GS2: Executive and Judiciary: structure, organisation, functioning; pressure groups"
     },
     "paperAngles": {
-      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Art 124(1); Art 123 (ordinance power); Supreme Court (Number of Judges) Act 1956; sanctioned strength 38</em>. Exam Priority: 1-page note + 1 practised answer."
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Art 124(1); Art 123 (ordinance power); Supreme Court (Number of Judges) Act 1956; sanctioned strength 33 to 37 excluding the CJI, i.e. 38 in all</em>. Exam Priority: 1-page note + 1 practised answer."
     }
   },
   {
     "id": 19,
-    "rank": 40,
-    "paperRank": 16,
+    "rank": 52,
+    "paperRank": 19,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Oil shocks, rupee defence and macro-stability: inflation, external sector, capital-flow measures",
@@ -1181,8 +1566,8 @@
   },
   {
     "id": 16,
-    "rank": 41,
-    "paperRank": 23,
+    "rank": 53,
+    "paperRank": 32,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "UN Security Council paralysis and reform: Hormuz resolution vetoes",
@@ -1207,8 +1592,8 @@
   },
   {
     "id": 32,
-    "rank": 42,
-    "paperRank": 17,
+    "rank": 54,
+    "paperRank": 20,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Critical minerals security: partnerships, domestic mining and recycling",
@@ -1224,20 +1609,20 @@
     "index": 69,
     "tier": "Tier 2",
     "prepDepth": "1-page note + 1 practised answer",
-    "staticCore": "Rare earths; Quad Critical Minerals Initiative; India-US framework; National Critical Mineral Mission; recycling",
+    "staticCore": "Rare earths; Quad Critical Minerals Initiative; India-US framework; National Critical Mineral Mission (verify); recycling",
     "syllabusPointers": {
       "GS3": "GS3: Science and technology: developments, applications, indigenisation",
       "GS2": "GS2: Functions and responsibilities of the Union and the States; Government policies and interventions."
     },
     "paperAngles": {
-      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>Rare earths; Quad Critical Minerals Initiative; India-US framework; National Critical Mineral Mission; recycling</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>Rare earths; Quad Critical Minerals Initiative; India-US framework; National Critical Mineral Mission (verify); recycling</em>. Exam Priority: 1-page note + 1 practised answer.",
       "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design."
     }
   },
   {
     "id": 37,
-    "rank": 43,
-    "paperRank": 18,
+    "rank": 55,
+    "paperRank": 21,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Extreme heat, record power demand and climate adaptation",
@@ -1271,8 +1656,8 @@
   },
   {
     "id": 42,
-    "rank": 44,
-    "paperRank": 24,
+    "rank": 56,
+    "paperRank": 33,
     "month": "Jun 2026",
     "monthShort": "Jun",
     "title": "Three-language formula, language politics and federal education policy",
@@ -1287,18 +1672,47 @@
     "index": 69,
     "tier": "Tier 1",
     "prepDepth": "1-page note + 1 practised answer",
-    "staticCore": "NEP 2020; Arts 343-351 and the Eighth Schedule; Arts 29-30; Official Languages Act 1963; Kothari Commission; Concurrent List",
+    "staticCore": "NEP 2020; Arts 343-351 and the Eighth Schedule; Arts 29-30; Official Languages Act 1963; Kothari Commission; Education on the Concurrent List",
     "syllabusPointers": {
       "GS2": "GS2: Issues relating to development and management of social sector services: health, education, human resources"
     },
     "paperAngles": {
-      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>NEP 2020; Arts 343-351 and the Eighth Schedule; Arts 29-30; Official Languages Act 1963; Kothari Commission; Concurrent List</em>. Exam Priority: 1-page note + 1 practised answer."
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>NEP 2020; Arts 343-351 and the Eighth Schedule; Arts 29-30; Official Languages Act 1963; Kothari Commission; Education on the Concurrent List</em>. Exam Priority: 1-page note + 1 practised answer."
+    }
+  },
+  {
+    "id": 67,
+    "rank": 57,
+    "paperRank": 22,
+    "month": "Feb 2026",
+    "monthShort": "Feb",
+    "title": "New GDP series: base year 2022-23, double deflation and statistical credibility",
+    "primaryPaper": "GS3",
+    "papers": [
+      "GS3",
+      "GS2"
+    ],
+    "selectedPaper": "GS3",
+    "band": "bandB",
+    "effort": "QUICK READ",
+    "prob": "41.1%",
+    "index": 69,
+    "tier": "Tier 1",
+    "prepDepth": "1-page note + 1 practised answer",
+    "staticCore": "MoSPI; base-year revision (2011-12 to 2022-23); double deflation; GVA versus GDP; IIP base 2022-23; CPI base 2024; national statistics integrity",
+    "syllabusPointers": {
+      "GS3": "GS3: Indian economy and issues relating to planning, mobilisation of resources, growth, development and employment",
+      "GS2": "GS2: Government policies and interventions in various sectors; Executive accountability and institutional design."
+    },
+    "paperAngles": {
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>MoSPI; base-year revision (2011-12 to 2022-23); double deflation; GVA versus GDP; IIP base 2022-23; CPI base 2024; national statistics integrity</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design."
     }
   },
   {
     "id": 58,
-    "rank": 45,
-    "paperRank": 19,
+    "rank": 58,
+    "paperRank": 23,
     "month": "Sep 2026",
     "monthShort": "Sep",
     "title": "Money mules and banking fraud: the SC order and RBI's draft KYC amendment",
@@ -1329,8 +1743,8 @@
   },
   {
     "id": 14,
-    "rank": 46,
-    "paperRank": 25,
+    "rank": 59,
+    "paperRank": 34,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Decriminalisation and trust-based regulation: Jan Vishwas 2026",
@@ -1358,8 +1772,8 @@
   },
   {
     "id": 20,
-    "rank": 47,
-    "paperRank": 20,
+    "rank": 60,
+    "paperRank": 24,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Defence acquisitions and indigenisation: DAC approvals, SSBN and air defence",
@@ -1384,8 +1798,8 @@
   },
   {
     "id": 18,
-    "rank": 48,
-    "paperRank": 26,
+    "rank": 61,
+    "paperRank": 35,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Online gaming regulation: Rules 2026, addiction and Centre-State competence",
@@ -1413,8 +1827,8 @@
   },
   {
     "id": 21,
-    "rank": 49,
-    "paperRank": 21,
+    "rank": 62,
+    "paperRank": 25,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Digital payments: UPI scale, security rules and regulation",
@@ -1442,8 +1856,8 @@
   },
   {
     "id": 34,
-    "rank": 50,
-    "paperRank": 22,
+    "rank": 63,
+    "paperRank": 26,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Opening insurance to 100% FDI: access, penetration and policyholder protection",
@@ -1459,20 +1873,20 @@
     "index": 66,
     "tier": "Tier 2",
     "prepDepth": "1-page note + 1 practised answer",
-    "staticCore": "Insurance Act 1938; FEM (Non-debt Instruments) Rules; IRDAI; LIC cap 20%; resident-citizen rule",
+    "staticCore": "Insurance Act 1938; FEM (Non-debt Instruments) Rules; IRDAI; LIC cap 20%; resident-citizen rule for top posts",
     "syllabusPointers": {
       "GS3": "GS3: Effects of liberalisation; industrial policy changes",
       "GS2": "GS2: Functions and responsibilities of the Union and the States; Government policies and interventions."
     },
     "paperAngles": {
-      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>Insurance Act 1938; FEM (Non-debt Instruments) Rules; IRDAI; LIC cap 20%; resident-citizen rule</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>Insurance Act 1938; FEM (Non-debt Instruments) Rules; IRDAI; LIC cap 20%; resident-citizen rule for top posts</em>. Exam Priority: 1-page note + 1 practised answer.",
       "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design."
     }
   },
   {
     "id": 35,
-    "rank": 51,
-    "paperRank": 27,
+    "rank": 64,
+    "paperRank": 36,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Antimicrobial resistance: the global action plan 2026-36 and India's response",
@@ -1500,8 +1914,8 @@
   },
   {
     "id": 48,
-    "rank": 52,
-    "paperRank": 28,
+    "rank": 65,
+    "paperRank": 37,
     "month": "Jul 2026",
     "monthShort": "Jul",
     "title": "National symbols, free speech and duty: the Vande Mataram amendment to the National Honour Act",
@@ -1517,20 +1931,20 @@
     "index": 66,
     "tier": "Tier 2",
     "prepDepth": "1-page note + 1 practised answer",
-    "staticCore": "Art 51A(a); Arts 19(1)(a) and 19(2); Prevention of Insults to National Honour Act 1971; Bijoe Emmanuel (1986)",
+    "staticCore": "Art 51A(a); Arts 19(1)(a) and 19(2); Prevention of Insults to National Honour Act 1971; Bijoe Emmanuel (1986: from my knowledge, verify)",
     "syllabusPointers": {
       "GS2": "GS2: Indian Constitution: historical underpinnings, evolution, features, amendments, significant provisions and basic structure",
       "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
     },
     "paperAngles": {
-      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Art 51A(a); Arts 19(1)(a) and 19(2); Prevention of Insults to National Honour Act 1971; Bijoe Emmanuel (1986)</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Art 51A(a); Arts 19(1)(a) and 19(2); Prevention of Insults to National Honour Act 1971; Bijoe Emmanuel (1986: from my knowledge, verify)</em>. Exam Priority: 1-page note + 1 practised answer.",
       "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
     }
   },
   {
     "id": 59,
-    "rank": 53,
-    "paperRank": 23,
+    "rank": 66,
+    "paperRank": 27,
     "month": "Sep 2026",
     "monthShort": "Sep",
     "title": "Stubble burning and NCR air quality: the draft compensation Rules",
@@ -1557,9 +1971,125 @@
     }
   },
   {
+    "id": 63,
+    "rank": 67,
+    "paperRank": 38,
+    "month": "Mar 2026",
+    "monthShort": "Mar",
+    "title": "Nine-judge reference on 'industry': Bangalore Water Supply v. Rajappa reconsidered",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS3"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandB",
+    "effort": "QUICK READ",
+    "prob": "35.4%",
+    "index": 65,
+    "tier": "Tier 2",
+    "prepDepth": "1-page note + 1 practised answer",
+    "staticCore": "Industrial Disputes Act 1947 s2(j); Bangalore Water Supply v. Rajappa (1978) triple test; labour codes; stare decisis; reference to larger benches",
+    "syllabusPointers": {
+      "GS2": "GS2: Executive and Judiciary: structure, organisation, functioning; dispute redressal mechanisms and institutions",
+      "GS3": "GS3: Changes in industrial policy and their effects on industrial growth and ease of doing business."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Industrial Disputes Act 1947 s2(j); Bangalore Water Supply v. Rajappa (1978) triple test; labour codes; stare decisis; reference to larger benches</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS3": "<strong>GS3 Economic/Tech Angle:</strong> Focus on fiscal sustainability, Capex allocations, supply-chain resilience, and macroeconomic stability."
+    }
+  },
+  {
+    "id": 65,
+    "rank": 68,
+    "paperRank": 28,
+    "month": "Mar 2026",
+    "monthShort": "Mar",
+    "title": "Central Armed Police Forces (General Administration) Bill 2026: IPS deputation and cadre control",
+    "primaryPaper": "GS3",
+    "papers": [
+      "GS3",
+      "GS2"
+    ],
+    "selectedPaper": "GS3",
+    "band": "bandB",
+    "effort": "QUICK READ",
+    "prob": "35.4%",
+    "index": 65,
+    "tier": "Tier 2",
+    "prepDepth": "1-page note + 1 practised answer",
+    "staticCore": "CRPF, BSF, CISF, ITBP, SSB; All India Services; cadre review; Entry 2 of the State List (police); deputation norms",
+    "syllabusPointers": {
+      "GS3": "GS3: Security challenges and their management in border areas; role of internal security forces; Union-State relations",
+      "GS2": "GS2: Government policies and interventions; Statutory regulatory framework and dispute redressal."
+    },
+    "paperAngles": {
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>CRPF, BSF, CISF, ITBP, SSB; All India Services; cadre review; Entry 2 of the State List (police); deputation norms</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design."
+    }
+  },
+  {
+    "id": 61,
+    "rank": 69,
+    "paperRank": 39,
+    "month": "Mar 2026",
+    "monthShort": "Mar",
+    "title": "End-of-life decisions: Harish Rana and passive euthanasia",
+    "primaryPaper": "GS2",
+    "papers": [
+      "GS2",
+      "GS4"
+    ],
+    "selectedPaper": "GS2",
+    "band": "bandB",
+    "effort": "QUICK READ",
+    "prob": "32.7%",
+    "index": 63,
+    "tier": "Tier 2",
+    "prepDepth": "1-page note + 1 practised answer",
+    "staticCore": "Art 21 and the right to die with dignity; Aruna Shanbaug (2011); Common Cause (2018) living wills; withdrawal of artificial nutrition as medical treatment",
+    "syllabusPointers": {
+      "GS2": "GS2: Issues relating to development and management of social sector services: health; Executive and Judiciary",
+      "GS4": "GS4: Ethics and human interface: essence, determinants, and consequences; Bioethics and moral philosophy."
+    },
+    "paperAngles": {
+      "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Art 21 and the right to die with dignity; Aruna Shanbaug (2011); Common Cause (2018) living wills; withdrawal of artificial nutrition as medical treatment</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS4": "<strong>GS4 Ethics & Values Angle:</strong> Examine administrative integrity, equity in public resource allocation, constitutional morality, and ethical dilemmas."
+    }
+  },
+  {
+    "id": 76,
+    "rank": 70,
+    "paperRank": 29,
+    "month": "Jan 2026",
+    "monthShort": "Jan",
+    "title": "Environmental regulation reset: Solid Waste Management Rules 2026, the EP Fund and the consent regime",
+    "primaryPaper": "GS3",
+    "papers": [
+      "GS3",
+      "GS2"
+    ],
+    "selectedPaper": "GS3",
+    "band": "bandB",
+    "effort": "QUICK READ",
+    "prob": "32.7%",
+    "index": 63,
+    "tier": "Tier 2",
+    "prepDepth": "1-page note + 1 practised answer",
+    "staticCore": "Environment (Protection) Act 1986; SWM Rules 2016; polluter pays; bulk waste generators; consent to operate; GHG Emission Intensity Target Rules; EPR",
+    "syllabusPointers": {
+      "GS3": "GS3: Conservation, environmental pollution and degradation, environmental impact assessment",
+      "GS2": "GS2: Government policies and interventions; Statutory regulatory framework and dispute redressal."
+    },
+    "paperAngles": {
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>Environment (Protection) Act 1986; SWM Rules 2016; polluter pays; bulk waste generators; consent to operate; GHG Emission Intensity Target Rules; EPR</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design."
+    }
+  },
+  {
     "id": 33,
-    "rank": 54,
-    "paperRank": 24,
+    "rank": 71,
+    "paperRank": 30,
     "month": "May 2026",
     "monthShort": "May",
     "title": "RBI's record surplus transfer, forex management and fiscal arithmetic",
@@ -1575,20 +2105,20 @@
     "index": 62,
     "tier": "Tier 2",
     "prepDepth": "1-page note + 1 practised answer",
-    "staticCore": "RBI Act s47; Economic Capital Framework (Bimal Jalan Committee); contingent risk buffer; CRB 6.5%",
+    "staticCore": "RBI Act s47; Economic Capital Framework (Bimal Jalan Committee); contingent risk buffer; forex intervention; fiscal deficit",
     "syllabusPointers": {
       "GS3": "GS3: Government budgeting",
       "GS2": "GS2: Functions and responsibilities of the Union and the States; Government policies and interventions."
     },
     "paperAngles": {
-      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>RBI Act s47; Economic Capital Framework (Bimal Jalan Committee); contingent risk buffer; CRB 6.5%</em>. Exam Priority: 1-page note + 1 practised answer.",
+      "GS3": "<strong>GS3 Core Angle:</strong> Focus on <em>RBI Act s47; Economic Capital Framework (Bimal Jalan Committee); contingent risk buffer; forex intervention; fiscal deficit</em>. Exam Priority: 1-page note + 1 practised answer.",
       "GS2": "<strong>GS2 Polity/Governance Angle:</strong> Examine legislative competence, Centre-State friction, judicial precedents, and institutional design."
     }
   },
   {
     "id": 47,
-    "rank": 55,
-    "paperRank": 25,
+    "rank": 72,
+    "paperRank": 31,
     "month": "Jul 2026",
     "monthShort": "Jul",
     "title": "Securities Markets Code 2025: consolidating securities law and limits on SEBI's delegated powers",
@@ -1616,8 +2146,8 @@
   },
   {
     "id": 55,
-    "rank": 56,
-    "paperRank": 29,
+    "rank": 73,
+    "paperRank": 40,
     "month": "Aug 2026",
     "monthShort": "Aug",
     "title": "Renaming Kerala as Keralam: Article 3, state reorganisation and linguistic identity",
@@ -1642,8 +2172,8 @@
   },
   {
     "id": 17,
-    "rank": 57,
-    "paperRank": 30,
+    "rank": 74,
+    "paperRank": 41,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Custodial violence, police accountability and the death penalty: Sathankulam verdict",
@@ -1662,7 +2192,7 @@
     "staticCore": "Art 21, 20(3); D.K. Basu; NHRC; Prakash Singh; rarest-of-rare (Bachan Singh); BNSS",
     "syllabusPointers": {
       "GS2": "GS2: Statutory, regulatory and quasi-judicial bodies",
-      "GS4": "GS4: Public/civil service values and ethics in public administration; Ethical governance, dilemmas, and accountability."
+      "GS4": "GS4: Probity in governance, public service integrity, anti-corruption, and code of conduct."
     },
     "paperAngles": {
       "GS2": "<strong>GS2 Core Angle:</strong> Focus on <em>Art 21, 20(3); D.K. Basu; NHRC; Prakash Singh; rarest-of-rare (Bachan Singh); BNSS</em>. Exam Priority: 1-page note + 1 practised answer.",
@@ -1671,8 +2201,8 @@
   },
   {
     "id": 23,
-    "rank": 58,
-    "paperRank": 26,
+    "rank": 75,
+    "paperRank": 32,
     "month": "Apr 2026",
     "monthShort": "Apr",
     "title": "Industrial and public safety failures: firecracker factory blasts",
@@ -1703,8 +2233,8 @@
   },
   {
     "id": 36,
-    "rank": 59,
-    "paperRank": 31,
+    "rank": 76,
+    "paperRank": 42,
     "month": "May 2026",
     "monthShort": "May",
     "title": "Strategic partnerships with Europe and the Nordics: Italy, Netherlands, Nordic summit",
@@ -1733,8 +2263,14 @@
 ];
 
   // State Management
-  const TOTAL_A = 35;
+  const TOTAL_A = 45;
+  const TOTAL_QUICK = 31;
+  const WEIGHT_A = 1.0;
+  const WEIGHT_QUICK = 0.5;
+  const TOTAL_PTS = 60.5;
+
   let doneSet = new Set();
+  let quickDoneSet = new Set();
   let currentMonthFilter = 'all';
   let currentPaperFilter = 'all';
   let currentTierFilter = 'all';
@@ -1763,12 +2299,22 @@
 
   // Update Progress Meters
   function updateProgress() {
-    const done = doneSet.size;
-    const pct = Math.round((done / TOTAL_A) * 100);
-    document.getElementById('progCount').textContent = `${done} / ${TOTAL_A}`;
-    document.getElementById('progFill').style.width = `${pct}%`;
-    document.getElementById('stickyFill').style.width = `${pct}%`;
-    document.getElementById('stickyPct').textContent = `${done} / ${TOTAL_A} Must-Cover done (${pct}%)`;
+    const doneA = doneSet.size;
+    const doneQuick = quickDoneSet.size;
+    const currentPts = (doneA * WEIGHT_A) + (doneQuick * WEIGHT_QUICK);
+    const pct = Math.min(100, Math.round((currentPts / TOTAL_PTS) * 100));
+
+    const progCountEl = document.getElementById('progCount');
+    if (progCountEl) progCountEl.textContent = `${doneA} / ${TOTAL_A}`;
+
+    const progFillEl = document.getElementById('progFill');
+    if (progFillEl) progFillEl.style.width = `${pct}%`;
+
+    const stickyFillEl = document.getElementById('stickyFill');
+    if (stickyFillEl) stickyFillEl.style.width = `${pct}%`;
+
+    const stickyPctEl = document.getElementById('stickyPct');
+    if (stickyPctEl) stickyPctEl.textContent = `${doneA} / ${TOTAL_A} Must-Cover done (${pct}%)`;
 
     const msgs = [
       'Start with Rank #1 below — just 45 mins per topic!',
@@ -1776,11 +2322,12 @@
       'Nice work! Core themes being locked into your memory vault.',
       'Halfway through Must-Cover themes — solid competitive edge!',
       'Great discipline! Over 70% of high-probability themes covered.',
-      'Almost done with Band A topics across all 6 months!',
-      '🎉 All 35 Must-Cover themes mastered! Ready for answer writing.'
+      'Almost done with Band A topics across all 9 months!',
+      '🎉 All 45 Must-Cover themes mastered! Ready for answer writing.'
     ];
-    const idx = Math.min(Math.floor((done / TOTAL_A) * (msgs.length - 1)), msgs.length - 1);
-    document.getElementById('progMsg').textContent = msgs[idx];
+    const idx = Math.min(Math.floor((doneA / TOTAL_A) * (msgs.length - 1)), msgs.length - 1);
+    const progMsgEl = document.getElementById('progMsg');
+    if (progMsgEl) progMsgEl.textContent = msgs[idx];
   }
 
   // Switch Paper for a Specific Topic Card (Interactive Multi-Paper Angle)
@@ -1789,7 +2336,6 @@
     if (!topic) return;
     topic.selectedPaper = selectedPaper;
 
-    // Update active paper pill buttons on this card
     const card = document.querySelector(`.topic-card[data-id="${topicId}"]`);
     if (!card) return;
     
@@ -1801,19 +2347,16 @@
       }
     });
 
-    // Update the Syllabus Pointer text
     const pointerEl = card.querySelector('.syllabus-pointer-text');
     if (pointerEl) {
       pointerEl.textContent = topic.syllabusPointers[selectedPaper] || topic.syllabusPointers[topic.primaryPaper];
     }
 
-    // Update the Syllabus Pointer label tag
     const headerLabel = card.querySelector('.syllabus-pointer-header span');
     if (headerLabel) {
       headerLabel.textContent = `OFFICIAL SYLLABUS POINTER // ${selectedPaper}`;
     }
 
-    // Update the Plain English Exam Angle Hook
     const hookEl = card.querySelector('.card-hook');
     if (hookEl) {
       hookEl.innerHTML = topic.paperAngles[selectedPaper] || topic.paperAngles[topic.primaryPaper];
@@ -1823,17 +2366,16 @@
   // Render Band A Cards
   function renderCards() {
     const container = document.getElementById('topicListA');
+    if (!container) return;
     let html = '';
 
-    // Only render Band A topics in the primary card deck
     const bandAList = TOPICS_DATA.filter(t => t.band === 'bandA');
 
     bandAList.forEach(t => {
-      const activePaper = t.selectedPaper;
+      const activePaper = t.selectedPaper || t.primaryPaper;
       const syllabusText = t.syllabusPointers[activePaper] || t.syllabusPointers[t.primaryPaper];
       const angleText = t.paperAngles[activePaper] || t.paperAngles[t.primaryPaper];
 
-      // Build interactive paper pills
       let paperPillsHtml = '';
       t.papers.forEach(p => {
         const isActive = p === activePaper;
@@ -1867,7 +2409,6 @@
 
             <div class="card-title">${t.title}</div>
 
-            <!-- Prominently displayed official syllabus pointer -->
             <div class="syllabus-pointer-box">
               <div class="syllabus-pointer-header">
                 <span>OFFICIAL SYLLABUS POINTER // ${activePaper}</span>
@@ -1876,7 +2417,6 @@
               <div class="syllabus-pointer-text">${syllabusText}</div>
             </div>
 
-            <!-- Plain English Exam Angle Hook -->
             <div class="card-hook">
               ${angleText}
             </div>
@@ -1898,6 +2438,7 @@
   // Render Band B & C Quick Reads
   function renderQuickReads() {
     const container = document.getElementById('quickReadsContainer');
+    if (!container) return;
     let html = '';
     const quickList = TOPICS_DATA.filter(t => t.band !== 'bandA');
 
@@ -1928,7 +2469,7 @@
   // Filter Handlers
   function setMonthFilter(month) {
     currentMonthFilter = month;
-    ['all','apr','may','jun','jul','aug','sep'].forEach(m => {
+    ['all','jan','feb','mar','apr','may','jun','jul','aug','sep'].forEach(m => {
       const btn = document.getElementById(`f-month-${m}`);
       if (btn) btn.classList.remove('active');
     });
@@ -1975,7 +2516,6 @@
 
       card.style.display = (showMonth && showPaper && showTier) ? 'grid' : 'none';
 
-      // If user selected a specific paper (e.g. GS1), automatically set that card's view to that paper
       if (currentPaperFilter !== 'all' && papers.includes(currentPaperFilter)) {
         const id = parseInt(card.dataset.id, 10);
         switchTopicPaper(id, currentPaperFilter);
@@ -1995,46 +2535,46 @@
       item.style.display = (showMonth && showPaper && showTier) ? 'flex' : 'none';
     });
 
-    // Show/Hide Section Headings based on Tier filter
     const sectionA = document.getElementById('sectionHeadingA');
     const sectionB = document.getElementById('sectionB');
-    if (currentTierFilter === 'bandB' || currentTierFilter === 'bandC') {
-      sectionA.style.display = 'none';
-      sectionB.style.display = 'block';
-      document.getElementById('qrList').classList.add('open');
-      document.getElementById('qrArrowIcon').textContent = '▲ HIDE LIST';
-    } else if (currentTierFilter === 'bandA') {
-      sectionA.style.display = 'flex';
-      sectionB.style.display = 'none';
-    } else {
-      sectionA.style.display = 'flex';
-      sectionB.style.display = 'block';
+    if (sectionA && sectionB) {
+      if (currentTierFilter === 'bandB' || currentTierFilter === 'bandC') {
+        sectionA.style.display = 'none';
+        sectionB.style.display = 'block';
+        const qrList = document.getElementById('qrList');
+        if (qrList) qrList.classList.add('open');
+        const arrow = document.getElementById('qrArrowIcon');
+        if (arrow) arrow.textContent = '▲ HIDE LIST';
+      } else if (currentTierFilter === 'bandA') {
+        sectionA.style.display = 'flex';
+        sectionB.style.display = 'none';
+      } else {
+        sectionA.style.display = 'flex';
+        sectionB.style.display = 'block';
+      }
     }
   }
 
-  // Toggle Dropdown Explainer
   function toggleModelExplainer() {
     const body = document.getElementById('explainerBody');
     const btn = document.getElementById('explainerToggleBtn');
     const arrow = document.getElementById('explainerArrowIcon');
-    body.classList.toggle('open');
-    btn.classList.toggle('open');
-    if (body.classList.contains('open')) {
-      arrow.textContent = '▲ CLICK TO COLLAPSE';
-    } else {
-      arrow.textContent = '▼ CLICK TO EXPAND';
+    if (body) body.classList.toggle('open');
+    if (btn) btn.classList.toggle('open');
+    if (arrow) {
+      arrow.textContent = body && body.classList.contains('open') ? '▲ CLICK TO COLLAPSE' : '▼ CLICK TO EXPAND';
     }
   }
 
-  // Toggle Quick Reads Accordion
   function toggleQuickReads() {
     const list = document.getElementById('qrList');
     const arrow = document.getElementById('qrArrowIcon');
-    list.classList.toggle('open');
-    arrow.textContent = list.classList.contains('open') ? '▲ HIDE LIST' : '▼ SHOW LIST';
+    if (list) list.classList.toggle('open');
+    if (arrow) {
+      arrow.textContent = list && list.classList.contains('open') ? '▲ HIDE LIST' : '▼ SHOW LIST';
+    }
   }
 
-  // Initial Load
   document.addEventListener('DOMContentLoaded', () => {
     renderCards();
     renderQuickReads();

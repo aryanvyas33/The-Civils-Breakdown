@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 import { useAuthStore } from '@/store/authStore';
-import { syncVault } from '@/lib/firebase/sync';
+import { syncVault, isPullingFromCloud } from '@/lib/firebase/sync';
 
 export function useVaultSync() {
   const user = useAuthStore((state) => state.user);
@@ -10,28 +10,31 @@ export function useVaultSync() {
 
   const triggerSync = useCallback(() => {
     if (!user) return;
-    syncVault(user.uid);
+    syncVault(user.uid, true);
   }, [user]);
 
   const scheduleDebouncedSync = useCallback(() => {
-    if (!user) return;
+    if (!user || isPullingFromCloud()) return;
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }
     debounceTimerRef.current = setTimeout(() => {
-      syncVault(user.uid);
+      syncVault(user.uid, false);
     }, 2000);
   }, [user]);
 
   useEffect(() => {
     if (!user) return;
 
-    // Initial sync upon login/hydration
-    syncVault(user.uid);
+    // Initial sync upon login/hydration (pull cloud first, then merge)
+    syncVault(user.uid, true);
 
     // Event listeners
     const handleManualTrigger = () => triggerSync();
-    const handleDataChange = () => scheduleDebouncedSync();
+    const handleDataChange = () => {
+      if (isPullingFromCloud()) return;
+      scheduleDebouncedSync();
+    };
 
     window.addEventListener('pyq-vault-sync-trigger', handleManualTrigger);
     window.addEventListener('pyq-bookmarks-updated', handleDataChange);

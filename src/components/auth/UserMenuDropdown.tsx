@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { User, Archive, LogOut, RefreshCw, Cloud } from 'lucide-react';
 
 export default function UserMenuDropdown() {
-  const { profile, signOut, isSyncing, lastSyncedAt } = useAuth();
+  const { profile, signOut, isSyncing, lastSyncedAt, syncStatus } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -25,6 +25,7 @@ export default function UserMenuDropdown() {
   const initial = displayName.charAt(0).toUpperCase();
 
   const formatLastSync = () => {
+    if (syncStatus === 'error') return 'Sync error (tap force sync)';
     if (!lastSyncedAt) return 'Ready to sync';
     const minsAgo = Math.floor((Date.now() - new Date(lastSyncedAt).getTime()) / 60000);
     if (minsAgo < 1) return 'Synced just now';

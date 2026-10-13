@@ -8,7 +8,7 @@ import { isBookmarked, toggleBookmark } from '@/lib/bookmarks';
 import { highlightQuestionKeywords } from '@/lib/highlight';
 import QuestionNoteEditor from './QuestionNoteEditor';
 import eliteTagsRaw from '@/data/elite-yield-tags.json';
-import { getAIDeconstruction } from '@/lib/aiDeconstruction';
+import { getQuestionCardBadges } from '@/lib/cardBadges';
 
 const eliteTags = new Set(eliteTagsRaw.map((t: string) => t.toLowerCase()));
 
@@ -37,10 +37,10 @@ export default function QuestionCard({
   const [copied, setCopied] = useState(false);
   const copyTimerRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  const aiData = React.useMemo(() => getAIDeconstruction(question.id), [question.id]);
-  const directiveWord = aiData?.deconstruction?.directive?.word;
-  const primaryAnchor = aiData?.taxonomy_mapping?.primary_anchor;
-  const microThemes = aiData?.taxonomy_mapping?.micro_themes || [];
+  const badgeData = React.useMemo(() => getQuestionCardBadges(question.id), [question.id]);
+  const directiveWord = badgeData?.directiveWord;
+  const primaryAnchor = badgeData?.primaryAnchor;
+  const microThemes = badgeData?.microThemes || [];
 
   const shouldShowNotes = showNotes !== undefined ? showNotes : variant !== 'related';
 

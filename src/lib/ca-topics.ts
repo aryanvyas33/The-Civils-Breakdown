@@ -11,7 +11,7 @@ import rawTopicsData from '@/data/ca-topics.json';
 const topics: CATopic[] = rawTopicsData as CATopic[];
 
 /**
- * Returns all 59 current affairs priority topics.
+ * Returns all 76 current affairs priority topics.
  */
 export function getAllTopics(): CATopic[] {
   return topics;
@@ -26,8 +26,8 @@ export function getTopicById(id: number): CATopic | undefined {
 
 /**
  * Filter topics by band:
- * - 'bandA': Must-Cover (P >= 50%) — 35 topics
- * - 'bandB': Quick Reads (25% <= P < 50%) — 23 topics
+ * - 'bandA': Must-Cover (P >= 50%) — 45 topics
+ * - 'bandB': Quick Reads (25% <= P < 50%) — 30 topics
  * - 'bandC': Headline Awareness (P < 25%) — 1 topic
  */
 export function getTopicsByBand(band: CABand): CATopic[] {
@@ -64,7 +64,7 @@ export function getTopicsWithUpdates(): CATopic[] {
 
 /**
  * Computes live weighted progress metrics based on completion sets.
- * Formula: Band A * 1.0x + Quick Reads * 0.5x = 47.0 pts max.
+ * Formula: Band A * 1.0x + Quick Reads * 0.5x = 60.5 pts max.
  */
 export function calculateCAProgress(
   allTopics: CATopic[],
@@ -85,7 +85,7 @@ export function calculateCAProgress(
   const updatesDone = updateTopics.filter((t) => updateDoneSet.has(t.id)).length;
 
   const pts = Number((bandADone * CA_WEIGHTS.bandA + quickDone * CA_WEIGHTS.bandBandC).toFixed(1));
-  const maxPts = CA_WEIGHTS.totalPts; // 47.0
+  const maxPts = CA_WEIGHTS.totalPts; // 60.5
   const pct = maxPts > 0 ? Math.min(100, Math.round((pts / maxPts) * 100)) : 0;
 
   return {
@@ -119,6 +119,6 @@ export function getTopicsSummaryStats() {
     quickReads,
     updates,
     maxPoints: CA_WEIGHTS.totalPts,
-    modelCoverage: 'April – September 2026',
+    modelCoverage: 'January – September 2026',
   };
 }

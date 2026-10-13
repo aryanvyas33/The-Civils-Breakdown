@@ -41,6 +41,7 @@ module.exports = {
           essay: '#D35400',
           accent: '#E26A59',
           folder: '#FFD25A',
+          mint: '#0D9488',
         },
         surface: '#f4f6f8',
         card: '#ffffff',

@@ -77,7 +77,7 @@ export default function HomePage() {
                   className="inline-flex items-center px-2.5 py-1 bg-[#D1FAF0] border-2 border-retro-border text-xs sm:text-sm font-bold text-retro-border shadow-retro-sm hover:bg-[#50E3C2] transition-colors group cursor-pointer"
                 >
                   <span className="w-2.5 h-2.5 rounded-full border border-retro-border bg-[#0D9488] mr-2 group-hover:scale-110 transition-transform" />
-                  <span>59 Mains 2027 CA Dossiers</span>
+                  <span>76 Mains 2027 CA Dossiers</span>
                   <span className="ml-1.5 text-[10px] bg-[#0D9488] text-white px-1.5 py-0.2 font-space uppercase">NEW</span>
                 </Link>
                 <span className="inline-flex items-center px-2.5 py-1 bg-white border-2 border-retro-border text-xs sm:text-sm font-bold text-retro-border shadow-retro-sm">

@@ -50,7 +50,7 @@ export function getAIDeconstruction(questionId: string): AIDeconstructionItem | 
  * Checks if AI deconstruction exists for a question
  */
 export function hasAIDeconstruction(questionId: string): boolean {
-  if (!questionId) return null as unknown as boolean;
+  if (!questionId) return false;
   const { map } = initAIDeconstructions();
   return map.has(questionId.toLowerCase().trim());
 }

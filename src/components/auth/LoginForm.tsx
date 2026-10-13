@@ -26,7 +26,7 @@ export default function LoginForm({ onSwitchToSignup, onSwitchToForgot }: LoginF
     }
 
     setIsSubmitting(true);
-    const result = await loginWithPassword(email, password);
+    const result = await loginWithPassword(email, password, rememberMe);
     setIsSubmitting(false);
 
     if (!result.success && !result.error) {

@@ -1,13 +1,14 @@
 'use client';
 
 import React from 'react';
-import { CAPaperFilter, CATierFilter } from '@/types';
+import { CAPaperFilter, CATierFilter, CATopic } from '@/types';
 
 interface CAFilterBarProps {
   paperFilter: CAPaperFilter;
   tierFilter: CATierFilter;
   onPaperChange: (paper: CAPaperFilter) => void;
   onTierChange: (tier: CATierFilter) => void;
+  topics?: CATopic[];
 }
 
 export default function CAFilterBar({
@@ -15,7 +16,17 @@ export default function CAFilterBar({
   tierFilter,
   onPaperChange,
   onTierChange,
+  topics,
 }: CAFilterBarProps) {
+  const total = topics ? topics.length : 76;
+  const gs1Count = topics ? topics.filter((t) => t.papers.includes('GS1')).length : 16;
+  const gs2Count = topics ? topics.filter((t) => t.primaryPaper === 'GS2').length : 42;
+  const gs3Count = topics ? topics.filter((t) => t.primaryPaper === 'GS3').length : 32;
+  const gs4Count = topics ? topics.filter((t) => t.papers.includes('GS4')).length : 38;
+  const bandACount = topics ? topics.filter((t) => t.band === 'bandA').length : 45;
+  const quickCount = topics ? topics.filter((t) => t.band !== 'bandA').length : 31;
+  const updatesCount = topics ? topics.filter((t) => Boolean(t.recentUpdate)).length : 2;
+
   return (
     <section className="bg-white border-[3px] border-[#2A2A2A] shadow-[2px_2px_0px_#2A2A2A] p-3.5 mb-6 flex flex-col gap-3">
       {/* Row 1: GS Paper Filter */}
@@ -32,7 +43,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          ALL PAPERS (59)
+          ALL PAPERS ({total})
         </button>
         <button
           type="button"
@@ -43,7 +54,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          GS1 (4 LINKED)
+          GS1 ({gs1Count} LINKED)
         </button>
         <button
           type="button"
@@ -54,7 +65,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          GS2 (31 PRIMARY)
+          GS2 ({gs2Count} PRIMARY)
         </button>
         <button
           type="button"
@@ -65,7 +76,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          GS3 (26 PRIMARY)
+          GS3 ({gs3Count} PRIMARY)
         </button>
         <button
           type="button"
@@ -76,7 +87,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          GS4 / ETHICS (12 LINKED)
+          GS4 / ETHICS ({gs4Count} LINKED)
         </button>
       </div>
 
@@ -94,7 +105,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          ALL TIERS (59)
+          ALL TIERS ({total})
         </button>
         <button
           type="button"
@@ -105,7 +116,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          ★ MUST-COVER ONLY (35)
+          ★ MUST-COVER ONLY ({bandACount})
         </button>
         <button
           type="button"
@@ -116,7 +127,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          📖 QUICK READS (24)
+          📖 QUICK READS ({quickCount})
         </button>
         <button
           type="button"
@@ -127,7 +138,7 @@ export default function CAFilterBar({
               : 'bg-[#F4F1E1] text-[#2A2A2A] hover:bg-[#EAE6D6] shadow-[2px_2px_0px_#2A2A2A]'
           }`}
         >
-          ⚡ HAS DELTA UPDATES (2)
+          ⚡ HAS DELTA UPDATES ({updatesCount})
         </button>
       </div>
     </section>

@@ -7,7 +7,7 @@ import { Layers, Sparkles } from 'lucide-react';
 import MetaNoteEditor from './MetaNoteEditor';
 import AggregatedNotesList from './AggregatedNotesList';
 import { getAllNotes, NoteEntry } from '@/lib/notes';
-import { getAIDeconstruction } from '@/lib/aiDeconstruction';
+import { getQuestionCardBadges } from '@/lib/cardBadges';
 
 
 interface ExploreContentProps {
@@ -93,9 +93,9 @@ export default function ExploreContent({
   const activeMicroThemes = useMemo(() => {
     const counts = new Map<string, number>();
     filteredQs.forEach((q) => {
-      const ai = getAIDeconstruction(q.id);
-      if (ai?.taxonomy_mapping?.micro_themes) {
-        ai.taxonomy_mapping.micro_themes.forEach((theme) => {
+      const badges = getQuestionCardBadges(q.id);
+      if (badges?.microThemes) {
+        badges.microThemes.forEach((theme) => {
           counts.set(theme, (counts.get(theme) || 0) + 1);
         });
       }

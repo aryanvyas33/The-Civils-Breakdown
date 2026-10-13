@@ -76,7 +76,7 @@ export function useCAProgress(topics: CATopic[]): UseCAProgressReturn {
 
     const rawPts = bandADone * CA_WEIGHTS.bandA + quickDone * CA_WEIGHTS.bandBandC;
     const pts = Number(rawPts.toFixed(1));
-    const maxPts = CA_WEIGHTS.totalPts; // 47.0
+    const maxPts = CA_WEIGHTS.totalPts; // 60.5
     const pct = maxPts > 0 ? Math.min(100, Math.round((pts / maxPts) * 100)) : 0;
 
     return {

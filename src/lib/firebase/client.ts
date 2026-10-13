@@ -8,24 +8,18 @@ import {
   type Firestore,
 } from 'firebase/firestore';
 
+import { clientEnv, isFirebaseConfigured } from '@/lib/env';
+
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'dummy-api-key',
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || 'project-77819c3a-8a9c-4bf7-afb.firebaseapp.com',
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'project-77819c3a-8a9c-4bf7-afb',
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || 'project-77819c3a-8a9c-4bf7-afb.appspot.com',
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '1234567890',
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '1:1234567890:web:abcdef',
+  apiKey: clientEnv.firebaseApiKey,
+  authDomain: clientEnv.firebaseAuthDomain,
+  projectId: clientEnv.firebaseProjectId,
+  storageBucket: clientEnv.firebaseStorageBucket,
+  messagingSenderId: clientEnv.firebaseMessagingSenderId,
+  appId: clientEnv.firebaseAppId,
 };
 
-export function isFirebaseConfigured(): boolean {
-  const key = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
-  return Boolean(
-    key &&
-    !key.includes('your-firebase') &&
-    !key.includes('dummy') &&
-    key.length > 10
-  );
-}
+export { isFirebaseConfigured };
 
 let app: FirebaseApp | undefined;
 let auth: Auth | undefined;

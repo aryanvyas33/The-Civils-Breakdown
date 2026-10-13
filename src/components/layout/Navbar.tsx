@@ -13,7 +13,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [savedCount, setSavedCount] = useState<number>(0);
-  const { isAuthenticated, openAuthModal, profile, signOut } = useAuth();
+  const { isAuthenticated, openAuthModal, profile, signOut, isLoading } = useAuth();
 
   useEffect(() => {
     const updateSaved = () => {
@@ -59,11 +59,11 @@ export default function Navbar() {
         >
           <img
             src="/prism_logo_mark.png"
-            alt="The UPSC Breakdown"
+            alt="The Civils Breakdown"
             className="h-9 sm:h-10 w-auto object-contain filter drop-shadow-[2px_2px_0px_rgba(42,42,42,0.35)] group-hover:scale-105 transition-transform"
           />
           <span className="text-xl sm:text-2xl tracking-wide uppercase font-vt text-retro-border font-bold">
-            THE_UPSC_BREAKDOWN
+            THE_CIVILS_BREAKDOWN
           </span>
         </Link>
 
@@ -110,7 +110,9 @@ export default function Navbar() {
         <div className="hidden sm:block text-xs font-space font-medium text-retro-border/80">LIVE 2013-2026</div>
 
         {/* Auth CTA or User Menu */}
-        {isAuthenticated ? (
+        {isLoading ? (
+          <div className="hidden sm:inline-block w-28 h-8 bg-retro-border/10 border-2 border-retro-border/20 animate-pulse" />
+        ) : isAuthenticated ? (
           <UserMenuDropdown />
         ) : (
           <button
@@ -135,7 +137,11 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="sm:hidden absolute top-full left-0 right-0 bg-retro-window border-b-4 border-retro-border shadow-retro-lg flex flex-col p-3 z-50 divide-y divide-retro-border/20">
-          {isAuthenticated ? (
+          {isLoading ? (
+            <div className="p-3 mb-2 bg-retro-border/10 border-2 border-retro-border/20 animate-pulse text-center font-vt text-sm text-retro-border/60">
+              AUTHENTICATING...
+            </div>
+          ) : isAuthenticated ? (
             <div className="flex items-center justify-between p-2 mb-2 bg-white border-2 border-retro-border">
               <div className="truncate pr-2">
                 <div className="font-vt text-xl font-bold truncate">{profile?.display_name || 'Aspirant'}</div>

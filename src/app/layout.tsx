@@ -7,25 +7,25 @@ import AuthModal from '@/components/auth/AuthModal';
 import AuthSyncManager from '@/components/auth/AuthSyncManager';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://theupscbreakdown.com'),
-  title: "The UPSC Breakdown — Don't Outsource Your Intellect to AI. Structure It.",
+  metadataBase: new URL('https://thecivilsbreakdown.com'),
+  title: "The Civils Breakdown — Don't Outsource Your Intellect to AI. Structure It.",
   description: "Don't outsource your intellect to AI. Structure it. Search 1,100+ verified UPSC Mains questions (2013–2026), explore high-yield topic heatmaps, official syllabus micro-trees, and build personal answer frameworks.",
-  keywords: ['UPSC', 'CSE', 'Mains', 'PYQ', 'The UPSC Breakdown', 'Previous Year Questions', 'GS1', 'GS2', 'GS3', 'GS4', 'Essay', 'UPSC Search', 'High Yield Topics'],
+  keywords: ['UPSC', 'CSE', 'Mains', 'PYQ', 'The Civils Breakdown', 'Civils Breakdown', 'UPSC Syllabus Breakdown', 'Previous Year Questions', 'GS1', 'GS2', 'GS3', 'GS4', 'Essay', 'UPSC Search', 'High Yield Topics'],
   icons: {
     icon: '/prism_logo_mark.png',
     apple: '/prism_logo_mark.png',
   },
   openGraph: {
-    title: "The UPSC Breakdown — Don't Outsource Your Intellect to AI. Structure It.",
+    title: "The Civils Breakdown — Don't Outsource Your Intellect to AI. Structure It.",
     description: "Search 1,100+ verified UPSC Mains questions (2013–2026), explore high-yield topic heatmaps, and build personal answer frameworks.",
-    url: 'https://theupscbreakdown.com',
-    siteName: 'The UPSC Breakdown',
+    url: 'https://thecivilsbreakdown.com',
+    siteName: 'The Civils Breakdown',
     images: [
       {
         url: '/prism_logo_full.png',
         width: 1200,
         height: 630,
-        alt: 'The UPSC Breakdown Logo',
+        alt: 'The Civils Breakdown Logo',
       },
     ],
     locale: 'en_IN',

@@ -2,7 +2,7 @@ import Fuse, { type IFuseOptions } from 'fuse.js';
 import { Question, SearchResult, FilterOptions } from '@/types';
 import { getAllQuestions, getAllTags, getAllSubjects } from './data';
 import { highlightQuestionKeywords } from './highlight';
-import { getAllAIDeconstructions } from './aiDeconstruction';
+import { getAllQuestionCardBadges } from './cardBadges';
 
 export interface SearchableQuestion extends Question {
   aiMicroThemes: string[];
@@ -38,16 +38,16 @@ let enrichedQuestionsCache: SearchableQuestion[] | null = null;
 export function getEnrichedQuestions(): SearchableQuestion[] {
   if (enrichedQuestionsCache) return enrichedQuestionsCache;
   const questions = getAllQuestions();
-  const aiMap = getAllAIDeconstructions();
+  const badgeMap = getAllQuestionCardBadges();
   enrichedQuestionsCache = questions.map((q) => {
-    const ai = aiMap[q.id.toLowerCase().trim()];
+    const badge = badgeMap[q.id.toLowerCase().trim()];
     return {
       ...q,
-      aiMicroThemes: ai?.taxonomy_mapping?.micro_themes || [],
-      aiCoreConcepts: ai?.deconstruction?.core_concepts || [],
-      aiPrimaryAnchor: ai?.taxonomy_mapping?.primary_anchor || '',
-      aiDirective: ai?.deconstruction?.directive?.word || '',
-      aiStakeholders: ai?.stakeholders || [],
+      aiMicroThemes: badge?.microThemes || [],
+      aiCoreConcepts: badge?.coreConcepts || [],
+      aiPrimaryAnchor: badge?.primaryAnchor || '',
+      aiDirective: badge?.directiveWord || '',
+      aiStakeholders: badge?.stakeholders || [],
     };
   });
   return enrichedQuestionsCache;
@@ -178,13 +178,6 @@ export function searchQuestions(
     paperBreakdown[pid] = (paperBreakdown[pid] || 0) + 1;
     paperBreakdown.all += 1;
 
-    // Collect related tags
-    for (const tag of q.tags) {
-      if (!searchTerms.some((st) => tag.toLowerCase().includes(st))) {
-        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
-      }
-    }
-
     // Apply paper filter
     if (filters?.paper && filters.paper !== 'all' && pid !== filters.paper.toLowerCase()) {
       continue;
@@ -196,6 +189,13 @@ export function searchQuestions(
     // Apply subject filter
     if (filters?.subject && q.subjectId.toLowerCase() !== filters.subject.toLowerCase()) {
       continue;
+    }
+
+    // Collect related tags after year & subject scope are constrained
+    for (const tag of q.tags) {
+      if (!searchTerms.some((st) => tag.toLowerCase().includes(st))) {
+        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+      }
     }
 
     // Accumulate syllabusBreakdown before pointerId filter
@@ -263,11 +263,11 @@ export function getAutocompleteSuggestions(query: string, limit: number = 6): st
     }
   }
 
-  // 2. Micro-themes from AI deconstructions
-  const aiMap = getAllAIDeconstructions();
-  for (const item of Object.values(aiMap)) {
-    if (item.taxonomy_mapping?.micro_themes) {
-      for (const theme of item.taxonomy_mapping.micro_themes) {
+  // 2. Micro-themes from question badges
+  const badgeMap = getAllQuestionCardBadges();
+  for (const item of Object.values(badgeMap)) {
+    if (item.microThemes) {
+      for (const theme of item.microThemes) {
         if (theme.toLowerCase().includes(qLower)) {
           matched.add(theme);
           if (matched.size >= limit) return Array.from(matched);

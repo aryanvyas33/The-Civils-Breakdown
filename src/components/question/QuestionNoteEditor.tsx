@@ -117,7 +117,7 @@ export default function QuestionNoteEditor({ questionId, pointerId }: QuestionNo
     try {
       const fileData = await getFile(savedFileId);
       if (!fileData) {
-        alert('File data could not be retrieved from local storage.');
+        setErrorMsg('Note: This legacy file attachment was stored locally on another device and is not available in this browser session.');
         return;
       }
       const blob = fileData instanceof Blob ? fileData : new Blob([fileData], { type: 'text/plain;charset=utf-8' });
@@ -131,7 +131,7 @@ export default function QuestionNoteEditor({ questionId, pointerId }: QuestionNo
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (e) {
       console.error('[NoteEditor] Download failed:', e);
-      alert('Failed to download file.');
+      setErrorMsg('Failed to download file from local storage.');
     }
   };
 

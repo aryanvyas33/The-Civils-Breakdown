@@ -1,6 +1,6 @@
 /**
  * Current Affairs Priority Tracker Types & Data Contracts
- * The UPSC Breakdown — Mains 2027 Model
+ * The Civils Breakdown — Mains 2027 Model
  */
 
 export type GSPaper = 'GS1' | 'GS2' | 'GS3' | 'GS4';
@@ -21,11 +21,11 @@ export interface CATopicUpdate {
 
 /**
  * A single Current Affairs Priority Topic.
- * Model cycle: April - September 2026 (59 themes total).
+ * Model cycle: January - September 2026 (76 themes total).
  */
 export interface CATopic {
   id: number;
-  rank: number;             // Overall priority rank 1–59
+  rank: number;             // Overall priority rank 1–76
   paperRank: number;        // Rank within primary GS paper
   month: string;            // e.g. "Apr 2026"
   monthShort: string;       // e.g. "Apr"
@@ -47,14 +47,14 @@ export interface CATopic {
 
 /**
  * Weighted progress scoring formula constants.
- * Band A = 1.0 pt, Quick Reads (Band B & C) = 0.5 pt. Total = 47.0 pts.
+ * Band A = 1.0 pt, Quick Reads (Band B & C) = 0.5 pt. Total = 60.5 pts.
  */
 export const CA_WEIGHTS = {
   bandA: 1.0,
   bandBandC: 0.5,
-  totalPts: 47.0,
-  bandATarget: 35,
-  quickReadsTarget: 24,
+  totalPts: 60.5,
+  bandATarget: 45,
+  quickReadsTarget: 31,
 } as const;
 
 /**
@@ -72,12 +72,12 @@ export interface CAProgressState {
  */
 export interface CAProgressMetrics {
   pts: number;              // Current weighted points e.g. 18.5
-  maxPts: number;           // Target total points (47.0)
+  maxPts: number;           // Target total points (60.5)
   pct: number;              // Percentage (0–100)
   bandADone: number;        // Count of Band A completed
-  bandATotal: number;       // 35
+  bandATotal: number;       // 45
   quickDone: number;        // Count of Quick Reads completed
-  quickTotal: number;       // 24
+  quickTotal: number;       // 31
   updatesDone: number;      // Count of reviewed updates
   updatesTotal: number;     // Total updates available in the dataset
 }

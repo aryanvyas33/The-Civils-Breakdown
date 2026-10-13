@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useMemo, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
-import { getQuestionById, getRelatedQuestionsForQuestion, getQuestionsByPaper, getAllQuestions, getSubjectById } from '@/lib/data';
+import { getQuestionById, getQuestionsByPaper, getAllQuestions, getSubjectById } from '@/lib/data';
+import { RelatedQuestion } from '@/types';
 import QuestionCard from '@/components/question/QuestionCard';
 import QuestionNoteEditor from '@/components/question/QuestionNoteEditor';
 import QuestionDeconstructionView from '@/components/question/QuestionDeconstructionView';
@@ -25,6 +26,29 @@ import {
   Layers,
   ArrowRight,
 } from 'lucide-react';
+
+interface CachedQuestionSearch {
+  id: string;
+  year: number;
+  tagsLowerJoined: string;
+  textLower: string;
+  staticCoreLower: string[];
+}
+
+let cachedSearchCorpus: CachedQuestionSearch[] | null = null;
+
+function getSearchCorpus(): CachedQuestionSearch[] {
+  if (cachedSearchCorpus) return cachedSearchCorpus;
+  const allQs = getAllQuestions();
+  cachedSearchCorpus = allQs.map((q) => ({
+    id: q.id,
+    year: q.year,
+    tagsLowerJoined: q.tags.map((t) => t.toLowerCase()).join(' '),
+    textLower: q.text.toLowerCase(),
+    staticCoreLower: (q.staticCore || []).map((sc) => sc.toLowerCase()),
+  }));
+  return cachedSearchCorpus;
+}
 
 function QuestionDetailContent() {
   const params = useParams();
@@ -100,8 +124,20 @@ function QuestionDetailContent() {
     );
   }, [question, queryParam]);
 
-  const related = useMemo(() => {
-    return questionId ? getRelatedQuestionsForQuestion(questionId, 8) : [];
+  const [related, setRelated] = useState<RelatedQuestion[]>([]);
+
+  useEffect(() => {
+    if (!questionId) return;
+    let isMounted = true;
+    fetch(`/api/related/${encodeURIComponent(questionId)}?limit=8`)
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data) => {
+        if (isMounted) setRelated(data);
+      })
+      .catch((err) => console.error('[RelatedQuestions] Fetch error:', err));
+    return () => {
+      isMounted = false;
+    };
   }, [questionId]);
 
   // Topic trend data: distribution across 2013-2026 (14 years) for question's primary tags
@@ -143,38 +179,35 @@ function QuestionDetailContent() {
     };
   }, [question]);
 
-  // Concept Frequency Trend: counts questions across 2013-2026 testing this core concept/doctrine
+  // Concept Frequency Trend: counts questions across 2013-2026 testing this core concept/doctrine (O(N) zero-allocation pass)
   const topicTrend = useMemo(() => {
     if (!question) return [];
-    const allQs = getAllQuestions();
+    const corpus = getSearchCorpus();
     const { label, conceptPhrases } = coreConceptInfo;
     const labelLower = label.toLowerCase();
     const years = Array.from({ length: 14 }, (_, i) => 2013 + i);
+    const countsByYear: Record<number, number> = {};
 
-    return years.map((yr) => {
-      const yearQuestions = allQs.filter((q) => q.year === yr);
-      const count = yearQuestions.filter((q) => {
-        // Direct match with this question
-        if (q.id === question.id) return true;
-
-        const qTagsJoined = q.tags.map((t) => t.toLowerCase()).join(' ');
-        const qTextLower = q.text.toLowerCase();
-
-        // Match primary concept in tags or text
-        if (labelLower && (qTagsJoined.includes(labelLower) || qTextLower.includes(labelLower))) {
-          return true;
+    for (const q of corpus) {
+      let isMatch = false;
+      if (q.id === question.id) {
+        isMatch = true;
+      } else {
+        if (labelLower && (q.tagsLowerJoined.includes(labelLower) || q.textLower.includes(labelLower))) {
+          isMatch = true;
+        } else if (q.staticCoreLower.some((sc) => sc.includes(labelLower) || labelLower.includes(sc))) {
+          isMatch = true;
+        } else if (conceptPhrases.some((phrase) => phrase.length > 5 && (q.tagsLowerJoined.includes(phrase) || q.textLower.includes(phrase)))) {
+          isMatch = true;
         }
+      }
 
-        if (q.staticCore && q.staticCore.some((sc) => sc.toLowerCase().includes(labelLower) || labelLower.includes(sc.toLowerCase()))) {
-          return true;
-        }
+      if (isMatch) {
+        countsByYear[q.year] = (countsByYear[q.year] || 0) + 1;
+      }
+    }
 
-        // Match any of the specific core multi-word doctrine phrases
-        return conceptPhrases.some((phrase) => phrase.length > 5 && (qTagsJoined.includes(phrase) || qTextLower.includes(phrase)));
-      }).length;
-
-      return { year: yr, count };
-    });
+    return years.map((yr) => ({ year: yr, count: countsByYear[yr] || 0 }));
   }, [question, coreConceptInfo]);
 
   // Previous and Next questions in the same paper
@@ -285,7 +318,7 @@ function QuestionDetailContent() {
         </Link>
         <span>/</span>
         <Link
-          href={`/papers/${question.paperId}-subject=${question.subjectId}`}
+          href={`/explore/${question.paperId}?subject=${question.subjectId}`}
           className="hover:text-primary transition-colors"
         >
           {question.subjectName}

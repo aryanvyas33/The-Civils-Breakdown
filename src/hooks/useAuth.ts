@@ -11,6 +11,10 @@ import {
   signOut as firebaseSignOut,
   onAuthStateChanged,
   updateProfile,
+  sendEmailVerification,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
 } from 'firebase/auth';
 import { getFirebaseAuth, isFirebaseConfigured } from '@/lib/firebase/client';
 
@@ -54,7 +58,11 @@ export function useAuth() {
   }, [setUser, setLoading]);
 
   const loginWithPassword = useCallback(
-    async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+    async (
+      email: string,
+      password: string,
+      rememberMe = true
+    ): Promise<{ success: boolean; error?: string }> => {
       setErrorMessage(null);
       if (!isFirebaseConfigured()) {
         const error = 'GCP / Firebase credentials are not yet configured in .env';
@@ -64,6 +72,14 @@ export function useAuth() {
 
       try {
         const auth = getFirebaseAuth();
+        try {
+          await setPersistence(
+            auth,
+            rememberMe ? browserLocalPersistence : browserSessionPersistence
+          );
+        } catch {
+          // Persistence setup non-fatal fallback
+        }
         const res = await signInWithEmailAndPassword(auth, email, password);
         setUser(res.user);
         setModalOpen(false);
@@ -103,9 +119,13 @@ export function useAuth() {
         if (name && res.user) {
           await updateProfile(res.user, { displayName: name });
         }
+        try {
+          await sendEmailVerification(res.user);
+        } catch (vErr) {
+          console.warn('[FirebaseAuth] Email verification send warning:', vErr);
+        }
         setUser(res.user);
-        setModalOpen(false);
-        return { success: true, needsVerification: false };
+        return { success: true, needsVerification: true };
       } catch (err: any) {
         let message = 'Sign up failed. Please try again.';
         if (err?.code === 'auth/email-already-in-use') {
@@ -140,6 +160,11 @@ export function useAuth() {
     } catch (err: any) {
       if (err?.code === 'auth/popup-closed-by-user') {
         return { success: false };
+      }
+      if (err?.code === 'auth/popup-blocked') {
+        const message = 'Google sign-in popup was blocked by your browser. Please allow popups or use email sign-in.';
+        setErrorMessage(message);
+        return { success: false, error: message };
       }
       const message = err?.message || 'Google sign-in failed.';
       setErrorMessage(message);

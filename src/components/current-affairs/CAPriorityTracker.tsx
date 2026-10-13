@@ -133,28 +133,28 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
 
         <h1 className="font-vt text-4xl sm:text-5xl text-[#2A2A2A] tracking-wide leading-none mb-2">
           THIS CYCLE&apos;S <span className="text-[#E26A59]">MUST-COVER</span> TOPICS{' '}
-          <span className="text-xl sm:text-2xl text-[#666] font-mono">// APR–SEP 2026</span>
+          <span className="text-xl sm:text-2xl text-[#666] font-mono">// JAN–SEP 2026</span>
         </h1>
 
         <p className="text-sm sm:text-base text-[#444] font-sans max-w-3xl leading-relaxed mb-4">
-          Our probability engine has evaluated <strong>59 current affairs themes</strong> across 6
-          months (April – September 2026) for Mains 2027. We&apos;ve done the scoring — just master
+          Our probability engine has evaluated <strong>{topics.length} current affairs themes</strong> across 9
+          months (January – September 2026) for Mains 2027. We&apos;ve done the scoring — just master
           them in order.
         </p>
 
         {/* Metadata Chips Bar */}
         <div className="flex flex-wrap gap-2 text-xs font-mono">
           <span className="bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488] px-2 py-1 font-bold shadow-[1px_1px_0px_#2A2A2A]">
-            ★ 35 Must-Cover Topics (Band A)
+            ★ {bandATotal} Must-Cover Topics (Band A)
           </span>
           <span className="bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2 py-1 font-medium shadow-[1px_1px_0px_#2A2A2A]">
-            📖 23 Quick-Read Topics (Band B)
+            📖 {topics.filter((t) => t.band === 'bandB').length} Quick-Read Topics (Band B)
           </span>
           <span className="bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2 py-1 font-medium shadow-[1px_1px_0px_#2A2A2A]">
-            👁 1 Headline Awareness (Band C)
+            👁 {topics.filter((t) => t.band === 'bandC').length} Headline Awareness (Band C)
           </span>
           <span className="bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2 py-1 font-medium shadow-[1px_1px_0px_#2A2A2A]">
-            📅 Cycle: April 2026 – September 2026 (59 Total)
+            📅 Cycle: January 2026 – September 2026 ({topics.length} Total)
           </span>
           <span className="bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2 py-1 font-medium shadow-[1px_1px_0px_#2A2A2A]">
             ↻ Next Refresh: October 2026 Digest
@@ -171,6 +171,7 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
         tierFilter={tierFilter}
         onPaperChange={setPaperFilter}
         onTierChange={setTierFilter}
+        topics={topics}
       />
 
       {/* 4. Must-Cover Topics Section (Band A) */}
@@ -179,7 +180,7 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
           <div className="flex items-center gap-2.5 py-2 mb-4 border-b-2 border-dashed border-[#2A2A2A]">
             <div className="w-3.5 h-3.5 bg-[#50E3C2] border-2 border-[#2A2A2A]" />
             <h2 className="font-vt text-2xl text-[#2A2A2A] uppercase tracking-wide">
-              BAND A: MUST-COVER TOPICS ({bandATopics.length} SHOWN / 35 TOTAL) — BUILD FULL NOTES &amp; PRACTISE ANSWERS
+              BAND A: MUST-COVER TOPICS ({bandATopics.length} SHOWN / {bandATotal} TOTAL) — BUILD FULL NOTES &amp; PRACTISE ANSWERS
             </h2>
           </div>
 

@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, X, Sparkles } from 'lucide-react';
-import { getAutocompleteSuggestions } from '@/lib/search';
 
 interface SearchBarProps {
   initialQuery?: string;
@@ -24,19 +23,41 @@ export default function SearchBar({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const searchModRef = useRef<typeof import('@/lib/search') | null>(null);
+
+  const getSearchMod = async () => {
+    if (!searchModRef.current) {
+      try {
+        searchModRef.current = await import('@/lib/search');
+      } catch (err) {
+        console.warn('[SearchBar] Search module dynamic load deferred (offline or network error):', err);
+        return null;
+      }
+    }
+    return searchModRef.current;
+  };
 
   useEffect(() => {
     setQuery(initialQuery);
   }, [initialQuery]);
 
   useEffect(() => {
-    if (query.trim().length >= 2) {
-      const results = getAutocompleteSuggestions(query, 5);
-      setSuggestions(results);
+    let isCancelled = false;
+    const cleanQuery = query.trim();
+    if (cleanQuery.length >= 2) {
+      getSearchMod().then((mod) => {
+        if (!isCancelled && mod) {
+          const results = mod.getAutocompleteSuggestions(cleanQuery, 5);
+          setSuggestions(results);
+        }
+      });
     } else {
       setSuggestions([]);
     }
     setSelectedIndex(null);
+    return () => {
+      isCancelled = true;
+    };
   }, [query]);
 
   // Click outside listener
@@ -110,7 +131,10 @@ export default function SearchBar({
               setQuery(e.target.value);
               setIsOpen(true);
             }}
-            onFocus={() => setIsOpen(true)}
+            onFocus={() => {
+              setIsOpen(true);
+              getSearchMod();
+            }}
             onKeyDown={handleKeyDown}
             placeholder="C:\> search..."
             role="combobox"
@@ -178,7 +202,10 @@ export default function SearchBar({
             setQuery(e.target.value);
             setIsOpen(true);
           }}
-          onFocus={() => setIsOpen(true)}
+          onFocus={() => {
+            setIsOpen(true);
+            getSearchMod();
+          }}
           onKeyDown={handleKeyDown}
           autoFocus={autoFocus}
           role="combobox"
