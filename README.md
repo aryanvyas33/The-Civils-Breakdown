@@ -49,11 +49,7 @@ A comprehensive, intelligent search and analytical engine for UPSC Civil Service
    ```
 
 3. **Set up Environment Variables**:
-   Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-   Fill in your Firebase credentials and AI API keys.
+   Create a local `.env` file with your Firebase configuration and API keys.
 
 4. **Run the Development Server**:
    ```bash

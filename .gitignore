@@ -14,12 +14,7 @@ tsconfig.tsbuildinfo
 *.tsbuildinfo
 
 # Environment variables & secrets
-.env
-.env*.local
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*
 *runner-key.json
 *service-account*.json
 *.pem
