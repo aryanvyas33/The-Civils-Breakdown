@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, Suspense } from 'react';
+import React, { useState, useEffect, useMemo, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { searchQuestions } from '@/lib/search';
+import { searchQuestions, getAutocompleteSuggestions } from '@/lib/search';
 import QuestionCard from '@/components/question/QuestionCard';
 import {
   Search,
@@ -17,7 +17,9 @@ import {
   Layers,
   ArrowLeft,
 } from 'lucide-react';
-import { getSyllabusPointersByPaper, getSyllabusPointerById } from '@/lib/syllabus';
+import { getSyllabusPointersByPaper, getSyllabusPointerById, getAllSyllabusPointers } from '@/lib/syllabus';
+import { getAllTags, getAllSubjects } from '@/lib/data';
+import { getAllQuestionCardBadges } from '@/lib/cardBadges';
 
 function SearchContent() {
   const searchParams = useSearchParams();
@@ -95,6 +97,168 @@ function SearchContent() {
     router.push(`/search?q=${encodeURIComponent(kw)}`);
   };
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Vocabulary for predictive suggestions
+  const searchVocabulary = useMemo(() => {
+    const vocab = new Set<string>();
+    // Tags
+    getAllTags().forEach((t) => vocab.add(t.tag));
+    // Question badge micro-themes and core concepts
+    const badges = getAllQuestionCardBadges();
+    Object.values(badges).forEach((b) => {
+      b.microThemes?.forEach((m) => vocab.add(m));
+      b.coreConcepts?.forEach((c) => vocab.add(c));
+    });
+    // Syllabus pointers
+    getAllSyllabusPointers().forEach((p) => {
+      vocab.add(p.label);
+      p.keywords.forEach((k) => vocab.add(k));
+    });
+    // Subjects
+    getAllSubjects().forEach((s) => vocab.add(s.name));
+    return Array.from(vocab);
+  }, []);
+
+  // Suggestions with prefix matches prioritized and case-insensitive deduplication
+  const suggestions = useMemo(() => {
+    const clean = inputVal.trim().toLowerCase();
+    if (clean.length < 2) return [];
+
+    const matches: string[] = [];
+    const seenLower = new Set<string>();
+
+    const addTerm = (term: string) => {
+      const lower = term.toLowerCase().trim();
+      if (!lower || lower === clean || seenLower.has(lower)) return;
+      seenLower.add(lower);
+      matches.push(term);
+    };
+
+    // 1. Prefix matches first
+    for (const term of searchVocabulary) {
+      if (term.toLowerCase().startsWith(clean)) {
+        addTerm(term);
+        if (matches.length >= 6) return matches;
+      }
+    }
+
+    // 2. Contains matches second
+    if (matches.length < 6) {
+      for (const term of searchVocabulary) {
+        if (term.toLowerCase().includes(clean)) {
+          addTerm(term);
+          if (matches.length >= 6) return matches;
+        }
+      }
+    }
+
+    // 3. Fallback to general autocomplete
+    if (matches.length < 6) {
+      const general = getAutocompleteSuggestions(clean, 10);
+      for (const g of general) {
+        addTerm(g);
+        if (matches.length >= 6) return matches;
+      }
+    }
+
+    return matches;
+  }, [inputVal, searchVocabulary]);
+
+  // Top predictive completion (for inline ghost text)
+  const ghostSuggestion = useMemo(() => {
+    const raw = inputVal;
+    if (!raw || raw.trim().length < 2) return '';
+    const trimmed = raw.trimStart();
+    const prefix = trimmed.toLowerCase();
+    const match = suggestions.find((s) => s.toLowerCase().startsWith(prefix));
+    if (match && match.toLowerCase() !== prefix) {
+      return raw + match.slice(trimmed.length);
+    }
+    return '';
+  }, [inputVal, suggestions]);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+        setSelectedSuggestionIndex(-1);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const applySuggestion = (val: string) => {
+    setInputVal(val);
+    setIsDropdownOpen(false);
+    setSelectedSuggestionIndex(-1);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('q', val.trim());
+    if (selectedPaper && selectedPaper !== 'all') params.set('paper', selectedPaper);
+    if (selectedPointer && selectedPointer !== 'all') params.set('pointer', selectedPointer);
+    if (selectedYear) params.set('year', selectedYear.toString());
+    if (selectedDirective && selectedDirective !== 'all') params.set('directive', selectedDirective);
+    if (sortBy && sortBy !== 'relevance') params.set('sort', sortBy);
+    router.push(`/search?${params.toString()}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (
+      (e.key === 'Tab' || (e.key === 'ArrowRight' && inputRef.current?.selectionStart === inputVal.length)) &&
+      ghostSuggestion
+    ) {
+      e.preventDefault();
+      applySuggestion(ghostSuggestion);
+      return;
+    }
+
+    if (isDropdownOpen && suggestions.length > 0) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedSuggestionIndex((prev) =>
+          prev < suggestions.length - 1 ? prev + 1 : 0
+        );
+        return;
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedSuggestionIndex((prev) =>
+          prev > 0 ? prev - 1 : suggestions.length - 1
+        );
+        return;
+      }
+      if (e.key === 'Enter') {
+        if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length) {
+          e.preventDefault();
+          applySuggestion(suggestions[selectedSuggestionIndex]);
+          return;
+        }
+        // Do not force ghost completion on Enter; submit user's actual typed query
+        setIsDropdownOpen(false);
+        setSelectedSuggestionIndex(-1);
+        return;
+      }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setIsDropdownOpen(false);
+        setSelectedSuggestionIndex(-1);
+        return;
+      }
+    }
+
+    if (e.key === 'Enter') {
+      setIsDropdownOpen(false);
+      setSelectedSuggestionIndex(-1);
+    }
+  };
+
   // Paper filter button styling helper
   const getFilterBtnClass = (paperKey: string) => {
     const isSelected = selectedPaper.toLowerCase() === paperKey.toLowerCase();
@@ -145,34 +309,127 @@ function SearchContent() {
       {/* 1. Search Bar & Filter Banner matching wireframe 03 */}
       <section className="w-full bg-retro-window border-b-4 border-retro-border py-8 px-4 md:px-8 shadow-[0px_4px_0px_rgba(42,42,42,1)] relative z-30">
         <div className="max-w-6xl mx-auto flex flex-col gap-6">
-          {/* Main Search Input */}
-          <form onSubmit={handleSearchSubmit} className="relative w-full max-w-3xl">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-retro-border">
-              <Search className="w-5 h-5" />
-            </div>
-            <input
-              type="text"
-              value={inputVal}
-              onChange={(e) => setInputVal(e.target.value)}
-              placeholder="C:\> search query..."
-              className="w-full pl-12 pr-32 md:pr-[140px] py-4 rounded border-4 border-retro-border focus:shadow-[4px_4px_0px_#2A2A2A] outline-none shadow-retro font-space font-bold text-base md:text-lg text-retro-border bg-white transition-all"
-            />
-            {inputVal && (
-              <button
-                type="button"
-                onClick={() => setInputVal('')}
-                className="absolute right-[100px] md:right-[120px] top-[1.15rem] text-retro-border hover:text-retro-accent p-1 bg-white border-2 border-retro-border shadow-[2px_2px_0px_#2A2A2A]"
+          {/* Main Search Input with Predictive Ghost Text & Autocomplete Dropdown */}
+          <div className="relative w-full max-w-3xl z-40" ref={containerRef}>
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <div className="relative border-4 border-retro-border bg-white focus-within:bg-retro-window shadow-retro focus-within:shadow-[4px_4px_0px_#2A2A2A] rounded transition-all">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-retro-border z-10">
+                  <Search className="w-5 h-5" />
+                </div>
+
+                {/* Predictive Inline Ghost Text (behind transparent input) */}
+                {isInputFocused && ghostSuggestion && (
+                  <div
+                    className="absolute inset-0 pl-12 pr-32 md:pr-[140px] py-4 font-space font-bold text-base md:text-lg pointer-events-none text-gray-400 select-none overflow-hidden whitespace-pre flex items-center z-0"
+                    aria-hidden="true"
+                  >
+                    <span className="opacity-0">{inputVal}</span>
+                    <span>{ghostSuggestion.slice(inputVal.length)}</span>
+                    <span className="ml-2 text-xs font-vt uppercase tracking-wider bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded border border-gray-300">
+                      Tab ⇥
+                    </span>
+                  </div>
+                )}
+
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputVal}
+                  onFocus={() => {
+                    setIsInputFocused(true);
+                    if (inputVal.trim().length >= 2) setIsDropdownOpen(true);
+                  }}
+                  onBlur={(e) => {
+                    setIsInputFocused(false);
+                    if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+                      setIsDropdownOpen(false);
+                      setSelectedSuggestionIndex(-1);
+                    }
+                  }}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setInputVal(val);
+                    setIsDropdownOpen(val.trim().length >= 2);
+                    setSelectedSuggestionIndex(-1);
+                  }}
+                  onKeyDown={handleKeyDown}
+                  placeholder="C:\> search query..."
+                  className="w-full pl-12 pr-32 md:pr-[140px] py-4 bg-transparent outline-none font-space font-bold text-base md:text-lg text-retro-border relative z-10"
+                />
+
+                {inputVal && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInputVal('');
+                      setIsDropdownOpen(false);
+                      setSelectedSuggestionIndex(-1);
+                      inputRef.current?.focus();
+                    }}
+                    className="absolute right-[100px] md:right-[120px] top-[1.15rem] z-20 text-retro-border hover:text-retro-accent p-1 bg-white border-2 border-retro-border shadow-[2px_2px_0px_#2A2A2A]"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  className="absolute inset-y-2.5 right-2.5 px-4 md:px-6 bg-retro-border hover:bg-retro-accent text-white font-vt text-xl rounded-sm transition-colors shadow-none hover:shadow-none uppercase z-20 cursor-pointer"
+                >
+                  EXECUTE
+                </button>
+              </div>
+            </form>
+
+            {/* Predictive Autocomplete Dropdown */}
+            {isDropdownOpen && suggestions.length > 0 && (
+              <div
+                role="listbox"
+                className="absolute left-0 right-0 top-full mt-2 bg-retro-window border-4 border-retro-border shadow-[6px_6px_0px_#2A2A2A] z-50 py-1 max-h-72 overflow-y-auto custom-scrollbar"
               >
-                <X className="w-4 h-4" />
-              </button>
+                <div className="px-3 py-1.5 text-[10px] font-space font-bold uppercase text-retro-border/60 border-b-2 border-retro-border/20 flex justify-between items-center sticky top-0 bg-retro-window z-10">
+                  <span className="flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-retro-accent" />
+                    Predictive Topics &amp; Keywords
+                  </span>
+                  <span className="font-vt text-xs tracking-wider">
+                    ↑↓ Navigate • Tab/Enter select • Esc
+                  </span>
+                </div>
+                {suggestions.map((item, idx) => {
+                  const isSelected = idx === selectedSuggestionIndex;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      role="option"
+                      aria-selected={isSelected}
+                      onPointerDown={(e) => {
+                        e.preventDefault();
+                        applySuggestion(item);
+                      }}
+                      className={`w-full px-4 py-2.5 text-left text-sm font-space font-bold flex items-center justify-between transition-colors ${
+                        isSelected
+                          ? 'bg-retro-border text-white'
+                          : 'hover:bg-retro-border hover:text-white text-retro-border'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Search
+                          className={`w-4 h-4 shrink-0 ${
+                            isSelected ? 'text-white' : 'text-retro-border'
+                          }`}
+                        />
+                        <span>{item}</span>
+                      </div>
+                      <span className="text-xs font-vt uppercase opacity-75">
+                        {isSelected ? 'Press Enter' : 'Select'}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             )}
-            <button
-              type="submit"
-              className="absolute inset-y-2.5 right-2.5 px-4 md:px-6 bg-retro-border hover:bg-retro-accent text-white font-vt text-xl rounded-sm transition-colors shadow-none hover:shadow-none uppercase"
-            >
-              EXECUTE
-            </button>
-          </form>
+          </div>
 
           {/* Quick Micro-Theme Exploration Chips */}
           <div className="flex flex-wrap items-center gap-2 -mt-2 text-xs">

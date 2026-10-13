@@ -173,7 +173,10 @@ export default function SearchBar({
                 role="option"
                 aria-selected={idx === selectedIndex}
                 type="button"
-                onClick={() => handleSelectSuggestion(item)}
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  handleSelectSuggestion(item);
+                }}
                 className={`w-full px-4 py-2 text-left text-xs font-space font-bold flex items-center gap-2 transition-colors ${
                   idx === selectedIndex ? 'bg-retro-border text-white' : 'hover:bg-retro-border hover:text-white text-retro-border'
                 }`}
@@ -252,7 +255,10 @@ export default function SearchBar({
               role="option"
               aria-selected={idx === selectedIndex}
               type="button"
-              onClick={() => handleSelectSuggestion(item)}
+              onPointerDown={(e) => {
+                e.preventDefault();
+                handleSelectSuggestion(item);
+              }}
               className={`w-full px-4 py-3 text-left font-space text-sm flex items-center justify-between transition-colors ${
                 idx === selectedIndex ? 'bg-retro-border text-white' : 'hover:bg-retro-border hover:text-white text-retro-border'
               }`}

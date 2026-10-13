@@ -133,11 +133,8 @@ export default function ExploreContent({
         
         {/* Header */}
         <div className="retro-container p-6 relative bg-white mb-8">
-          <div className="absolute -top-3 -right-3 retro-badge bg-white shadow-retro-sm">
-            {filteredQs.length} Questions
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+            <div className="flex flex-wrap items-center gap-3">
             {onBackToIndex && (
               <button
                 onClick={onBackToIndex}
@@ -158,6 +155,11 @@ export default function ExploreContent({
                 {subject.name}
               </span>
             )}
+            </div>
+
+            <div className="retro-badge bg-white shadow-retro-sm text-xs py-0.5 px-2.5 font-bold border-2 border-retro-border shrink-0">
+              {filteredQs.length} Questions
+            </div>
           </div>
 
           <h1 className="font-space font-bold text-2xl md:text-3xl mb-4 border-l-8 border-retro-border pl-4">

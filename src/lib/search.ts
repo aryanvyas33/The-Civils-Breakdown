@@ -252,38 +252,53 @@ export function getAutocompleteSuggestions(query: string, limit: number = 6): st
   if (!query || query.trim().length < 2) return [];
   const qLower = query.toLowerCase().trim();
 
-  const matched = new Set<string>();
+  const results: string[] = [];
+  const seen = new Set<string>();
 
-  // 1. High frequency tags first
+  const add = (term: string) => {
+    const clean = term.trim();
+    const lower = clean.toLowerCase();
+    if (!clean || lower === qLower || seen.has(lower)) return;
+    seen.add(lower);
+    results.push(clean);
+  };
+
+  const pool: string[] = [];
+
+  // Tags
   const allTags = getAllTags();
   for (const item of allTags) {
-    if (item.tag.toLowerCase().includes(qLower)) {
-      matched.add(item.tag);
-      if (matched.size >= limit) return Array.from(matched);
-    }
+    pool.push(item.tag);
   }
 
-  // 2. Micro-themes from question badges
+  // Micro-themes and core concepts
   const badgeMap = getAllQuestionCardBadges();
   for (const item of Object.values(badgeMap)) {
-    if (item.microThemes) {
-      for (const theme of item.microThemes) {
-        if (theme.toLowerCase().includes(qLower)) {
-          matched.add(theme);
-          if (matched.size >= limit) return Array.from(matched);
-        }
-      }
-    }
+    if (item.microThemes) pool.push(...item.microThemes);
+    if (item.coreConcepts) pool.push(...item.coreConcepts);
   }
 
-  // 3. Subject names
+  // Subject names
   const allSubjects = getAllSubjects();
   for (const sub of allSubjects) {
-    if (sub.name.toLowerCase().includes(qLower)) {
-      matched.add(sub.name);
-      if (matched.size >= limit) return Array.from(matched);
+    pool.push(sub.name);
+  }
+
+  // 1. Prefix matches first
+  for (const term of pool) {
+    if (term.toLowerCase().startsWith(qLower)) {
+      add(term);
+      if (results.length >= limit) return results;
     }
   }
 
-  return Array.from(matched);
+  // 2. Contains matches second
+  for (const term of pool) {
+    if (term.toLowerCase().includes(qLower)) {
+      add(term);
+      if (results.length >= limit) return results;
+    }
+  }
+
+  return results;
 }
