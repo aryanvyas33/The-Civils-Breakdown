@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Addictive Progress Bar Concepts — The UPSC Breakdown</title>
+  
+  <!-- Fonts matching The UPSC Breakdown App -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:          #F8F5EE;
+      --grid:        #D3D0C5;
+      --border:      #2A2A2A;
+      --window:      #F4F1E1;
+      --accent:      #E26A59;
+      --folder:      #FFD25A;
+      --emerald:     #50E3C2;
+      --mint:        #0D9488;
+      --mint-bg:     #E6F9F4;
+      --teal:        #4A90E2;
+      --teal-bg:     #EDF5FF;
+      --amber:       #F5A623;
+      --shadow-sm:   2px 2px 0px #2A2A2A;
+      --shadow-md:   4px 4px 0px #2A2A2A;
+      --shadow-lg:   6px 6px 0px #2A2A2A;
+      --font-code:   'Space Mono', monospace;
+      --font-pixel:  'VT323', monospace;
+      --font-sans:   'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 25px 25px;
+      color: var(--border);
+      min-height: 100vh;
+      padding-bottom: 90px;
+      line-height: 1.5;
+    }
+
+    /* ── TOP WIREFRAME NAV BANNER ── */
+    .wf-banner {
+      background: var(--border);
+      color: #FFF;
+      padding: 7px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 2px solid var(--border);
+    }
+    .wf-banner .live-badge {
+      background: var(--accent);
+      color: #FFF;
+      padding: 1px 7px;
+      font-family: var(--font-pixel);
+      font-size: 1rem;
+      margin-right: 8px;
+    }
+    .wf-banner a { color: var(--folder); margin-left: 12px; text-decoration: underline; font-weight: bold; }
+
+    /* ── AUTHENTIC RETRO NAVBAR ── */
+    .navbar {
+      background: var(--window);
+      border-bottom: 4px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-pixel);
+      font-size: 1.3rem;
+      position: sticky;
+      top: 33px;
+      z-index: 100;
+      box-shadow: 0 4px 0 rgba(42,42,42,0.12);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--border);
+      font-weight: bold;
+    }
+    .nav-logo {
+      background: var(--border);
+      color: #FFF;
+      padding: 2px 8px;
+      font-family: var(--font-pixel);
+      border: 2px solid var(--border);
+      box-shadow: 1.5px 1.5px 0px var(--border);
+    }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-link {
+      padding: 3px 12px;
+      text-decoration: none;
+      color: var(--border);
+    }
+    .nav-link.active {
+      background: var(--border);
+      color: #FFF;
+    }
+
+    /* ── CONTAINER ── */
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px;
+    }
+
+    .hero-heading {
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: var(--font-pixel);
+      font-size: 3rem;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: #444;
+      max-width: 780px;
+    }
+
+    /* Concept Selector Tabs */
+    .concept-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .concept-tab-btn {
+      font-family: var(--font-pixel);
+      font-size: 1.3rem;
+      padding: 8px 18px;
+      border: 3px solid var(--border);
+      background: #FFF;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.12s;
+    }
+    .concept-tab-btn:hover { background: #EAE6D6; }
+    .concept-tab-btn.active {
+      background: var(--border);
+      color: #FFF;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    /* ── PREVIEW WINDOW CONTAINER ── */
+    .preview-window {
+      background: var(--window);
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      border-radius: 4px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+    .window-header {
+      background: var(--border);
+      color: #FFF;
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-pixel);
+      font-size: 1.25rem;
+    }
+    .window-controls { display: flex; gap: 6px; }
+    .win-dot {
+      width: 12px;
+      height: 12px;
+      border: 2px solid #FFF;
+      display: inline-block;
+    }
+    .win-dot.red { background: var(--accent); }
+    .win-dot.yellow { background: var(--folder); }
+    .win-dot.green { background: var(--emerald); }
+
+    .window-body {
+      padding: 24px;
+      background: var(--bg);
+    }
+
+    /* ═════════════════════════════════════════════════════════
+       CONCEPT 1: THE RETRO XP LEVEL-UP BAR (Tactile Chunks & Rank Unlocks)
+       ═════════════════════════════════════════════════════════ */
+    .c1-widget {
+      background: #FFF;
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+      border-radius: 4px;
+      position: relative;
+    }
+    .c1-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 12px;
+    }
+    .c1-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .c1-title {
+      font-family: var(--font-pixel);
+      font-size: 1.8rem;
+      letter-spacing: 0.5px;
+      line-height: 1;
+    }
+    .c1-tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--mint);
+      background: #D1FAF0;
+      border: 1.5px solid var(--mint);
+      padding: 2px 8px;
+      margin-top: 4px;
+      width: fit-content;
+    }
+    .c1-counter {
+      font-family: var(--font-pixel);
+      font-size: 2.5rem;
+      color: var(--border);
+      line-height: 1;
+    }
+    .c1-counter span { color: var(--mint); }
+
+    /* Chunky Segmented Retro Rail */
+    .c1-rail {
+      height: 22px;
+      background: #E8E5DA;
+      border: 2.5px solid var(--border);
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .c1-fill {
+      height: 100%;
+      background: var(--emerald);
+      transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      box-shadow: 0 0 10px rgba(80, 227, 194, 0.6);
+    }
+    /* Discrete milestone tick lines */
+    .c1-milestone-marker {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2.5px;
+      background: var(--border);
+      z-index: 5;
+    }
+    .c1-marker-10 { left: 28.57%; } /* 10/35 */
+    .c1-marker-20 { left: 57.14%; } /* 20/35 */
+    .c1-marker-30 { left: 85.71%; } /* 30/35 */
+
+    .c1-milestones-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-code);
+      font-size: 0.68rem;
+      color: #666;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .c1-milestone.active { color: var(--border); font-weight: 800; }
+
+    /* ═════════════════════════════════════════════════════════
+       CONCEPT 2: THE KINETIC STRIPED DYNAMO (Velocity & Live Streak)
+       ═════════════════════════════════════════════════════════ */
+    .c2-widget {
+      background: #FFF;
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+      border-radius: 4px;
+    }
+    .c2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .c2-title {
+      font-family: var(--font-pixel);
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .c2-streak-pill {
+      background: #FFF3D0;
+      border: 2px solid var(--border);
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #946700;
+      padding: 4px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
+    }
+    .c2-rail {
+      height: 20px;
+      background: #EAE6D6;
+      border: 2.5px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .c2-fill {
+      height: 100%;
+      background-color: var(--emerald);
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.35) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.35) 50%,
+        rgba(255, 255, 255, 0.35) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 26px 26px;
+      animation: stripeDrift 2.2s linear infinite;
+      transition: width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+      box-shadow: 0 0 12px rgba(80, 227, 194, 0.6);
+      position: relative;
+    }
+    .c2-fill.accelerating {
+      animation: stripeSurge 0.6s linear infinite;
+      background-color: #38EF7D;
+      box-shadow: 0 0 18px rgba(56, 239, 125, 0.8);
+    }
+    @keyframes stripeDrift {
+      from { background-position: 0 0; }
+      to { background-position: 52px 0; }
+    }
+    @keyframes stripeSurge {
+      from { background-position: 0 0; }
+      to { background-position: 52px 0; }
+    }
+    .c2-footer {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-code);
+      font-size: 0.78rem;
+      color: #555;
+    }
+    .c2-speed-badge { color: var(--mint); font-weight: 700; }
+
+    /* ═════════════════════════════════════════════════════════
+       CONCEPT 3: THE VAULT CAPSULE & STAMP LOCK-IN (Elastic Spring + Stamps)
+       ═════════════════════════════════════════════════════════ */
+    .c3-widget {
+      background: #FFF;
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+      border-radius: 4px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .c3-dial {
+      width: 78px;
+      height: 78px;
+      border: 3px solid var(--border);
+      background: var(--window);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .c3-dial-pct {
+      font-family: var(--font-pixel);
+      font-size: 2.2rem;
+      line-height: 1;
+      color: var(--border);
+    }
+    .c3-dial-lbl {
+      font-family: var(--font-code);
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #666;
+      text-transform: uppercase;
+    }
+
+    .c3-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .c3-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .c3-title {
+      font-family: var(--font-pixel);
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .c3-target-chip {
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      background: var(--folder);
+      border: 1.5px solid var(--border);
+      padding: 2px 8px;
+      font-weight: 700;
+    }
+    .c3-rail {
+      height: 18px;
+      background: #E8E5DA;
+      border: 2.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 2px;
+    }
+    .c3-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #50E3C2, #4A90E2);
+      border-radius: 8px;
+      transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .c3-msg {
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      color: #555;
+    }
+
+    /* ── FLOATING XP POPUP ANIMATION ── */
+    .xp-float {
+      position: fixed;
+      font-family: var(--font-pixel);
+      font-size: 1.8rem;
+      color: var(--mint);
+      text-shadow: 1px 1px 0 #FFF, -1px -1px 0 #FFF;
+      pointer-events: none;
+      z-index: 999;
+      animation: floatUp 0.85s ease-out forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(0.9); }
+      50% { opacity: 1; transform: translateY(-30px) scale(1.15); }
+      100% { opacity: 0; transform: translateY(-55px) scale(1); }
+    }
+
+    /* ── INTERACTIVE TESTING SANDBOX ── */
+    .sandbox-section {
+      margin-top: 36px;
+    }
+    .sandbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+    .sandbox-title {
+      font-family: var(--font-pixel);
+      font-size: 1.8rem;
+      text-transform: uppercase;
+    }
+    .reset-btn {
+      font-family: var(--font-pixel);
+      font-size: 1.15rem;
+      padding: 4px 14px;
+      background: #FFF;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    .reset-btn:hover { background: #F0ECE0; }
+
+    .test-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .test-card {
+      background: #FFF;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.1s;
+    }
+    .test-card.done {
+      background: #F4FBF7;
+      opacity: 0.65;
+    }
+    .test-card.done .tc-title {
+      text-decoration: line-through;
+    }
+    .tc-rank {
+      font-family: var(--font-pixel);
+      font-size: 1.5rem;
+      color: var(--accent);
+      min-width: 28px;
+    }
+    .tc-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1.3;
+      flex: 1;
+    }
+    .tc-check-btn {
+      font-family: var(--font-pixel);
+      font-size: 1.3rem;
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--border);
+      background: #FFF;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 1.5px 1.5px 0px var(--border);
+      transition: 0.1s;
+    }
+    .tc-check-btn:hover { background: #E0FFF8; }
+    .tc-check-btn.checked {
+      background: var(--emerald);
+      color: var(--border);
+    }
+
+    /* Explanation Comparison Cards */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .comp-card {
+      background: #FFF;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 16px;
+    }
+    .comp-title {
+      font-family: var(--font-pixel);
+      font-size: 1.35rem;
+      color: var(--border);
+      border-bottom: 1.5px dashed var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .comp-desc {
+      font-size: 0.84rem;
+      color: #555;
+      line-height: 1.5;
+    }
+    .comp-pros {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      font-family: var(--font-code);
+      color: var(--mint);
+      font-weight: 700;
+    }
+
+    @media (max-width: 800px) {
+      .comp-grid { grid-template-columns: 1fr; }
+      .c3-widget { grid-template-columns: 1fr; }
+      .c3-dial { margin: 0 auto; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP WIREFRAME NAV BANNER -->
+<div class="wf-banner">
+  <div>
+    <span class="live-badge">WIREFRAME</span>
+    <span>ADDICTIVE CA PROGRESS BAR CONCEPTS // RETRO OS THEME</span>
+  </div>
+  <div>
+    <a href="12-current-affairs-priority-tracker.html">&larr; Back to Main Priority Tracker</a>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="/" class="nav-brand">
+    <div class="nav-logo">&#9650; PB</div>
+    <span>THE_UPSC_BREAKDOWN</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="12-current-affairs-priority-tracker.html">PRIORITY TRACKER</a>
+    <a class="nav-link active" href="#">PROGRESS LAB</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div class="hero-heading">
+    <h1 class="hero-title">MAKING <span>CA PROGRESS</span> ADDICTIVE</h1>
+    <p class="hero-sub">
+      Tested with 3 student-focused gamification loops that create genuine momentum without feeling gimmicky or cluttered. Click the tabs below to switch concepts, then check off sample topics in the sandbox!
+    </p>
+  </div>
+
+  <!-- CONCEPT SELECTOR TABS -->
+  <div class="concept-tabs">
+    <button class="concept-tab-btn active" id="tabBtn1" onclick="switchConcept(1)">
+      &#127918; CONCEPT 1: RETRO LEVEL-UP XP BAR
+    </button>
+    <button class="concept-tab-btn" id="tabBtn2" onclick="switchConcept(2)">
+      &#9889; CONCEPT 2: KINETIC STRIPED DYNAMO
+    </button>
+    <button class="concept-tab-btn" id="tabBtn3" onclick="switchConcept(3)">
+      &#128274; CONCEPT 3: VAULT CAPSULE &amp; SPRING DIAL
+    </button>
+  </div>
+
+  <!-- PREVIEW WINDOW -->
+  <div class="preview-window">
+    <div class="window-header">
+      <span id="previewWinTitle">CONCEPT 1: RETRO XP LEVEL-UP BAR // LIVE INTERACTIVE MOCKUP</span>
+      <div class="window-controls">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+      </div>
+    </div>
+
+    <div class="window-body">
+
+      <!-- ── CONCEPT 1 CONTAINER ── -->
+      <div id="conceptArea1" class="concept-display">
+        <div class="c1-widget">
+          <div class="c1-header">
+            <div class="c1-title-group">
+              <div class="c1-title">CA PROGRESS</div>
+              <div class="c1-tier-badge" id="c1TierBadge">&#9733; LEVEL 1: SYLLABUS ANCHOR</div>
+            </div>
+            <div class="c1-counter">
+              <span id="c1Count">0</span> / 35
+            </div>
+          </div>
+
+          <!-- Chunky Rail with Milestone Markers -->
+          <div class="c1-rail">
+            <div class="c1-fill" id="c1Fill" style="width: 0%;"></div>
+            <div class="c1-milestone-marker c1-marker-10" title="Milestone: 10 Topics"></div>
+            <div class="c1-milestone-marker c1-marker-20" title="Milestone: 20 Topics"></div>
+            <div class="c1-milestone-marker c1-marker-30" title="Milestone: 30 Topics"></div>
+          </div>
+
+          <div class="c1-milestones-row">
+            <span class="c1-milestone active" id="m0">START (0)</span>
+            <span class="c1-milestone" id="m10">CONTENDER (10)</span>
+            <span class="c1-milestone" id="m20">RANKER (20)</span>
+            <span class="c1-milestone" id="m30">INTERVIEW CALL (30)</span>
+            <span class="c1-milestone" id="m35">LOCKED (35)</span>
+          </div>
+
+          <div style="font-size: 0.86rem; color: #555; font-weight: 500;" id="c1Msg">
+            Start with Rank #1 below &mdash; each topic adds +100 Mains XP!
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CONCEPT 2 CONTAINER ── -->
+      <div id="conceptArea2" class="concept-display" style="display: none;">
+        <div class="c2-widget">
+          <div class="c2-header">
+            <div class="c2-title">
+              <span>CA PROGRESS</span>
+              <span style="font-family: var(--font-code); font-size: 1rem; color: var(--mint);" id="c2Pct">0%</span>
+            </div>
+            <div class="c2-streak-pill" id="c2StreakPill">
+              &#128293; 3-TOPIC DAILY VELOCITY
+            </div>
+          </div>
+
+          <!-- Striped Dynamo Rail -->
+          <div class="c2-rail">
+            <div class="c2-fill" id="c2Fill" style="width: 0%;"></div>
+          </div>
+
+          <div class="c2-footer">
+            <span id="c2CountText">0 of 35 Must-Cover themes locked</span>
+            <span class="c2-speed-badge" id="c2Pace">⚡ PACE: AHEAD OF 76% OF MAINS ASPIRANTS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CONCEPT 3 CONTAINER ── -->
+      <div id="conceptArea3" class="concept-display" style="display: none;">
+        <div class="c3-widget">
+          <div class="c3-dial">
+            <div class="c3-dial-pct" id="c3Dial">0%</div>
+            <div class="c3-dial-lbl">LOCKED</div>
+          </div>
+
+          <div class="c3-content">
+            <div class="c3-header">
+              <div class="c3-title">CA PROGRESS</div>
+              <div class="c3-target-chip" id="c3TargetChip">TARGET: 35 MUST-COVER (BAND A)</div>
+            </div>
+
+            <!-- Pill Capsule Rail -->
+            <div class="c3-rail">
+              <div class="c3-fill" id="c3Fill" style="width: 0%;"></div>
+            </div>
+
+            <div class="c3-msg" id="c3Msg">
+              35 high-yield topics remaining to lock 100% of Band A
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── INTERACTIVE TESTING SANDBOX ── -->
+  <section class="sandbox-section">
+    <div class="sandbox-header">
+      <div class="sandbox-title">&#128394; INTERACTIVE TEST BENCH (CLICK TO COMPLETE TOPICS)</div>
+      <button class="reset-btn" onclick="resetSandbox()">&#8635; RESET TO 0</button>
+    </div>
+    <p style="font-size: 0.88rem; color: #555; margin-bottom: 14px;">
+      Click the checkboxes below to see how each progress bar responds in real-time with kinetic micro-animations:
+    </p>
+
+    <div class="test-cards-grid" id="testCardsGrid">
+      <!-- 6 Sample Interactive Topics -->
+    </div>
+  </section>
+
+  <!-- ── CONCEPT COMPARISON & PSYCHOLOGICAL HOOKS ── -->
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-title">&#127918; IDEA 1: XP LEVEL-UP</div>
+      <div class="comp-desc">
+        Divides the 35 topics into 4 bite-sized CSE rank tiers (Contender &rarr; Ranker &rarr; Interview Ready). Hitting milestones triggers a tier upgrade sound &amp; badge.
+      </div>
+      <div class="comp-pros">
+        &check; Eliminates intimidation of 35 topics<br />
+        &check; Feels like a retro game RPG progress
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-title">&#9889; IDEA 2: KINETIC DYNAMO</div>
+      <div class="comp-desc">
+        Barber-pole diagonal stripes that visibly surge forward and glow whenever a user completes an action, paired with percentile social proof (Ahead of 76%).
+      </div>
+      <div class="comp-pros">
+        &check; Instant kinetic reward for effort<br />
+        &check; Built-in daily velocity streak pill
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-title">&#128274; IDEA 3: VAULT CAPSULE &amp; SPRING DIAL</div>
+      <div class="comp-desc">
+        Radial percentage lock-in dial paired with an elastic capsule bar that counts down directly to the 35 Must-Cover (Band A) goal. Employs the classic psychological <em>Goal Gradient Effect</em>.
+      </div>
+      <div class="comp-pros">
+        &check; Compact, ultra-clean executive UI<br />
+        &check; Clear Band A countdown without artificial weekly silos
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const TOTAL = 35;
+  let activeConcept = 1;
+  let completedCount = 0;
+  let checkedIndices = new Set();
+
+  const SAMPLE_TOPICS = [
+    { id: 1, rank: 1, title: "16th Finance Commission Award (2026–31)" },
+    { id: 2, rank: 2, title: "India's New Climate Targets (NDC 2031–35)" },
+    { id: 3, rank: 3, title: "From MGNREGA to VB-G RAM G Rural Guarantee" },
+    { id: 4, rank: 4, title: "Labour Codes: Gig Worker Social Security Rules" },
+    { id: 5, rank: 5, title: "Indus Waters Treaty in Abeyance & Trans-Boundary Law" },
+    { id: 6, rank: 6, title: "Women's Reservation: Delimitation Decoupling Debate" }
+  ];
+
+  function renderTestCards() {
+    const grid = document.getElementById('testCardsGrid');
+    grid.innerHTML = '';
+
+    SAMPLE_TOPICS.forEach((t, idx) => {
+      const isDone = checkedIndices.has(idx);
+      const card = document.createElement('div');
+      card.className = `test-card ${isDone ? 'done' : ''}`;
+      card.innerHTML = `
+        <span class="tc-rank">#${t.rank}</span>
+        <span class="tc-title">${t.title}</span>
+        <button class="tc-check-btn ${isDone ? 'checked' : ''}" onclick="toggleTopic(event, ${idx})">
+          ${isDone ? '✔' : '☐'}
+        </button>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function toggleTopic(event, idx) {
+    if (checkedIndices.has(idx)) {
+      checkedIndices.delete(idx);
+    } else {
+      checkedIndices.add(idx);
+      spawnXpFloat(event.clientX, event.clientY);
+      triggerConceptSurge();
+    }
+    completedCount = checkedIndices.size * 6; // Scale to test higher numbers up to 35
+    if (completedCount > TOTAL) completedCount = TOTAL;
+    
+    updateAllBars();
+    renderTestCards();
+  }
+
+  function spawnXpFloat(x, y) {
+    const float = document.createElement('div');
+    float.className = 'xp-float';
+    float.textContent = '+100 XP';
+    float.style.left = (x - 20) + 'px';
+    float.style.top = (y - 20) + 'px';
+    document.body.appendChild(float);
+    setTimeout(() => float.remove(), 900);
+  }
+
+  function triggerConceptSurge() {
+    const fill2 = document.getElementById('c2Fill');
+    fill2.classList.add('accelerating');
+    setTimeout(() => fill2.classList.remove('accelerating'), 1200);
+  }
+
+  function updateAllBars() {
+    const pct = Math.round((completedCount / TOTAL) * 100);
+
+    // Concept 1 Update
+    document.getElementById('c1Count').textContent = completedCount;
+    document.getElementById('c1Fill').style.width = pct + '%';
+    
+    let tierText = "★ LEVEL 1: SYLLABUS ANCHOR";
+    let msgText = "Start with Rank #1 below — each topic adds +100 Mains XP!";
+    if (completedCount >= 30) {
+      tierText = "🏆 LEVEL 4: INTERVIEW CALL READY!";
+      msgText = "Phenomenal! You are in the top 1% of prepared aspirants!";
+    } else if (completedCount >= 20) {
+      tierText = "⚡ LEVEL 3: RANKER ORBIT (TIER 1)";
+      msgText = "Over 60% locked! High probability answer fodder secured.";
+    } else if (completedCount >= 10) {
+      tierText = "🔥 LEVEL 2: MAINS CONTENDER";
+      msgText = "Double digits reached! Building unstoppable momentum.";
+    }
+    document.getElementById('c1TierBadge').textContent = tierText;
+    document.getElementById('c1Msg').textContent = msgText;
+
+    // Milestone highlights
+    document.getElementById('m10').classList.toggle('active', completedCount >= 10);
+    document.getElementById('m20').classList.toggle('active', completedCount >= 20);
+    document.getElementById('m30').classList.toggle('active', completedCount >= 30);
+    document.getElementById('m35').classList.toggle('active', completedCount >= 35);
+
+    // Concept 2 Update
+    document.getElementById('c2Pct').textContent = pct + '%';
+    document.getElementById('c2Fill').style.width = pct + '%';
+    document.getElementById('c2CountText').textContent = `${completedCount} of 35 Must-Cover themes locked`;
+
+    // Concept 3 Update
+    document.getElementById('c3Dial').textContent = pct + '%';
+    document.getElementById('c3Fill').style.width = pct + '%';
+    const remaining = Math.max(0, TOTAL - completedCount);
+    let c3MsgText = '';
+    if (completedCount === 0) {
+      c3MsgText = '35 high-yield topics remaining to lock 100% of Band A (Must-Cover)';
+    } else if (remaining === 0) {
+      c3MsgText = '🎉 Band A 100% locked! All 35 highest probability themes mastered!';
+    } else if (remaining <= 5) {
+      c3MsgText = `🔥 Final stretch! Only ${remaining} more ${remaining === 1 ? 'topic' : 'topics'} to complete Band A!`;
+    } else if (completedCount >= 18) {
+      c3MsgText = `Solid momentum! Over halfway there — ${remaining} topics left to lock Band A.`;
+    } else {
+      c3MsgText = `${remaining} topics remaining to achieve complete Band A lock-in (${pct}% done)`;
+    }
+    document.getElementById('c3Msg').textContent = c3MsgText;
+  }
+
+  function switchConcept(conceptNum) {
+    activeConcept = conceptNum;
+    [1, 2, 3].forEach(n => {
+      document.getElementById(`tabBtn${n}`).classList.toggle('active', n === conceptNum);
+      document.getElementById(`conceptArea${n}`).style.display = n === conceptNum ? 'block' : 'none';
+    });
+
+    const titles = {
+      1: "CONCEPT 1: RETRO XP LEVEL-UP BAR // LIVE INTERACTIVE MOCKUP",
+      2: "CONCEPT 2: KINETIC STRIPED DYNAMO // MOMENTUM & VELOCITY",
+      3: "CONCEPT 3: VAULT CAPSULE & SPRING DIAL // GOAL GRADIENT"
+    };
+    document.getElementById('previewWinTitle').textContent = titles[conceptNum];
+  }
+
+  function resetSandbox() {
+    checkedIndices.clear();
+    completedCount = 0;
+    updateAllBars();
+    renderTestCards();
+  }
+
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    renderTestCards();
+    updateAllBars();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYQ Vault - UPSC CSE Mains PYQ Searcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        custom: {
+                            primary: '#0d1b2a',
+                            secondary: '#1b3a4b',
+                            accent: '#d4a029',
+                            'accent-hover': '#b8891f',
+                            'accent-light': '#fef9e7',
+                            surface: '#f4f6f8',
+                            card: '#ffffff',
+                            text: '#0d1b2a',
+                            muted: '#5a6977',
+                            border: '#dde2e8',
+                            gs1: '#2563eb',
+                            gs2: '#059669',
+                            gs3: '#d97706',
+                            gs4: '#7c3aed',
+                            essay: '#dc2626',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f4f6f8;
+            color: #0d1b2a;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .dot-pattern {
+            background-image: radial-gradient(#dde2e8 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- 1. Navbar -->
+    <nav class="sticky top-0 z-50 glass-nav border-b border-custom-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-custom-primary tracking-tight">PYQ Vault</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-custom-primary font-medium hover:text-custom-accent transition-colors">Home</a>
+                    <a href="#" class="text-custom-muted font-medium hover:text-custom-primary transition-colors">Papers</a>
+                    <a href="#" class="text-custom-muted font-medium hover:text-custom-primary transition-colors">Essay</a>
+                    <a href="#" class="text-custom-muted font-medium hover:text-custom-primary transition-colors">Search</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-custom-primary hover:text-custom-accent focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <!-- 2. Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Left Side -->
+                <div class="w-full lg:w-[60%] flex flex-col items-start space-y-6">
+                    <span class="inline-block px-3 py-1 rounded-full bg-custom-accent-light border border-custom-accent/30 text-custom-accent text-sm font-semibold tracking-wide">
+                        UPSC CSE Mains 2013–2024
+                    </span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-custom-primary leading-tight">
+                        Every Question. <br class="hidden md:block"/>Every Year. <br class="hidden md:block"/>One Search.
+                    </h1>
+                    <p class="text-lg text-custom-muted leading-relaxed max-w-2xl">
+                        Browse 2700+ Mains questions across GS Papers & Essay — organized by paper, topic, and year. Spot patterns. Prepare smart.
+                    </p>
+                    
+                    <div class="w-full max-w-2xl mt-4">
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-custom-muted group-focus-within:text-custom-accent transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input type="text" class="block w-full pl-11 pr-4 py-4 rounded-xl border-2 border-custom-border bg-white text-custom-primary placeholder-custom-muted focus:outline-none focus:border-custom-accent focus:ring-0 transition-all text-lg shadow-sm hover:shadow-md" placeholder="Try &quot;climate change&quot;, &quot;judicial review&quot;, &quot;women empowerment&quot;...">
+                            <button class="absolute inset-y-2 right-2 bg-custom-primary hover:bg-custom-secondary text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                                Search
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mt-6">
+                            <span class="inline-flex items-center px-3 py-1 rounded-md bg-white border border-custom-border text-sm font-medium text-custom-muted shadow-sm">
+                                <span class="w-2 h-2 rounded-full bg-custom-gs1 mr-2"></span> 2700+ Qs
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-md bg-white border border-custom-border text-sm font-medium text-custom-muted shadow-sm">
+                                <span class="w-2 h-2 rounded-full bg-custom-gs2 mr-2"></span> 5 Papers
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-md bg-white border border-custom-border text-sm font-medium text-custom-muted shadow-sm">
+                                <span class="w-2 h-2 rounded-full bg-custom-gs3 mr-2"></span> 12 Years
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-md bg-white border border-custom-border text-sm font-medium text-custom-muted shadow-sm">
+                                <span class="w-2 h-2 rounded-full bg-custom-gs4 mr-2"></span> 35+ Topics
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side (Decorative) -->
+                <div class="w-full lg:w-[40%] flex justify-center lg:justify-end hidden md:flex">
+                    <div class="relative w-80 h-80">
+                        <div class="absolute inset-0 dot-pattern rounded-2xl opacity-50 transform translate-x-4 translate-y-4"></div>
+                        <div class="absolute inset-0 bg-white rounded-2xl border border-custom-border shadow-xl overflow-hidden p-6 grid grid-cols-2 grid-rows-2 gap-4 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+                            <div class="rounded-xl bg-custom-gs1/10 flex items-center justify-center p-4">
+                                <div class="w-16 h-16 rounded-full bg-custom-gs1/20 border-2 border-custom-gs1 flex items-center justify-center font-bold text-custom-gs1 text-xl">GS1</div>
+                            </div>
+                            <div class="rounded-xl bg-custom-gs2/10 flex items-center justify-center p-4">
+                                <div class="w-16 h-16 rounded-full bg-custom-gs2/20 border-2 border-custom-gs2 flex items-center justify-center font-bold text-custom-gs2 text-xl">GS2</div>
+                            </div>
+                            <div class="rounded-xl bg-custom-gs3/10 flex items-center justify-center p-4">
+                                <div class="w-16 h-16 rounded-full bg-custom-gs3/20 border-2 border-custom-gs3 flex items-center justify-center font-bold text-custom-gs3 text-xl">GS3</div>
+                            </div>
+                            <div class="rounded-xl bg-custom-gs4/10 flex items-center justify-center p-4">
+                                <div class="w-16 h-16 rounded-full bg-custom-gs4/20 border-2 border-custom-gs4 flex items-center justify-center font-bold text-custom-gs4 text-xl">GS4</div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-custom-card border-4 border-white shadow-lg flex items-center justify-center font-bold text-custom-essay text-lg z-10 bg-custom-essay/5">
+                                Essay
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Paper Cards Section -->
+        <section class="bg-white py-16 border-y border-custom-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 flex items-baseline justify-between">
+                    <h2 class="text-3xl font-bold text-custom-primary">Explore Papers</h2>
+                    <a href="#" class="text-custom-accent font-medium hover:text-custom-accent-hover flex items-center">View all <span class="ml-1">→</span></a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- GS1 -->
+                    <a href="#" class="group block bg-custom-surface rounded-xl p-6 border border-custom-border border-t-4 border-t-custom-gs1 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-full bg-custom-gs1/10 text-custom-gs1 flex items-center justify-center font-bold text-lg border border-custom-gs1/20">1</div>
+                            <span class="text-sm font-medium text-custom-muted bg-white px-2 py-1 rounded-md border border-custom-border">~240 Qs</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-custom-primary mb-1">GS Paper 1</h3>
+                        <p class="text-sm text-custom-muted mb-4 h-10">History, Culture & Geography</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Modern History</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Art & Culture</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">World Geo</span>
+                        </div>
+                        <div class="text-custom-gs1 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                            Browse →
+                        </div>
+                    </a>
+
+                    <!-- GS2 -->
+                    <a href="#" class="group block bg-custom-surface rounded-xl p-6 border border-custom-border border-t-4 border-t-custom-gs2 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-full bg-custom-gs2/10 text-custom-gs2 flex items-center justify-center font-bold text-lg border border-custom-gs2/20">2</div>
+                            <span class="text-sm font-medium text-custom-muted bg-white px-2 py-1 rounded-md border border-custom-border">~240 Qs</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-custom-primary mb-1">GS Paper 2</h3>
+                        <p class="text-sm text-custom-muted mb-4 h-10">Governance, Constitution, Polity & IR</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Constitution</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Intl. Relations</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Social Justice</span>
+                        </div>
+                        <div class="text-custom-gs2 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                            Browse →
+                        </div>
+                    </a>
+
+                    <!-- GS3 -->
+                    <a href="#" class="group block bg-custom-surface rounded-xl p-6 border border-custom-border border-t-4 border-t-custom-gs3 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-full bg-custom-gs3/10 text-custom-gs3 flex items-center justify-center font-bold text-lg border border-custom-gs3/20">3</div>
+                            <span class="text-sm font-medium text-custom-muted bg-white px-2 py-1 rounded-md border border-custom-border">~240 Qs</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-custom-primary mb-1">GS Paper 3</h3>
+                        <p class="text-sm text-custom-muted mb-4 h-10">Technology, Economic Dev & Environment</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Economy</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Environment</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Disaster Mgmt</span>
+                        </div>
+                        <div class="text-custom-gs3 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                            Browse →
+                        </div>
+                    </a>
+                    
+                    <!-- GS4 -->
+                    <a href="#" class="group block bg-custom-surface rounded-xl p-6 border border-custom-border border-t-4 border-t-custom-gs4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 lg:col-start-1 lg:col-span-1 lg:ml-auto lg:w-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-full bg-custom-gs4/10 text-custom-gs4 flex items-center justify-center font-bold text-lg border border-custom-gs4/20">4</div>
+                            <span class="text-sm font-medium text-custom-muted bg-white px-2 py-1 rounded-md border border-custom-border">~144 Qs</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-custom-primary mb-1">GS Paper 4</h3>
+                        <p class="text-sm text-custom-muted mb-4 h-10">Ethics, Integrity and Aptitude</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Case Studies</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Moral Thinkers</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Probity</span>
+                        </div>
+                        <div class="text-custom-gs4 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                            Browse →
+                        </div>
+                    </a>
+
+                    <!-- Essay -->
+                    <a href="#" class="group block bg-custom-surface rounded-xl p-6 border border-custom-border border-t-4 border-t-custom-essay hover:shadow-lg hover:-translate-y-1 transition-all duration-300 lg:col-start-2 lg:col-span-1 lg:mr-auto lg:w-full">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-full bg-custom-essay/10 text-custom-essay flex items-center justify-center font-bold text-lg border border-custom-essay/20">E</div>
+                            <span class="text-sm font-medium text-custom-muted bg-white px-2 py-1 rounded-md border border-custom-border">~96 Topics</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-custom-primary mb-1">Essay Paper</h3>
+                        <p class="text-sm text-custom-muted mb-4 h-10">Philosophical & Contemporary Themes</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Philosophical</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Social Issues</span>
+                            <span class="text-xs font-medium text-custom-secondary bg-white px-2 py-1 rounded border border-custom-border">Democracy</span>
+                        </div>
+                        <div class="text-custom-essay text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                            Browse →
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Topic Cloud Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-custom-primary mb-3">Trending Topics</h2>
+                <p class="text-custom-muted">Frequently asked themes across recent years</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-5xl mx-auto">
+                <a href="#" class="px-5 py-2 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-lg transition-colors shadow-sm">Indian Economy</a>
+                <a href="#" class="px-4 py-1.5 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-base transition-colors shadow-sm">Fundamental Rights</a>
+                <a href="#" class="px-6 py-2.5 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-bold text-xl transition-colors shadow-sm">Climate Change</a>
+                <a href="#" class="px-4 py-1.5 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-base transition-colors shadow-sm">Ethics Case Studies</a>
+                <a href="#" class="px-5 py-2 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-lg transition-colors shadow-sm">International Relations</a>
+                <a href="#" class="px-3 py-1 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-muted text-sm transition-colors shadow-sm">Disaster Management</a>
+                <a href="#" class="px-3 py-1 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-muted text-sm transition-colors shadow-sm">Ancient History</a>
+                <a href="#" class="px-4 py-1.5 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-base transition-colors shadow-sm">Biodiversity</a>
+                <a href="#" class="px-5 py-2 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-lg transition-colors shadow-sm">Women Empowerment</a>
+                <a href="#" class="px-3 py-1 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-muted text-sm transition-colors shadow-sm">Digital India</a>
+                <a href="#" class="px-4 py-1.5 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-base transition-colors shadow-sm">Judicial Activism</a>
+                <a href="#" class="px-5 py-2 rounded-full bg-white border border-custom-border hover:border-custom-accent hover:bg-custom-accent-light text-custom-primary font-medium text-lg transition-colors shadow-sm">Globalization</a>
+            </div>
+        </section>
+
+        <!-- 5. Year Timeline Section -->
+        <section class="bg-custom-surface py-16 border-t border-custom-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 text-center">
+                    <h2 class="text-3xl font-bold text-custom-primary mb-3">Browse by Year</h2>
+                    <p class="text-custom-muted">Navigate through the years to see paper evolution</p>
+                </div>
+                
+                <div class="relative w-full overflow-x-auto hide-scroll py-8">
+                    <div class="min-w-max px-4">
+                        <div class="flex items-center">
+                            <!-- Timeline line -->
+                            <div class="absolute left-0 right-0 h-0.5 bg-custom-border top-1/2 -translate-y-1/2 z-0 hidden md:block"></div>
+                            
+                            <!-- Year Dots -->
+                            <div class="relative z-10 flex space-x-8 md:space-x-12 lg:space-x-16 mx-auto">
+                                <script>
+                                    for(let year = 2013; year <= 2024; year++) {
+                                        let isLatest = year === 2024;
+                                        document.write(`
+                                            <a href="#" class="group flex flex-col items-center">
+                                                <span class="text-sm font-medium ${isLatest ? 'text-custom-accent font-bold' : 'text-custom-muted group-hover:text-custom-primary'} mb-3 transition-colors">${year}</span>
+                                                <div class="w-4 h-4 rounded-full ${isLatest ? 'bg-custom-accent ring-4 ring-custom-accent-light' : 'bg-white border-2 border-custom-border group-hover:border-custom-accent'} transition-all z-10"></div>
+                                                <span class="text-xs text-custom-muted mt-3 bg-white px-2 py-0.5 rounded border border-custom-border shadow-sm group-hover:shadow transition-shadow">~88 Qs</span>
+                                            </a>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 6. Footer -->
+    <footer class="bg-white border-t border-custom-border py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <span class="text-xl font-bold text-custom-primary tracking-tight block mb-1">PYQ Vault</span>
+                <span class="text-sm text-custom-muted">An open resource for UPSC aspirants</span>
+            </div>
+            <div class="text-center md:text-right text-xs text-custom-muted max-w-sm">
+                Disclaimer: This is an unofficial platform. Questions sourced from publicly available UPSC papers.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

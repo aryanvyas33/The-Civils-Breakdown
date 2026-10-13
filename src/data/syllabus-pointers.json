@@ -1,0 +1,546 @@
+[
+  {
+    "id": "gs1-her-1",
+    "label": "Art, Literature & Architecture",
+    "subjectId": "gs1-her",
+    "paperId": "gs1",
+    "officialText": "Indian culture will cover the salient aspects of Art Forms, literature and Architecture from ancient to modern times.",
+    "keywords": ["art", "architecture", "literature", "culture", "ancient", "temple", "sculpture", "painting", "buddhist", "gandhara", "chola", "vijayanagara"]
+  },
+  {
+    "id": "gs1-mod-1",
+    "label": "Modern Indian History: Mid 18th Century",
+    "subjectId": "gs1-mod",
+    "paperId": "gs1",
+    "officialText": "Modern Indian history from about the middle of the eighteenth century until the present- significant events, personalities, issues.",
+    "keywords": ["18th century", "colonial", "british", "revolt", "1857", "reform", "personality", "issue", "viceroy", "policy", "revenue"]
+  },
+  {
+    "id": "gs1-fre-1",
+    "label": "The Freedom Struggle",
+    "subjectId": "gs1-fre",
+    "paperId": "gs1",
+    "officialText": "The Freedom Struggle — its various stages and important contributors/contributions from different parts of the country.",
+    "keywords": ["freedom struggle", "gandhi", "congress", "national movement", "swadeshi", "non-cooperation", "civil disobedience", "quit india", "bose", "revolutionary", "moderate", "extremist"]
+  },
+  {
+    "id": "gs1-post-1",
+    "label": "Post-independence Consolidation",
+    "subjectId": "gs1-post",
+    "paperId": "gs1",
+    "officialText": "Post-independence consolidation and reorganization within the country.",
+    "keywords": ["post-independence", "consolidation", "reorganization", "princely states", "linguistic", "nehru", "green revolution", "emergency"]
+  },
+  {
+    "id": "gs1-wh-1",
+    "label": "World History Events",
+    "subjectId": "gs1-wh",
+    "paperId": "gs1",
+    "officialText": "History of the world will include events from 18th century such as industrial revolution, world wars, redrawal of national boundaries, colonization, decolonization, political philosophies like communism, capitalism, socialism etc.— their forms and effect on the society.",
+    "keywords": ["world history", "industrial revolution", "world war", "colonization", "decolonization", "communism", "capitalism", "socialism", "french revolution", "fascism", "nazism", "cold war"]
+  },
+  {
+    "id": "gs1-soc-1",
+    "label": "Salient features of Indian Society",
+    "subjectId": "gs1-soc",
+    "paperId": "gs1",
+    "officialText": "Salient features of Indian Society, Diversity of India.",
+    "keywords": ["indian society", "diversity", "caste", "family", "marriage", "kinship", "unity"]
+  },
+  {
+    "id": "gs1-soc-2",
+    "label": "Women & Women's Organizations",
+    "subjectId": "gs1-soc",
+    "paperId": "gs1",
+    "officialText": "Role of women and women’s organization, population and associated issues, poverty and developmental issues, urbanization, their problems and their remedies.",
+    "keywords": ["women", "women's organization", "population", "poverty", "urbanization", "patriarchy", "empowerment"]
+  },
+  {
+    "id": "gs1-soc-3",
+    "label": "Effects of Globalization",
+    "subjectId": "gs1-soc",
+    "paperId": "gs1",
+    "officialText": "Effects of globalization on Indian society.",
+    "keywords": ["globalization", "society", "tradition", "modernity", "culture", "economy", "youth", "elderly"]
+  },
+  {
+    "id": "gs1-soc-4",
+    "label": "Social Empowerment, Communalism, Regionalism & Secularism",
+    "subjectId": "gs1-soc",
+    "paperId": "gs1",
+    "officialText": "Social empowerment, communalism, regionalism & secularism.",
+    "keywords": ["empowerment", "communalism", "regionalism", "secularism", "minorities", "dalit", "tribal"]
+  },
+  {
+    "id": "gs1-geo-1",
+    "label": "Physical Geography",
+    "subjectId": "gs1-geo",
+    "paperId": "gs1",
+    "officialText": "Salient features of world’s physical geography.",
+    "keywords": ["physical geography", "geomorphology", "climatology", "oceanography", "earthquake", "volcano", "plate tectonics", "monsoon", "climate", "cyclone", "currents"]
+  },
+  {
+    "id": "gs1-geo-2",
+    "label": "Natural Resources",
+    "subjectId": "gs1-geo",
+    "paperId": "gs1",
+    "officialText": "Distribution of key natural resources across the world (including South Asia and the Indian sub-continent); factors responsible for the location of primary, secondary, and tertiary sector industries in various parts of the world (including India).",
+    "keywords": ["resources", "natural resources", "water", "mineral", "energy", "industry", "location", "manufacturing", "distribution", "iron", "coal"]
+  },
+  {
+    "id": "gs1-geo-3",
+    "label": "Geophysical Phenomena",
+    "subjectId": "gs1-geo",
+    "paperId": "gs1",
+    "officialText": "Important Geophysical phenomena such as earthquakes, Tsunami, Volcanic activity, cyclone etc., geographical features and their location-changes in critical geographical features (including water-bodies and ice-caps) and in flora and fauna and the effects of such changes.",
+    "keywords": ["earthquake", "tsunami", "volcano", "cyclone", "geophysical", "ice-caps", "water-bodies", "flora", "fauna", "environmental change", "melting"]
+  },
+  {
+    "id": "gs2-con-1",
+    "label": "Historical Underpinnings & Salient Features",
+    "subjectId": "gs2-con",
+    "paperId": "gs2",
+    "officialText": "Indian Constitution—historical underpinnings, evolution, features, amendments, significant provisions and basic structure.",
+    "keywords": ["constitution", "historical underpinning", "evolution", "feature", "amendment", "basic structure", "preamble", "constituent assembly"]
+  },
+  {
+    "id": "gs2-con-2",
+    "label": "Union & States: Functions & Challenges",
+    "subjectId": "gs2-con",
+    "paperId": "gs2",
+    "officialText": "Functions and responsibilities of the Union and the States, issues and challenges pertaining to the federal structure, devolution of powers and finances up to local levels and challenges therein.",
+    "keywords": ["union", "state", "federal", "centre-state", "devolution", "local government", "panchayat", "municipality", "governor", "inter-state", "finance commission"]
+  },
+  {
+    "id": "gs2-con-3",
+    "label": "Separation of Powers & Dispute Redressal",
+    "subjectId": "gs2-con",
+    "paperId": "gs2",
+    "officialText": "Separation of powers between various organs dispute redressal mechanisms and institutions.",
+    "keywords": ["separation of powers", "dispute redressal", "judiciary", "executive", "legislature", "tribunal", "judicial review", "judicial activism"]
+  },
+  {
+    "id": "gs2-con-4",
+    "label": "Comparison of Indian Constitutional Scheme",
+    "subjectId": "gs2-con",
+    "paperId": "gs2",
+    "officialText": "Comparison of the Indian constitutional scheme with that of other countries.",
+    "keywords": ["comparison", "other countries", "uk", "usa", "france", "constitution scheme"]
+  },
+  {
+    "id": "gs2-par-1",
+    "label": "Parliament & State Legislatures",
+    "subjectId": "gs2-par",
+    "paperId": "gs2",
+    "officialText": "Parliament and State legislatures—structure, functioning, conduct of business, powers & privileges and issues arising out of these.",
+    "keywords": ["parliament", "state legislature", "rajya sabha", "lok sabha", "speaker", "privilege", "anti-defection", "committee", "bill"]
+  },
+  {
+    "id": "gs2-con-5",
+    "label": "Executive & Judiciary",
+    "subjectId": "gs2-con",
+    "paperId": "gs2",
+    "officialText": "Structure, organization and functioning of the Executive and the Judiciary—Ministries and Departments of the Government; pressure groups and formal/informal associations and their role in the Polity.",
+    "keywords": ["executive", "judiciary", "ministry", "department", "supreme court", "high court", "pressure group", "association", "collegium"]
+  },
+  {
+    "id": "gs2-bod-1",
+    "label": "Representation of People's Act",
+    "subjectId": "gs2-bod",
+    "paperId": "gs2",
+    "officialText": "Salient features of the Representation of People’s Act.",
+    "keywords": ["representation of people", "rpa", "election", "criminalization", "electoral reform"]
+  },
+  {
+    "id": "gs2-bod-2",
+    "label": "Constitutional Bodies",
+    "subjectId": "gs2-bod",
+    "paperId": "gs2",
+    "officialText": "Appointment to various Constitutional posts, powers, functions and responsibilities of various Constitutional Bodies.",
+    "keywords": ["constitutional body", "upsc", "cag", "election commission", "finance commission", "ncsc", "ncst", "ncbc"]
+  },
+  {
+    "id": "gs2-bod-3",
+    "label": "Statutory, Regulatory & Quasi-Judicial Bodies",
+    "subjectId": "gs2-bod",
+    "paperId": "gs2",
+    "officialText": "Statutory, regulatory and various quasi-judicial bodies.",
+    "keywords": ["statutory", "regulatory", "quasi-judicial", "tribunal", "nhrc", "cbi", "cvc", "cic", "sebi", "rbi"]
+  },
+  {
+    "id": "gs2-gov-1",
+    "label": "Government Policies & Interventions",
+    "subjectId": "gs2-gov",
+    "paperId": "gs2",
+    "officialText": "Government policies and interventions for development in various sectors and issues arising out of their design and implementation.",
+    "keywords": ["policy", "intervention", "development", "scheme", "implementation", "design"]
+  },
+  {
+    "id": "gs2-gov-2",
+    "label": "Development Processes & NGOs",
+    "subjectId": "gs2-gov",
+    "paperId": "gs2",
+    "officialText": "Development processes and the development industry —the role of NGOs, SHGs, various groups and associations, donors, charities, institutional and other stakeholders.",
+    "keywords": ["development process", "ngo", "shg", "civil society", "charity", "stakeholder", "microfinance"]
+  },
+  {
+    "id": "gs2-soc-1",
+    "label": "Welfare Schemes for Vulnerable Sections",
+    "subjectId": "gs2-soc",
+    "paperId": "gs2",
+    "officialText": "Welfare schemes for vulnerable sections of the population by the Centre and States and the performance of these schemes; mechanisms, laws, institutions and Bodies constituted for the protection and betterment of these vulnerable sections.",
+    "keywords": ["welfare", "vulnerable", "sc", "st", "obc", "women", "children", "elderly", "disabled", "mechanism", "institution", "scheme"]
+  },
+  {
+    "id": "gs2-soc-2",
+    "label": "Social Sector/Services (Health, Education, HR)",
+    "subjectId": "gs2-soc",
+    "paperId": "gs2",
+    "officialText": "Issues relating to development and management of Social Sector/Services relating to Health, Education, Human Resources.",
+    "keywords": ["health", "education", "human resource", "social sector", "nep", "healthcare", "skill"]
+  },
+  {
+    "id": "gs2-soc-3",
+    "label": "Poverty & Hunger",
+    "subjectId": "gs2-soc",
+    "paperId": "gs2",
+    "officialText": "Issues relating to poverty and hunger.",
+    "keywords": ["poverty", "hunger", "malnutrition", "food security", "pds"]
+  },
+  {
+    "id": "gs2-gov-3",
+    "label": "Governance, Transparency & Accountability",
+    "subjectId": "gs2-gov",
+    "paperId": "gs2",
+    "officialText": "Important aspects of governance, transparency and accountability, e-governance- applications, models, successes, limitations, and potential; citizens charters, transparency & accountability and institutional and other measures.",
+    "keywords": ["governance", "transparency", "accountability", "e-governance", "citizen charter", "rti", "digital", "measure"]
+  },
+  {
+    "id": "gs2-gov-4",
+    "label": "Role of Civil Services in Democracy",
+    "subjectId": "gs2-gov",
+    "paperId": "gs2",
+    "officialText": "Role of civil services in a democracy.",
+    "keywords": ["civil service", "democracy", "bureaucracy", "reform", "lateral entry", "neutrality"]
+  },
+  {
+    "id": "gs2-ir-1",
+    "label": "India and its Neighborhood",
+    "subjectId": "gs2-ir",
+    "paperId": "gs2",
+    "officialText": "India and its neighborhood- relations.",
+    "keywords": ["neighborhood", "pakistan", "china", "nepal", "bangladesh", "sri lanka", "maldives", "bhutan", "myanmar", "saarc", "bimstec"]
+  },
+  {
+    "id": "gs2-ir-2",
+    "label": "Bilateral, Regional and Global Groupings",
+    "subjectId": "gs2-ir",
+    "paperId": "gs2",
+    "officialText": "Bilateral, regional and global groupings and agreements involving India and/or affecting India’s interests.",
+    "keywords": ["bilateral", "regional", "global", "grouping", "agreement", "interest", "quad", "brics", "sco", "asean", "g20"]
+  },
+  {
+    "id": "gs2-ir-3",
+    "label": "Effect of Policies of Developed & Developing Countries",
+    "subjectId": "gs2-ir",
+    "paperId": "gs2",
+    "officialText": "Effect of policies and politics of developed and developing countries on India’s interests, Indian diaspora.",
+    "keywords": ["policy", "politics", "developed", "developing", "interest", "diaspora", "usa", "russia", "middle east", "west asia"]
+  },
+  {
+    "id": "gs2-ir-4",
+    "label": "Important International Institutions",
+    "subjectId": "gs2-ir",
+    "paperId": "gs2",
+    "officialText": "Important International institutions, agencies and fora - their structure, mandate.",
+    "keywords": ["international institution", "agency", "forum", "un", "wto", "who", "imf", "world bank", "unsc"]
+  },
+  {
+    "id": "gs3-eco-1",
+    "label": "Indian Economy & Planning",
+    "subjectId": "gs3-eco",
+    "paperId": "gs3",
+    "officialText": "Indian Economy and issues relating to planning, mobilization, of resources, growth, development and employment.",
+    "keywords": ["economy", "planning", "mobilization", "resource", "growth", "development", "employment", "gdp", "jobless"]
+  },
+  {
+    "id": "gs3-eco-2",
+    "label": "Inclusive Growth",
+    "subjectId": "gs3-eco",
+    "paperId": "gs3",
+    "officialText": "Inclusive growth and issues arising from it.",
+    "keywords": ["inclusive", "inequality", "financial inclusion", "microfinance"]
+  },
+  {
+    "id": "gs3-eco-3",
+    "label": "Government Budgeting",
+    "subjectId": "gs3-eco",
+    "paperId": "gs3",
+    "officialText": "Government Budgeting.",
+    "keywords": ["budget", "fiscal", "deficit", "taxation", "gst", "expenditure", "revenue"]
+  },
+  {
+    "id": "gs3-agr-1",
+    "label": "Cropping Patterns & Irrigation",
+    "subjectId": "gs3-agr",
+    "paperId": "gs3",
+    "officialText": "Major crops-cropping patterns in various parts of the country, - different types of irrigation and irrigation systems storage, transport and marketing of agricultural produce and issues and related constraints; e-technology in the aid of farmers.",
+    "keywords": ["crop", "cropping pattern", "irrigation", "agriculture", "marketing", "transport", "storage", "e-technology", "farmer"]
+  },
+  {
+    "id": "gs3-agr-2",
+    "label": "Farm Subsidies & Food Security",
+    "subjectId": "gs3-agr",
+    "paperId": "gs3",
+    "officialText": "Issues related to direct and indirect farm subsidies and minimum support prices; Public Distribution System- objectives, functioning, limitations, revamping; issues of buffer stocks and food security; Technology missions; economics of animal-rearing.",
+    "keywords": ["subsidy", "msp", "minimum support price", "pds", "public distribution system", "food security", "buffer stock", "animal rearing", "livestock", "dairy"]
+  },
+  {
+    "id": "gs3-agr-3",
+    "label": "Food Processing & Supply Chain",
+    "subjectId": "gs3-agr",
+    "paperId": "gs3",
+    "officialText": "Food processing and related industries in India- scope' and significance, location, upstream and downstream requirements, supply chain management.",
+    "keywords": ["food processing", "industry", "supply chain", "upstream", "downstream", "mega food park"]
+  },
+  {
+    "id": "gs3-agr-4",
+    "label": "Land Reforms",
+    "subjectId": "gs3-agr",
+    "paperId": "gs3",
+    "officialText": "Land reforms in India.",
+    "keywords": ["land reform", "tenancy", "ceiling", "land acquisition", "digitization"]
+  },
+  {
+    "id": "gs3-eco-4",
+    "label": "Effects of Liberalization",
+    "subjectId": "gs3-eco",
+    "paperId": "gs3",
+    "officialText": "Effects of liberalization on the economy, changes in industrial policy and their effects on industrial growth.",
+    "keywords": ["liberalization", "lpg", "1991", "industrial policy", "manufacturing", "growth"]
+  },
+  {
+    "id": "gs3-inf-1",
+    "label": "Infrastructure",
+    "subjectId": "gs3-inf",
+    "paperId": "gs3",
+    "officialText": "Infrastructure: Energy, Ports, Roads, Airports, Railways etc.",
+    "keywords": ["infrastructure", "energy", "port", "road", "airport", "railway", "power", "renewable", "logistics"]
+  },
+  {
+    "id": "gs3-inf-2",
+    "label": "Investment Models",
+    "subjectId": "gs3-inf",
+    "paperId": "gs3",
+    "officialText": "Investment models.",
+    "keywords": ["investment", "model", "ppp", "fdi", "fpi"]
+  },
+  {
+    "id": "gs3-sci-1",
+    "label": "Science & Technology: Developments",
+    "subjectId": "gs3-sci",
+    "paperId": "gs3",
+    "officialText": "Science and Technology- developments and their applications and effects in everyday life.",
+    "keywords": ["science", "technology", "application", "effect", "everyday life"]
+  },
+  {
+    "id": "gs3-sci-2",
+    "label": "Indigenization of Technology",
+    "subjectId": "gs3-sci",
+    "paperId": "gs3",
+    "officialText": "Achievements of Indians in science & technology; indigenization of technology and developing new technology.",
+    "keywords": ["achievement", "indian", "indigenization", "developing new", "innovation", "scientist"]
+  },
+  {
+    "id": "gs3-sci-3",
+    "label": "IT, Space, Computers, Robotics, Nano-tech",
+    "subjectId": "gs3-sci",
+    "paperId": "gs3",
+    "officialText": "Awareness in the fields of IT, Space, Computers, robotics, nano-technology, bio-technology and issues relating to intellectual property rights.",
+    "keywords": ["it", "space", "computer", "robotics", "nano-technology", "bio-technology", "ipr", "intellectual property", "artificial intelligence", "isro"]
+  },
+  {
+    "id": "gs3-env-1",
+    "label": "Conservation, Pollution & Degradation",
+    "subjectId": "gs3-env",
+    "paperId": "gs3",
+    "officialText": "Conservation, environmental pollution and degradation, environmental impact assessment.",
+    "keywords": ["conservation", "environment", "pollution", "degradation", "eia", "climate change", "global warming", "biodiversity", "paris", "emission"]
+  },
+  {
+    "id": "gs3-dis-1",
+    "label": "Disaster and Disaster Management",
+    "subjectId": "gs3-dis",
+    "paperId": "gs3",
+    "officialText": "Disaster and disaster management.",
+    "keywords": ["disaster", "management", "ndma", "flood", "earthquake", "tsunami", "landslide", "mitigation", "resilience", "sendai"]
+  },
+  {
+    "id": "gs3-sec-1",
+    "label": "Extremism and Development",
+    "subjectId": "gs3-sec",
+    "paperId": "gs3",
+    "officialText": "Linkages between development and spread of extremism.",
+    "keywords": ["extremism", "development", "naxalism", "maoism", "lwe"]
+  },
+  {
+    "id": "gs3-sec-2",
+    "label": "Internal Security Challenges & Actors",
+    "subjectId": "gs3-sec",
+    "paperId": "gs3",
+    "officialText": "Role of external state and non-state actors in creating challenges to internal security.",
+    "keywords": ["external state", "non-state actor", "challenge", "internal security", "terrorism"]
+  },
+  {
+    "id": "gs3-sec-3",
+    "label": "Cyber Security, Media & Social Networking",
+    "subjectId": "gs3-sec",
+    "paperId": "gs3",
+    "officialText": "Challenges to internal security through communication networks, role of media and social networking sites in internal security challenges, basics of cyber security; money-laundering and its prevention.",
+    "keywords": ["communication network", "media", "social networking", "cyber", "money-laundering", "prevention", "data", "fake news"]
+  },
+  {
+    "id": "gs3-sec-4",
+    "label": "Border Management & Organized Crime",
+    "subjectId": "gs3-sec",
+    "paperId": "gs3",
+    "officialText": "Security challenges and their management in border areas - linkages of organized crime with terrorism.",
+    "keywords": ["border", "management", "organized crime", "terrorism", "coastal", "infiltrator", "smuggling"]
+  },
+  {
+    "id": "gs3-sec-5",
+    "label": "Security Forces and Agencies",
+    "subjectId": "gs3-sec",
+    "paperId": "gs3",
+    "officialText": "Various Security forces and agencies and their mandate.",
+    "keywords": ["security force", "agency", "mandate", "capf", "army", "paramilitary", "intelligence"]
+  },
+  {
+    "id": "gs4-eth-1",
+    "label": "Ethics and Human Interface",
+    "subjectId": "gs4-eth",
+    "paperId": "gs4",
+    "officialText": "Ethics and Human Interface: Essence, determinants and consequences of Ethics in-human actions; dimensions of ethics; ethics - in private and public relationships. Human Values - lessons from the lives and teachings of great leaders, reformers and administrators; role of family society and educational institutions in inculcating values.",
+    "keywords": ["ethics", "human action", "determinant", "consequence", "dimension", "private", "public", "human value", "leader", "reformer", "administrator", "family", "society", "education", "inculcating"]
+  },
+  {
+    "id": "gs4-att-1",
+    "label": "Attitude",
+    "subjectId": "gs4-att",
+    "paperId": "gs4",
+    "officialText": "Attitude: content, structure, function; its influence and relation with thought and behaviour; moral and political attitudes; social influence and persuasion.",
+    "keywords": ["attitude", "content", "structure", "function", "influence", "thought", "behaviour", "moral", "political", "social influence", "persuasion"]
+  },
+  {
+    "id": "gs4-att-2",
+    "label": "Aptitude and Foundational Values",
+    "subjectId": "gs4-att",
+    "paperId": "gs4",
+    "officialText": "Aptitude and foundational values for Civil Service, integrity, impartiality and non-partisanship, objectivity, dedication to public service, empathy, tolerance and compassion towards the weaker-sections.",
+    "keywords": ["aptitude", "foundational value", "civil service", "integrity", "impartiality", "non-partisanship", "objectivity", "dedication", "public service", "empathy", "tolerance", "compassion", "weaker"]
+  },
+  {
+    "id": "gs4-ei-1",
+    "label": "Emotional Intelligence",
+    "subjectId": "gs4-ei",
+    "paperId": "gs4",
+    "officialText": "Emotional intelligence-concepts, and their utilities and application in administration and governance.",
+    "keywords": ["emotional intelligence", "concept", "utility", "application", "administration", "governance"]
+  },
+  {
+    "id": "gs4-phi-1",
+    "label": "Moral Thinkers and Philosophers",
+    "subjectId": "gs4-phi",
+    "paperId": "gs4",
+    "officialText": "Contributions of moral thinkers and philosophers from India and world.",
+    "keywords": ["contribution", "moral thinker", "philosopher", "india", "world", "gandhi", "kant", "aristotle", "socrates", "plato", "buddha", "rawls"]
+  },
+  {
+    "id": "gs4-pro-1",
+    "label": "Public/Civil Service Values and Ethics",
+    "subjectId": "gs4-pro",
+    "paperId": "gs4",
+    "officialText": "Public/Civil service values and Ethics in Public administration: Status and problems; ethical concerns and dilemmas in government and private institutions; laws, rules, regulations and conscience as sources of ethical guidance; accountability and ethical governance; strengthening of ethical and moral values in governance; ethical issues in international relations and funding; corporate governance.",
+    "keywords": ["public service", "civil service", "value", "ethics", "public administration", "problem", "dilemma", "government", "private institution", "law", "rule", "regulation", "conscience", "guidance", "accountability", "ethical governance", "international relation", "funding", "corporate governance"]
+  },
+  {
+    "id": "gs4-pro-2",
+    "label": "Probity in Governance",
+    "subjectId": "gs4-pro",
+    "paperId": "gs4",
+    "officialText": "Probity in Governance: Concept of public service; Philosophical basis of governance and probity; Information sharing and transparency in government, Right to Information, Codes of Ethics, Codes of Conduct, Citizen’s Charters, Work culture, Quality of service delivery, Utilization of public funds, challenges of corruption.",
+    "keywords": ["probity", "governance", "public service", "philosophical basis", "information sharing", "transparency", "right to information", "rti", "code of ethics", "code of conduct", "citizen charter", "work culture", "quality", "service delivery", "utilization", "fund", "corruption"]
+  },
+  {
+    "id": "gs4-case-1",
+    "label": "Case Studies on above issues",
+    "subjectId": "gs4-case",
+    "paperId": "gs4",
+    "officialText": "Case Studies on above issues.",
+    "keywords": ["case study", "scenario", "dilemma situation"]
+  },
+  {
+    "id": "ess-phi-1",
+    "label": "Philosophy & Abstract Thought",
+    "subjectId": "ess-phi",
+    "paperId": "essay",
+    "officialText": "Reflective, quote-based, and paradoxical statements testing wisdom, human condition, character, resilience, means vs ends.",
+    "keywords": ["philosophy", "abstract", "wisdom", "truth", "character", "resilience", "mind", "journey", "simplicity", "destiny", "quote"]
+  },
+  {
+    "id": "ess-soc-1",
+    "label": "Society & Social Justice",
+    "subjectId": "ess-soc",
+    "paperId": "essay",
+    "officialText": "Gender parity, women empowerment, patriarchy, social inequalities, youth, social media dynamics, customary vs modern morality.",
+    "keywords": ["women", "patriarchy", "gender", "society", "inequality", "youth", "social media", "customary morality", "humanity"]
+  },
+  {
+    "id": "ess-pol-1",
+    "label": "Polity & Governance",
+    "subjectId": "ess-pol",
+    "paperId": "essay",
+    "officialText": "Constitutional morality, democracy, state effectiveness, people's participation, rule of law, classrooms shaping national destiny.",
+    "keywords": ["constitutional morality", "democracy", "governance", "citizen participation", "classrooms", "nation building", "reforms"]
+  },
+  {
+    "id": "ess-eco-1",
+    "label": "Economy & Development",
+    "subjectId": "ess-eco",
+    "paperId": "essay",
+    "officialText": "Inclusive development, globalization, technology as enabler, sustainable subsistence, poverty, shared spaces vs conflicts.",
+    "keywords": ["economy", "development", "globalization", "inclusive growth", "technology enabler", "farming", "shared spaces"]
+  },
+  {
+    "id": "ess-sci-1",
+    "label": "Science, Tech & Environment",
+    "subjectId": "ess-sci",
+    "paperId": "essay",
+    "officialText": "Technological outsourcing of self-discovery, cyberspace blessings/curse, alternative climate technologies, innovation determinants.",
+    "keywords": ["science", "cyberspace", "climate resilience", "innovation", "artificial intelligence", "environment", "digital age"]
+  },
+  {
+    "id": "ess-int-1",
+    "label": "International Affairs & Geopolitics",
+    "subjectId": "ess-int",
+    "paperId": "essay",
+    "officialText": "Non-alignment relevance, multi-polar world, South Asian cooperation, global peace, international conflicts.",
+    "keywords": ["non-alignment", "multipolar", "south asia", "geopolitics", "global order", "peace"]
+  },
+  {
+    "id": "ess-cul-1",
+    "label": "Culture, Education & Heritage",
+    "subjectId": "ess-cul",
+    "paperId": "essay",
+    "officialText": "Classrooms shaping destiny, cultural identity, linguistic heritage, tourism potential, national synthesis.",
+    "keywords": ["education", "classrooms", "culture", "tourism", "heritage", "identity"]
+  },
+  {
+    "id": "ess-eth-1",
+    "label": "Ethics & Values",
+    "subjectId": "ess-eth",
+    "paperId": "essay",
+    "officialText": "Means and ends, moral courage, values vs behavior, power and responsibility, simplicity as sophistication.",
+    "keywords": ["ethics", "values", "power", "responsibility", "courage", "moral compass"]
+  }
+]

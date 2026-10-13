@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Signup — Auth Modal & Vault Gate | The UPSC Breakdown</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RETRO OS SYSTEM TOKENS ── */
+    :root {
+      --bg:        #F8F5EE;
+      --grid:      #D3D0C5;
+      --border:    #2A2A2A;
+      --window:    #F4F1E1;
+      --accent:    #E26A59;
+      --folder:    #FFD25A;
+      --emerald:   #50E3C2;
+      --mint:      #0D9488;
+      --gs1:       #7C8B71;
+      --gs3:       #4A74A8;
+      --shadow:    4px 4px 0px #2A2A2A;
+      --shadow-sm: 2px 2px 0px #2A2A2A;
+      --shadow-lg: 6px 6px 0px #2A2A2A;
+      --ff-pixel:  'VT323', monospace;
+      --ff-mono:   'Space Mono', monospace;
+      --ff-sans:   'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--ff-sans);
+      background: var(--bg);
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 25px 25px;
+      color: var(--border);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ── TOP WIREFRAME BANNER ── */
+    .wf-banner {
+      background: var(--border);
+      color: #FFF;
+      padding: 6px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .wf-banner .live-badge {
+      background: var(--accent);
+      color: #FFF;
+      padding: 1px 7px;
+      font-family: var(--ff-pixel);
+      font-size: 1rem;
+      margin-right: 8px;
+    }
+    .wf-nav-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wf-pill {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 2px 10px;
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.15s;
+    }
+    .wf-pill:hover, .wf-pill.active { background: var(--accent); border-color: var(--accent); }
+
+    /* ── AUTHENTIC RETRO NAVBAR ── */
+    .navbar {
+      background: var(--window);
+      border-bottom: 4px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--ff-pixel);
+      font-size: 1.2rem;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; letter-spacing: 1px; }
+    .brand-dot { width: 32px; height: 32px; background: var(--border); display: flex; align-items: center; justify-content: center; }
+    .brand-dot span { color: var(--folder); font-family: var(--ff-pixel); font-size: 1.2rem; }
+    .nav-links { display: flex; gap: 2px; align-items: center; }
+    .nav-link {
+      padding: 3px 10px;
+      font-family: var(--ff-pixel);
+      font-size: 1.15rem;
+      color: var(--border);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .nav-link:hover { background: var(--border); color: #fff; }
+    .nav-link.active { background: var(--border); color: #fff; font-weight: bold; }
+    .nav-link .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 1px 5px;
+      font-family: var(--ff-mono);
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .nav-right { display: flex; align-items: center; gap: 12px; font-family: var(--ff-mono); font-size: 0.78rem; font-weight: 700; }
+    .login-btn {
+      background: var(--border);
+      color: #fff;
+      border: 2px solid var(--border);
+      padding: 4px 14px;
+      font-family: var(--ff-pixel);
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.1s;
+      letter-spacing: 1px;
+    }
+    .login-btn:hover { background: var(--accent); border-color: var(--accent); }
+    .login-btn.logged-in { background: var(--mint); border-color: var(--mint); }
+
+    /* ── PAGE SECTION LABELS ── */
+    .section-label {
+      background: var(--border);
+      color: var(--folder);
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 18px;
+    }
+
+    /* ── RETRO WINDOW / CONTAINER ── */
+    .retro-window {
+      background: var(--window);
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .window-header {
+      background: var(--border);
+      color: #fff;
+      padding: 7px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--ff-pixel);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      border-bottom: 3px solid var(--border);
+    }
+    .window-controls { display: flex; gap: 6px; }
+    .wc {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .wc.close { background: var(--accent); }
+    .wc.min { background: var(--folder); }
+    .wc.max { background: var(--mint); }
+
+    /* ── RETRO INPUT ── */
+    .retro-label {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+      display: block;
+      color: var(--border);
+    }
+    .retro-input {
+      width: 100%;
+      background: #fff;
+      border: 2px solid var(--border);
+      padding: 9px 12px;
+      font-family: var(--ff-mono);
+      font-size: 0.85rem;
+      color: var(--border);
+      box-shadow: var(--shadow-sm);
+      outline: none;
+      transition: box-shadow 0.1s, border-color 0.1s;
+    }
+    .retro-input:focus { border-color: var(--accent); box-shadow: 4px 4px 0px var(--accent); }
+    .retro-input::placeholder { color: #aaa; }
+    .retro-input.error { border-color: var(--accent); background: #FFF5F5; }
+
+    /* ── RETRO BUTTON ── */
+    .retro-btn {
+      background: var(--border);
+      color: #fff;
+      border: 2px solid var(--border);
+      padding: 10px 20px;
+      font-family: var(--ff-pixel);
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.1s;
+      letter-spacing: 1px;
+      width: 100%;
+      text-align: center;
+    }
+    .retro-btn:hover { background: #111; box-shadow: 6px 6px 0 var(--accent); }
+    .retro-btn:active { transform: translate(4px, 4px); box-shadow: none; }
+    .retro-btn.secondary {
+      background: #fff;
+      color: var(--border);
+      border-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .retro-btn.secondary:hover { background: var(--window); }
+    .retro-btn.accent { background: var(--accent); border-color: var(--accent); }
+    .retro-btn.accent:hover { background: #c9543f; box-shadow: 6px 6px 0 var(--border); }
+    .retro-btn.google {
+      background: #fff;
+      color: #333;
+      border-color: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--ff-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .google-g {
+      width: 18px; height: 18px;
+      background: linear-gradient(135deg, #EA4335 25%, #FBBC05 25% 50%, #34A853 50% 75%, #4285F4 75%);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .divider-line { flex: 1; height: 2px; background: var(--border); }
+    .divider-text { font-family: var(--ff-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; }
+
+    /* ── TABS ── */
+    .auth-tabs {
+      display: flex;
+      border-bottom: 3px solid var(--border);
+      background: var(--bg);
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 10px 16px;
+      font-family: var(--ff-pixel);
+      font-size: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      background: var(--bg);
+      color: var(--border);
+      border: none;
+      border-right: 2px solid var(--border);
+      transition: background 0.1s, color 0.1s;
+      letter-spacing: 1px;
+    }
+    .auth-tab:last-child { border-right: none; }
+    .auth-tab.active { background: var(--window); color: var(--border); font-weight: bold; }
+    .auth-tab:hover:not(.active) { background: var(--border); color: #fff; }
+
+    /* ── PASSWORD STRENGTH ── */
+    .pw-strength-bar {
+      height: 6px;
+      background: #e2e2e2;
+      border: 2px solid var(--border);
+      margin-top: 6px;
+    }
+    .pw-fill {
+      height: 100%;
+      transition: width 0.3s, background 0.3s;
+    }
+    .pw-fill.weak { background: var(--accent); width: 33%; }
+    .pw-fill.medium { background: var(--folder); width: 66%; }
+    .pw-fill.strong { background: var(--mint); width: 100%; }
+
+    /* ── CHECKBOX ── */
+    .retro-check-row { display: flex; align-items: center; gap: 10px; }
+    .retro-checkbox {
+      width: 18px; height: 18px;
+      border: 2px solid var(--border);
+      background: #fff;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    .retro-checkbox.checked { background: var(--border); }
+    .retro-checkbox.checked::after { content: '✓'; color: #fff; font-size: 12px; font-weight: bold; }
+    .check-label { font-family: var(--ff-mono); font-size: 0.72rem; color: var(--border); }
+    .check-label a { color: var(--accent); font-weight: 700; text-decoration: underline; cursor: pointer; }
+
+    /* ── ERROR / SUCCESS STATE ── */
+    .error-msg {
+      background: #FFF0EE;
+      border: 2px solid var(--accent);
+      border-left: 5px solid var(--accent);
+      padding: 8px 12px;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .success-msg {
+      background: #EDF7F5;
+      border: 2px solid var(--mint);
+      border-left: 5px solid var(--mint);
+      padding: 8px 12px;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--mint);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── LOADING STATE ── */
+    .loading-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .loading-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%;
+      height: 100%;
+      background: rgba(255,255,255,0.2);
+      animation: shimmer 1s infinite;
+    }
+    @keyframes shimmer {
+      to { left: 200%; }
+    }
+
+    /* ── VAULT GATE (protected page header) ── */
+    .vault-gate {
+      background: var(--window);
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      padding: 40px 32px;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .lock-icon {
+      width: 64px; height: 64px;
+      border: 4px solid var(--border);
+      background: var(--folder);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: var(--shadow);
+      font-size: 28px;
+    }
+
+    /* ── DROPDOWN USER MENU ── */
+    .user-menu {
+      position: relative;
+      display: inline-block;
+    }
+    .user-avatar {
+      width: 32px; height: 32px;
+      background: var(--mint);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-pixel);
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    .user-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      background: var(--window);
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow);
+      min-width: 200px;
+      z-index: 100;
+      font-family: var(--ff-mono);
+      font-size: 0.78rem;
+    }
+    .user-dropdown-header { padding: 12px 14px; border-bottom: 2px solid var(--border); }
+    .user-email { font-weight: 700; font-size: 0.7rem; color: var(--border); }
+    .user-name { font-family: var(--ff-pixel); font-size: 1.1rem; margin-bottom: 2px; }
+    .dropdown-item {
+      padding: 9px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(42,42,42,0.1);
+      transition: background 0.1s;
+    }
+    .dropdown-item:hover { background: var(--border); color: #fff; }
+    .dropdown-item.danger:hover { background: var(--accent); }
+
+    /* ── FORGOT PASSWORD OVERLAY ── */
+    .forgot-panel {
+      background: #FFF9EE;
+      border: 2px dashed var(--folder);
+      padding: 16px;
+      margin-top: 8px;
+    }
+
+    /* ── SOCIAL PROOF STRIP ── */
+    .social-strip {
+      background: var(--border);
+      color: #fff;
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      padding: 6px 16px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      letter-spacing: 0.5px;
+    }
+    .stat-num {
+      font-family: var(--ff-pixel);
+      font-size: 1rem;
+      color: var(--folder);
+    }
+
+    /* ── LAYOUT HELPERS ── */
+    .main { max-width: 1080px; margin: 0 auto; padding: 32px 20px 60px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .form-gap { display: flex; flex-direction: column; gap: 16px; }
+    .row-gap { display: flex; gap: 12px; }
+    .mt { margin-top: 16px; }
+    .mt-sm { margin-top: 8px; }
+    .mb { margin-bottom: 16px; }
+    .px { padding: 20px; }
+    .text-center { text-align: center; }
+    .muted { font-family: var(--ff-mono); font-size: 0.7rem; color: #666; }
+    .link { color: var(--accent); font-weight: 700; cursor: pointer; text-decoration: underline; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      border: 2px solid var(--border); background: #fff;
+      padding: 2px 8px;
+      font-family: var(--ff-mono); font-size: 0.68rem; font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+    .tag.green { background: #EDF7F5; border-color: var(--mint); color: var(--mint); }
+    .tag.amber { background: #FFF9EE; border-color: var(--folder); color: #8B6914; }
+    h1 { font-family: var(--ff-pixel); font-size: 2.8rem; letter-spacing: 1px; line-height: 1; }
+    h2 { font-family: var(--ff-pixel); font-size: 2rem; letter-spacing: 1px; line-height: 1.1; }
+    h3 { font-family: var(--ff-pixel); font-size: 1.4rem; letter-spacing: 0.5px; }
+    p { font-size: 0.88rem; line-height: 1.6; }
+
+    /* ── SEPARATORS ── */
+    hr { border: none; border-top: 3px solid var(--border); margin: 28px 0; }
+
+    /* Scanline overlay on the window surface */
+    .scanlines {
+      background: repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(42,42,42,0.04) 3px, rgba(42,42,42,0.04) 4px);
+    }
+
+    /* ── ANNOTATE ARROWS ── */
+    .annotation {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .callout-box {
+      border: 2px dashed var(--accent);
+      background: rgba(226,106,89,0.06);
+      padding: 8px 12px;
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .callout-box.blue {
+      border-color: var(--gs3);
+      background: rgba(74,116,168,0.06);
+      color: var(--gs3);
+    }
+    .callout-box.green {
+      border-color: var(--mint);
+      background: rgba(13,148,136,0.06);
+      color: var(--mint);
+    }
+
+    /* ── INTERACTIVE TABS LOGIC ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .wf-section { margin-bottom: 52px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     WIREFRAME BANNER
+════════════════════════════════════════════════════════════ -->
+<div class="wf-banner">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="live-badge">WF</span>
+    <span>WIREFRAME #17 — Login / Signup Auth System</span>
+    <span style="opacity:0.5">| The UPSC Breakdown</span>
+  </div>
+  <div class="wf-nav-pills">
+    <span class="wf-pill active" onclick="showSection('s-modal')">Modal Login</span>
+    <span class="wf-pill" onclick="showSection('s-signup')">Signup Form</span>
+    <span class="wf-pill" onclick="showSection('s-vault')">Vault Gate</span>
+    <span class="wf-pill" onclick="showSection('s-loggedin')">Logged-In State</span>
+    <span class="wf-pill" onclick="showSection('s-forgot')">Forgot Password</span>
+    <span class="wf-pill" onclick="showSection('s-mobile')">Mobile View</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     AUTHENTIC RETRO NAVBAR
+════════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="brand">
+    <div class="brand-dot"><span>▲</span></div>
+    <span>THE_UPSC_BREAKDOWN</span>
+  </div>
+  <div class="nav-links">
+    <span class="nav-link">Home</span>
+    <span class="nav-link">Explore</span>
+    <span class="nav-link">Search</span>
+    <span class="nav-link">High Yield</span>
+    <span class="nav-link">Current Affairs <span class="badge">NEW</span></span>
+    <span class="nav-link active">My Vault</span>
+  </div>
+  <div class="nav-right">
+    <div style="display:flex;gap:6px;align-items:center">
+      <div style="width:14px;height:14px;border:2px solid var(--border);background:#fff"></div>
+      <div style="width:14px;height:14px;border:2px solid var(--border);background:var(--accent)"></div>
+    </div>
+    <span style="font-size:0.8rem">LIVE 2013–2026</span>
+    <!-- STATE A: Not logged in -->
+    <button class="login-btn" id="navbar-login-btn" onclick="showSection('s-modal')">LOGIN / SIGNUP</button>
+  </div>
+</nav>
+
+<!-- Social proof strip -->
+<div class="social-strip">
+  <span><span class="stat-num">12,400+</span> UPSC aspirants preparing</span>
+  <span><span class="stat-num">1,131</span> PYQs indexed</span>
+  <span><span class="stat-num">2013–2026</span> Mains coverage</span>
+  <span style="margin-left:auto;opacity:0.6">● SECURE LOGIN — AES-256 encrypted vaults</span>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 1: LOGIN MODAL (default)
+════════════════════════════════════════════════════════════ -->
+<div id="s-modal" class="wf-section panel active">
+  <div class="section-label">▶ SECTION 01 — AUTH MODAL (appears as overlay on any page)</div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;margin-top:10px">
+
+    <!-- The Auth Modal itself -->
+    <div style="width:100%;max-width:460px">
+      <div class="retro-window">
+        <div class="window-header">
+          <span>C:\VAULT\AUTH.EXE</span>
+          <div class="window-controls">
+            <div class="wc min"></div>
+            <div class="wc max"></div>
+            <div class="wc close"></div>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">▶ LOGIN</button>
+          <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">✚ SIGN UP</button>
+        </div>
+
+        <!-- ── LOGIN PANEL ── -->
+        <div id="panel-login" class="panel active px scanlines" style="padding:24px">
+
+          <!-- Google OAuth -->
+          <button class="retro-btn google">
+            <div class="google-g"></div>
+            CONTINUE WITH GOOGLE
+          </button>
+
+          <div class="divider">
+            <div class="divider-line"></div>
+            <span class="divider-text">— OR —</span>
+            <div class="divider-line"></div>
+          </div>
+
+          <!-- Error State (annotated) -->
+          <div class="error-msg mb" id="login-error" style="display:none">
+            ⚠ Invalid credentials. Please check your email or password.
+          </div>
+
+          <div class="form-gap">
+            <div>
+              <label class="retro-label">Email Address</label>
+              <input class="retro-input" type="email" placeholder="aspirant@upsc.gov.in" />
+            </div>
+            <div>
+              <label class="retro-label">Password
+                <span class="muted" style="float:right;text-transform:none;letter-spacing:0"><a class="link" onclick="switchTab('forgot')">Forgot?</a></span>
+              </label>
+              <input class="retro-input" type="password" placeholder="••••••••••••" />
+            </div>
+            <div class="retro-check-row">
+              <div class="retro-checkbox checked"></div>
+              <span class="check-label">Keep me logged in for 30 days</span>
+            </div>
+            <button class="retro-btn accent" onclick="simulateLogin()">▶ LOGIN TO MY VAULT</button>
+          </div>
+
+          <p class="muted text-center mt">
+            No account? <a class="link" onclick="switchTab('signup')">Create one free →</a>
+          </p>
+        </div>
+
+        <!-- ── SIGNUP PANEL ── -->
+        <div id="panel-signup" class="panel px scanlines" style="padding:24px">
+
+          <!-- Success State -->
+          <div class="success-msg mb" id="signup-success" style="display:none">
+            ✓ Account created! Check your email to verify and start using your Vault.
+          </div>
+
+          <button class="retro-btn google">
+            <div class="google-g"></div>
+            SIGN UP WITH GOOGLE
+          </button>
+
+          <div class="divider">
+            <div class="divider-line"></div>
+            <span class="divider-text">— OR EMAIL —</span>
+            <div class="divider-line"></div>
+          </div>
+
+          <div class="form-gap">
+            <div class="row-gap">
+              <div style="flex:1">
+                <label class="retro-label">First Name</label>
+                <input class="retro-input" type="text" placeholder="Aryan" />
+              </div>
+              <div style="flex:1">
+                <label class="retro-label">Last Name</label>
+                <input class="retro-input" type="text" placeholder="Singh" />
+              </div>
+            </div>
+            <div>
+              <label class="retro-label">Email Address</label>
+              <input class="retro-input" type="email" placeholder="you@email.com" />
+            </div>
+            <div>
+              <label class="retro-label">Password</label>
+              <input class="retro-input" type="password" placeholder="Min. 8 characters" oninput="updatePwStrength(this.value)" />
+              <div class="pw-strength-bar mt-sm">
+                <div class="pw-fill weak" id="pw-bar" style="width:0%"></div>
+              </div>
+              <div style="margin-top:4px;font-family:var(--ff-mono);font-size:0.65rem;color:#666" id="pw-label">Enter a password</div>
+            </div>
+            <div class="retro-check-row">
+              <div class="retro-checkbox checked"></div>
+              <span class="check-label">I agree to the <a>Terms of Service</a> and <a>Privacy Policy</a></span>
+            </div>
+            <button class="retro-btn accent" onclick="simulateSignup()">✚ CREATE VAULT ACCOUNT</button>
+          </div>
+
+          <p class="muted text-center mt">
+            Already have an account? <a class="link" onclick="switchTab('login')">Login →</a>
+          </p>
+        </div>
+
+        <!-- ── FORGOT PASSWORD PANEL ── -->
+        <div id="panel-forgot" class="panel px scanlines" style="padding:24px">
+          <h3 style="margin-bottom:4px">Reset Password</h3>
+          <p class="muted mb" style="margin-bottom:16px">Enter your email and we'll send a reset link within 60 seconds.</p>
+
+          <div class="success-msg mb" id="reset-success" style="display:none">
+            ✓ Reset link sent! Check your inbox (and spam folder).
+          </div>
+
+          <div class="form-gap">
+            <div>
+              <label class="retro-label">Email Address</label>
+              <input class="retro-input" type="email" placeholder="your@email.com" />
+            </div>
+            <button class="retro-btn accent" onclick="simulateReset()">▶ SEND RESET LINK</button>
+            <button class="retro-btn secondary" onclick="switchTab('login')">← BACK TO LOGIN</button>
+          </div>
+        </div>
+
+      </div><!-- /retro-window -->
+
+      <div class="callout-box mt">
+        💡 Modal opens: (a) when user clicks "LOGIN/SIGNUP" in navbar, (b) when they try to access a protected feature, or (c) when they click "Sign in to sync" on Vault page.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 2: SIGNUP FULL FLOW (same modal, signup tab)
+════════════════════════════════════════════════════════════ -->
+<div id="s-signup" class="wf-section panel">
+  <div class="section-label">▶ SECTION 02 — FULL SIGNUP FLOW STATES</div>
+
+  <div class="grid-3" style="align-items:start">
+
+    <!-- State 1: Empty -->
+    <div>
+      <div class="annotation mb">State A: Empty form</div>
+      <div class="retro-window">
+        <div class="window-header"><span>SIGNUP — EMPTY</span><div class="window-controls"><div class="wc close"></div></div></div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+          <button class="retro-btn google"><div class="google-g"></div> SIGN UP WITH GOOGLE</button>
+          <div class="divider"><div class="divider-line"></div><span class="divider-text">OR</span><div class="divider-line"></div></div>
+          <div>
+            <label class="retro-label">Email</label>
+            <input class="retro-input" placeholder="you@email.com" />
+          </div>
+          <div>
+            <label class="retro-label">Password</label>
+            <input class="retro-input" placeholder="Min. 8 chars" />
+            <div class="pw-strength-bar mt-sm"><div class="pw-fill" style="width:0%"></div></div>
+          </div>
+          <button class="retro-btn" style="opacity:0.5;cursor:not-allowed">CREATE ACCOUNT</button>
+          <p class="muted text-center" style="font-size:0.65rem">Button disabled until form is valid</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- State 2: Validation Errors -->
+    <div>
+      <div class="annotation mb">State B: Validation errors</div>
+      <div class="retro-window">
+        <div class="window-header"><span>SIGNUP — ERRORS</span><div class="window-controls"><div class="wc close"></div></div></div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+          <div class="error-msg">⚠ Please fix 2 errors below</div>
+          <div>
+            <label class="retro-label" style="color:var(--accent)">Email ✗</label>
+            <input class="retro-input error" value="not-an-email" />
+            <div style="font-family:var(--ff-mono);font-size:0.65rem;color:var(--accent);margin-top:4px">✗ Enter a valid email address</div>
+          </div>
+          <div>
+            <label class="retro-label">Password ✓</label>
+            <input class="retro-input" style="border-color:var(--mint)" placeholder="••••••••••" />
+            <div class="pw-strength-bar mt-sm"><div class="pw-fill strong"></div></div>
+            <div style="font-family:var(--ff-mono);font-size:0.65rem;color:var(--mint);margin-top:4px">✓ Strong password</div>
+          </div>
+          <div class="retro-check-row">
+            <div class="retro-checkbox"></div>
+            <span class="check-label" style="color:var(--accent)">✗ You must accept the Terms</span>
+          </div>
+          <button class="retro-btn accent">FIX ERRORS & SUBMIT</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- State 3: Success -->
+    <div>
+      <div class="annotation mb">State C: Verification email sent</div>
+      <div class="retro-window">
+        <div class="window-header"><span>SIGNUP — SUCCESS ✓</span><div class="window-controls"><div class="wc close"></div></div></div>
+        <div style="padding:20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px">
+          <div style="width:60px;height:60px;background:var(--mint);border:3px solid var(--border);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);font-size:26px">✓</div>
+          <h3>Vault Created!</h3>
+          <div class="success-msg" style="text-align:left">
+            ✓ Check your inbox at <b>you@email.com</b> for the verification link.
+          </div>
+          <p class="muted">You can start using the vault now. Your data will sync once verified.</p>
+          <button class="retro-btn accent" style="width:auto;padding:10px 24px">GO TO MY VAULT →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 3: VAULT PAGE — UNAUTHENTICATED GATE
+════════════════════════════════════════════════════════════ -->
+<div id="s-vault" class="wf-section panel">
+  <div class="section-label">▶ SECTION 03 — VAULT PAGE (Unauthenticated gate + guest mode)</div>
+
+  <!-- Vault Page Header — unchanged -->
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:flex;flex-direction:column;gap:4px;border-bottom:4px dashed var(--border);padding-bottom:24px;margin-bottom:24px">
+      <div class="tag" style="margin-bottom:8px">📁 Personal Revision Vault</div>
+      <h1>Saved Data</h1>
+      <p style="font-family:var(--ff-mono);font-size:0.8rem;font-weight:700;margin-top:8px;max-width:480px">Questions you've pinned and notes you've taken. Stored securely on your device.</p>
+    </div>
+
+    <!-- SYNC NUDGE BANNER (shown to guests with data) -->
+    <div class="retro-window mb" style="border-color:var(--folder);box-shadow:4px 4px 0 var(--folder)">
+      <div class="window-header" style="background:var(--folder);color:var(--border)">
+        <span>☁ CLOUD SYNC AVAILABLE</span>
+        <div class="window-controls">
+          <div class="wc close" style="background:var(--border)"></div>
+        </div>
+      </div>
+      <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:#FFFBEE">
+        <div>
+          <div style="font-family:var(--ff-pixel);font-size:1.3rem;margin-bottom:4px">Your vault lives only on this device</div>
+          <p style="font-family:var(--ff-mono);font-size:0.72rem">Sign in to sync across devices, prevent data loss, and unlock cloud backup. Your existing 3 bookmarks & 2 notes will be migrated automatically.</p>
+        </div>
+        <button class="retro-btn accent" style="width:auto;padding:10px 20px;flex-shrink:0;font-size:1rem" onclick="showSection('s-modal')">SIGN IN TO SYNC →</button>
+      </div>
+    </div>
+
+    <!-- Tabs (unchanged from current design) -->
+    <div style="display:flex;gap:12px;margin-bottom:24px">
+      <button class="retro-btn accent" style="width:auto;padding:8px 18px;font-size:1rem">📌 Bookmarks (3)</button>
+      <button class="retro-btn secondary" style="width:auto;padding:8px 18px;font-size:1rem">✏ My Notes (2)</button>
+    </div>
+
+    <!-- Sample question cards (guest mode) -->
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="retro-window" style="box-shadow:var(--shadow-sm)">
+        <div style="padding:14px 18px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="tag amber" style="margin-bottom:6px">GS3 • 2023</div>
+            <div style="font-family:var(--ff-mono);font-size:0.82rem;font-weight:700;max-width:500px">"Explain the significance of the Semiconductor Mission in the context of India's ambition to become a global electronics hub."</div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="retro-btn secondary" style="width:auto;padding:5px 10px;font-size:0.8rem;box-shadow:none">VIEW →</button>
+            <button class="retro-btn secondary" style="width:auto;padding:5px 10px;font-size:0.8rem;box-shadow:none;color:var(--accent)">🗑</button>
+          </div>
+        </div>
+      </div>
+      <div class="retro-window" style="box-shadow:var(--shadow-sm)">
+        <div style="padding:14px 18px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="tag" style="background:#E8F4FD;border-color:var(--gs3);color:var(--gs3);margin-bottom:6px">GS1 • 2022</div>
+            <div style="font-family:var(--ff-mono);font-size:0.82rem;font-weight:700;max-width:500px">"Examine the role of the Panchayati Raj System in rural governance and poverty alleviation."</div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="retro-btn secondary" style="width:auto;padding:5px 10px;font-size:0.8rem;box-shadow:none">VIEW →</button>
+            <button class="retro-btn secondary" style="width:auto;padding:5px 10px;font-size:0.8rem;box-shadow:none;color:var(--accent)">🗑</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-box blue mt" style="margin-top:16px">
+      📌 DESIGN NOTE: Guest users keep full access to the vault. The sync banner is a soft nudge (not a paywall). Users can dismiss it. Once logged in, the banner is replaced with the cloud-sync status indicator.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 4: LOGGED-IN STATE (navbar + vault)
+════════════════════════════════════════════════════════════ -->
+<div id="s-loggedin" class="wf-section panel">
+  <div class="section-label">▶ SECTION 04 — LOGGED-IN STATE (Navbar + Vault page)</div>
+
+  <!-- Logged-in Navbar -->
+  <div class="callout-box green mb" style="margin-bottom:16px">✓ When logged in: Navbar replaces "LOGIN" button with a user avatar + dropdown</div>
+
+  <nav style="background:var(--window);border:3px solid var(--border);box-shadow:var(--shadow-sm);padding:10px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <div class="brand">
+      <div class="brand-dot"><span>▲</span></div>
+      <span style="font-family:var(--ff-pixel);font-size:1.4rem">THE_UPSC_BREAKDOWN</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-family:var(--ff-mono);font-size:0.78rem;font-weight:700">LIVE 2013–2026</div>
+      <!-- User avatar + dropdown -->
+      <div class="user-menu">
+        <div class="user-avatar">A</div>
+        <div class="user-dropdown">
+          <div class="user-dropdown-header">
+            <div class="user-name">Aryan Singh</div>
+            <div class="user-email">aryan@email.com</div>
+            <div class="tag green" style="margin-top:6px;font-size:0.62rem">☁ Vault Synced 2 min ago</div>
+          </div>
+          <div class="dropdown-item">📁 My Vault</div>
+          <div class="dropdown-item">⚙ Account Settings</div>
+          <div class="dropdown-item">🔄 Sync Status</div>
+          <div class="dropdown-item danger">⬡ Sign Out</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Logged-in Vault Page Header -->
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:flex;align-items:end;justify-content:space-between;gap:16px;border-bottom:4px dashed var(--border);padding-bottom:24px;margin-bottom:24px">
+      <div>
+        <div class="tag green" style="margin-bottom:8px">☁ Cloud Synced · 2 devices</div>
+        <h1>Saved Data</h1>
+        <p style="font-family:var(--ff-mono);font-size:0.8rem;font-weight:700;margin-top:8px">Questions you've pinned and notes you've taken. Synced across all your devices.</p>
+      </div>
+      <button class="retro-btn secondary" style="width:auto;padding:7px 14px;font-size:0.8rem;color:var(--accent);border-color:var(--accent)">🗑 CLEAR ALL BOOKMARKS</button>
+    </div>
+
+    <!-- Sync status bar -->
+    <div style="background:#EDF7F5;border:2px solid var(--mint);padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;font-family:var(--ff-mono);font-size:0.72rem">
+      <div style="width:10px;height:10px;background:var(--mint);border-radius:50%;animation:pulse 2s infinite"></div>
+      <span><b>Cloud sync active</b> — Last synced Oct 12, 2026 at 3:48 PM · 3 bookmarks, 2 notes · 2 devices</span>
+      <span class="link" style="margin-left:auto">Sync now</span>
+    </div>
+
+    <div class="callout-box green">
+      ✓ No more sync nudge. Vault page is identical in layout — only the header/banner changes to reflect auth state.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 5: FORGOT PASSWORD FLOW
+════════════════════════════════════════════════════════════ -->
+<div id="s-forgot" class="wf-section panel">
+  <div class="section-label">▶ SECTION 05 — FORGOT PASSWORD FLOW</div>
+
+  <div class="grid-3" style="align-items:start">
+
+    <div>
+      <div class="annotation mb">Step 1: Enter email</div>
+      <div class="retro-window" style="max-width:340px">
+        <div class="window-header"><span>RESET PASSWORD</span><div class="window-controls"><div class="wc close"></div></div></div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+          <h3>Forgot Password?</h3>
+          <p class="muted">Enter your account email to receive a reset link.</p>
+          <div>
+            <label class="retro-label">Email Address</label>
+            <input class="retro-input" placeholder="you@email.com" />
+          </div>
+          <button class="retro-btn accent">SEND RESET LINK</button>
+          <button class="retro-btn secondary">← BACK</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="annotation mb">Step 2: Email sent confirmation</div>
+      <div class="retro-window" style="max-width:340px">
+        <div class="window-header"><span>RESET LINK SENT ✓</span><div class="window-controls"><div class="wc close"></div></div></div>
+        <div style="padding:20px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+          <div style="width:54px;height:54px;background:var(--folder);border:3px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:var(--shadow)">✉</div>
+          <h3>Check Your Inbox</h3>
+          <div class="success-msg" style="text-align:left">✓ Reset link sent to <b>ar***@email.com</b></div>
+          <p class="muted">Link expires in 15 minutes. Didn't get it? <a class="link">Resend (60s)</a></p>
+          <button class="retro-btn secondary">← BACK TO LOGIN</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="annotation mb">Step 3: New password form (from email link)</div>
+      <div class="retro-window" style="max-width:340px">
+        <div class="window-header"><span>NEW PASSWORD</span><div class="window-controls"><div class="wc close"></div></div></div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+          <h3>Set New Password</h3>
+          <div>
+            <label class="retro-label">New Password</label>
+            <input class="retro-input" type="password" placeholder="Min. 8 chars" />
+            <div class="pw-strength-bar mt-sm"><div class="pw-fill strong"></div></div>
+          </div>
+          <div>
+            <label class="retro-label">Confirm Password</label>
+            <input class="retro-input" type="password" placeholder="Re-enter password" style="border-color:var(--mint)" />
+            <div style="font-family:var(--ff-mono);font-size:0.65rem;color:var(--mint);margin-top:4px">✓ Passwords match</div>
+          </div>
+          <button class="retro-btn accent">✓ UPDATE PASSWORD & LOGIN</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 6: MOBILE VIEWS
+════════════════════════════════════════════════════════════ -->
+<div id="s-mobile" class="wf-section panel">
+  <div class="section-label">▶ SECTION 06 — MOBILE AUTH VIEWS</div>
+
+  <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center">
+
+    <!-- Mobile Login -->
+    <div style="width:320px">
+      <div class="annotation mb">Mobile Login — full-screen sheet</div>
+      <div class="retro-window">
+        <!-- Mobile nav bar -->
+        <div style="background:var(--window);border-bottom:3px solid var(--border);padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--ff-pixel);font-size:1.2rem">THE_UPSC</span>
+          <button class="retro-btn secondary" style="width:auto;padding:3px 10px;font-size:0.85rem;box-shadow:none" onclick="showSection('s-modal')">✕</button>
+        </div>
+        <!-- Full-screen auth -->
+        <div class="auth-tabs">
+          <button class="auth-tab active">▶ LOGIN</button>
+          <button class="auth-tab">✚ SIGN UP</button>
+        </div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+          <button class="retro-btn google"><div class="google-g"></div> CONTINUE WITH GOOGLE</button>
+          <div class="divider"><div class="divider-line"></div><span class="divider-text">OR</span><div class="divider-line"></div></div>
+          <div>
+            <label class="retro-label">Email</label>
+            <input class="retro-input" placeholder="you@email.com" />
+          </div>
+          <div>
+            <label class="retro-label">Password</label>
+            <input class="retro-input" type="password" placeholder="••••••••" />
+          </div>
+          <button class="retro-btn accent">▶ LOGIN TO MY VAULT</button>
+          <p class="muted text-center" style="font-size:0.68rem">No account? <a class="link">Sign up free</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Vault with sync nudge -->
+    <div style="width:320px">
+      <div class="annotation mb">Mobile Vault — sync nudge banner</div>
+      <div class="retro-window">
+        <div style="background:var(--window);border-bottom:3px solid var(--border);padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--ff-pixel);font-size:1.2rem">THE_UPSC</span>
+          <div style="font-family:var(--ff-mono);font-size:0.7rem;font-weight:700">☰</div>
+        </div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+          <div class="tag" style="font-size:0.65rem">📁 Personal Revision Vault</div>
+          <h2 style="font-size:1.6rem">Saved Data</h2>
+          <!-- Sync nudge -->
+          <div style="background:#FFFBEE;border:2px solid var(--folder);padding:12px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-family:var(--ff-pixel);font-size:1.1rem">☁ Sync to Cloud?</div>
+            <p style="font-size:0.72rem;font-family:var(--ff-mono)">Sign in to prevent data loss & access on any device.</p>
+            <button class="retro-btn accent" style="font-size:0.9rem;padding:7px">SIGN IN TO SYNC</button>
+          </div>
+          <!-- Tabs -->
+          <div style="display:flex;gap:8px">
+            <button class="retro-btn accent" style="font-size:0.85rem;padding:6px 12px">📌 (3)</button>
+            <button class="retro-btn secondary" style="font-size:0.85rem;padding:6px 12px">✏ (2)</button>
+          </div>
+          <!-- Mock question card -->
+          <div style="border:2px solid var(--border);padding:12px;background:#fff;box-shadow:var(--shadow-sm)">
+            <div class="tag amber" style="font-size:0.6rem;margin-bottom:6px">GS3 • 2023</div>
+            <div style="font-family:var(--ff-mono);font-size:0.72rem;font-weight:700">"Semiconductor Mission and India's electronics hub ambition..."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Logged In -->
+    <div style="width:320px">
+      <div class="annotation mb">Mobile Vault — logged in + synced</div>
+      <div class="retro-window">
+        <div style="background:var(--window);border-bottom:3px solid var(--border);padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--ff-pixel);font-size:1.2rem">THE_UPSC</span>
+          <div class="user-avatar" style="width:28px;height:28px;font-size:0.9rem">A</div>
+        </div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+          <div class="tag green" style="font-size:0.62rem">☁ Synced · 2 devices</div>
+          <h2 style="font-size:1.6rem">Saved Data</h2>
+          <div style="background:#EDF7F5;border:2px solid var(--mint);padding:10px;font-family:var(--ff-mono);font-size:0.7rem;display:flex;align-items:center;gap:8px">
+            <div style="width:8px;height:8px;background:var(--mint);border-radius:50%"></div>
+            Cloud sync active — Last synced 2 min ago
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="retro-btn accent" style="font-size:0.85rem;padding:6px 12px">📌 (3)</button>
+            <button class="retro-btn secondary" style="font-size:0.85rem;padding:6px 12px">✏ (2)</button>
+          </div>
+          <div style="border:2px solid var(--border);padding:12px;background:#fff;box-shadow:var(--shadow-sm)">
+            <div class="tag amber" style="font-size:0.6rem;margin-bottom:6px">GS3 • 2023</div>
+            <div style="font-family:var(--ff-mono);font-size:0.72rem;font-weight:700">"Semiconductor Mission and India's electronics hub ambition..."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- ── FOOTER ── -->
+<div style="background:var(--border);color:#fff;font-family:var(--ff-mono);font-size:0.7rem;padding:12px 24px;text-align:center;letter-spacing:1px;margin-top:40px">
+  WIREFRAME #17 — THE UPSC BREAKDOWN AUTH SYSTEM · Login · Signup · Vault Gate · Forgot Password · Mobile Views
+</div>
+
+<script>
+  // Section navigation
+  function showSection(id) {
+    document.querySelectorAll('.wf-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.wf-pill').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const idx = ['s-modal','s-signup','s-vault','s-loggedin','s-forgot','s-mobile'].indexOf(id);
+    document.querySelectorAll('.wf-pill')[idx]?.classList.add('active');
+    window.scrollTo({top: 80, behavior: 'smooth'});
+  }
+
+  // Auth tab switcher
+  function switchTab(tab) {
+    ['login','signup','forgot'].forEach(t => {
+      document.getElementById('panel-'+t)?.classList.remove('active');
+      document.getElementById('tab-'+t)?.classList.remove('active');
+    });
+    document.getElementById('panel-'+tab)?.classList.add('active');
+    document.getElementById('tab-'+tab)?.classList.add('active');
+  }
+
+  // Simulate login (show error then success)
+  function simulateLogin() {
+    const err = document.getElementById('login-error');
+    err.style.display = 'flex';
+    setTimeout(() => { err.style.display = 'none'; showSection('s-loggedin'); }, 1800);
+  }
+
+  // Simulate signup
+  function simulateSignup() {
+    const s = document.getElementById('signup-success');
+    s.style.display = 'flex';
+  }
+
+  // Simulate reset
+  function simulateReset() {
+    const s = document.getElementById('reset-success');
+    s.style.display = 'flex';
+  }
+
+  // Password strength meter
+  function updatePwStrength(val) {
+    const bar = document.getElementById('pw-bar');
+    const label = document.getElementById('pw-label');
+    if (!bar) return;
+    if (val.length === 0) {
+      bar.style.width = '0%'; bar.className = 'pw-fill'; label.textContent = 'Enter a password';
+    } else if (val.length < 6) {
+      bar.style.width = '33%'; bar.className = 'pw-fill weak'; label.textContent = '⚠ Weak — too short';
+    } else if (val.length < 10 || !/[0-9]/.test(val)) {
+      bar.style.width = '66%'; bar.className = 'pw-fill medium'; label.textContent = '~ Medium — add numbers/symbols';
+    } else {
+      bar.style.width = '100%'; bar.className = 'pw-fill strong'; label.textContent = '✓ Strong password!';
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alternative B: Weekly Study Plan — UPSC Breakdown</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F8F5EE;
+      --grid:      #D3D0C5;
+      --border:    #2A2A2A;
+      --window:    #F4F1E1;
+      --accent:    #E26A59;
+      --folder:    #FFD25A;
+      --emerald:   #50E3C2;
+      --mint:      #0D9488;
+      --teal:      #4A90E2;
+      --amber:     #F5A623;
+      --gs1:       #7C8B71;
+      --gs2:       #B97A3A;
+      --gs3:       #4A74A8;
+      --shadow:    4px 4px 0px #2A2A2A;
+      --shadow-sm: 2px 2px 0px #2A2A2A;
+      --ff-pixel:  'VT323', monospace;
+      --ff-mono:   'Space Mono', monospace;
+      --ff-sans:   'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--ff-sans);
+      background: var(--bg);
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 25px 25px;
+      color: var(--border);
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+
+    /* WIREFRAME BANNER */
+    .wf-banner {
+      background: var(--border); color: #FFF;
+      padding: 6px 18px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 1px;
+      position: sticky; top: 0; z-index: 200;
+    }
+    .wf-banner a { color: var(--folder); margin-left: 12px; }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--window); border-bottom: 4px solid var(--border);
+      padding: 10px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--ff-pixel); font-size: 1.25rem;
+      position: sticky; top: 31px; z-index: 100;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--border); }
+    .nav-logo { background: var(--border); color: #FFF; padding: 2px 8px; }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-link { padding: 3px 10px; text-decoration: none; color: var(--border); }
+    .nav-link:hover, .nav-link.active { background: var(--border); color: #FFF; }
+    .nav-new { background: var(--accent); color: #FFF; font-family: var(--ff-sans); font-size: 0.65rem; font-weight: 800; padding: 1px 5px; vertical-align: super; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+
+    /* PLAN HEADER */
+    .plan-header {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: flex-end;
+      gap: 16px; margin-bottom: 24px;
+    }
+    .plan-header-left {}
+    .plan-title { font-family: var(--ff-pixel); font-size: 2.8rem; text-transform: uppercase; line-height: 1; margin-bottom: 6px; }
+    .plan-title span { color: var(--accent); }
+    .plan-sub { font-size: 0.95rem; color: #555; max-width: 600px; line-height: 1.5; }
+    .plan-header-right { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .retro-btn {
+      font-family: var(--ff-pixel); font-size: 1.15rem;
+      padding: 6px 16px; border: 2px solid var(--border);
+      background: var(--window); box-shadow: var(--shadow-sm);
+      cursor: pointer; transition: 0.1s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .retro-btn:hover { background: var(--border); color: #FFF; }
+
+    /* WEEK NAV BAR */
+    .week-nav {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--window); border: 2px solid var(--border);
+      box-shadow: var(--shadow-sm); padding: 10px 16px;
+      margin-bottom: 20px;
+    }
+    .week-nav-btn {
+      font-family: var(--ff-pixel); font-size: 1.3rem;
+      padding: 4px 14px; border: 1.5px solid var(--border);
+      background: #FFF; cursor: pointer; box-shadow: var(--shadow-sm);
+      transition: 0.1s;
+    }
+    .week-nav-btn:hover { background: var(--border); color: #FFF; }
+    .week-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .week-label { font-family: var(--ff-pixel); font-size: 1.6rem; flex: 1; text-align: center; }
+    .week-progress-pills { display: flex; gap: 8px; }
+    .wpill {
+      font-family: var(--ff-mono); font-size: 0.7rem; font-weight: 700;
+      padding: 3px 10px; border: 1.5px solid var(--border);
+      background: #FFF;
+    }
+    .wpill.active { background: var(--folder); }
+
+    /* CALENDAR GRID */
+    .calendar-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 10px; margin-bottom: 28px;
+    }
+    .day-col {
+      display: flex; flex-direction: column;
+      border: 2px solid var(--border);
+      background: #FFF; min-height: 200px;
+      transition: 0.15s;
+      position: relative; overflow: hidden;
+    }
+    .day-col.today { background: #FFFDE7; border-color: var(--border); border-width: 3px; }
+    .day-col.completed { opacity: 0.7; }
+    .day-col.rest-day { background: #F0F8F2; }
+
+    .day-header {
+      background: var(--border); color: #FFF;
+      padding: 6px 8px; text-align: center;
+      font-family: var(--ff-pixel); font-size: 1.2rem; line-height: 1.1;
+    }
+    .day-col.today .day-header { background: var(--amber); color: var(--border); }
+    .today-badge {
+      display: block; font-family: var(--ff-sans); font-size: 0.6rem;
+      font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;
+      color: var(--border); margin-top: 1px;
+    }
+    .day-body { padding: 8px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+    /* Topic assignment in a calendar day */
+    .day-topic-card {
+      border: 1.5px solid var(--border);
+      padding: 8px; background: var(--window);
+      display: flex; flex-direction: column; gap: 5px; flex: 1;
+    }
+    .day-topic-title { font-size: 0.78rem; font-weight: 700; line-height: 1.25; color: var(--border); }
+    .day-topic-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+    .paper-chip {
+      font-family: var(--ff-mono); font-size: 0.6rem; font-weight: 700;
+      padding: 1px 5px; color: #FFF;
+    }
+    .paper-chip.GS1 { background: var(--gs1); }
+    .paper-chip.GS2 { background: var(--gs2); }
+    .paper-chip.GS3 { background: var(--gs3); }
+    .effort-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      border: 1.5px solid var(--border);
+    }
+    .effort-dot.deep { background: var(--emerald); }
+    .effort-dot.quick { background: var(--teal); }
+
+    .day-check-btn {
+      margin-top: auto; font-family: var(--ff-mono); font-size: 0.7rem; font-weight: 700;
+      padding: 4px 8px; border: 1.5px solid var(--border); background: #FFF;
+      cursor: pointer; width: 100%; text-align: center; transition: 0.1s;
+    }
+    .day-check-btn:hover { background: var(--emerald); border-color: var(--mint); }
+    .day-check-btn.done-btn { background: var(--emerald); border-color: var(--mint); color: var(--mint); }
+
+    /* Completion overlay */
+    .done-overlay {
+      position: absolute; inset: 0; background: rgba(80,227,194,0.18);
+      display: none; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .done-overlay .check { font-size: 3rem; color: var(--mint); opacity: 0.7; }
+    .day-col.completed .done-overlay { display: flex; }
+
+    /* Rest day styling */
+    .rest-label {
+      font-family: var(--ff-pixel); font-size: 1.15rem;
+      color: var(--mint); text-align: center; padding: 12px 6px;
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px;
+    }
+    .rest-hint { font-family: var(--ff-sans); font-size: 0.72rem; color: #666; }
+
+    /* TODAY'S SPOTLIGHT CARD */
+    .spotlight-section { margin-bottom: 24px; }
+    .spot-header {
+      font-family: var(--ff-pixel); font-size: 1.5rem; text-transform: uppercase;
+      border-bottom: 2px dashed var(--border); padding-bottom: 6px; margin-bottom: 16px;
+    }
+    .spotlight-card {
+      background: var(--window); border: 3px solid var(--border);
+      box-shadow: var(--shadow); border-radius: 3px;
+      overflow: hidden;
+    }
+    .spot-topbar {
+      background: var(--folder); border-bottom: 3px solid var(--border);
+      padding: 10px 16px; font-family: var(--ff-pixel); font-size: 1.3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .spot-body {
+      padding: 20px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .spot-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; color: var(--border); }
+    .spot-facts { display: flex; flex-direction: column; gap: 6px; }
+    .spot-fact { font-size: 0.88rem; display: flex; gap: 8px; line-height: 1.35; }
+    .spot-fact::before { content: '→'; font-family: var(--ff-mono); flex-shrink: 0; color: var(--mint); font-weight: 700; }
+    .spot-actions { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+    .spot-big-btn {
+      font-family: var(--ff-pixel); font-size: 1.4rem;
+      padding: 12px 20px; border: 2px solid var(--border);
+      box-shadow: var(--shadow); cursor: pointer; text-align: center;
+      transition: 0.1s; width: 100%;
+    }
+    .spot-big-btn.start { background: var(--border); color: #FFF; }
+    .spot-big-btn.start:hover { background: #111; }
+    .spot-big-btn.done-btn { background: var(--emerald); color: var(--border); }
+    .spot-big-btn.done-btn.marked { background: #D1FAF0; color: #777; }
+
+    /* OVERALL PROGRESS */
+    .overall-progress {
+      background: #FFF; border: 2px solid var(--border);
+      box-shadow: var(--shadow-sm); padding: 16px;
+      margin-bottom: 24px;
+    }
+    .op-title { font-family: var(--ff-pixel); font-size: 1.3rem; margin-bottom: 12px; }
+    .op-rail { height: 14px; background: #DDD; border: 2px solid var(--border); margin-bottom: 8px; overflow: hidden; }
+    .op-fill { height: 100%; background: var(--emerald); transition: width 0.3s; }
+    .op-breakdown { display: flex; gap: 16px; font-family: var(--ff-mono); font-size: 0.75rem; font-weight: 700; }
+    .op-breakdown .ba { color: var(--mint); }
+    .op-breakdown .bb { color: var(--teal); }
+
+    /* CUSTOMIZE SETTINGS ACCORDION */
+    .settings-section { margin-bottom: 24px; }
+    .settings-toggle {
+      width: 100%; font-family: var(--ff-pixel); font-size: 1.2rem;
+      padding: 10px 16px; background: var(--window); border: 2px solid var(--border);
+      box-shadow: var(--shadow-sm); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .settings-body {
+      display: none; background: #FFF; border: 2px solid var(--border);
+      border-top: none; padding: 16px;
+    }
+    .settings-body.open { display: block; }
+    .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .setting-group { display: flex; flex-direction: column; gap: 6px; }
+    .setting-label { font-family: var(--ff-mono); font-size: 0.75rem; font-weight: 700; color: #555; text-transform: uppercase; }
+    .setting-input {
+      font-family: var(--ff-mono); font-size: 0.9rem;
+      padding: 6px 10px; border: 2px solid var(--border); background: #FFF9E6;
+    }
+    .toggle-row { display: flex; gap: 8px; }
+    .toggle-option {
+      padding: 5px 12px; border: 1.5px solid var(--border);
+      font-family: var(--ff-pixel); font-size: 1rem; cursor: pointer;
+      background: #FFF;
+    }
+    .toggle-option.active { background: var(--border); color: #FFF; }
+
+    @media (max-width: 900px) {
+      .calendar-grid { grid-template-columns: repeat(3, 1fr); }
+      .spot-body { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .calendar-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- WIREFRAME BANNER -->
+<div class="wf-banner">
+  <span>WIREFRAME — ALTERNATIVE B: WEEKLY STUDY PLAN GENERATOR</span>
+  <span>
+    <a href="12-current-affairs-priority-tracker.html">&larr; Main List View</a>
+    <a href="14-ca-alternative-daily-focus.html">ALT A: Daily Focus</a>
+  </span>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="/" class="nav-brand">
+    <div class="nav-logo">▲ PB</div>
+    <span>THE_UPSC_BREAKDOWN</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="#">HOME</a>
+    <a class="nav-link" href="#">EXPLORE</a>
+    <a class="nav-link" href="#">SEARCH</a>
+    <a class="nav-link" href="#">HIGH YIELD</a>
+    <a class="nav-link active" href="#">CURRENT AFFAIRS <span class="nav-new">NEW</span></a>
+    <a class="nav-link" href="#">MY VAULT</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- PLAN HEADER -->
+  <div class="plan-header">
+    <div class="plan-header-left">
+      <h1 class="plan-title">YOUR <span>APRIL</span> STUDY PLAN</h1>
+      <p class="plan-sub">We've spread 23 current affairs topics across your available study days. Each session is 45–60 mins. Just open up, check it off, and move forward.</p>
+    </div>
+    <div class="plan-header-right">
+      <button class="retro-btn" onclick="alert('Plan regenerated!')">⟳ REGENERATE PLAN</button>
+      <a href="12-current-affairs-priority-tracker.html" style="font-family:var(--ff-mono);font-size:0.75rem;color:var(--teal);text-decoration:underline;">≡ View priority ranked list instead</a>
+    </div>
+  </div>
+
+  <!-- WEEK NAVIGATION BAR -->
+  <div class="week-nav">
+    <button class="week-nav-btn" id="prevWeekBtn" onclick="changeWeek(-1)" disabled>← PREV WEEK</button>
+    <div class="week-label" id="weekLabel">WEEK 1 OF 3 &nbsp;·&nbsp; APR 14–20</div>
+    <div class="week-progress-pills">
+      <span class="wpill active" id="wpill1" onclick="changeWeek(0, 0)">W1</span>
+      <span class="wpill" id="wpill2" onclick="changeWeek(0, 1)">W2</span>
+      <span class="wpill" id="wpill3" onclick="changeWeek(0, 2)">W3</span>
+    </div>
+    <button class="week-nav-btn" id="nextWeekBtn" onclick="changeWeek(1)">NEXT WEEK →</button>
+  </div>
+
+  <!-- OVERALL PROGRESS BAR -->
+  <div class="overall-progress">
+    <div class="op-title">OVERALL APRIL PROGRESS — <span id="opCountLabel">0 / 23 topics covered</span></div>
+    <div class="op-rail"><div class="op-fill" id="opFill" style="width: 0%;"></div></div>
+    <div class="op-breakdown">
+      <span class="ba" id="opBandA">Band A done: 0 / 14</span>
+      <span class="bb" id="opBandB">Band B done: 0 / 9</span>
+    </div>
+  </div>
+
+  <!-- CALENDAR GRID -->
+  <div class="calendar-grid" id="calendarGrid">
+    <!-- Injected by JS -->
+  </div>
+
+  <!-- TODAY'S SPOTLIGHT -->
+  <div class="spotlight-section">
+    <div class="spot-header">📌 TODAY'S FOCUS — MONDAY, APRIL 14</div>
+    <div class="spotlight-card">
+      <div class="spot-topbar">
+        <span>TODAY: <span id="spotDayLabel">MON APR 14 · GS2 · BAND A · DEEP DIVE</span></span>
+        <span style="font-family:var(--ff-mono);font-size:0.78rem;">~45-60 mins</span>
+      </div>
+      <div class="spot-body">
+        <div>
+          <div class="spot-title" id="spotTitle">16th Finance Commission Award (2026–31)</div>
+          <div class="spot-facts" id="spotFacts">
+            <div class="spot-fact">41% of divisible pool devolved to states — highest ever vertical share</div>
+            <div class="spot-fact">Horizontal formula: Income distance 45%, Area 15%, Population 15%, Efficiency 12.5%, Demographic 12.5%</div>
+            <div class="spot-fact">Local body grants tied to sanitation & drinking water outcomes</div>
+            <div class="spot-fact">Cesses & surcharges excluded from divisible pool — states want this reversed</div>
+          </div>
+        </div>
+        <div class="spot-actions">
+          <a href="/search?q=Finance+Commission" class="spot-big-btn start" style="display:block;text-decoration:none;">🔍 SEARCH RELATED PYQs IN VAULT</a>
+          <button class="spot-big-btn done-btn" id="spotDoneBtn" onclick="markSpotDone()">✓ MARK TODAY AS DONE</button>
+          <div style="font-size:0.78rem;color:#777;text-align:center;">Completing this marks Day 1 done on the calendar above</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMIZE SETTINGS -->
+  <div class="settings-section">
+    <button class="settings-toggle" onclick="toggleSettings()">
+      <span>⚙ CUSTOMISE YOUR SCHEDULE</span>
+      <span id="settingsArrow">▼ OPEN</span>
+    </button>
+    <div class="settings-body" id="settingsBody">
+      <div class="settings-grid" style="margin-bottom: 16px;">
+        <div class="setting-group">
+          <div class="setting-label">Study days per week</div>
+          <div class="toggle-row">
+            <div class="toggle-option" onclick="selectToggle(this, 'days')">4</div>
+            <div class="toggle-option active" onclick="selectToggle(this, 'days')">5</div>
+            <div class="toggle-option" onclick="selectToggle(this, 'days')">6</div>
+            <div class="toggle-option" onclick="selectToggle(this, 'days')">7</div>
+          </div>
+        </div>
+        <div class="setting-group">
+          <div class="setting-label">Skip weekends?</div>
+          <div class="toggle-row">
+            <div class="toggle-option active" onclick="selectToggle(this, 'weekend')">Yes, skip</div>
+            <div class="toggle-option" onclick="selectToggle(this, 'weekend')">No, include</div>
+          </div>
+        </div>
+        <div class="setting-group">
+          <div class="setting-label">Session length</div>
+          <div class="toggle-row">
+            <div class="toggle-option" onclick="selectToggle(this, 'session')">30 min</div>
+            <div class="toggle-option active" onclick="selectToggle(this, 'session')">45–60 min</div>
+            <div class="toggle-option" onclick="selectToggle(this, 'session')">90 min</div>
+          </div>
+        </div>
+        <div class="setting-group">
+          <div class="setting-label">Revision day frequency</div>
+          <div class="toggle-row">
+            <div class="toggle-option" onclick="selectToggle(this, 'rev')">After 2</div>
+            <div class="toggle-option active" onclick="selectToggle(this, 'rev')">After 3</div>
+            <div class="toggle-option" onclick="selectToggle(this, 'rev')">After 5</div>
+          </div>
+        </div>
+      </div>
+      <button class="retro-btn" onclick="alert('Plan regenerated with your preferences!')">⟳ REGENERATE WITH THESE SETTINGS</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // ── WEEKLY PLAN DATA ──
+  const WEEKS = [
+    {
+      label: 'WEEK 1 OF 3 · APR 14–20',
+      days: [
+        { day: 'MON', date: 'APR 14', id: 1, topic: '16th Finance Commission Award', paper: 'GS2', band: 'A', effort: 'deep', rest: false, today: true },
+        { day: 'TUE', date: 'APR 15', id: 2, topic: 'India\'s Climate NDC 2031–35', paper: 'GS3', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'WED', date: 'APR 16', id: 3, topic: 'Women\'s Reservation: Timeline', paper: 'GS1', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'THU', date: 'APR 17', id: null, topic: 'Revise Mon–Wed topics', paper: null, band: null, effort: null, rest: true, today: false },
+        { day: 'FRI', date: 'APR 18', id: 4, topic: 'West Asia Crisis & India', paper: 'GS2', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'SAT', date: 'APR 19', id: 5, topic: 'Electoral Roll Controversy', paper: 'GS2', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'SUN', date: 'APR 20', id: 6, topic: 'India\'s FTA Push (UK, EU, NZ)', paper: 'GS2', band: 'A', effort: 'deep', rest: false, today: false },
+      ]
+    },
+    {
+      label: 'WEEK 2 OF 3 · APR 21–27',
+      days: [
+        { day: 'MON', date: 'APR 21', id: 7, topic: 'Monsoon Failure & Food Security', paper: 'GS3', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'TUE', date: 'APR 22', id: 8, topic: 'Delimitation & Census Debate', paper: 'GS2', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'WED', date: 'APR 23', id: 9, topic: 'Census 2027 with Caste Data', paper: 'GS1', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'THU', date: 'APR 24', id: null, topic: 'Revise Mon–Wed topics', paper: null, band: null, effort: null, rest: true, today: false },
+        { day: 'FRI', date: 'APR 25', id: 10, topic: 'Nuclear Power: 100 GW Plan', paper: 'GS3', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'SAT', date: 'APR 26', id: 11, topic: 'LWE-Free India: Lessons', paper: 'GS3', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'SUN', date: 'APR 27', id: 12, topic: 'Semiconductor Mission', paper: 'GS3', band: 'A', effort: 'deep', rest: false, today: false },
+      ]
+    },
+    {
+      label: 'WEEK 3 OF 3 · APR 28–30',
+      days: [
+        { day: 'MON', date: 'APR 28', id: 13, topic: 'Gaganyaan Progress Update', paper: 'GS3', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'TUE', date: 'APR 29', id: 14, topic: 'Energy Security & Hormuz Risk', paper: 'GS3', band: 'A', effort: 'deep', rest: false, today: false },
+        { day: 'WED', date: 'APR 30', id: null, topic: 'Revise all Band A topics', paper: null, band: null, effort: null, rest: true, today: false },
+        { day: 'THU', date: 'MAY 1', id: 15, topic: 'UN Security Council Reform', paper: 'GS2', band: 'B', effort: 'quick', rest: false, today: false },
+        { day: 'FRI', date: 'MAY 2', id: 16, topic: 'Jan Vishwas Act 2026', paper: 'GS2', band: 'B', effort: 'quick', rest: false, today: false },
+        { day: 'SAT', date: 'MAY 3', id: 17, topic: 'Online Gaming Regulation', paper: 'GS2', band: 'B', effort: 'quick', rest: false, today: false },
+        { day: 'SUN', date: 'MAY 4', id: 18, topic: 'Digital Payments & UPI Security', paper: 'GS3', band: 'B', effort: 'quick', rest: false, today: false },
+      ]
+    }
+  ];
+
+  let currentWeek = 0;
+  let doneSet = new Set();
+
+  function renderCalendar() {
+    const grid = document.getElementById('calendarGrid');
+    const week = WEEKS[currentWeek];
+    grid.innerHTML = '';
+
+    week.days.forEach(d => {
+      const col = document.createElement('div');
+      col.className = 'day-col' +
+        (d.today ? ' today' : '') +
+        (d.rest ? ' rest-day' : '') +
+        (d.id && doneSet.has(d.id) ? ' completed' : '');
+
+      const headerBg = d.today ? ' style="background:var(--amber);color:var(--border);"' : '';
+
+      if (d.rest) {
+        col.innerHTML = `
+          <div class="day-header"${headerBg}>
+            ${d.day}<br><small style="font-family:var(--ff-sans);font-size:0.62rem;">${d.date}</small>
+          </div>
+          <div class="day-body">
+            <div class="rest-label">
+              <span>⟳ REST & REVISION</span>
+              <span class="rest-hint">${d.topic}</span>
+            </div>
+          </div>
+        `;
+      } else {
+        const isDone = doneSet.has(d.id);
+        const bandColor = d.band === 'A' ? 'var(--mint)' : 'var(--teal)';
+        const bandBg = d.band === 'A' ? '#D1FAF0' : '#DCEEFF';
+        col.innerHTML = `
+          <div class="day-header"${headerBg}>
+            ${d.day}${d.today ? '<span class="today-badge">TODAY</span>' : ''}
+            <br><small style="font-family:var(--ff-sans);font-size:0.62rem;opacity:0.8;">${d.date}</small>
+          </div>
+          <div class="day-body">
+            <div class="day-topic-card">
+              <div class="day-topic-chips">
+                <span class="paper-chip ${d.paper}">${d.paper}</span>
+                <span class="effort-dot ${d.effort}" title="${d.effort === 'deep' ? 'Deep Dive' : 'Quick Read'}"></span>
+                <span style="font-family:var(--ff-mono);font-size:0.58rem;font-weight:700;padding:1px 4px;background:${bandBg};color:${bandColor};">BAND ${d.band}</span>
+              </div>
+              <div class="day-topic-title">${d.topic}</div>
+              <button class="day-check-btn ${isDone ? 'done-btn' : ''}" onclick="toggleDay(${d.id})">
+                ${isDone ? '✓ DONE' : '☐ MARK DONE'}
+              </button>
+            </div>
+          </div>
+          <div class="done-overlay"><span class="check">✓</span></div>
+        `;
+      }
+
+      grid.appendChild(col);
+    });
+  }
+
+  function toggleDay(id) {
+    if (doneSet.has(id)) doneSet.delete(id);
+    else doneSet.add(id);
+    renderCalendar();
+    updateProgress();
+  }
+
+  function markSpotDone() {
+    const btn = document.getElementById('spotDoneBtn');
+    if (!doneSet.has(1)) {
+      doneSet.add(1);
+      btn.textContent = '✓ DONE — Great work!';
+      btn.classList.add('marked');
+    } else {
+      doneSet.delete(1);
+      btn.textContent = '✓ MARK TODAY AS DONE';
+      btn.classList.remove('marked');
+    }
+    renderCalendar();
+    updateProgress();
+  }
+
+  function changeWeek(dir, absWeek) {
+    if (absWeek !== undefined) {
+      currentWeek = absWeek;
+    } else {
+      currentWeek = Math.max(0, Math.min(2, currentWeek + dir));
+    }
+    document.getElementById('prevWeekBtn').disabled = currentWeek === 0;
+    document.getElementById('nextWeekBtn').disabled = currentWeek === WEEKS.length - 1;
+    document.getElementById('weekLabel').textContent = WEEKS[currentWeek].label;
+    ['wpill1','wpill2','wpill3'].forEach((id, i) => {
+      document.getElementById(id).classList.toggle('active', i === currentWeek);
+    });
+    renderCalendar();
+  }
+
+  function updateProgress() {
+    const allTopicIds = WEEKS.flatMap(w => w.days.filter(d => d.id).map(d => d.id));
+    const bandAIds = WEEKS.flatMap(w => w.days.filter(d => d.band === 'A' && d.id).map(d => d.id));
+    const bandBIds = WEEKS.flatMap(w => w.days.filter(d => d.band === 'B' && d.id).map(d => d.id));
+
+    const totalDone = [...doneSet].filter(id => allTopicIds.includes(id)).length;
+    const bandADone = [...doneSet].filter(id => bandAIds.includes(id)).length;
+    const bandBDone = [...doneSet].filter(id => bandBIds.includes(id)).length;
+    const pct = Math.round((totalDone / 23) * 100);
+
+    document.getElementById('opFill').style.width = `${pct}%`;
+    document.getElementById('opCountLabel').textContent = `${totalDone} / 23 topics covered (${pct}%)`;
+    document.getElementById('opBandA').textContent = `Band A done: ${bandADone} / 14`;
+    document.getElementById('opBandB').textContent = `Band B done: ${bandBDone} / 9`;
+  }
+
+  function toggleSettings() {
+    const body = document.getElementById('settingsBody');
+    const arrow = document.getElementById('settingsArrow');
+    body.classList.toggle('open');
+    arrow.textContent = body.classList.contains('open') ? '▲ CLOSE' : '▼ OPEN';
+  }
+
+  function selectToggle(el, group) {
+    el.closest('.toggle-row').querySelectorAll('.toggle-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Init
+  renderCalendar();
+  updateProgress();
+</script>
+</body>
+</html>

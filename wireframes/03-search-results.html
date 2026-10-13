@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - PYQ Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0d1b2a',
+                        secondary: '#1b3a4b',
+                        accent: '#d4a029',
+                        'accent-hover': '#b8891f',
+                        surface: '#f4f6f8',
+                        card: '#ffffff',
+                        text: '#0d1b2a',
+                        muted: '#5a6977',
+                        border: '#dde2e8',
+                        highlight: '#fef3c7',
+                        gs1: '#2563eb',
+                        gs2: '#059669',
+                        gs3: '#d97706',
+                        gs4: '#7c3aed',
+                        essay: '#dc2626',
+                        'gold-tint': '#fdfbf7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f4f6f8; color: #0d1b2a; }
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #dde2e8; }
+        .kw-highlight { background-color: #fef3c7; font-weight: 500; padding: 0 2px; border-radius: 2px; }
+        .essay-border { border-left: 4px solid #dc2626; }
+        .gs1-border { border-left: 4px solid #2563eb; }
+        .gs2-border { border-left: 4px solid #059669; }
+        .gs3-border { border-left: 4px solid #d97706; }
+        .gs4-border { border-left: 4px solid #7c3aed; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="glass-nav sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            <span class="font-bold text-xl tracking-tight text-primary">PYQ Vault</span>
+        </div>
+        <div class="hidden md:flex gap-6 text-sm font-medium text-muted">
+            <a href="#" class="hover:text-primary transition-colors">Papers</a>
+            <a href="#" class="hover:text-primary transition-colors">Topics</a>
+            <a href="#" class="text-primary border-b-2 border-accent pb-1">Search</a>
+            <a href="#" class="hover:text-primary transition-colors">About</a>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="w-full bg-gold-tint border-b border-border py-8 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto flex flex-col gap-6">
+            
+            <!-- Search Bar -->
+            <div class="relative w-full max-w-3xl">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input type="text" value="climate change" class="w-full pl-12 pr-24 py-4 rounded-lg border-2 border-accent/50 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none shadow-sm text-lg text-primary bg-white transition-all" placeholder="Search pyqs...">
+                <button class="absolute inset-y-2 right-2 px-6 bg-accent hover:bg-accent-hover text-white font-medium rounded-md transition-colors shadow-sm">
+                    Search
+                </button>
+            </div>
+
+            <!-- Meta / Filters -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mt-2">
+                <p class="text-muted text-sm font-medium">18 results for "<span class="text-primary font-bold">climate change</span>" across 4 papers</p>
+                
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <!-- Filters -->
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <button class="px-3 py-1.5 rounded-full border border-border text-muted bg-white hover:bg-surface transition-colors">All Papers (18)</button>
+                        <button class="px-3 py-1.5 rounded-full border border-border text-muted bg-white hover:bg-surface transition-colors">GS1 (2)</button>
+                        <button class="px-3 py-1.5 rounded-full border border-border text-muted bg-white hover:bg-surface transition-colors">GS2 (1)</button>
+                        <button class="px-3 py-1.5 rounded-full border border-gs3 bg-gs3/10 text-gs3 font-medium transition-colors">GS3 (8)</button>
+                        <button class="px-3 py-1.5 rounded-full border border-border text-muted bg-white hover:bg-surface transition-colors">GS4 (3)</button>
+                        <button class="px-3 py-1.5 rounded-full border border-border text-muted bg-white hover:bg-surface transition-colors">Essay (4)</button>
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-border text-muted text-sm rounded-lg px-4 py-2 pr-8 focus:outline-none focus:border-accent cursor-pointer shadow-sm">
+                            <option>Sort by: Relevance</option>
+                            <option>Sort by: Year (Newest)</option>
+                            <option>Sort by: Year (Oldest)</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-muted">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl mx-auto w-full px-4 md:px-8 py-8 flex flex-col lg:flex-row gap-8">
+        
+        <!-- Left Column: Results (70%) -->
+        <div class="w-full lg:w-[70%] flex flex-col gap-5">
+            
+            <!-- Result Card 1 (GS3) -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border hover:shadow-md transition-shadow gs3-border flex flex-col gap-3">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted tracking-wide uppercase">
+                        <span class="text-gs3 bg-gs3/10 px-2 py-0.5 rounded">GS3</span>
+                        <span>•</span>
+                        <span>2023</span>
+                        <span>•</span>
+                        <span>Environment & Biodiversity</span>
+                    </div>
+                    <span class="text-xs font-medium bg-surface text-muted px-2 py-1 rounded">15 Marks</span>
+                </div>
+                <h3 class="text-lg font-medium text-primary leading-snug">
+                    Examine the impact of <span class="kw-highlight">climate change</span> on the frequency of extreme weather events in India. Suggest suitable measures for disaster risk reduction.
+                </h3>
+                <div class="flex items-center justify-between mt-2 pt-3 border-t border-border/50">
+                    <div class="flex items-center gap-2 text-xs text-muted">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                        <span>Climate, Weather, India</span>
+                    </div>
+                    <a href="#" class="text-sm font-medium text-accent hover:text-accent-hover flex items-center gap-1 group">
+                        See Related 
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Result Card 2 (Essay) -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border hover:shadow-md transition-shadow essay-border flex flex-col gap-3">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted tracking-wide uppercase">
+                        <span class="text-essay bg-essay/10 px-2 py-0.5 rounded font-bold border border-essay/20">ESSAY</span>
+                        <span>•</span>
+                        <span>2018</span>
+                        <span>•</span>
+                        <span>Science & Technology</span>
+                    </div>
+                    <span class="text-xs font-medium bg-surface text-muted px-2 py-1 rounded">Sec B | 125 Marks</span>
+                </div>
+                <h3 class="text-lg font-medium text-primary leading-snug italic">
+                    "Alternative technologies for a <span class="kw-highlight">climate change</span> resilient India"
+                </h3>
+                <div class="flex items-center justify-between mt-2 pt-3 border-t border-border/50">
+                    <div class="flex items-center gap-2 text-xs text-muted">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                        <span>Technology, Climate, Resilience</span>
+                    </div>
+                    <a href="#" class="text-sm font-medium text-accent hover:text-accent-hover flex items-center gap-1 group">
+                        See Related 
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Result Card 3 (GS3) -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border hover:shadow-md transition-shadow gs3-border flex flex-col gap-3">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted tracking-wide uppercase">
+                        <span class="text-gs3 bg-gs3/10 px-2 py-0.5 rounded">GS3</span>
+                        <span>•</span>
+                        <span>2021</span>
+                        <span>•</span>
+                        <span>Environment & Biodiversity</span>
+                    </div>
+                    <span class="text-xs font-medium bg-surface text-muted px-2 py-1 rounded">10 Marks</span>
+                </div>
+                <h3 class="text-lg font-medium text-primary leading-snug">
+                    Discuss the role of wetlands in mitigating the effects of <span class="kw-highlight">climate change</span>. How effective are the Ramsar Convention guidelines in protecting Indian wetlands?
+                </h3>
+            </div>
+
+            <!-- Result Card 4 (GS1) -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border hover:shadow-md transition-shadow gs1-border flex flex-col gap-3">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted tracking-wide uppercase">
+                        <span class="text-gs1 bg-gs1/10 px-2 py-0.5 rounded">GS1</span>
+                        <span>•</span>
+                        <span>2022</span>
+                        <span>•</span>
+                        <span>Geography</span>
+                    </div>
+                    <span class="text-xs font-medium bg-surface text-muted px-2 py-1 rounded">15 Marks</span>
+                </div>
+                <h3 class="text-lg font-medium text-primary leading-snug">
+                    How has <span class="kw-highlight">climate change</span> affected the monsoon patterns in the Indian subcontinent? Discuss its socio-economic implications.
+                </h3>
+            </div>
+
+            <!-- Result Card 5 (GS4) -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border hover:shadow-md transition-shadow gs4-border flex flex-col gap-3">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted tracking-wide uppercase">
+                        <span class="text-gs4 bg-gs4/10 px-2 py-0.5 rounded">GS4</span>
+                        <span>•</span>
+                        <span>2020</span>
+                        <span>•</span>
+                        <span>Ethics</span>
+                    </div>
+                    <span class="text-xs font-medium bg-surface text-muted px-2 py-1 rounded">10 Marks</span>
+                </div>
+                <h3 class="text-lg font-medium text-primary leading-snug">
+                    Examine the ethical dimensions of <span class="kw-highlight">climate change</span> policy formulation. How can intergenerational equity be maintained in resource consumption?
+                </h3>
+            </div>
+
+            <!-- Result Card 6 (Essay) -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border hover:shadow-md transition-shadow essay-border flex flex-col gap-3 opacity-90">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted tracking-wide uppercase">
+                        <span class="text-essay bg-essay/10 px-2 py-0.5 rounded font-bold border border-essay/20">ESSAY</span>
+                        <span>•</span>
+                        <span>2016</span>
+                        <span>•</span>
+                        <span>Science & Technology</span>
+                    </div>
+                    <span class="text-xs font-medium bg-surface text-muted px-2 py-1 rounded">Sec B | 125 Marks</span>
+                </div>
+                <h3 class="text-lg font-medium text-primary leading-snug italic text-muted">
+                    "Cyberspace and Internet: Blessing or Curse to the Human Civilization?" 
+                </h3>
+                <p class="text-xs text-muted/70 italic mt-1">(Matched indirectly via related environmental/tech themes in corpus context)</p>
+            </div>
+
+            <!-- Result Card 7 (GS2) -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border hover:shadow-md transition-shadow gs2-border flex flex-col gap-3">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted tracking-wide uppercase">
+                        <span class="text-gs2 bg-gs2/10 px-2 py-0.5 rounded">GS2</span>
+                        <span>•</span>
+                        <span>2019</span>
+                        <span>•</span>
+                        <span>International Relations</span>
+                    </div>
+                    <span class="text-xs font-medium bg-surface text-muted px-2 py-1 rounded">15 Marks</span>
+                </div>
+                <h3 class="text-lg font-medium text-primary leading-snug">
+                    Assess India's role in global <span class="kw-highlight">climate change</span> negotiations. How does the principle of Common but Differentiated Responsibilities (CBDR) safeguard developing nations?
+                </h3>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center items-center gap-2 mt-6 pt-4">
+                <button class="w-8 h-8 rounded-md flex items-center justify-center text-muted hover:bg-surface hover:text-primary transition-colors disabled:opacity-50" disabled>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center bg-accent text-white font-medium shadow-sm">1</button>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center text-muted hover:bg-surface hover:text-primary font-medium transition-colors">2</button>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center text-muted hover:bg-surface hover:text-primary font-medium transition-colors">3</button>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center text-muted hover:bg-surface hover:text-primary transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+            
+            <!-- Hidden Empty State Example -->
+            <!-- 
+            <div class="bg-card rounded-xl p-12 shadow-sm border border-border text-center flex flex-col items-center justify-center gap-4 py-20">
+                <div class="w-16 h-16 bg-surface rounded-full flex items-center justify-center mb-2">
+                    <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h2 class="text-xl font-bold text-primary">No questions found for your search</h2>
+                <p class="text-muted text-sm max-w-sm">We couldn't find any PYQs matching your query. Try adjusting your search criteria.</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-3">
+                    <button class="px-4 py-2 rounded-lg bg-surface text-primary text-sm font-medium hover:bg-border transition-colors">Try broader keywords</button>
+                    <button class="px-4 py-2 rounded-lg bg-surface text-primary text-sm font-medium hover:bg-border transition-colors">Check spelling</button>
+                    <button class="px-4 py-2 rounded-lg bg-surface text-primary text-sm font-medium hover:bg-border transition-colors">Browse by paper instead</button>
+                </div>
+            </div>
+            -->
+
+        </div>
+
+        <!-- Right Column: Sidebar (30%) -->
+        <aside class="w-full lg:w-[30%] flex flex-col gap-6">
+            
+            <!-- Related Keywords -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border">
+                <h4 class="text-sm font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path></svg>
+                    Related Keywords
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                    <a href="#" class="px-3 py-1.5 rounded bg-surface text-muted text-xs font-medium hover:bg-border hover:text-primary transition-colors">Global Warming</a>
+                    <a href="#" class="px-3 py-1.5 rounded bg-surface text-muted text-xs font-medium hover:bg-border hover:text-primary transition-colors">Carbon Emissions</a>
+                    <a href="#" class="px-3 py-1.5 rounded bg-surface text-muted text-xs font-medium hover:bg-border hover:text-primary transition-colors">Paris Agreement</a>
+                    <a href="#" class="px-3 py-1.5 rounded bg-surface text-muted text-xs font-medium hover:bg-border hover:text-primary transition-colors">Renewable Energy</a>
+                    <a href="#" class="px-3 py-1.5 rounded bg-surface text-muted text-xs font-medium hover:bg-border hover:text-primary transition-colors">Disaster Management</a>
+                    <a href="#" class="px-3 py-1.5 rounded bg-surface text-muted text-xs font-medium hover:bg-border hover:text-primary transition-colors">Biodiversity</a>
+                    <a href="#" class="px-3 py-1.5 rounded bg-surface text-muted text-xs font-medium hover:bg-border hover:text-primary transition-colors">Sustainable Development</a>
+                </div>
+            </div>
+
+            <!-- Paper Distribution -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border">
+                <h4 class="text-sm font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Paper Distribution
+                </h4>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 text-xs font-medium text-muted">GS3</span>
+                        <div class="flex-grow bg-surface rounded-full h-2 overflow-hidden">
+                            <div class="bg-gs3 h-full rounded-full" style="width: 44%;"></div>
+                        </div>
+                        <span class="w-4 text-xs text-right font-medium text-primary">8</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 text-xs font-medium text-muted">Essay</span>
+                        <div class="flex-grow bg-surface rounded-full h-2 overflow-hidden">
+                            <div class="bg-essay h-full rounded-full" style="width: 22%;"></div>
+                        </div>
+                        <span class="w-4 text-xs text-right font-medium text-primary">4</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 text-xs font-medium text-muted">GS4</span>
+                        <div class="flex-grow bg-surface rounded-full h-2 overflow-hidden">
+                            <div class="bg-gs4 h-full rounded-full" style="width: 17%;"></div>
+                        </div>
+                        <span class="w-4 text-xs text-right font-medium text-primary">3</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 text-xs font-medium text-muted">GS1</span>
+                        <div class="flex-grow bg-surface rounded-full h-2 overflow-hidden">
+                            <div class="bg-gs1 h-full rounded-full" style="width: 11%;"></div>
+                        </div>
+                        <span class="w-4 text-xs text-right font-medium text-primary">2</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 text-xs font-medium text-muted">GS2</span>
+                        <div class="flex-grow bg-surface rounded-full h-2 overflow-hidden">
+                            <div class="bg-gs2 h-full rounded-full" style="width: 6%;"></div>
+                        </div>
+                        <span class="w-4 text-xs text-right font-medium text-primary">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year Trend -->
+            <div class="bg-card rounded-xl p-5 shadow-sm border border-border">
+                <h4 class="text-sm font-bold text-primary uppercase tracking-wider mb-5 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    Year Trend
+                </h4>
+                <div class="flex items-end justify-between h-24 gap-1 border-b border-border pb-2">
+                    <!-- Simple bar chart CSS -->
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 20%;" title="2016: 1"></div>
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 10%;" title="2017: 0"></div>
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 40%;" title="2018: 2"></div>
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 20%;" title="2019: 1"></div>
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 60%;" title="2020: 3"></div>
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 80%;" title="2021: 4"></div>
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 100%;" title="2022: 5"></div>
+                    <div class="w-full bg-accent/80 hover:bg-accent rounded-t-sm transition-all" style="height: 40%;" title="2023: 2"></div>
+                </div>
+                <div class="flex justify-between text-[10px] font-medium text-muted mt-2">
+                    <span>'16</span>
+                    <span>'18</span>
+                    <span>'20</span>
+                    <span>'23</span>
+                </div>
+            </div>
+
+        </aside>
+
+    </main>
+</body>
+</html>

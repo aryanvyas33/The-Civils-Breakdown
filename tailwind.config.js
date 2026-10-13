@@ -1,0 +1,66 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        space: ['"Space Mono"', 'monospace'],
+        vt: ['"VT323"', 'monospace'],
+      },
+      boxShadow: {
+        'retro': '6px 6px 0px rgba(42, 42, 42, 1)',
+        'retro-sm': '3px 3px 0px rgba(42, 42, 42, 1)',
+        'retro-lg': '8px 8px 0px rgba(42, 42, 42, 1)',
+        'retro-hover': '10px 10px 0px #E26A59',
+      },
+      colors: {
+        primary: {
+          DEFAULT: '#0d1b2a',
+          secondary: '#1b3a4b',
+        },
+        secondary: '#1b3a4b',
+        accent: {
+          DEFAULT: '#d4a029',
+          hover: '#b8891f',
+          light: '#fef9e7',
+        },
+        retro: {
+          bg: '#F8F5EE',
+          grid: '#D3D0C5',
+          border: '#2A2A2A',
+          window: '#F4F1E1',
+          gs1: '#7C8B71',
+          gs2: '#E09F71',
+          gs3: '#6C91BF',
+          gs4: '#C47B89',
+          essay: '#D35400',
+          accent: '#E26A59',
+          folder: '#FFD25A',
+        },
+        surface: '#f4f6f8',
+        card: '#ffffff',
+        bodytext: '#0d1b2a',
+        txt: '#0d1b2a',
+        muted: '#5a6977',
+        bordercolor: '#dde2e8',
+        border: '#dde2e8',
+        bdr: '#dde2e8',
+        highlight: '#fef3c7',
+        'gold-tint': '#fdfbf7',
+        gs1: '#2563eb',
+        gs2: '#059669',
+        gs3: '#d97706',
+        gs4: '#7c3aed',
+        essay: '#dc2626',
+        highrel: '#dcfce7',
+        modrel: '#fef3c7',
+      },
+    },
+  },
+  plugins: [],
+};

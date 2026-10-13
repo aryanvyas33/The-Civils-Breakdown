@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSC PYQ Vault - GS Paper 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0d1b2a',
+                        secondary: '#1b3a4b',
+                        accent: '#d4a029',
+                        accentHover: '#b8891f',
+                        surface: '#f4f6f8',
+                        card: '#ffffff',
+                        text: '#0d1b2a',
+                        muted: '#5a6977',
+                        bordercolor: '#dde2e8', /* avoid shadow name clash */
+                        gs1: '#2563eb',
+                        gs2: '#059669',
+                        gs3: '#d97706',
+                        gs4: '#7c3aed',
+                        essay: '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f4f6f8; color: #0d1b2a; }
+        /* Smooth details animation trick */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-sans">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-bordercolor">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a029" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <span class="font-bold text-xl text-primary tracking-tight">PYQ Vault</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-muted hover:text-accent font-medium transition-colors">Home</a>
+                    <a href="#" class="text-primary border-b-2 border-accent font-medium">Papers</a>
+                    <a href="#" class="text-muted hover:text-accent font-medium transition-colors">Essay</a>
+                    <a href="#" class="text-muted hover:text-accent font-medium transition-colors">Search</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-muted hover:text-primary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Breadcrumb -->
+        <nav class="flex text-sm text-muted mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                <li class="inline-flex items-center hover:text-primary cursor-pointer transition-colors">Home</li>
+                <li><span class="mx-2">/</span></li>
+                <li class="font-medium text-text">GS Paper 1</li>
+            </ol>
+        </nav>
+
+        <!-- Paper Header -->
+        <div class="bg-card rounded-xl shadow-sm border border-bordercolor overflow-hidden mb-8">
+            <div class="border-l-4 border-gs1 p-6 md:p-8">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div>
+                        <div class="inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-gs1 text-xs font-semibold uppercase tracking-wider mb-3 border border-blue-100">
+                            GS Paper 1
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-primary mb-2">Indian Heritage & Culture, History and Geography of the World and Society</h1>
+                        <p class="text-muted text-sm md:text-base flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            308 Questions across 7 subjects, 12 years (2013-2024)
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Inline Filters -->
+                <div class="mt-6 pt-6 border-t border-bordercolor flex flex-wrap items-center gap-3">
+                    <span class="text-sm font-medium text-muted mr-2">Filter by:</span>
+                    <select class="text-sm border border-bordercolor rounded-lg px-3 py-2 bg-surface text-text focus:outline-none focus:border-gs1 focus:ring-1 focus:ring-gs1 cursor-pointer">
+                        <option value="">All Years</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                    </select>
+                    <select class="text-sm border border-bordercolor rounded-lg px-3 py-2 bg-surface text-text focus:outline-none focus:border-gs1 focus:ring-1 focus:ring-gs1 cursor-pointer">
+                        <option value="">All Subjects</option>
+                        <option value="heritage">Indian Heritage & Culture</option>
+                        <option value="modern">Modern Indian History</option>
+                    </select>
+                    <button class="text-sm text-gs1 hover:text-blue-700 hover:underline px-2 py-2 transition-all">Clear filters</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- LEFT (70%) - Main Content -->
+            <div class="lg:w-[70%] flex flex-col gap-4">
+                
+                <!-- Subject Accordion A: Expanded -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden" open>
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-50 text-gs1 p-2 rounded-lg">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <h2 class="text-lg font-bold text-primary">Indian Heritage & Culture</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="bg-surface text-muted text-xs font-semibold px-2.5 py-1 rounded-full border border-bordercolor">45 Qs</span>
+                            <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-2 border-t border-bordercolor">
+                        <!-- Year Groups -->
+                        
+                        <!-- 2024 Year Group - Expanded -->
+                        <details class="mt-4 group/year" open>
+                            <summary class="inline-flex items-center gap-2 cursor-pointer mb-4">
+                                <span class="bg-surface border border-bordercolor text-text px-3 py-1.5 rounded-lg text-sm font-semibold hover:border-gs1 transition-colors">2024</span>
+                                <span class="text-xs text-muted">4 questions</span>
+                                <svg class="w-4 h-4 text-muted transform group-open/year:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </summary>
+                            
+                            <!-- Questions List -->
+                            <div class="flex flex-col gap-3 pl-2 border-l-2 border-blue-100 ml-4 mb-6">
+                                <!-- Q1 -->
+                                <div class="bg-surface rounded-lg p-4 border border-bordercolor hover:shadow-md transition-shadow">
+                                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                                        <span class="text-xs font-bold bg-white border border-bordercolor px-2 py-0.5 rounded text-primary">15m</span>
+                                        <span class="text-xs text-muted bg-white border border-bordercolor px-2 py-0.5 rounded">Indian Architecture</span>
+                                    </div>
+                                    <p class="text-text font-medium leading-relaxed mb-4 text-sm md:text-base">
+                                        Evaluate the nature of the Bhakti Literature and its contribution to Indian culture.
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <a href="#" class="text-sm text-gs1 font-medium hover:underline inline-flex items-center gap-1 group-hover/q:text-blue-700 transition-colors">
+                                            See Related <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="bg-surface rounded-lg p-4 border border-bordercolor hover:shadow-md transition-shadow">
+                                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                                        <span class="text-xs font-bold bg-white border border-bordercolor px-2 py-0.5 rounded text-primary">10m</span>
+                                        <span class="text-xs text-muted bg-white border border-bordercolor px-2 py-0.5 rounded">Ancient History</span>
+                                    </div>
+                                    <p class="text-text font-medium leading-relaxed mb-4 text-sm md:text-base">
+                                        Assess the role of the Mauryan Empire in shaping the cultural landscape of ancient India.
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <a href="#" class="text-sm text-gs1 font-medium hover:underline inline-flex items-center gap-1 transition-colors">
+                                            See Related <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- 2023 Year Group - Collapsed -->
+                        <details class="mt-2 group/year">
+                            <summary class="inline-flex items-center gap-2 cursor-pointer mb-2">
+                                <span class="bg-surface border border-bordercolor text-text px-3 py-1.5 rounded-lg text-sm font-semibold hover:border-gs1 transition-colors">2023</span>
+                                <span class="text-xs text-muted">3 questions</span>
+                                <svg class="w-4 h-4 text-muted transform group-open/year:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </summary>
+                            <div class="pl-2 border-l-2 border-blue-100 ml-4 py-2">
+                                <p class="text-sm text-muted italic">Questions for 2023 would appear here...</p>
+                            </div>
+                        </details>
+
+                        <!-- 2022 Year Group - Collapsed -->
+                        <details class="mt-2 group/year">
+                            <summary class="inline-flex items-center gap-2 cursor-pointer mb-2">
+                                <span class="bg-surface border border-bordercolor text-text px-3 py-1.5 rounded-lg text-sm font-semibold hover:border-gs1 transition-colors">2022</span>
+                                <span class="text-xs text-muted">5 questions</span>
+                                <svg class="w-4 h-4 text-muted transform group-open/year:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </summary>
+                        </details>
+                    </div>
+                </details>
+
+                <!-- Subject B: Collapsed -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-50 text-gs1 p-2 rounded-lg">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <h2 class="text-lg font-bold text-primary">Modern Indian History</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="bg-surface text-muted text-xs font-semibold px-2.5 py-1 rounded-full border border-bordercolor">62 Qs</span>
+                            <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </summary>
+                </details>
+
+                <!-- Subject C: Collapsed -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-50 text-gs1 p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
+                            <h2 class="text-lg font-bold text-primary">Freedom Struggle</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="bg-surface text-muted text-xs font-semibold px-2.5 py-1 rounded-full border border-bordercolor">38 Qs</span>
+                            <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </summary>
+                </details>
+
+                <!-- Subject D: Collapsed -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-50 text-gs1 p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
+                            <h2 class="text-lg font-bold text-primary">Post-Independence India</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="bg-surface text-muted text-xs font-semibold px-2.5 py-1 rounded-full border border-bordercolor">28 Qs</span>
+                            <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </summary>
+                </details>
+
+                <!-- Subject E: Collapsed -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-50 text-gs1 p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
+                            <h2 class="text-lg font-bold text-primary">World History</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="bg-surface text-muted text-xs font-semibold px-2.5 py-1 rounded-full border border-bordercolor">35 Qs</span>
+                            <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </summary>
+                </details>
+
+                <!-- Subject F: Collapsed -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-50 text-gs1 p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
+                            <h2 class="text-lg font-bold text-primary">Indian Society</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="bg-surface text-muted text-xs font-semibold px-2.5 py-1 rounded-full border border-bordercolor">52 Qs</span>
+                            <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </summary>
+                </details>
+
+                <!-- Subject G: Collapsed -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-50 text-gs1 p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
+                            <h2 class="text-lg font-bold text-primary">Geography</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="bg-surface text-muted text-xs font-semibold px-2.5 py-1 rounded-full border border-bordercolor">48 Qs</span>
+                            <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </summary>
+                </details>
+
+            </div>
+
+            <!-- RIGHT (30%) - Sidebar -->
+            <aside class="lg:w-[30%]">
+                <div class="sticky top-24 space-y-6">
+                    
+                    <!-- Paper Stats Mini Card -->
+                    <div class="bg-card border border-bordercolor rounded-xl p-5 shadow-sm">
+                        <h3 class="text-sm font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+                            Paper Insights
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center pb-2 border-b border-bordercolor/50">
+                                <span class="text-sm text-muted">Avg. Qs/Year</span>
+                                <span class="text-sm font-bold text-text">25.6</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-2 border-b border-bordercolor/50">
+                                <span class="text-sm text-muted">Most Asked</span>
+                                <span class="text-sm font-bold text-gs1">Modern History</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-muted">Least Asked</span>
+                                <span class="text-sm font-bold text-text">Post-Independence</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jump to Subject -->
+                    <div class="bg-card border border-bordercolor rounded-xl p-5 shadow-sm hidden md:block">
+                        <h3 class="text-sm font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h7"></path></svg>
+                            Jump to Subject
+                        </h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-muted hover:text-gs1 transition-colors flex items-center justify-between group"><span>Heritage & Culture</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">→</span></a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-gs1 transition-colors flex items-center justify-between group"><span>Modern History</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">→</span></a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-gs1 transition-colors flex items-center justify-between group"><span>Freedom Struggle</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">→</span></a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-gs1 transition-colors flex items-center justify-between group"><span>Post-Independence</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">→</span></a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-gs1 transition-colors flex items-center justify-between group"><span>World History</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">→</span></a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-gs1 transition-colors flex items-center justify-between group"><span>Indian Society</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">→</span></a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-gs1 transition-colors flex items-center justify-between group"><span>Geography</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">→</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Filter by Year -->
+                    <div class="bg-card border border-bordercolor rounded-xl p-5 shadow-sm hidden md:block">
+                        <h3 class="text-sm font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M7 12h10"></path><path d="M10 18h4"></path></svg>
+                            Filter by Year
+                        </h3>
+                        <div class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 text-gs1 border-bordercolor rounded focus:ring-gs1 focus:ring-offset-1">
+                                <span class="text-sm text-muted group-hover:text-text transition-colors">2024</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 text-gs1 border-bordercolor rounded focus:ring-gs1 focus:ring-offset-1">
+                                <span class="text-sm text-muted group-hover:text-text transition-colors">2023</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 text-gs1 border-bordercolor rounded focus:ring-gs1 focus:ring-offset-1">
+                                <span class="text-sm text-muted group-hover:text-text transition-colors">2022</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 text-gs1 border-bordercolor rounded focus:ring-gs1 focus:ring-offset-1">
+                                <span class="text-sm text-muted group-hover:text-text transition-colors">2021</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 text-gs1 border-bordercolor rounded focus:ring-gs1 focus:ring-offset-1">
+                                <span class="text-sm text-muted group-hover:text-text transition-colors">2020</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Spacer -->
+        <div class="h-16 md:h-24"></div>
+
+        <!-- ESSAY PAPER SECTION (Preview) -->
+        <div class="pt-12 border-t-2 border-bordercolor/60">
+            <div class="mb-8 text-center md:text-left">
+                <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-essay text-xs font-bold uppercase tracking-wider border border-red-100 mb-3">Preview Layout</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2">Essay Paper — Topic-wise Organization</h2>
+                <p class="text-muted text-sm md:text-base max-w-2xl">Organized by broad themes rather than rigid subjects.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Theme A - Expanded -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden md:col-span-2" open>
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-50 text-essay p-2 rounded-lg">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-primary">Philosophy & Abstract</h3>
+                        </div>
+                        <svg class="w-5 h-5 text-muted transform group-open:-rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-5 pb-5 pt-2 border-t border-bordercolor flex flex-col gap-4 bg-surface">
+                        
+                        <!-- Essay Card 1 -->
+                        <div class="bg-card rounded-lg p-5 border border-bordercolor shadow-sm mt-3 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-essay"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-bold bg-surface border border-bordercolor px-2.5 py-1 rounded text-primary">2024</span>
+                                    <span class="text-xs font-semibold text-essay bg-red-50 border border-red-100 px-2.5 py-1 rounded">Section A</span>
+                                </div>
+                                <span class="text-xs text-muted font-medium">125 marks</span>
+                            </div>
+                            <h4 class="text-text font-semibold text-lg leading-relaxed mb-4 italic">
+                                "Forests precede civilizations and deserts follow them."
+                            </h4>
+                            <div class="flex justify-end pt-3 border-t border-bordercolor/50">
+                                <a href="#" class="text-sm text-essay font-medium hover:underline inline-flex items-center gap-1 transition-colors">
+                                    Related GS Questions <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Essay Card 2 -->
+                        <div class="bg-card rounded-lg p-5 border border-bordercolor shadow-sm relative overflow-hidden">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-essay"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-bold bg-surface border border-bordercolor px-2.5 py-1 rounded text-primary">2023</span>
+                                    <span class="text-xs font-semibold text-essay bg-red-50 border border-red-100 px-2.5 py-1 rounded">Section A</span>
+                                </div>
+                                <span class="text-xs text-muted font-medium">125 marks</span>
+                            </div>
+                            <h4 class="text-text font-semibold text-lg leading-relaxed mb-4 italic">
+                                "Thinking is like a game, it does not begin unless there is an opposite team."
+                            </h4>
+                            <div class="flex justify-end pt-3 border-t border-bordercolor/50">
+                                <a href="#" class="text-sm text-essay font-medium hover:underline inline-flex items-center gap-1 transition-colors">
+                                    Related GS Questions <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </details>
+
+                <!-- Theme B -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-50 text-essay p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <h3 class="text-lg font-bold text-primary">Society & Social Justice</h3>
+                        </div>
+                        <span class="text-xs text-muted font-medium bg-surface px-2 py-1 rounded border border-bordercolor">7 topics</span>
+                    </summary>
+                </details>
+
+                <!-- Theme C -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-50 text-essay p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                            <h3 class="text-lg font-bold text-primary">Economy & Development</h3>
+                        </div>
+                        <span class="text-xs text-muted font-medium bg-surface px-2 py-1 rounded border border-bordercolor">6 topics</span>
+                    </summary>
+                </details>
+
+                <!-- Theme D -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-50 text-essay p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div>
+                            <h3 class="text-lg font-bold text-primary">Science & Technology</h3>
+                        </div>
+                        <span class="text-xs text-muted font-medium bg-surface px-2 py-1 rounded border border-bordercolor">5 topics</span>
+                    </summary>
+                </details>
+
+                <!-- Theme E -->
+                <details class="group bg-card border border-bordercolor rounded-xl shadow-sm overflow-hidden">
+                    <summary class="flex justify-between items-center cursor-pointer p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-50 text-essay p-2 rounded-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                            <h3 class="text-lg font-bold text-primary">Polity & Governance</h3>
+                        </div>
+                        <span class="text-xs text-muted font-medium bg-surface px-2 py-1 rounded border border-bordercolor">6 topics</span>
+                    </summary>
+                </details>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-bordercolor mt-auto">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-muted">&copy; 2026 PYQ Vault. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

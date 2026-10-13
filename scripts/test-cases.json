@@ -1,0 +1,122 @@
+[
+  {
+    "questionId": "gs2-2026-q12",
+    "mustInclude": ["gs2-2015-q11"],
+    "mustExclude": ["gs1-2015-q7", "gs2-2025-q1", "gs3-2020-q1"],
+    "notes": "Judicial legislation & passive euthanasia / advance directives. Must surface Aruna Shanbaug/Art 21 euthanasia question."
+  },
+  {
+    "questionId": "gs3-2024-q15",
+    "mustInclude": ["gs3-2019-q8", "gs3-2018-q8"],
+    "mustExclude": ["gs1-2020-q1", "gs2-2024-q1"],
+    "notes": "Sendai Framework (SFDRR), disaster resilience, and CDRI."
+  },
+  {
+    "questionId": "gs1-2026-q1",
+    "mustInclude": ["gs1-2022-q13", "gs1-2013-q2"],
+    "mustExclude": ["gs2-2026-q12", "gs3-2024-q15"],
+    "notes": "Ashokan inscriptions, Mauryan history, and ancient epigraphy."
+  },
+  {
+    "questionId": "gs2-2026-q14",
+    "mustInclude": ["gs2-2019-q1"],
+    "mustExclude": ["gs2-2024-q18"],
+    "notes": "Separation of powers and constitutional checks and balances."
+  },
+  {
+    "questionId": "gs2-2015-q2",
+    "mustInclude": ["gs2-2026-q11", "gs2-2021-q11", "essay-2016-q5"],
+    "mustExclude": ["gs2-2015-q19"],
+    "notes": "Cooperative federalism, Inter-state council, and GST."
+  },
+  {
+    "questionId": "gs2-2022-q14",
+    "mustInclude": ["gs2-2020-q2", "gs2-2018-q6", "gs4-2020-q5"],
+    "mustExclude": ["gs2-2022-q1"],
+    "notes": "Right to Information (RTI) Act, transparency, and accountability in governance."
+  },
+  {
+    "questionId": "gs2-2024-q1",
+    "mustInclude": ["gs2-2019-q12"],
+    "mustExclude": ["gs2-2024-q18"],
+    "notes": "Basic structure doctrine, Kesavananda Bharati, and judicial review."
+  },
+  {
+    "questionId": "gs3-2022-q1",
+    "mustInclude": ["gs3-2013-q12"],
+    "mustExclude": ["gs3-2022-q5"],
+    "notes": "Public-Private Partnership (PPP) in infrastructure and investment models."
+  },
+  {
+    "questionId": "gs3-2020-q9",
+    "mustInclude": ["gs3-2016-q19", "gs3-2013-q19"],
+    "mustExclude": ["gs3-2020-q1"],
+    "notes": "Cyber security challenges, critical information infrastructure, and NCIIPC."
+  },
+  {
+    "questionId": "gs3-2024-q16",
+    "mustInclude": ["gs3-2020-q8", "gs3-2016-q8", "gs3-2015-q8"],
+    "mustExclude": ["gs3-2024-q6"],
+    "notes": "Urban flooding causes, sponge cities, and NDMA guidelines."
+  },
+  {
+    "questionId": "gs2-2026-q11",
+    "mustInclude": ["gs2-2024-q11", "gs2-2014-q2"],
+    "mustExclude": ["gs2-2026-q9"],
+    "notes": "Governor's role in federal polity, Article 200, and Sarkaria/Punchhi commissions."
+  },
+  {
+    "questionId": "gs2-2024-q18",
+    "mustInclude": ["gs2-2026-q9", "gs2-2021-q18"],
+    "mustExclude": ["gs2-2024-q1"],
+    "notes": "Quad grouping, Indo-Pacific, and maritime security architectures like AUKUS/IPMDA."
+  },
+  {
+    "questionId": "gs4-2023-q5",
+    "mustInclude": ["gs4-2020-q5", "gs4-2019-q5", "gs4-2014-q5"],
+    "mustExclude": ["gs4-2023-q4"],
+    "notes": "Probity in governance, code of ethics, and anti-corruption institutions."
+  },
+  {
+    "questionId": "gs3-2022-q4",
+    "mustInclude": ["gs3-2025-q14", "gs3-2019-q4"],
+    "mustExclude": ["gs3-2022-q5"],
+    "notes": "Food processing industries, supply chain, and agro-processing policy."
+  },
+  {
+    "questionId": "gs1-2016-q1",
+    "mustInclude": ["gs1-2020-q2"],
+    "mustExclude": ["gs1-2016-q12"],
+    "notes": "Early Buddhist stupa art and Buddhist history."
+  },
+  {
+    "questionId": "gs2-2017-q3",
+    "mustInclude": ["gs2-2013-q1", "gs2-2026-q12"],
+    "mustExclude": ["gs2-2017-q10"],
+    "notes": "Article 142 inherent powers, complete justice, and judicial activism."
+  },
+  {
+    "questionId": "gs3-2017-q8",
+    "mustInclude": ["gs3-2022-q18"],
+    "mustExclude": ["gs3-2017-q1"],
+    "notes": "2004 Indian Ocean Tsunami, early warning systems, and coastal bio-shields."
+  },
+  {
+    "questionId": "gs4-2022-q5",
+    "mustInclude": ["gs4-2017-q1"],
+    "mustExclude": ["gs4-2022-q1"],
+    "notes": "Conflict of interest in public administration and official duties."
+  },
+  {
+    "questionId": "essay-2016-q5",
+    "mustInclude": ["gs2-2015-q2", "gs2-2026-q11"],
+    "mustExclude": ["essay-2016-q1"],
+    "notes": "Cooperative federalism essay and GS2 federalism links."
+  },
+  {
+    "questionId": "gs3-2022-q5",
+    "mustInclude": ["gs2-2020-q20"],
+    "mustExclude": ["gs3-2022-q1"],
+    "notes": "mRNA vaccines, biotechnology, and multilateral vaccine governance."
+  }
+]

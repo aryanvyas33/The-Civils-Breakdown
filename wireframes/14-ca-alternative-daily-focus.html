@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alternative A: Daily Focus Mode — UPSC Breakdown</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F8F5EE;
+      --grid:      #D3D0C5;
+      --border:    #2A2A2A;
+      --window:    #F4F1E1;
+      --accent:    #E26A59;
+      --folder:    #FFD25A;
+      --emerald:   #50E3C2;
+      --mint:      #0D9488;
+      --teal:      #4A90E2;
+      --gs1:       #7C8B71;
+      --gs2:       #B97A3A;
+      --gs3:       #4A74A8;
+      --shadow:    4px 4px 0px #2A2A2A;
+      --shadow-sm: 2px 2px 0px #2A2A2A;
+      --ff-pixel:  'VT323', monospace;
+      --ff-mono:   'Space Mono', monospace;
+      --ff-sans:   'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--ff-sans);
+      background: var(--bg);
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 25px 25px;
+      color: var(--border);
+      min-height: 100vh;
+    }
+
+    /* WIREFRAME BANNER */
+    .wf-banner {
+      background: var(--border); color: #FFF;
+      padding: 6px 18px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 1px;
+      position: sticky; top: 0; z-index: 200;
+    }
+    .wf-banner a { color: var(--folder); margin-left: 12px; }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--window); border-bottom: 4px solid var(--border);
+      padding: 10px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--ff-pixel); font-size: 1.25rem;
+      position: sticky; top: 31px; z-index: 100;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--border); }
+    .nav-logo { background: var(--border); color: #FFF; padding: 2px 8px; }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-link { padding: 3px 10px; text-decoration: none; color: var(--border); }
+    .nav-link:hover, .nav-link.active { background: var(--border); color: #FFF; }
+    .nav-new { background: var(--accent); color: #FFF; font-family: var(--ff-sans); font-size: 0.65rem; font-weight: 800; padding: 1px 5px; vertical-align: super; }
+
+    /* LAYOUT */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 0;
+      min-height: calc(100vh - 100px);
+    }
+    .main-area { padding: 24px 20px 80px 24px; }
+    .sidebar {
+      border-left: 3px solid var(--border);
+      background: var(--window);
+      padding: 16px;
+      position: sticky;
+      top: 96px;
+      height: calc(100vh - 96px);
+      overflow-y: auto;
+    }
+
+    /* SESSION HEADER */
+    .session-header { margin-bottom: 24px; }
+    .session-title {
+      font-family: var(--ff-pixel); font-size: 2.2rem;
+      text-transform: uppercase; line-height: 1; margin-bottom: 6px;
+    }
+    .session-meta {
+      font-family: var(--ff-mono); font-size: 0.78rem; color: #555;
+      display: flex; gap: 14px; align-items: center; margin-bottom: 16px;
+    }
+    .session-meta a { color: var(--teal); font-weight: 700; text-decoration: underline; }
+
+    /* PROGRESS DOTS */
+    .dots-row {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px;
+    }
+    .prog-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid var(--border); background: #DDD;
+      cursor: pointer; transition: 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; font-weight: 700;
+    }
+    .prog-dot.done { background: var(--emerald); border-color: var(--mint); }
+    .prog-dot.current {
+      background: var(--folder);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,210,90,0.6); }
+      50% { box-shadow: 0 0 0 6px rgba(255,210,90,0); }
+    }
+    .dots-label { font-family: var(--ff-mono); font-size: 0.72rem; color: #777; }
+
+    /* FOCUS CARD */
+    .focus-card-wrap {
+      max-width: 720px;
+      perspective: 1000px;
+    }
+    .focus-card {
+      background: #FFF; border: 3px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 4px; overflow: hidden;
+      transition: transform 0.3s ease, opacity 0.25s ease;
+    }
+    .focus-card.slide-out-left { transform: translateX(-30px); opacity: 0; }
+    .focus-card.slide-out-right { transform: translateX(30px); opacity: 0; }
+
+    .card-titlebar {
+      background: var(--border); color: #FFF;
+      padding: 8px 14px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--ff-pixel); font-size: 1.25rem;
+    }
+    .card-titlebar .win-dots { display: flex; gap: 5px; }
+    .win-dot { width: 12px; height: 12px; border: 2px solid #FFF; display: inline-block; }
+    .win-dot.close { background: var(--accent); }
+    .win-dot.min { background: var(--folder); }
+    .win-dot.max { background: var(--emerald); }
+
+    .card-meta-bar {
+      background: var(--window); border-bottom: 2px solid var(--border);
+      padding: 8px 14px;
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    }
+    .paper-chip {
+      font-family: var(--ff-mono); font-size: 0.7rem; font-weight: 700;
+      padding: 2px 8px; border: 1.5px solid var(--border); color: #FFF;
+    }
+    .paper-chip.GS1 { background: var(--gs1); }
+    .paper-chip.GS2 { background: var(--gs2); }
+    .paper-chip.GS3 { background: var(--gs3); }
+
+    .card-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+    .card-headline { font-size: 1.6rem; font-weight: 700; line-height: 1.25; color: var(--border); }
+
+    /* Why it Matters box */
+    .why-box {
+      background: #FFF9E6; border-left: 4px solid var(--folder);
+      padding: 14px 16px; border: 1.5px solid var(--border);
+      border-left-width: 4px;
+    }
+    .why-label { font-family: var(--ff-mono); font-size: 0.7rem; font-weight: 700; color: #777; text-transform: uppercase; margin-bottom: 6px; }
+    .why-text { font-size: 0.95rem; line-height: 1.55; color: #333; }
+
+    /* Key Facts */
+    .facts-section {}
+    .facts-label { font-family: var(--ff-pixel); font-size: 1.2rem; text-transform: uppercase; border-bottom: 1.5px dashed var(--border); padding-bottom: 4px; margin-bottom: 10px; }
+    .facts-list { display: flex; flex-direction: column; gap: 8px; }
+    .fact-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.9rem; line-height: 1.4;
+    }
+    .fact-bullet {
+      width: 20px; height: 20px; flex-shrink: 0;
+      background: var(--border); color: #FFF;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-mono); font-size: 0.7rem; font-weight: 700; margin-top: 1px;
+    }
+
+    /* Syllabus anchor pill */
+    .anchor-pill {
+      background: #E5E1D4; border: 1.5px dashed var(--border);
+      padding: 8px 12px; font-size: 0.8rem; color: #333;
+    }
+    .anchor-pill-label { font-family: var(--ff-mono); font-size: 0.68rem; font-weight: 700; color: #777; text-transform: uppercase; display: block; margin-bottom: 3px; }
+
+    /* Past PYQ echoes */
+    .pyq-echoes { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pyq-chip {
+      background: var(--window); border: 1.5px solid var(--border);
+      padding: 4px 9px; font-family: var(--ff-mono); font-size: 0.68rem;
+      font-weight: 700; color: var(--border);
+    }
+
+    /* Specimen question */
+    .specimen-box {
+      background: #F0F4FF; border: 2px solid var(--teal);
+      padding: 14px 16px;
+    }
+    .spec-label { font-family: var(--ff-mono); font-size: 0.68rem; font-weight: 700; color: var(--teal); text-transform: uppercase; margin-bottom: 6px; }
+    .spec-q { font-style: italic; font-size: 0.92rem; color: var(--border); line-height: 1.5; }
+
+    /* CARD NAVIGATION */
+    .card-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 24px; max-width: 720px;
+    }
+    .nav-arrow-btn {
+      font-family: var(--ff-pixel); font-size: 1.5rem;
+      padding: 8px 20px; border: 2px solid var(--border);
+      background: var(--window); box-shadow: var(--shadow-sm);
+      cursor: pointer; transition: 0.1s; display: flex; align-items: center; gap: 8px;
+    }
+    .nav-arrow-btn:hover { background: var(--border); color: #FFF; }
+    .nav-arrow-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .nav-center { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .mark-done-btn {
+      font-family: var(--ff-pixel); font-size: 1.4rem;
+      padding: 10px 28px; border: 2px solid var(--border);
+      background: var(--emerald); cursor: pointer;
+      box-shadow: var(--shadow); transition: 0.1s;
+      display: flex; align-items: center; gap: 8px; color: var(--border);
+    }
+    .mark-done-btn:hover { transform: translateY(-2px); box-shadow: 4px 6px 0px var(--border); }
+    .mark-done-btn.marked { background: #D1FAF0; color: #555; }
+    .skip-link { font-size: 0.82rem; color: #888; text-decoration: underline; cursor: pointer; }
+    .kbd-hint { font-family: var(--ff-mono); font-size: 0.68rem; color: #AAA; }
+
+    /* SIDEBAR */
+    .sidebar-title { font-family: var(--ff-pixel); font-size: 1.2rem; text-transform: uppercase; border-bottom: 2px solid var(--border); padding-bottom: 4px; margin-bottom: 12px; }
+    .sidebar-list { display: flex; flex-direction: column; gap: 4px; }
+    .sidebar-item {
+      padding: 6px 8px; font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; border: 1px solid transparent;
+      display: flex; gap: 8px; align-items: flex-start;
+      transition: 0.1s; line-height: 1.3;
+    }
+    .sidebar-item:hover { background: #FFF; border-color: var(--border); }
+    .sidebar-item.active { background: var(--folder); border-color: var(--border); }
+    .sidebar-item.done-item { text-decoration: line-through; color: #AAA; }
+    .sb-num { font-family: var(--ff-pixel); font-size: 1rem; flex-shrink: 0; }
+
+    @media (max-width: 768px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- WIREFRAME BANNER -->
+<div class="wf-banner">
+  <span>WIREFRAME — ALTERNATIVE A: DAILY FOCUS MODE // ONE TOPIC AT A TIME</span>
+  <span>
+    <a href="12-current-affairs-priority-tracker.html">&larr; Main List View</a>
+    <a href="15-ca-alternative-weekly-plan.html">ALT B: Weekly Plan &rarr;</a>
+  </span>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="/" class="nav-brand">
+    <div class="nav-logo">▲ PB</div>
+    <span>THE_UPSC_BREAKDOWN</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="#">HOME</a>
+    <a class="nav-link" href="#">EXPLORE</a>
+    <a class="nav-link" href="#">SEARCH</a>
+    <a class="nav-link" href="#">HIGH YIELD</a>
+    <a class="nav-link active" href="#">CURRENT AFFAIRS <span class="nav-new">NEW</span></a>
+    <a class="nav-link" href="#">MY VAULT</a>
+  </div>
+</nav>
+
+<div class="page-layout">
+
+  <!-- MAIN AREA -->
+  <main class="main-area">
+
+    <!-- SESSION HEADER -->
+    <div class="session-header">
+      <div class="session-title">APRIL 2026 FOCUS SESSION</div>
+      <div class="session-meta">
+        <span id="topicCounter">Topic 1 of 14 Must-Cover Topics</span>
+        <a href="12-current-affairs-priority-tracker.html">≡ View all topics</a>
+        <span id="overallDone">0 done ✓</span>
+      </div>
+
+      <!-- PROGRESS DOTS -->
+      <div class="dots-row" id="dotsRow"></div>
+      <div class="dots-label">Click a dot to jump · Yellow = current · Green = done</div>
+    </div>
+
+    <!-- FOCUS CARD -->
+    <div class="focus-card-wrap">
+      <div class="focus-card" id="focusCard">
+        <div class="card-titlebar">
+          <span id="cardMeta">TOPIC #1 · BAND A · GS2</span>
+          <div class="win-dots">
+            <span class="win-dot close"></span>
+            <span class="win-dot min"></span>
+            <span class="win-dot max"></span>
+          </div>
+        </div>
+        <div class="card-meta-bar" id="cardMetaBar">
+          <!-- chips injected by JS -->
+        </div>
+        <div class="card-body" id="cardBody">
+          <!-- content injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="card-nav">
+      <button class="nav-arrow-btn" id="prevBtn" onclick="navigate(-1)">← PREV</button>
+      <div class="nav-center">
+        <button class="mark-done-btn" id="markDoneBtn" onclick="markDone()">
+          ✓ MARK AS DONE
+        </button>
+        <div class="kbd-hint">or press ← → keys to navigate</div>
+        <span class="skip-link" onclick="navigate(1)">Skip for now →</span>
+      </div>
+      <button class="nav-arrow-btn" id="nextBtn" onclick="navigate(1)">NEXT →</button>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR CHECKLIST -->
+  <aside class="sidebar">
+    <div class="sidebar-title">ALL TOPICS</div>
+    <div class="sidebar-list" id="sidebarList"></div>
+  </aside>
+
+</div>
+
+<script>
+  const TOPICS = [
+    {
+      id: 1, paper: 'GS2', band: 'BAND A',
+      title: '16th Finance Commission Award (2026–31)',
+      why: `The 16th Finance Commission determines how ₹134+ lakh crore flows from the Centre to States over 5 years. This single number affects every school, hospital and road in every state. UPSC loves fiscal federalism because it's where economics, polity, and real-world governance collide — and there's always a debate to critically examine.`,
+      facts: [
+        '41% of the divisible pool devolved to states (vertical share)',
+        'Horizontal formula: Income distance 45%, Population 15%, Area 15%, Demographic performance 12.5%, Efficiency 12.5%',
+        'States can no longer borrow beyond 3.5% of GSDP without FC approval',
+        'Special grants to local bodies specifically tied to sanitation and drinking water outcomes'
+      ],
+      anchor: 'Functions and responsibilities of the Union and the States, issues and challenges pertaining to the federal structure.',
+      pyqs: ['GS2 2022: Fiscal federalism', 'GS2 2019: Finance Commission role', 'GS2 2016: Centre-State financial relations'],
+      specimen: 'Critically examine whether the 16th Finance Commission\'s devolution formula adequately addresses the tension between equity and efficiency in Centre-State fiscal relations.'
+    },
+    {
+      id: 2, paper: 'GS3', band: 'BAND A',
+      title: 'India\'s New Climate Targets (NDC 2031–35)',
+      why: `India submitted its updated Nationally Determined Contribution for 2031-35 under the Paris Agreement — promising steeper emission cuts while demanding rich nations pay for the transition. With COP31 approaching and Article 6 carbon markets now active, this is THE climate question for Mains 2027. The Ethics angle (climate justice, intergenerational equity) makes it an Essay candidate too.`,
+      facts: [
+        'India\'s 2030 NDC: 45% reduction in emissions intensity vs 2005 levels; 50% non-fossil power by 2030',
+        '2031-35 NDC sharpens targets: ~50% intensity reduction, 65% renewable installed capacity',
+        'Carbon Credit Trading Scheme (CCTS) launched — India\'s domestic carbon market',
+        'Demand: \$1 trillion/year in climate finance from developed nations (not pledged yet)',
+        'Net zero by 2070 — not 2050 like EU (CBDR-RC principle)'
+      ],
+      anchor: 'Conservation, environmental pollution and degradation, environmental impact assessment.',
+      pyqs: ['GS3 2023: India climate commitments', 'GS3 2020: Paris Agreement & NDC', 'Essay 2022: Climate justice'],
+      specimen: 'While India\'s updated NDCs are more ambitious, critics argue they remain insufficient to limit warming to 1.5°C. Discuss India\'s climate commitments in the context of common but differentiated responsibilities.'
+    },
+    {
+      id: 3, paper: 'GS1', band: 'BAND A',
+      title: 'Women\'s Reservation: Implementation Timeline',
+      why: `The 106th Constitutional Amendment guarantees 33% seats for women in Parliament and State Assemblies — but it won't kick in until after delimitation, which requires Census 2027 data. With Census starting, this creates a 2-3 year wait period that's politically controversial. UPSC will test whether you understand the constitutional mechanics, the delay, and the arguments for/against decoupling it from delimitation.`,
+      facts: [
+        'Articles 330A (Lok Sabha) and 332A (State Assemblies) inserted by 106th Amendment',
+        'Trigger: comes into force only after delimitation post-Census 2027 — earliest 2029',
+        'Reservation is for 15 years, renewable by Parliament vote',
+        '1/3rd of reserved seats for SC/ST women within the 33% quota',
+        'Rajya Sabha and State Councils not covered (indirectly elected houses excluded)'
+      ],
+      anchor: 'Role of women and women\'s organisations, population and associated issues, poverty and developmental issues.',
+      pyqs: ['GS1 2023: Women\'s political participation', 'GS2 2017: Electoral reforms', 'GS1 2015: Women\'s reservation debate'],
+      specimen: 'The 106th Constitutional Amendment has been called "a promise deferred." Critically analyse the constitutional provisions, implementation challenges, and the case for decoupling women\'s reservation from delimitation.'
+    },
+    {
+      id: 4, paper: 'GS2', band: 'BAND A',
+      title: 'India & the West Asia Crisis (Hormuz, Diaspora, Oil)',
+      why: `The Israel-Gaza-Houthi-Iran conflict is reshaping the Middle East — and India can't afford to be caught in the crossfire. With 90 lakh Indians in Gulf countries, $42 billion in annual remittances, and 85% of crude oil transiting through Hormuz, this isn't just a distant conflict. It tests your knowledge of strategic autonomy, diaspora evacuation protocols, energy security, and India's "no first use of conflict" diplomacy.`,
+      facts: [
+        'India has 90 lakh+ diaspora in GCC countries; remittances ~\$42 billion/year from Gulf',
+        'Hormuz Strait handles ~85% of India\'s crude oil imports and ~90% of LPG',
+        'IMEC (India-Middle East-Europe Corridor) now disrupted by conflict dynamics',
+        'India abstained on multiple UN resolutions — "strategic ambiguity" drew Western criticism',
+        'Operation Kaveri: India evacuated 3,500+ citizens from Sudan (conflict precedent)'
+      ],
+      anchor: 'Effect of policies and politics of other countries on India\'s interests, Indian diaspora.',
+      pyqs: ['GS2 2022: West Asia & India', 'GS2 2019: India-Gulf relations', 'GS3 2021: Energy security India'],
+      specimen: 'India\'s "strategic autonomy" in the West Asia conflict has been called both principled and evasive. Critically examine India\'s approach balancing diaspora security, energy interests, and multilateral commitments.'
+    },
+    {
+      id: 5, paper: 'GS2', band: 'BAND A',
+      title: 'Electoral Roll Controversy: SIR 2026',
+      why: `The Election Commission's Special Intensive Revision exercise asked voters to prove citizenship to stay on electoral rolls — raising constitutional alarms about Arts 326 and 5-11. Opposition parties called it a "voter purge." The Supreme Court was petitioned. This tests your understanding of ECI powers, the difference between citizenship and franchise, and democratic safeguards — a perfect critically-examine stem for Mains.`,
+      facts: [
+        'Art 326 guarantees franchise to every adult citizen — no further eligibility conditions permitted',
+        'SIR 2026 asked for citizenship documents from existing voters in certain constituencies',
+        'ECs Act 2023 changed Chief EC appointment procedure — prior SC challenge (Anoop Baranwal case)',
+        'Issue: RP Act 1950 s21(3) allows continuous revision, but not retroactive citizenship verification',
+        'SC interim order restrained extreme deletions pending full bench hearing'
+      ],
+      anchor: 'Salient features of the Representation of People\'s Act; Powers, functions and responsibilities of Election Commission of India.',
+      pyqs: ['GS2 2023: ECI independence', 'GS2 2020: Electoral reforms', 'GS2 2016: Model Code of Conduct'],
+      specimen: 'The Special Intensive Revision exercise of 2026 raised fundamental questions about the boundary between citizenship verification and voter intimidation. Discuss the constitutional limits on the Election Commission\'s powers to revise electoral rolls.'
+    }
+  ];
+
+  let currentIdx = 0;
+  let doneSet = new Set();
+
+  function renderDots() {
+    const row = document.getElementById('dotsRow');
+    row.innerHTML = '';
+    TOPICS.forEach((t, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'prog-dot' + (doneSet.has(t.id) ? ' done' : '') + (i === currentIdx ? ' current' : '');
+      dot.title = `Topic ${i + 1}: ${t.title}`;
+      dot.onclick = () => goTo(i);
+      row.appendChild(dot);
+    });
+    // Add placeholder dots for remaining Band A topics not in data
+    for (let i = TOPICS.length; i < 14; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'prog-dot';
+      dot.style.background = '#EEE';
+      dot.title = `Topic ${i + 1} (coming soon)`;
+      row.appendChild(dot);
+    }
+  }
+
+  function renderSidebar() {
+    const list = document.getElementById('sidebarList');
+    list.innerHTML = '';
+    TOPICS.forEach((t, i) => {
+      const item = document.createElement('div');
+      item.className = 'sidebar-item' +
+        (i === currentIdx ? ' active' : '') +
+        (doneSet.has(t.id) ? ' done-item' : '');
+      item.innerHTML = `<span class="sb-num">${i + 1}.</span><span>${t.title}</span>`;
+      item.onclick = () => goTo(i);
+      list.appendChild(item);
+    });
+  }
+
+  function renderCard() {
+    const t = TOPICS[currentIdx];
+    document.getElementById('cardMeta').textContent = `TOPIC #${currentIdx + 1} · ${t.band} · ${t.paper}`;
+    document.getElementById('topicCounter').textContent = `Topic ${currentIdx + 1} of 14 Must-Cover Topics`;
+
+    const metaBar = document.getElementById('cardMetaBar');
+    metaBar.innerHTML = `
+      <span class="paper-chip ${t.paper}">${t.paper}</span>
+      <span style="font-family:var(--ff-mono);font-size:0.72rem;font-weight:700;padding:2px 8px;border:1.5px solid var(--mint);background:#D1FAF0;color:var(--mint);">BAND A · DEEP DIVE</span>
+    `;
+
+    const factsHTML = t.facts.map(f => `
+      <div class="fact-item">
+        <span class="fact-bullet">→</span>
+        <span>${f}</span>
+      </div>`).join('');
+
+    const pyqsHTML = t.pyqs.map(p => `<span class="pyq-chip">${p}</span>`).join('');
+
+    document.getElementById('cardBody').innerHTML = `
+      <div class="card-headline">${t.title}</div>
+      
+      <div class="why-box">
+        <div class="why-label">WHY UPSC WILL ASK THIS</div>
+        <div class="why-text">${t.why}</div>
+      </div>
+
+      <div class="anchor-pill">
+        <span class="anchor-pill-label">Official Syllabus Anchor</span>
+        ${t.anchor}
+      </div>
+
+      <div class="facts-section">
+        <div class="facts-label">Key Facts to Remember</div>
+        <div class="facts-list">${factsHTML}</div>
+      </div>
+
+      <div>
+        <div class="facts-label" style="margin-bottom:8px;">Past PYQ Echoes</div>
+        <div class="pyq-echoes">${pyqsHTML}</div>
+      </div>
+
+      <div class="specimen-box">
+        <div class="spec-label">⚡ Possible 2027 Question Stem</div>
+        <div class="spec-q">${t.specimen}</div>
+      </div>
+    `;
+
+    const isDone = doneSet.has(t.id);
+    const btn = document.getElementById('markDoneBtn');
+    btn.textContent = isDone ? '✓ DONE!' : '✓ MARK AS DONE';
+    btn.classList.toggle('marked', isDone);
+
+    document.getElementById('prevBtn').disabled = currentIdx === 0;
+    document.getElementById('nextBtn').disabled = currentIdx === TOPICS.length - 1;
+    document.getElementById('overallDone').textContent = `${doneSet.size} done ✓`;
+  }
+
+  function goTo(idx) {
+    if (idx === currentIdx) return;
+    const card = document.getElementById('focusCard');
+    card.classList.add(idx > currentIdx ? 'slide-out-left' : 'slide-out-right');
+    setTimeout(() => {
+      card.classList.remove('slide-out-left', 'slide-out-right');
+      currentIdx = idx;
+      renderCard();
+      renderDots();
+      renderSidebar();
+    }, 250);
+  }
+
+  function navigate(dir) {
+    const newIdx = currentIdx + dir;
+    if (newIdx >= 0 && newIdx < TOPICS.length) {
+      goTo(newIdx);
+    }
+  }
+
+  function markDone() {
+    const t = TOPICS[currentIdx];
+    if (doneSet.has(t.id)) {
+      doneSet.delete(t.id);
+    } else {
+      doneSet.add(t.id);
+    }
+    renderCard();
+    renderDots();
+    renderSidebar();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
+
+  // Init
+  renderDots();
+  renderSidebar();
+  renderCard();
+</script>
+</body>
+</html>

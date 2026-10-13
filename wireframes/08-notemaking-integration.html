@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSC PYQ Searcher - Notes Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans h-screen flex flex-col overflow-hidden">
+
+    <!-- Top Navigation -->
+    <header class="bg-white border-b border-slate-200 shadow-sm z-10 flex-shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-4">
+                    <span class="text-xl font-bold text-indigo-600">PYQ Searcher</span>
+                    <nav class="hidden md:flex space-x-4 ml-6">
+                        <a href="#" class="text-slate-600 hover:text-indigo-600 font-medium px-3 py-2">Home</a>
+                        <a href="#" class="text-slate-600 hover:text-indigo-600 font-medium px-3 py-2">Syllabus</a>
+                        <a href="#" class="text-indigo-600 font-medium px-3 py-2 border-b-2 border-indigo-600">Explore</a>
+                        <a href="#" class="text-slate-600 hover:text-indigo-600 font-medium px-3 py-2 flex items-center gap-1">
+                            Notebooks
+                            <span class="bg-indigo-100 text-indigo-700 text-xs px-1.5 py-0.5 rounded-full">New</span>
+                        </a>
+                    </nav>
+                </div>
+                <div>
+                    <input type="text" placeholder="Search questions..." class="w-64 px-4 py-2 rounded-full border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Left Pane: Content (PYQ) -->
+        <main class="flex-1 overflow-y-auto p-6 lg:p-10 relative transition-all duration-300" id="main-content">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-4 flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <span class="bg-slate-200 text-slate-700 px-2 py-1 rounded text-xs font-semibold">GS Paper 1</span>
+                        <span class="bg-slate-200 text-slate-700 px-2 py-1 rounded text-xs font-semibold">2023</span>
+                    </div>
+                    <!-- Trigger for Notes Sidebar -->
+                    <button class="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-3 py-1.5 rounded-md text-sm font-medium border border-indigo-100 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        Take Notes
+                    </button>
+                </div>
+                
+                <h1 class="text-2xl font-serif text-slate-900 mb-6 leading-relaxed">
+                    Explain the changes in the pattern of <span class="bg-yellow-200 cursor-pointer relative group">monsoon<span class="absolute hidden group-hover:block -top-8 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap shadow-lg">Extract to Note</span></span> and their effects on <span class="bg-yellow-200 cursor-pointer relative group">agriculture<span class="absolute hidden group-hover:block -top-8 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap shadow-lg">Extract to Note</span></span> in India.
+                </h1>
+
+                <div class="prose prose-slate max-w-none text-slate-700 space-y-4">
+                    <p>The Indian Monsoon is experiencing significant shifts due to climate change. Traditionally, the monsoon arrived in early June and retreated by late September. Recently, instances of delayed onset and erratic rainfall distribution have become frequent.</p>
+                    <div class="p-4 bg-slate-100 rounded-lg border border-slate-200 italic">
+                        <strong>Model Answer Hint:</strong> Focus on El Nino, Indian Ocean Dipole (IOD), spatial temporal variations, and subsequent impact on Kharif and Rabi crops.
+                    </div>
+                </div>
+
+                <div class="mt-8 border-t border-slate-200 pt-6">
+                    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Syllabus Tags</h3>
+                    <div class="flex gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Geography</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Agriculture</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Pane: Notes Sidebar (Slide-out) -->
+        <aside class="w-96 bg-white border-l border-slate-200 shadow-xl flex flex-col transform transition-transform duration-300 translate-x-0" id="notes-sidebar">
+            
+            <!-- Header -->
+            <div class="px-5 py-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+                <h2 class="font-semibold text-slate-800 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-500"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+                    Notes
+                </h2>
+                <div class="flex gap-2">
+                    <button class="text-slate-400 hover:text-slate-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
+                    </button>
+                    <button class="text-slate-400 hover:text-slate-600" id="close-notes">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="flex-1 overflow-y-auto p-5">
+                <input type="text" class="w-full text-xl font-bold text-slate-800 border-none focus:outline-none focus:ring-0 placeholder-slate-300 mb-4" placeholder="Note Title" value="Monsoon Changes & Impact">
+                
+                <!-- Simulated Rich Text Editor -->
+                <div class="min-h-[300px] text-slate-700 text-sm leading-relaxed outline-none cursor-text" contenteditable="true">
+                    <p class="mb-2">Key points for GS1 Geography regarding recent shifts:</p>
+                    <ul class="list-disc pl-5 mb-4 text-slate-600">
+                        <li>Shift from uniform rainfall to extreme events.</li>
+                        <li>More dry spells, shorter but intense wet spells.</li>
+                    </ul>
+                    
+                    <!-- Backlinked Question Block -->
+                    <div class="bg-indigo-50 border border-indigo-100 rounded p-3 mb-4 text-xs relative group cursor-pointer">
+                        <div class="flex items-center gap-1 text-indigo-700 font-semibold mb-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            Linked PYQ
+                        </div>
+                        <p class="text-slate-600 line-clamp-2">"Explain the changes in the pattern of monsoon and their effects on agriculture in India." (GS1 2023)</p>
+                    </div>
+
+                    <p>Impact on Agriculture:</p>
+                    <p class="text-slate-400 italic mt-1">Type '/' for commands or '@' to link another PYQ...</p>
+                </div>
+            </div>
+
+            <!-- Footer Toolbar -->
+            <div class="px-4 py-3 border-t border-slate-200 bg-white flex justify-between items-center text-slate-500">
+                <div class="flex gap-3">
+                    <button class="hover:text-indigo-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg></button>
+                    <button class="hover:text-indigo-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg></button>
+                    <button class="hover:text-indigo-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
+                </div>
+                <div class="text-xs">Saved just now</div>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

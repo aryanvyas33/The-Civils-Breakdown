@@ -1,0 +1,308 @@
+[
+  {
+    "id": "gs1-her",
+    "code": "GS1-HER",
+    "name": "Indian Heritage & Culture",
+    "paperId": "gs1",
+    "paperNumber": 1,
+    "description": "Art forms, literature, architecture from ancient to modern times, temple styles, Buddhist/Jain art, classical dances, music.",
+    "keywords": ["art", "architecture", "sculpture", "temple", "literature", "heritage", "buddhist", "gandhara", "chola", "bhakti", "sufi"]
+  },
+  {
+    "id": "gs1-mod",
+    "code": "GS1-MOD",
+    "name": "Modern Indian History",
+    "paperId": "gs1",
+    "paperNumber": 1,
+    "description": "Mid-18th century until independence, British colonial policies, socio-religious reform movements, tribal/peasant uprisings.",
+    "keywords": ["british", "colonial", "reform", "1857", "revolt", "land revenue", "commercialization", "drain of wealth", "renaissance", "raja ram mohan"]
+  },
+  {
+    "id": "gs1-fre",
+    "code": "GS1-FRE",
+    "name": "Freedom Struggle",
+    "paperId": "gs1",
+    "paperNumber": 1,
+    "description": "Stages of national movement, Congress, extremists, moderates, Gandhian phase, INA, revolutionary movements, partition.",
+    "keywords": ["gandhi", "non-cooperation", "civil disobedience", "quit india", "swadeshi", "subhas chandra bose", "congress", "partition", "revolutionaries"]
+  },
+  {
+    "id": "gs1-post",
+    "code": "GS1-POST",
+    "name": "Post-Independence India",
+    "paperId": "gs1",
+    "paperNumber": 1,
+    "description": "Reorganization of states, tribal consolidation, wars, emergency, linguistic policy, green revolution political impacts.",
+    "keywords": ["integration", "princely states", "states reorganization", "nehru", "green revolution", "non-aligned", "linguistic reorganization", "emergency"]
+  },
+  {
+    "id": "gs1-wh",
+    "code": "GS1-WH",
+    "name": "World History",
+    "paperId": "gs1",
+    "paperNumber": 1,
+    "description": "Industrial revolution, World Wars, redrawal of national boundaries, decolonization, political philosophies like communism, capitalism, socialism.",
+    "keywords": ["industrial revolution", "world war", "french revolution", "fascism", "nazism", "cold war", "imperialism", "decolonization", "socialism"]
+  },
+  {
+    "id": "gs1-soc",
+    "code": "GS1-SOC",
+    "name": "Indian Society",
+    "paperId": "gs1",
+    "paperNumber": 1,
+    "description": "Salient features of Indian society, diversity, role of women, population, poverty, urbanization, globalization effects, secularism, communalism, regionalism.",
+    "keywords": ["society", "women", "urbanization", "globalization", "caste", "communalism", "regionalism", "secularism", "population", "family", "elderly"]
+  },
+  {
+    "id": "gs1-geo",
+    "code": "GS1-GEO",
+    "name": "Geography",
+    "paperId": "gs1",
+    "paperNumber": 1,
+    "description": "Physical geography, distribution of key natural resources, factors for industrial location, geophysical phenomena (earthquakes, cyclones, volcanoes).",
+    "keywords": ["geography", "monsoon", "climate", "cyclone", "earthquake", "ocean currents", "plate tectonics", "resources", "minerals", "industrial location", "river systems"]
+  },
+  {
+    "id": "gs2-con",
+    "code": "GS2-CON",
+    "name": "Constitution & Polity",
+    "paperId": "gs2",
+    "paperNumber": 2,
+    "description": "Historical underpinnings, basic structure, fundamental rights, directive principles, federalism, inter-state relations, constitutional amendments.",
+    "keywords": ["constitution", "fundamental rights", "directive principles", "dpsp", "basic structure", "preamble", "amendment", "federalism", "centre-state"]
+  },
+  {
+    "id": "gs2-gov",
+    "code": "GS2-GOV",
+    "name": "Governance & Civil Services",
+    "paperId": "gs2",
+    "paperNumber": 2,
+    "description": "E-governance, citizen charters, transparency, accountability, RTI, role of civil services in democracy, NGO/SHG roles.",
+    "keywords": ["governance", "e-governance", "citizen charter", "transparency", "accountability", "rti", "civil services", "bureaucracy", "ngos", "shgs"]
+  },
+  {
+    "id": "gs2-par",
+    "code": "GS2-PAR",
+    "name": "Parliament & State Legislatures",
+    "paperId": "gs2",
+    "paperNumber": 2,
+    "description": "Structure, functioning, conduct of business, powers & privileges, decline of legislature, parliamentary committees, anti-defection law.",
+    "keywords": ["parliament", "rajya sabha", "lok sabha", "speaker", "privileges", "committees", "anti-defection", "legislative council", "bills"]
+  },
+  {
+    "id": "gs2-bod",
+    "code": "GS2-BOD",
+    "name": "Constitutional & Quasi-Judicial Bodies",
+    "paperId": "gs2",
+    "paperNumber": 2,
+    "description": "Election Commission, CAG, UPSC, Finance Commission, National Commissions for SC/ST/OBC, tribunals, regulatory bodies.",
+    "keywords": ["election commission", "cag", "upsc", "finance commission", "nhrc", "tribunals", "cbi", "cve", "regulatory bodies", "quasi-judicial"]
+  },
+  {
+    "id": "gs2-soc",
+    "code": "GS2-SOC",
+    "name": "Social Justice & Welfare",
+    "paperId": "gs2",
+    "paperNumber": 2,
+    "description": "Welfare schemes for vulnerable sections, health, education, human resources, issues relating to poverty and hunger.",
+    "keywords": ["social justice", "welfare", "vulnerable", "health", "education", "hunger", "poverty", "malnutrition", "human development", "pds"]
+  },
+  {
+    "id": "gs2-ir",
+    "code": "GS2-IR",
+    "name": "International Relations",
+    "paperId": "gs2",
+    "paperNumber": 2,
+    "description": "India and its neighbourhood, bilateral, regional and global groupings, agreements involving India, diaspora, international institutions (UN, WTO, IMF).",
+    "keywords": ["international relations", "foreign policy", "neighbourhood", "quad", "brics", "g20", "unsc", "diaspora", "indo-pacific", "china", "usa", "wto"]
+  },
+  {
+    "id": "gs3-eco",
+    "code": "GS3-ECO",
+    "name": "Indian Economy & Budgeting",
+    "paperId": "gs3",
+    "paperNumber": 3,
+    "description": "Indian Economy, planning, mobilization of resources, growth, development, employment, government budgeting, fiscal policy, inflation, banking.",
+    "keywords": ["economy", "gdp", "growth", "budget", "fiscal policy", "inflation", "banking", "npa", "employment", "manufacturing", "monetary policy"]
+  },
+  {
+    "id": "gs3-agr",
+    "code": "GS3-AGR",
+    "name": "Agriculture & Food Security",
+    "paperId": "gs3",
+    "paperNumber": 3,
+    "description": "Cropping patterns, irrigation, farm subsidies, MSP, PDS, food processing, supply chain management, land reforms.",
+    "keywords": ["agriculture", "msp", "irrigation", "subsidies", "pds", "food security", "food processing", "land reforms", "supply chain", "crop diversification"]
+  },
+  {
+    "id": "gs3-inf",
+    "code": "GS3-INF",
+    "name": "Infrastructure & Investment",
+    "paperId": "gs3",
+    "paperNumber": 3,
+    "description": "Energy, ports, roads, airports, railways, investment models (PPP, BOT, HAM), logistics, urban infrastructure.",
+    "keywords": ["infrastructure", "energy", "renewable energy", "ports", "railways", "airports", "ppp", "investment models", "logistics", "smart cities"]
+  },
+  {
+    "id": "gs3-sci",
+    "code": "GS3-SCI",
+    "name": "Science & Technology",
+    "paperId": "gs3",
+    "paperNumber": 3,
+    "description": "Developments in IT, space, computers, robotics, nanotechnology, biotechnology, issues relating to intellectual property rights (IPR).",
+    "keywords": ["science", "technology", "artificial intelligence", "space", "isro", "biotechnology", "nanotechnology", "robotics", "ipr", "quantum", "patents"]
+  },
+  {
+    "id": "gs3-env",
+    "code": "GS3-ENV",
+    "name": "Environment & Biodiversity",
+    "paperId": "gs3",
+    "paperNumber": 3,
+    "description": "Conservation, environmental pollution and degradation, environmental impact assessment (EIA), climate change, Paris agreement, green energy.",
+    "keywords": ["environment", "climate change", "biodiversity", "pollution", "eia", "carbon emissions", "paris agreement", "wildlife", "wetlands", "forests"]
+  },
+  {
+    "id": "gs3-sec",
+    "code": "GS3-SEC",
+    "name": "Internal Security",
+    "paperId": "gs3",
+    "paperNumber": 3,
+    "description": "Linkages between development and spread of extremism, external state and non-state actors, cyber security, money laundering, border management.",
+    "keywords": ["internal security", "cyber security", "terrorism", "extremism", "naxalism", "border management", "money laundering", "coastal security", "drones"]
+  },
+  {
+    "id": "gs3-dis",
+    "code": "GS3-DIS",
+    "name": "Disaster Management",
+    "paperId": "gs3",
+    "paperNumber": 3,
+    "description": "Disaster preparedness, NDMA guidelines, disaster risk reduction (DRR), Sendai framework, floods, urban heat islands, earthquakes, landslides.",
+    "keywords": ["disaster management", "floods", "drought", "ndma", "sendai framework", "resilience", "mitigation", "landslides", "early warning"]
+  },
+  {
+    "id": "gs4-eth",
+    "code": "GS4-ETH",
+    "name": "Ethics & Human Interface",
+    "paperId": "gs4",
+    "paperNumber": 4,
+    "description": "Essence, determinants and consequences of ethics in human action; dimensions of ethics; ethics in private and public relationships; human values.",
+    "keywords": ["ethics", "human values", "morality", "virtues", "conscience", "dimensions of ethics", "public life", "private relationships"]
+  },
+  {
+    "id": "gs4-att",
+    "code": "GS4-ATT",
+    "name": "Attitude & Aptitude for Civil Services",
+    "paperId": "gs4",
+    "paperNumber": 4,
+    "description": "Attitude: its content, structure, function; its influence on thought and behavior; moral and political attitudes; civil service foundational values.",
+    "keywords": ["attitude", "aptitude", "civil service values", "integrity", "impartiality", "non-partisanship", "objectivity", "dedication", "empathy", "tolerance"]
+  },
+  {
+    "id": "gs4-ei",
+    "code": "GS4-EI",
+    "name": "Emotional Intelligence",
+    "paperId": "gs4",
+    "paperNumber": 4,
+    "description": "Concepts, and their utilities and application in administration and governance; empathy, compassion towards weaker sections.",
+    "keywords": ["emotional intelligence", "empathy", "self-regulation", "motivation", "social skills", "compassion", "crisis leadership"]
+  },
+  {
+    "id": "gs4-pro",
+    "code": "GS4-PRO",
+    "name": "Probity in Governance",
+    "paperId": "gs4",
+    "paperNumber": 4,
+    "description": "Concept of public service; philosophical basis of governance and probity; information sharing, transparency, RTI, code of ethics, citizen charter, corruption.",
+    "keywords": ["probity", "transparency", "corruption", "whistleblower", "code of conduct", "code of ethics", "citizen charter", "public interest", "conflict of interest"]
+  },
+  {
+    "id": "gs4-phi",
+    "code": "GS4-PHI",
+    "name": "Moral Thinkers & Philosophers",
+    "paperId": "gs4",
+    "paperNumber": 4,
+    "description": "Contributions of moral thinkers and philosophers from India and world: Socrates, Plato, Aristotle, Kant, Bentham, Mill, Gandhi, Tagore, Ambedkar.",
+    "keywords": ["thinkers", "philosophers", "gandhi", "kant", "aristotle", "utilitarianism", "deontology", "ambedkar", "kautilya", "buddha", "socrates"]
+  },
+  {
+    "id": "gs4-case",
+    "code": "GS4-CASE",
+    "name": "Case Studies on Ethical Dilemmas",
+    "paperId": "gs4",
+    "paperNumber": 4,
+    "description": "Case studies on problems of integrity, conflict of interest, crisis management, political pressure, social boycott, ethical dilemmas in public office.",
+    "keywords": ["case study", "ethical dilemma", "conflict of interest", "public official", "whistleblower", "crisis", "pressure", "corruption case", "illegal orders"]
+  },
+  {
+    "id": "ess-phi",
+    "code": "ESS-PHI",
+    "name": "Philosophy & Abstract Thought",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Reflective, quote-based, and paradoxical statements testing wisdom, human condition, character, resilience, means vs ends.",
+    "keywords": ["philosophy", "abstract", "wisdom", "truth", "character", "resilience", "mind", "journey", "simplicity", "destiny"]
+  },
+  {
+    "id": "ess-soc",
+    "code": "ESS-SOC",
+    "name": "Society & Social Justice",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Gender parity, women empowerment, patriarchy, social inequalities, youth, social media dynamics, customary vs modern morality.",
+    "keywords": ["women", "patriarchy", "gender", "society", "inequality", "youth", "social media", "customary morality", "humanity"]
+  },
+  {
+    "id": "ess-pol",
+    "code": "ESS-POL",
+    "name": "Polity & Governance",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Constitutional morality, democracy, state effectiveness, people's participation, rule of law, classrooms shaping national destiny.",
+    "keywords": ["constitutional morality", "democracy", "governance", "citizen participation", "classrooms", "nation building", "reforms"]
+  },
+  {
+    "id": "ess-eco",
+    "code": "ESS-ECO",
+    "name": "Economy & Development",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Inclusive development, globalization, technology as enabler, sustainable subsistence, poverty, shared spaces vs conflicts.",
+    "keywords": ["economy", "development", "globalization", "inclusive growth", "technology enabler", "farming", "shared spaces"]
+  },
+  {
+    "id": "ess-sci",
+    "code": "ESS-SCI",
+    "name": "Science, Tech & Environment",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Technological outsourcing of self-discovery, cyberspace blessings/curse, alternative climate technologies, innovation determinants.",
+    "keywords": ["science", "cyberspace", "climate resilience", "innovation", "artificial intelligence", "environment", "digital age"]
+  },
+  {
+    "id": "ess-int",
+    "code": "ESS-INT",
+    "name": "International Affairs & Geopolitics",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Non-alignment relevance, multi-polar world, South Asian cooperation, global peace, international conflicts.",
+    "keywords": ["non-alignment", "multipolar", "south asia", "geopolitics", "global order", "peace"]
+  },
+  {
+    "id": "ess-cul",
+    "code": "ESS-CUL",
+    "name": "Culture, Education & Heritage",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Classrooms shaping destiny, cultural identity, linguistic heritage, tourism potential, national synthesis.",
+    "keywords": ["education", "classrooms", "culture", "tourism", "heritage", "identity"]
+  },
+  {
+    "id": "ess-eth",
+    "code": "ESS-ETH",
+    "name": "Ethics & Values",
+    "paperId": "essay",
+    "paperNumber": 5,
+    "description": "Means and ends, moral courage, values vs behavior, power and responsibility, simplicity as sophistication.",
+    "keywords": ["ethics", "values", "power", "responsibility", "courage", "moral compass"]
+  }
+]

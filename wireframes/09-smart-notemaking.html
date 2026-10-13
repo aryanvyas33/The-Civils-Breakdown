@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Note-Making - PYQ Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0d1b2a',
+                        secondary: '#1b3a4b',
+                        accent: {
+                            DEFAULT: '#d4a029',
+                            hover: '#b8891f'
+                        },
+                        surface: '#f4f6f8',
+                        card: '#ffffff',
+                        txt: '#0d1b2a',
+                        muted: '#5a6977',
+                        bdr: '#dde2e8',
+                        gs1: '#2563eb',
+                        gs2: '#059669',
+                        gs3: '#d97706',
+                        gs4: '#7c3aed',
+                        essay: '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'DM Sans', sans-serif; background-color: theme('colors.surface'); color: theme('colors.txt'); }
+        /* Glassmorphism */
+        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid theme('colors.bdr'); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: theme('colors.bdr'); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.muted'); }
+    </style>
+</head>
+<body class="bg-surface antialiased text-txt font-sans h-screen flex flex-col overflow-hidden">
+
+    <!-- Top Navigation with Global Progress -->
+    <header class="glass z-10 flex-shrink-0">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-4">
+                    <span class="text-xl font-bold text-primary tracking-tight"><span class="text-accent">PYQ</span> Vault</span>
+                    <nav class="hidden md:flex space-x-2 ml-6">
+                        <a href="#" class="text-muted hover:text-accent font-medium px-3 py-2 rounded-md transition-colors">Home</a>
+                        <a href="#" class="text-muted hover:text-accent font-medium px-3 py-2 rounded-md transition-colors">Syllabus</a>
+                        <a href="#" class="text-muted hover:text-accent font-medium px-3 py-2 rounded-md transition-colors">Explore</a>
+                        <a href="#" class="text-accent font-medium px-3 py-2 border-b-2 border-accent transition-colors">Smart Notes</a>
+                    </nav>
+                </div>
+                <!-- Global Progress Tracker -->
+                <div class="flex items-center gap-4 border-l pl-4 border-bdr">
+                    <div class="text-xs text-right hidden sm:block">
+                        <p class="font-bold text-primary">GS 1 Completion</p>
+                        <p class="text-muted">45 / 120 Topics</p>
+                    </div>
+                    <div class="w-32 h-2.5 bg-bdr rounded-full overflow-hidden">
+                        <div class="bg-gs1 h-full w-[37.5%]"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex-1 flex overflow-hidden max-w-[1400px] mx-auto w-full">
+        
+        <!-- Left Sidebar: Syllabus & Topic Navigation -->
+        <aside class="w-72 bg-card border-r border-bdr flex flex-col overflow-y-auto">
+            <div class="p-4 border-b border-bdr bg-surface">
+                <h2 class="font-bold text-primary">GS 1: Geography</h2>
+            </div>
+            <div class="p-3">
+                <!-- Syllabus Items with Checkboxes -->
+                <div class="space-y-1">
+                    <label class="flex items-center gap-3 p-2 rounded hover:bg-surface cursor-pointer group">
+                        <input type="checkbox" checked class="w-4 h-4 text-primary rounded border-bdr focus:ring-accent accent-primary">
+                        <span class="text-sm text-muted line-through group-hover:text-primary transition-colors">Earthquakes</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 rounded hover:bg-surface cursor-pointer group">
+                        <input type="checkbox" checked class="w-4 h-4 text-primary rounded border-bdr focus:ring-accent accent-primary">
+                        <span class="text-sm text-muted line-through group-hover:text-primary transition-colors">Tsunamis</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 rounded bg-surface border border-bdr cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 text-primary rounded border-bdr focus:ring-accent accent-primary">
+                        <span class="text-sm font-semibold text-primary">Cyclones</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 rounded hover:bg-surface cursor-pointer group">
+                        <input type="checkbox" class="w-4 h-4 text-primary rounded border-bdr focus:ring-accent accent-primary">
+                        <span class="text-sm text-txt group-hover:text-primary transition-colors">Volcanic Activity</span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Pane: Smart Editor -->
+        <main class="flex-1 overflow-y-auto p-6 lg:p-8 bg-surface">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Topic Header & Actions -->
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-primary mb-2 tracking-tight">Tropical Cyclones</h1>
+                        <div class="flex gap-2">
+                            <span class="bg-blue-100 text-gs1 px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Geography</span>
+                            <span class="bg-purple-100 text-gs4 px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Disaster Mgt</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex items-center gap-2 bg-card border border-bdr text-primary px-4 py-2 rounded-md text-sm font-semibold hover:bg-surface transition-colors shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            Upload Notes
+                        </button>
+                        <button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-secondary transition-colors shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Mark Topic Done
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Note Integration Info Box -->
+                <div class="bg-green-50 border border-green-200 rounded-md p-4 mb-8 flex gap-3 items-start">
+                    <svg class="text-green-600 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <div>
+                        <h4 class="text-sm font-bold text-green-800">Uploaded Material Parsed</h4>
+                        <p class="text-xs text-green-700 mt-1">We parsed your uploaded PDF "Cyclones_VisionIAS.pdf". We've automatically filled some dimensions below. Review and add more.</p>
+                    </div>
+                </div>
+
+                <!-- Smart Dimensions Based on PYQs -->
+                <div class="mb-8">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="text-accent" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        <h2 class="text-lg font-bold text-primary">Smart Dimensions (PYQ Based)</h2>
+                        <span class="text-xs bg-bdr text-muted px-2 py-0.5 rounded-full ml-2 font-medium">UPSC asks these</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Dimension 1 -->
+                        <div class="bg-card border border-bdr rounded-md shadow-sm overflow-hidden">
+                            <div class="px-4 py-3 bg-surface border-b border-bdr flex justify-between items-center">
+                                <div>
+                                    <h3 class="font-bold text-primary text-sm">1. Formation Mechanism & Conditions</h3>
+                                    <p class="text-xs text-muted mt-0.5">Asked in 2020, 2013 • GS Paper 1</p>
+                                </div>
+                                <span class="text-xs font-bold text-green-700 bg-green-100 px-2 py-1 rounded">Auto-filled from Notes</span>
+                            </div>
+                            <div class="p-4 bg-card">
+                                <textarea class="w-full text-sm text-txt border-0 focus:ring-0 p-0 resize-none min-h-[100px] bg-transparent outline-none" placeholder="Enter points about formation...">- Large sea surface with temperature > 27°C.
+- Presence of the Coriolis force.
+- Small variations in the vertical wind speed.
+- A pre-existing weak low-pressure area.</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Dimension 2 -->
+                        <div class="bg-card border border-bdr rounded-md shadow-sm overflow-hidden border-l-4 border-l-accent">
+                            <div class="px-4 py-3 bg-surface border-b border-bdr flex justify-between items-center">
+                                <div>
+                                    <h3 class="font-bold text-primary text-sm">2. Naming Conventions & Color Warnings (IMD)</h3>
+                                    <p class="text-xs text-muted mt-0.5">Asked in 2021, 2022 • GS Paper 1</p>
+                                </div>
+                                <span class="text-xs font-bold text-accent bg-yellow-50 px-2 py-1 rounded">Needs Input</span>
+                            </div>
+                            <div class="p-4 bg-card">
+                                <textarea class="w-full text-sm text-txt border-0 focus:ring-0 p-0 resize-none min-h-[80px] bg-transparent outline-none" placeholder="Write about IMD color codes (Yellow, Orange, Red) and how cyclones are named in the Indian Ocean..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Dimension 3 -->
+                        <div class="bg-card border border-bdr rounded-md shadow-sm overflow-hidden">
+                            <div class="px-4 py-3 bg-surface border-b border-bdr flex justify-between items-center">
+                                <div>
+                                    <h3 class="font-bold text-primary text-sm">3. Impact & Disaster Mitigation</h3>
+                                    <p class="text-xs text-muted mt-0.5">Asked in 2014, 2018 • GS Paper 3</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-card">
+                                <textarea class="w-full text-sm text-txt border-0 focus:ring-0 p-0 resize-none min-h-[80px] bg-transparent outline-none" placeholder="Add points on coastal vulnerability, NDMA guidelines..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Custom Dimension -->
+                    <button class="mt-4 flex items-center gap-2 text-primary hover:text-accent text-sm font-bold transition-colors p-2 rounded hover:bg-surface">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        Add Custom Dimension
+                    </button>
+                </div>
+
+                <hr class="border-bdr mb-8">
+
+                <!-- Rich Text Notes (General) -->
+                <div>
+                    <h2 class="text-lg font-bold text-primary mb-4">Integrated Notes</h2>
+                    <div class="bg-card border border-bdr rounded-md shadow-sm min-h-[300px] p-4">
+                        <div class="flex gap-2 border-b border-bdr pb-2 mb-4 text-muted">
+                            <button class="hover:text-primary p-1 transition-colors"><b class="font-serif text-lg leading-none">B</b></button>
+                            <button class="hover:text-primary p-1 transition-colors"><i class="font-serif text-lg leading-none">I</i></button>
+                            <button class="hover:text-primary p-1 transition-colors"><u class="font-serif text-lg leading-none">U</u></button>
+                            <div class="w-px bg-bdr mx-1"></div>
+                            <button class="hover:text-primary p-1 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></button>
+                            <button class="hover:text-primary p-1 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
+                        </div>
+                        <div class="outline-none text-txt text-sm leading-relaxed" contenteditable="true">
+                            <p>Recent examples of cyclones to quote in exam:</p>
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Biparjoy (Arabian Sea) - Longest duration.</li>
+                                <li>Michaung (Bay of Bengal).</li>
+                            </ul>
+                            <br>
+                            <p class="text-muted italic">Continue typing your consolidated notes here...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Right Sidebar: Facts, Data & Keywords Repository -->
+        <aside class="w-80 bg-card border-l border-bdr flex flex-col">
+            <div class="p-4 border-b border-bdr bg-surface">
+                <h3 class="font-bold text-primary flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Facts & Fodder
+                </h3>
+                <p class="text-xs text-muted mt-1">Use these for Intro & Conclusion</p>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 space-y-6">
+                
+                <!-- Data Points section -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-xs font-bold text-muted uppercase tracking-wider">Data Points</h4>
+                        <button class="text-primary hover:text-accent transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="bg-surface border border-bdr p-2 rounded text-xs text-txt cursor-pointer hover:border-accent transition-colors group relative">
+                            "India has a coastline of 7,516 km, making it highly vulnerable to cyclones."
+                            <button class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 text-accent bg-surface rounded"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+                        </li>
+                        <li class="bg-surface border border-bdr p-2 rounded text-xs text-txt cursor-pointer hover:border-accent transition-colors group relative">
+                            "Bay of Bengal sees 4 times more cyclones than Arabian Sea."
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Keywords section -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-xs font-bold text-muted uppercase tracking-wider">Keywords</h4>
+                        <button class="text-primary hover:text-accent transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-surface border border-bdr text-txt font-medium px-2 py-1 rounded text-xs hover:border-accent cursor-pointer transition-colors">Eye of Storm</span>
+                        <span class="bg-surface border border-bdr text-txt font-medium px-2 py-1 rounded text-xs hover:border-accent cursor-pointer transition-colors">Storm Surge</span>
+                        <span class="bg-surface border border-bdr text-txt font-medium px-2 py-1 rounded text-xs hover:border-accent cursor-pointer transition-colors">NDMA Guidelines</span>
+                        <span class="bg-surface border border-bdr text-txt font-medium px-2 py-1 rounded text-xs hover:border-accent cursor-pointer transition-colors">Early Warning System</span>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

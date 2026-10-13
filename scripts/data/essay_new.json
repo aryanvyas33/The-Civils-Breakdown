@@ -1,0 +1,226 @@
+[
+  {
+    "year": 2026,
+    "questionNumber": 1,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "Oxymorons reflect the ironies of life.",
+    "tags": [
+      "Philosophy & Abstract Thought",
+      "Ironies of Life",
+      "Paradoxes of Existence",
+      "Philosophical Reflection"
+    ]
+  },
+  {
+    "year": 2026,
+    "questionNumber": 2,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "A grateful mind is very beautiful.",
+    "tags": [
+      "Gratitude",
+      "Human Values",
+      "Moral Aesthetics",
+      "Spiritual Philosophy"
+    ]
+  },
+  {
+    "year": 2026,
+    "questionNumber": 3,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "A thorn is a changed bud.",
+    "tags": [
+      "Transformation",
+      "Adversity to Strength",
+      "Dialectics of Growth",
+      "Philosophical Wisdom"
+    ]
+  },
+  {
+    "year": 2026,
+    "questionNumber": 4,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-int",
+    "text": "When two elephants fight, it is the grass that gets trampled.",
+    "tags": [
+      "Geopolitical Rivalry",
+      "Great Power Competition",
+      "Global South Impact",
+      "Third World Vulnerability"
+    ]
+  },
+  {
+    "year": 2026,
+    "questionNumber": 5,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-sci",
+    "text": "Nature is the symbol of the spirit.",
+    "tags": [
+      "Ecology and Spirituality",
+      "Nature Philosophy",
+      "Ecological Consciousness",
+      "Environmental Ethics"
+    ]
+  },
+  {
+    "year": 2026,
+    "questionNumber": 6,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-cul",
+    "text": "A well-educated mind will always have more questions than answers.",
+    "tags": [
+      "Critical Enquiry",
+      "True Education",
+      "Scientific Temper",
+      "Socratic Questioning"
+    ]
+  },
+  {
+    "year": 2026,
+    "questionNumber": 7,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-eth",
+    "text": "Shelving hard decisions is the least ethical course.",
+    "tags": [
+      "Ethical Leadership",
+      "Decision Making Ethics",
+      "Moral Courage",
+      "Administrative Accountability"
+    ]
+  },
+  {
+    "year": 2026,
+    "questionNumber": 8,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-pol",
+    "text": "A good leader is one who follows the followers.",
+    "tags": [
+      "Servant Leadership",
+      "Democratic Governance",
+      "Citizen-Centric Leadership",
+      "Public Administration"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 1,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "Truth knows no color.",
+    "tags": [
+      "Universal Truth",
+      "Impartiality",
+      "Moral Philosophy",
+      "Justice and Equality"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 2,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "The supreme art of war is to subdue the enemy without fighting.",
+    "tags": [
+      "Strategic Thought",
+      "Sun Tzu Philosophy",
+      "Diplomacy over Conflict",
+      "Statecraft"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 3,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "Thought finds a world and creates one also.",
+    "tags": [
+      "Power of Ideas",
+      "Human Consciousness",
+      "Constructivism",
+      "Intellectual Creation"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 4,
+    "section": "A",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "Best lessons are learnt through bitter experiences.",
+    "tags": [
+      "Experiential Wisdom",
+      "Resilience",
+      "Overcoming Failure",
+      "Human Development"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 5,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "Muddy water is best cleared by leaving it alone.",
+    "tags": [
+      "Non-Intervention",
+      "Mindfulness & Patience",
+      "Crisis Management",
+      "Taoist Wisdom"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 6,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "The years teach much which the days never know.",
+    "tags": [
+      "Long-Term Perspective",
+      "Historical Wisdom",
+      "Patience in Policy",
+      "Maturity"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 7,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-phi",
+    "text": "It is best to see life as a journey, not as a destination.",
+    "tags": [
+      "Existential Philosophy",
+      "Process over Outcome",
+      "Mindful Living",
+      "Human Fulfilment"
+    ]
+  },
+  {
+    "year": 2025,
+    "questionNumber": 8,
+    "section": "B",
+    "marks": 125,
+    "subjectId": "ess-eco",
+    "text": "Contentment is natural wealth; luxury is artificial poverty.",
+    "tags": [
+      "Consumerism Critique",
+      "Sustainable Living",
+      "Gandhian Economics",
+      "Simple Living High Thinking"
+    ]
+  }
+]

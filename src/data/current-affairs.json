@@ -1,0 +1,110 @@
+{
+  "gs2-2026-q9": {
+    "currentAffairsContext": "Indo-Pacific Partnership for Maritime Domain Awareness (IPMDA) operationalization",
+    "staticCore": ["maritime domain awareness", "quad naval cooperation", "indian ocean surveillance", "indo-pacific security"]
+  },
+  "gs2-2026-q11": {
+    "currentAffairsContext": "Supreme Court rulings on State Governors withholding assent to bills (Article 200)",
+    "staticCore": ["office of governor", "article 200 assent to bills", "cooperative federalism", "sarkaria commission recommendations"]
+  },
+  "gs2-2026-q12": {
+    "currentAffairsContext": "Supreme Court 2023 simplified guidelines for advance medical directives (Living Will)",
+    "staticCore": ["judicial legislation", "passive euthanasia guidelines", "right to die with dignity", "article 142 complete justice"]
+  },
+  "gs2-2024-q2": {
+    "currentAffairsContext": "Simultaneous Elections debate & High-Level Kovind Committee Report",
+    "staticCore": ["electoral reforms", "federalism and state elections", "election commission mandate", "terms of legislative assemblies"]
+  },
+  "gs2-2024-q10": {
+    "currentAffairsContext": "India's G20 Presidency 2023 & New Delhi Leaders' Declaration",
+    "staticCore": ["voice of global south", "multilateral diplomacy", "african union inclusion", "international development cooperation"]
+  },
+  "gs2-2024-q13": {
+    "currentAffairsContext": "Maharashtra legislative crisis & Tenth Schedule disqualification jurisprudence",
+    "staticCore": ["anti-defection law", "speaker disqualification powers", "tenth schedule reforms", "internal party democracy"]
+  },
+  "gs2-2024-q18": {
+    "currentAffairsContext": "Evolving Quad security architecture and maritime surveillance in Indo-Pacific",
+    "staticCore": ["indo-pacific balance of power", "maritime security", "minilateralism", "quad diplomatic grouping"]
+  },
+  "gs2-2024-q20": {
+    "currentAffairsContext": "Russia-Ukraine war and West Asia conflict deadlocking UN Security Council",
+    "staticCore": ["unsc reforms", "veto power gridlock", "multilateral peace architecture", "global governance reform"]
+  },
+  "gs3-2024-q15": {
+    "currentAffairsContext": "Global climate extreme events & Coalition for Disaster Resilient Infrastructure (CDRI)",
+    "staticCore": ["disaster risk reduction", "sendai framework implementation", "resilient infrastructure", "build back better"]
+  },
+  "gs3-2024-q16": {
+    "currentAffairsContext": "Repeated urban flash floods in Indian metropolises (Delhi, Chennai, Bengaluru)",
+    "staticCore": ["urban flood governance", "sponge city concept", "stormwater drainage", "wetland encroachment"]
+  },
+  "gs3-2023-q16": {
+    "currentAffairsContext": "COP28 UAE Consensus & Loss and Damage Fund operationalization",
+    "staticCore": ["renewable energy targets", "climate finance", "fossil fuel transition", "unfccc commitments"]
+  },
+  "gs2-2023-q5": {
+    "currentAffairsContext": "Competition Commission of India (CCI) anti-trust orders against Big Tech",
+    "staticCore": ["anti-trust regulation", "digital markets governance", "quasi-judicial regulatory bodies", "competition law enforcement"]
+  },
+  "gs2-2022-q9": {
+    "currentAffairsContext": "Inaugural I2U2 Leaders' Summit (India, Israel, UAE, USA)",
+    "staticCore": ["west asia foreign policy", "food security and clean energy corridors", "middle east economic integration", "minilateral diplomacy"]
+  },
+  "gs2-2022-q14": {
+    "currentAffairsContext": "Implementation challenges of RTI Amendment Act 2019 and appeals pendency",
+    "staticCore": ["right to information", "transparency in governance", "information commission autonomy", "social audit mechanisms"]
+  },
+  "gs3-2022-q1": {
+    "currentAffairsContext": "National Infrastructure Pipeline (NIP) and PM Gati-Shakti rollout",
+    "staticCore": ["public private partnership models", "infrastructure financing", "hybrid annuity model", "risk allocation in projects"]
+  },
+  "gs3-2022-q5": {
+    "currentAffairsContext": "COVID-19 mRNA vaccine breakthroughs (Pfizer-BioNTech / Moderna)",
+    "staticCore": ["biotechnology in health", "vaccine development platforms", "antigen presentation", "public health immunization"]
+  },
+  "gs1-2022-q8": {
+    "currentAffairsContext": "Post-pandemic shift to hybrid and remote work-from-home culture",
+    "staticCore": ["urban sociology", "gender division of labor", "family dynamics", "digital workplace transformation"]
+  },
+  "gs2-2021-q18": {
+    "currentAffairsContext": "Announcement of AUKUS security partnership (Australia, UK, USA)",
+    "staticCore": ["indo-pacific balance of power", "nuclear submarine technology transfer", "asean centrality", "maritime security alliances"]
+  },
+  "gs2-2020-q2": {
+    "currentAffairsContext": "Enactment of Right to Information (Amendment) Act 2019",
+    "staticCore": ["information commission autonomy", "terms and tenure of commissioners", "transparency in governance", "administrative independence"]
+  },
+  "gs2-2020-q20": {
+    "currentAffairsContext": "COVID-19 pandemic global emergency and paralysis of multilateral institutions",
+    "staticCore": ["multilateral health governance", "world health organization role", "vaccine nationalism and trips waiver", "global supply chain resilience"]
+  },
+  "gs3-2020-q9": {
+    "currentAffairsContext": "Rising frequency of state-sponsored cyber attacks on critical infrastructure",
+    "staticCore": ["cyber security infrastructure", "nciipc mandate", "critical information infrastructure protection", "cert-in response"]
+  },
+  "gs4-2020-q5": {
+    "currentAffairsContext": "Debate on culture of administrative secrecy vs proactive disclosure under RTI",
+    "staticCore": ["probity in governance", "right to information role", "transparency in public life", "nolan committee principles"]
+  },
+  "gs2-2019-q15": {
+    "currentAffairsContext": "Growing pendency in Information Commissions and threats to whistleblowers",
+    "staticCore": ["right to information hurdles", "proactive disclosures section 4", "whistleblower protection", "public authority compliance"]
+  },
+  "gs3-2018-q8": {
+    "currentAffairsContext": "Adoption of National Disaster Management Plan aligned with Sendai Framework",
+    "staticCore": ["sendai framework priorities", "disaster risk reduction", "national disaster management plan", "pre-disaster preparedness"]
+  },
+  "gs2-2015-q2": {
+    "currentAffairsContext": "Creation of NITI Aayog and Goods and Services Tax (GST) Council architecture",
+    "staticCore": ["cooperative federalism", "inter-state council", "fiscal devolution", "centre-state relations"]
+  },
+  "gs2-2015-q11": {
+    "currentAffairsContext": "Aruna Shanbaug verdict fallout and Law Commission report on terminal illness",
+    "staticCore": ["passive euthanasia", "right to die with dignity", "article 21 liberty", "advance medical directives"]
+  },
+  "essay-2016-q5": {
+    "currentAffairsContext": "14th Finance Commission 42% tax devolution and federal restructuring debate",
+    "staticCore": ["cooperative federalism", "competitive federalism", "centre-state balance", "fiscal decentralization"]
+  }
+}

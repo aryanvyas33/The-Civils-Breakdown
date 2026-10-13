@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYQ Vault — Mobile Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0d1b2a',
+                        secondary: '#1b3a4b',
+                        accent: '#d4a029',
+                        surface: '#f4f6f8',
+                        card: '#ffffff',
+                        bodytext: '#0d1b2a',
+                        muted: '#5a6977',
+                        border: '#dde2e8',
+                        gs1: '#2563eb',
+                        gs2: '#059669',
+                        gs3: '#d97706',
+                        gs4: '#7c3aed',
+                        essay: '#dc2626'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .screen-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .screen-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .screen-content::-webkit-scrollbar-thumb {
+            background: #dde2e8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-bodytext min-h-screen p-6 md:p-12">
+    <header class="max-w-6xl mx-auto mb-12 text-center md:text-left">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary mb-2">PYQ Vault — Mobile Experience</h1>
+        <p class="text-muted text-lg">Responsive design mockups for all key screens</p>
+    </header>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center">
+
+        <!-- Frame 1: Mobile Home -->
+        <div class="flex flex-col items-center">
+            <div class="relative w-[375px] h-[720px] bg-surface rounded-[40px] border-[8px] border-border overflow-hidden shadow-xl flex flex-col">
+                <!-- Status Bar -->
+                <div class="h-8 w-full bg-card flex justify-between items-center px-6 text-[12px] font-medium text-primary shrink-0 z-20">
+                    <span>9:41</span>
+                    <div class="flex items-center gap-1">
+                        <span class="tracking-tighter">●●●●</span>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0L12 21l-3.47-4.89z"></path></svg>
+                        <div class="border border-primary h-2.5 w-[22px] rounded-[3px] relative ml-0.5"><div class="absolute inset-[1px] bg-primary rounded-[1px] w-[80%]"></div><div class="absolute -right-[3px] top-[2px] h-1 w-[2px] bg-primary rounded-r"></div></div>
+                    </div>
+                </div>
+
+                <!-- Screen Content -->
+                <div class="flex-1 overflow-y-auto screen-content pb-20 bg-surface">
+                    <!-- App Header -->
+                    <div class="bg-card px-5 py-4 flex items-center justify-between shadow-sm sticky top-0 z-10">
+                        <div class="flex items-center gap-3">
+                            <button class="text-primary">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                            </button>
+                            <span class="text-xl font-bold text-primary">PYQ Vault</span>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-sm">A</div>
+                    </div>
+
+                    <div class="p-5 space-y-6">
+                        <!-- Search Bar -->
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            </div>
+                            <input type="text" placeholder="Search keywords, topics, years..." class="w-full bg-card border border-accent rounded-xl py-3 pl-10 pr-4 text-sm text-bodytext focus:outline-none shadow-sm">
+                        </div>
+
+                        <!-- Trending Topics -->
+                        <div>
+                            <h2 class="text-sm font-bold text-primary mb-3">Trending Topics</h2>
+                            <div class="flex overflow-x-auto hide-scrollbar gap-2 pb-1">
+                                <span class="whitespace-nowrap px-4 py-1.5 bg-card border border-border rounded-full text-xs font-medium text-secondary">Artificial Intelligence</span>
+                                <span class="whitespace-nowrap px-4 py-1.5 bg-card border border-border rounded-full text-xs font-medium text-secondary">Federalism</span>
+                                <span class="whitespace-nowrap px-4 py-1.5 bg-card border border-border rounded-full text-xs font-medium text-secondary">Monetary Policy</span>
+                                <span class="whitespace-nowrap px-4 py-1.5 bg-card border border-border rounded-full text-xs font-medium text-secondary">Ethics in Public Admin</span>
+                            </div>
+                        </div>
+
+                        <!-- Paper Cards -->
+                        <div>
+                            <h2 class="text-sm font-bold text-primary mb-3">Browse Papers</h2>
+                            <div class="space-y-3">
+                                <div class="bg-card border border-border border-l-4 border-l-gs1 rounded-xl p-4 flex justify-between items-center shadow-sm">
+                                    <div>
+                                        <h3 class="font-bold text-primary text-sm">General Studies I</h3>
+                                        <p class="text-xs text-muted mt-0.5">History, Geography, Society</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                                <div class="bg-card border border-border border-l-4 border-l-gs2 rounded-xl p-4 flex justify-between items-center shadow-sm">
+                                    <div>
+                                        <h3 class="font-bold text-primary text-sm">General Studies II</h3>
+                                        <p class="text-xs text-muted mt-0.5">Polity, Governance, IR</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                                <div class="bg-card border border-border border-l-4 border-l-gs3 rounded-xl p-4 flex justify-between items-center shadow-sm">
+                                    <div>
+                                        <h3 class="font-bold text-primary text-sm">General Studies III</h3>
+                                        <p class="text-xs text-muted mt-0.5">Economy, Environment, Sci-Tech</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                                <div class="bg-card border border-border border-l-4 border-l-gs4 rounded-xl p-4 flex justify-between items-center shadow-sm">
+                                    <div>
+                                        <h3 class="font-bold text-primary text-sm">General Studies IV</h3>
+                                        <p class="text-xs text-muted mt-0.5">Ethics, Integrity, Aptitude</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                                <div class="bg-card border border-border border-l-4 border-l-essay rounded-xl p-4 flex justify-between items-center shadow-sm">
+                                    <div>
+                                        <h3 class="font-bold text-primary text-sm">Essay Paper</h3>
+                                        <p class="text-xs text-muted mt-0.5">Philosophy, Society, Economy</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Nav -->
+                <div class="absolute bottom-0 w-full bg-card border-t border-border px-6 pt-3 pb-6 flex justify-between items-center z-20">
+                    <button class="flex flex-col items-center text-accent">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        <span class="text-[10px] font-medium">Home</span>
+                    </button>
+                    <button class="flex flex-col items-center text-muted">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span class="text-[10px] font-medium">Search</span>
+                    </button>
+                    <button class="flex flex-col items-center text-muted">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        <span class="text-[10px] font-medium">Papers</span>
+                    </button>
+                    <button class="flex flex-col items-center text-muted">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        <span class="text-[10px] font-medium">Saved</span>
+                    </button>
+                </div>
+                
+                <!-- Home Indicator -->
+                <div class="absolute bottom-1 w-full flex justify-center pb-1 pt-2 pointer-events-none z-30">
+                    <div class="w-1/3 h-[5px] bg-primary rounded-full opacity-80"></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center max-w-[320px]">
+                <h3 class="text-xl font-bold text-primary">Mobile Home</h3>
+                <p class="text-muted text-sm mt-1">Dashboard and navigation hub</p>
+            </div>
+        </div>
+
+        <!-- Frame 2: Mobile Search -->
+        <div class="flex flex-col items-center">
+            <div class="relative w-[375px] h-[720px] bg-surface rounded-[40px] border-[8px] border-border overflow-hidden shadow-xl flex flex-col">
+                <!-- Status Bar -->
+                <div class="h-8 w-full bg-card flex justify-between items-center px-6 text-[12px] font-medium text-primary shrink-0 z-20">
+                    <span>9:41</span>
+                    <div class="flex items-center gap-1">
+                        <span class="tracking-tighter">●●●●</span>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0L12 21l-3.47-4.89z"></path></svg>
+                        <div class="border border-primary h-2.5 w-[22px] rounded-[3px] relative ml-0.5"><div class="absolute inset-[1px] bg-primary rounded-[1px] w-[80%]"></div><div class="absolute -right-[3px] top-[2px] h-1 w-[2px] bg-primary rounded-r"></div></div>
+                    </div>
+                </div>
+
+                <!-- Screen Content -->
+                <div class="flex-1 overflow-y-auto screen-content pb-10 bg-surface">
+                    <div class="bg-card pt-2 pb-3 px-4 shadow-sm sticky top-0 z-10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <button class="text-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                            <div class="relative flex-1">
+                                <input type="text" value="climate change" class="w-full bg-surface border border-border rounded-lg py-2 px-3 text-sm text-bodytext focus:outline-none focus:border-accent">
+                                <button class="absolute right-3 top-2.5 text-muted hover:text-primary">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex overflow-x-auto hide-scrollbar gap-2">
+                            <span class="whitespace-nowrap px-3 py-1 bg-secondary text-white rounded-full text-xs font-medium">All</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">GS1</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">GS2</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">GS3</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">GS4</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">Essay</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <p class="text-xs text-muted mb-3 font-medium">42 results found</p>
+                        
+                        <div class="space-y-4">
+                            <!-- Result 1 -->
+                            <div class="bg-card p-4 rounded-xl shadow-sm border border-border border-l-4 border-l-gs3">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex gap-2">
+                                        <span class="bg-gs3/10 text-gs3 text-[10px] font-bold px-1.5 py-0.5 rounded">GS3</span>
+                                        <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded">2023</span>
+                                        <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded text-muted">Environment</span>
+                                    </div>
+                                    <button class="text-muted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+                                </div>
+                                <p class="text-sm font-medium text-bodytext leading-relaxed line-clamp-3 mb-3">Examine the impact of climate change on the agricultural sector in India. Discuss the measures taken by the government to mitigate these impacts.</p>
+                                <div class="flex justify-between items-center pt-3 border-t border-border">
+                                    <span class="text-xs text-muted font-medium">15 Marks / 250 Words</span>
+                                    <a href="#" class="text-xs font-bold text-secondary flex items-center gap-1">See Related <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                </div>
+                            </div>
+
+                            <!-- Result 2 -->
+                            <div class="bg-card p-4 rounded-xl shadow-sm border border-border border-l-4 border-l-essay">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex gap-2">
+                                        <span class="bg-essay/10 text-essay text-[10px] font-bold px-1.5 py-0.5 rounded">Essay</span>
+                                        <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded">2018</span>
+                                    </div>
+                                    <button class="text-muted"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+                                </div>
+                                <p class="text-sm font-bold text-bodytext leading-relaxed mb-3">"Alternative technologies for a climate change resilient India"</p>
+                                <div class="flex justify-between items-center pt-3 border-t border-border">
+                                    <span class="text-xs text-muted font-medium">Section B / 125 Marks</span>
+                                    <a href="#" class="text-xs font-bold text-secondary flex items-center gap-1">See Related <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Home Indicator -->
+                <div class="absolute bottom-1 w-full flex justify-center pb-1 pt-2 bg-gradient-to-t from-surface to-transparent pointer-events-none z-30">
+                    <div class="w-1/3 h-[5px] bg-primary rounded-full opacity-80"></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center max-w-[320px]">
+                <h3 class="text-xl font-bold text-primary">Mobile Search</h3>
+                <p class="text-muted text-sm mt-1">Full-width search with horizontal filters</p>
+            </div>
+        </div>
+
+        <!-- Frame 3: Mobile GS Paper View -->
+        <div class="flex flex-col items-center">
+            <div class="relative w-[375px] h-[720px] bg-surface rounded-[40px] border-[8px] border-border overflow-hidden shadow-xl flex flex-col">
+                <!-- Status Bar -->
+                <div class="h-8 w-full bg-card flex justify-between items-center px-6 text-[12px] font-medium text-primary shrink-0 z-20">
+                    <span>9:41</span>
+                    <div class="flex items-center gap-1">
+                        <span class="tracking-tighter">●●●●</span>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0L12 21l-3.47-4.89z"></path></svg>
+                        <div class="border border-primary h-2.5 w-[22px] rounded-[3px] relative ml-0.5"><div class="absolute inset-[1px] bg-primary rounded-[1px] w-[80%]"></div><div class="absolute -right-[3px] top-[2px] h-1 w-[2px] bg-primary rounded-r"></div></div>
+                    </div>
+                </div>
+
+                <!-- Screen Content -->
+                <div class="flex-1 overflow-y-auto screen-content pb-10 bg-surface">
+                    <div class="bg-card pt-4 pb-3 px-4 shadow-sm sticky top-0 z-10 border-b-2 border-b-gs1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <button class="text-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                            <span class="text-lg font-bold text-primary">GS Paper 1</span>
+                        </div>
+                        <div class="flex overflow-x-auto hide-scrollbar gap-2">
+                            <span class="whitespace-nowrap px-3 py-1 bg-secondary text-white rounded-full text-xs font-medium">All Years</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">2024</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">2023</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">2022</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">2021</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 space-y-3">
+                        <!-- Expanded Subject -->
+                        <div class="bg-card rounded-xl border border-border overflow-hidden shadow-sm">
+                            <div class="bg-gs1/5 p-4 flex justify-between items-center border-b border-border">
+                                <h3 class="font-bold text-sm text-primary">Indian Heritage & Culture <span class="text-muted text-xs font-normal ml-1">(45)</span></h3>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                            </div>
+                            
+                            <div class="p-3 bg-surface">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded">2024 (4)</span>
+                                    <div class="h-px bg-border flex-1"></div>
+                                </div>
+                                
+                                <div class="space-y-3 pl-2 border-l-2 border-border ml-2">
+                                    <div class="bg-card p-3 rounded-lg border border-border shadow-sm relative">
+                                        <p class="text-[13px] font-medium text-bodytext line-clamp-2 pr-6">Evaluate the nature of the Bhakti Literature and its contribution to Indian culture.</p>
+                                        <div class="mt-2 text-[10px] text-muted font-medium">10m / 150w</div>
+                                        <button class="absolute top-3 right-3 text-muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+                                    </div>
+                                    <div class="bg-card p-3 rounded-lg border border-border shadow-sm relative">
+                                        <p class="text-[13px] font-medium text-bodytext line-clamp-2 pr-6">Discuss the significance of the lion and bull figures in Indian mythology, art and architecture.</p>
+                                        <div class="mt-2 text-[10px] text-muted font-medium">15m / 250w</div>
+                                        <button class="absolute top-3 right-3 text-muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Collapsed Subjects -->
+                        <div class="bg-card p-4 rounded-xl border border-border flex justify-between items-center shadow-sm">
+                            <h3 class="font-bold text-sm text-primary">Modern Indian History <span class="text-muted text-xs font-normal ml-1">(62)</span></h3>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl border border-border flex justify-between items-center shadow-sm">
+                            <h3 class="font-bold text-sm text-primary">Post-Independence Consolidation <span class="text-muted text-xs font-normal ml-1">(18)</span></h3>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl border border-border flex justify-between items-center shadow-sm">
+                            <h3 class="font-bold text-sm text-primary">World History <span class="text-muted text-xs font-normal ml-1">(24)</span></h3>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Home Indicator -->
+                <div class="absolute bottom-1 w-full flex justify-center pb-1 pt-2 bg-gradient-to-t from-surface to-transparent pointer-events-none z-30">
+                    <div class="w-1/3 h-[5px] bg-primary rounded-full opacity-80"></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center max-w-[320px]">
+                <h3 class="text-xl font-bold text-primary">Mobile GS Paper View</h3>
+                <p class="text-muted text-sm mt-1">Nested accordion layout for syllabus topics</p>
+            </div>
+        </div>
+
+        <!-- Frame 4: Mobile Essay Paper View -->
+        <div class="flex flex-col items-center">
+            <div class="relative w-[375px] h-[720px] bg-surface rounded-[40px] border-[8px] border-border overflow-hidden shadow-xl flex flex-col">
+                <!-- Status Bar -->
+                <div class="h-8 w-full bg-card flex justify-between items-center px-6 text-[12px] font-medium text-primary shrink-0 z-20">
+                    <span>9:41</span>
+                    <div class="flex items-center gap-1">
+                        <span class="tracking-tighter">●●●●</span>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0L12 21l-3.47-4.89z"></path></svg>
+                        <div class="border border-primary h-2.5 w-[22px] rounded-[3px] relative ml-0.5"><div class="absolute inset-[1px] bg-primary rounded-[1px] w-[80%]"></div><div class="absolute -right-[3px] top-[2px] h-1 w-[2px] bg-primary rounded-r"></div></div>
+                    </div>
+                </div>
+
+                <!-- Screen Content -->
+                <div class="flex-1 overflow-y-auto screen-content pb-10 bg-surface">
+                    <div class="bg-card pt-4 pb-3 px-4 shadow-sm sticky top-0 z-10 border-b-2 border-b-essay">
+                        <div class="flex items-center gap-3 mb-4">
+                            <button class="text-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                            <span class="text-lg font-bold text-primary">Essay Paper</span>
+                        </div>
+                        <div class="flex overflow-x-auto hide-scrollbar gap-2">
+                            <span class="whitespace-nowrap px-3 py-1 bg-secondary text-white rounded-full text-xs font-medium">All Themes</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">Philosophy</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">Society</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium">Economy</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 space-y-3">
+                        <!-- Expanded Theme -->
+                        <div class="bg-card rounded-xl border border-border overflow-hidden shadow-sm">
+                            <div class="bg-essay/5 p-4 flex justify-between items-center border-b border-border">
+                                <h3 class="font-bold text-sm text-primary">Philosophy & Abstract <span class="text-muted text-xs font-normal ml-1">(12)</span></h3>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                            </div>
+                            
+                            <div class="p-4 bg-surface space-y-4">
+                                <!-- Essay 1 -->
+                                <div class="bg-card p-4 rounded-xl border border-border shadow-sm border-l-4 border-l-essay">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div class="flex gap-2">
+                                            <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded">2024</span>
+                                            <span class="text-[10px] font-medium text-muted px-1.5 py-0.5">Section A</span>
+                                        </div>
+                                        <button class="text-muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+                                    </div>
+                                    <p class="text-[14px] font-bold text-bodytext leading-relaxed">"Forests precede civilizations, deserts follow them."</p>
+                                </div>
+                                
+                                <!-- Essay 2 -->
+                                <div class="bg-card p-4 rounded-xl border border-border shadow-sm border-l-4 border-l-essay">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div class="flex gap-2">
+                                            <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded">2023</span>
+                                            <span class="text-[10px] font-medium text-muted px-1.5 py-0.5">Section A</span>
+                                        </div>
+                                        <button class="text-muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+                                    </div>
+                                    <p class="text-[14px] font-bold text-bodytext leading-relaxed">"Thinking is like a game, it does not begin unless there is an opposite team."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Collapsed Themes -->
+                        <div class="bg-card p-4 rounded-xl border border-border flex justify-between items-center shadow-sm">
+                            <h3 class="font-bold text-sm text-primary">Society & Social Justice <span class="text-muted text-xs font-normal ml-1">(7)</span></h3>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl border border-border flex justify-between items-center shadow-sm">
+                            <h3 class="font-bold text-sm text-primary">Economy & Development <span class="text-muted text-xs font-normal ml-1">(6)</span></h3>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Home Indicator -->
+                <div class="absolute bottom-1 w-full flex justify-center pb-1 pt-2 bg-gradient-to-t from-surface to-transparent pointer-events-none z-30">
+                    <div class="w-1/3 h-[5px] bg-primary rounded-full opacity-80"></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center max-w-[320px]">
+                <h3 class="text-xl font-bold text-primary">Mobile Essay View</h3>
+                <p class="text-muted text-sm mt-1">Specialized view for full essay topics</p>
+            </div>
+        </div>
+
+        <!-- Frame 5: Mobile Question Detail -->
+        <div class="flex flex-col items-center">
+            <div class="relative w-[375px] h-[720px] bg-surface rounded-[40px] border-[8px] border-border overflow-hidden shadow-xl flex flex-col">
+                <!-- Status Bar -->
+                <div class="h-8 w-full bg-card flex justify-between items-center px-6 text-[12px] font-medium text-primary shrink-0 z-20">
+                    <span>9:41</span>
+                    <div class="flex items-center gap-1">
+                        <span class="tracking-tighter">●●●●</span>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0L12 21l-3.47-4.89z"></path></svg>
+                        <div class="border border-primary h-2.5 w-[22px] rounded-[3px] relative ml-0.5"><div class="absolute inset-[1px] bg-primary rounded-[1px] w-[80%]"></div><div class="absolute -right-[3px] top-[2px] h-1 w-[2px] bg-primary rounded-r"></div></div>
+                    </div>
+                </div>
+
+                <!-- Screen Content -->
+                <div class="flex-1 overflow-y-auto screen-content pb-10 bg-surface">
+                    <div class="bg-card pt-4 pb-3 px-4 shadow-sm sticky top-0 z-10">
+                        <div class="flex items-center gap-3">
+                            <button class="text-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                            <div class="text-xs font-medium text-muted truncate">
+                                GS Paper 2 > Governance > Transparency
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 space-y-6">
+                        <!-- Main Question Card -->
+                        <div class="bg-card rounded-2xl shadow-sm border border-border p-5 border-l-4 border-l-gs2">
+                            <div class="flex gap-2 mb-4">
+                                <span class="bg-gs2/10 text-gs2 text-xs font-bold px-2 py-1 rounded">GS2</span>
+                                <span class="bg-surface border border-border text-xs font-bold px-2 py-1 rounded">2022</span>
+                                <span class="bg-surface border border-border text-xs font-bold px-2 py-1 rounded text-muted">15m / 250w</span>
+                            </div>
+                            
+                            <p class="text-[17px] font-medium text-bodytext leading-relaxed mb-6">
+                                "The Right to Information Act is not all about citizens' empowerment alone, it essentially redefines the concept of accountability." Discuss.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2 py-1 bg-surface border border-border rounded text-[11px] font-medium text-muted">RTI Act</span>
+                                <span class="px-2 py-1 bg-surface border border-border rounded text-[11px] font-medium text-muted">Accountability</span>
+                                <span class="px-2 py-1 bg-surface border border-border rounded text-[11px] font-medium text-muted">Governance</span>
+                            </div>
+
+                            <!-- Action Bar -->
+                            <div class="flex justify-between border-t border-border pt-4">
+                                <button class="flex items-center gap-2 text-sm font-medium text-secondary">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    Copy
+                                </button>
+                                <button class="flex items-center gap-2 text-sm font-medium text-secondary">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                                    Share
+                                </button>
+                                <button class="flex items-center gap-2 text-sm font-medium text-secondary">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Related Horizon Scroll -->
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <h3 class="font-bold text-sm text-primary">Related Questions</h3>
+                                <a href="#" class="text-xs font-bold text-secondary">View all</a>
+                            </div>
+                            <div class="flex overflow-x-auto hide-scrollbar gap-3 pb-2">
+                                <div class="min-w-[260px] bg-card p-4 rounded-xl border border-border shadow-sm">
+                                    <div class="flex gap-1.5 mb-2">
+                                        <span class="bg-gs2/10 text-gs2 text-[9px] font-bold px-1 py-0.5 rounded">GS2</span>
+                                        <span class="bg-surface text-[9px] font-bold px-1 py-0.5 rounded border border-border">2018</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-bodytext line-clamp-3">Citizens' Charter is an ideal instrument of organizational transparency and accountability, but it has its own limitations. Identify the limitations.</p>
+                                </div>
+                                <div class="min-w-[260px] bg-card p-4 rounded-xl border border-border shadow-sm">
+                                    <div class="flex gap-1.5 mb-2">
+                                        <span class="bg-gs4/10 text-gs4 text-[9px] font-bold px-1 py-0.5 rounded">GS4</span>
+                                        <span class="bg-surface text-[9px] font-bold px-1 py-0.5 rounded border border-border">2020</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-bodytext line-clamp-3">What do you understand by the terms 'governance', 'good governance' and 'ethical governance'?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Home Indicator -->
+                <div class="absolute bottom-1 w-full flex justify-center pb-1 pt-2 bg-gradient-to-t from-surface to-transparent pointer-events-none z-30">
+                    <div class="w-1/3 h-[5px] bg-primary rounded-full opacity-80"></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center max-w-[320px]">
+                <h3 class="text-xl font-bold text-primary">Mobile Detail</h3>
+                <p class="text-muted text-sm mt-1">Focused reading view with quick actions</p>
+            </div>
+        </div>
+
+        <!-- Frame 6: Mobile Related Questions View -->
+        <div class="flex flex-col items-center">
+            <div class="relative w-[375px] h-[720px] bg-surface rounded-[40px] border-[8px] border-border overflow-hidden shadow-xl flex flex-col">
+                <!-- Status Bar -->
+                <div class="h-8 w-full bg-card flex justify-between items-center px-6 text-[12px] font-medium text-primary shrink-0 z-20">
+                    <span>9:41</span>
+                    <div class="flex items-center gap-1">
+                        <span class="tracking-tighter">●●●●</span>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0L12 21l-3.47-4.89z"></path></svg>
+                        <div class="border border-primary h-2.5 w-[22px] rounded-[3px] relative ml-0.5"><div class="absolute inset-[1px] bg-primary rounded-[1px] w-[80%]"></div><div class="absolute -right-[3px] top-[2px] h-1 w-[2px] bg-primary rounded-r"></div></div>
+                    </div>
+                </div>
+
+                <!-- Screen Content -->
+                <div class="flex-1 overflow-y-auto screen-content pb-10 bg-surface">
+                    <div class="bg-card pt-4 pb-3 px-4 shadow-sm sticky top-0 z-10 border-b border-border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <button class="text-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                            <span class="text-lg font-bold text-primary">Connected Questions</span>
+                        </div>
+                        <div class="flex overflow-x-auto hide-scrollbar gap-2">
+                            <span class="whitespace-nowrap px-3 py-1 bg-secondary text-white rounded-full text-xs font-medium">All (14)</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-primary rounded-full text-xs font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> High Relevance</span>
+                            <span class="whitespace-nowrap px-3 py-1 bg-surface border border-border text-muted rounded-full text-xs font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Moderate</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 space-y-4">
+                        <!-- Result 1 -->
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border border-l-4 border-l-gs2">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex gap-2">
+                                    <span class="bg-gs2/10 text-gs2 text-[10px] font-bold px-1.5 py-0.5 rounded">GS2</span>
+                                    <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded">2018</span>
+                                </div>
+                            </div>
+                            <p class="text-sm font-medium text-bodytext leading-relaxed line-clamp-3 mb-3">Citizens' Charter is an ideal instrument of organizational transparency and accountability, but it has its own limitations. Identify the limitations...</p>
+                            <div class="flex items-center gap-2 pt-2 border-t border-border">
+                                <span class="text-[10px] text-muted">Matches:</span>
+                                <span class="text-[10px] font-medium bg-accent/10 text-accent px-1.5 py-0.5 rounded">Accountability</span>
+                                <span class="text-[10px] font-medium bg-accent/10 text-accent px-1.5 py-0.5 rounded">Transparency</span>
+                            </div>
+                        </div>
+
+                        <!-- Result 2 -->
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border border-l-4 border-l-gs4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex gap-2">
+                                    <span class="bg-gs4/10 text-gs4 text-[10px] font-bold px-1.5 py-0.5 rounded">GS4</span>
+                                    <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded">2020</span>
+                                </div>
+                            </div>
+                            <p class="text-sm font-medium text-bodytext leading-relaxed line-clamp-3 mb-3">What do you understand by the terms 'governance', 'good governance' and 'ethical governance'?</p>
+                            <div class="flex items-center gap-2 pt-2 border-t border-border">
+                                <span class="text-[10px] text-muted">Matches:</span>
+                                <span class="text-[10px] font-medium bg-accent/10 text-accent px-1.5 py-0.5 rounded">Governance</span>
+                            </div>
+                        </div>
+
+                        <!-- Result 3 -->
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border border-l-4 border-l-essay">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex gap-2">
+                                    <span class="bg-essay/10 text-essay text-[10px] font-bold px-1.5 py-0.5 rounded">Essay</span>
+                                    <span class="bg-surface border border-border text-[10px] font-bold px-1.5 py-0.5 rounded">2016</span>
+                                </div>
+                            </div>
+                            <p class="text-sm font-bold text-bodytext leading-relaxed line-clamp-3 mb-3">"Need brings greed, if greed increases it spoils breed."</p>
+                            <div class="flex items-center gap-2 pt-2 border-t border-border">
+                                <span class="text-[10px] text-muted">Matches:</span>
+                                <span class="text-[10px] font-medium bg-accent/10 text-accent px-1.5 py-0.5 rounded">Ethics Theme</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Home Indicator -->
+                <div class="absolute bottom-1 w-full flex justify-center pb-1 pt-2 bg-gradient-to-t from-surface to-transparent pointer-events-none z-30">
+                    <div class="w-1/3 h-[5px] bg-primary rounded-full opacity-80"></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center max-w-[320px]">
+                <h3 class="text-xl font-bold text-primary">Connected Questions</h3>
+                <p class="text-muted text-sm mt-1">Cross-paper theme matching results</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

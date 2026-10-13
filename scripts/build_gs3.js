@@ -1,0 +1,335 @@
+const fs = require('fs');
+const path = require('path');
+
+const gs3New = [
+  // 2026
+  {
+    year: 2026,
+    questionNumber: 1,
+    marks: 10,
+    subjectId: 'gs3-eco',
+    text: "What do you mean by Digital Rupee ? In this context, explain the working and progress of India's Central Bank Digital Currency (CBDC).",
+    tags: ['Digital Rupee (e-Rupee)', 'Central Bank Digital Currency (CBDC)', 'RBI Monetary Tech', 'Fintech Revolution', 'Currency Dematerialization']
+  },
+  {
+    year: 2026,
+    questionNumber: 2,
+    marks: 10,
+    subjectId: 'gs3-eco',
+    text: "Examine the view that financial inclusion is an integral part of social and economic inclusion in a country like India. Also throw light on the usefulness of the R.B.I.'s Financial Inclusion Index.",
+    tags: ['Financial Inclusion Index (FI-Index)', 'RBI Financial Inclusion', 'Social & Economic Inclusion', 'Pradhan Mantri Jan Dhan Yojana (PMJDY)', 'Banking Penetration']
+  },
+  {
+    year: 2026,
+    questionNumber: 3,
+    marks: 10,
+    subjectId: 'gs3-agr',
+    text: 'Describe the various Technology Missions initiated in Indian agriculture and examine their role in food security.',
+    tags: ['Technology Missions in Agriculture', 'National Mission on Oilseeds (NMEO)', 'Agricultural Modernisation', 'Food Security Mission (NFSM)', 'Digital Agriculture Mission']
+  },
+  {
+    year: 2026,
+    questionNumber: 4,
+    marks: 10,
+    subjectId: 'gs3-agr',
+    text: 'Explain the factors responsible for inefficiency of agri-produce marketing. How e-commerce helps to reduce inefficiency of agri-produce marketing ? Explain.',
+    tags: ['Agri-Produce Marketing', 'e-NAM Platform', 'APMC Market Inefficiencies', 'Agri-Tech & E-Commerce', 'Disintermediation in Farm Supply']
+  },
+  {
+    year: 2026,
+    questionNumber: 5,
+    marks: 10,
+    subjectId: 'gs3-agr',
+    text: 'Explain by giving two examples, how biotechnology has helped the Indian farmers in processing their perishable crops.',
+    tags: ['Agricultural Biotechnology', 'Food Processing Innovation', 'Post-Harvest Losses Mitigation', 'Transgenic Traits & Shelf-Life Extension', 'Enzyme Technology in Perishables']
+  },
+  {
+    year: 2026,
+    questionNumber: 6,
+    marks: 10,
+    subjectId: 'gs3-sci',
+    text: "Distinguish between a Fast Breeder Reactor (FBR) and a thermal nuclear reactor. In the context of first indigenously developed prototype FBR at Kalpakkam, explain the term 'criticality'. What are its implications for clean energy future of our country ?",
+    tags: ['Fast Breeder Reactor (FBR)', 'Three-Stage Nuclear Programme', 'PFBR Kalpakkam Criticality', 'Thorium Fuel Cycle', 'Clean Nuclear Energy']
+  },
+  {
+    year: 2026,
+    questionNumber: 7,
+    marks: 10,
+    subjectId: 'gs3-dis',
+    text: "Discuss how the contradiction between 'rapid infrastructure development' and 'disaster-risk reduction' in ecologically-sensitive areas of India can be managed, with suitable examples.",
+    tags: ['Infrastructure vs Disaster Risk Reduction', 'Ecologically Sensitive Zones (ESZ)', 'Himalayan Slope Instability', 'Char Dham Road Project Dilemma', 'Climate-Resilient Infrastructure']
+  },
+  {
+    year: 2026,
+    questionNumber: 8,
+    marks: 10,
+    subjectId: 'gs3-env',
+    text: "Discuss the aim and goals of Kunming-Montreal global biodiversity framework. Mention India's commitments and initiatives to achieve the goals and targets of this framework giving suitable examples.",
+    tags: ['Kunming-Montreal Global Biodiversity Framework (GBF)', '30x30 Target in Conservation', 'Convention on Biological Diversity (CBD)', 'India Biodiversity Targets', 'Ecosystem Restoration']
+  },
+  {
+    year: 2026,
+    questionNumber: 9,
+    marks: 10,
+    subjectId: 'gs3-sec',
+    text: 'Explain how fake news and disinformation pose threat to Internal Security and Public Order in Indian context ? In this regard, discuss salient features of amendments in respect of Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules 2021.',
+    tags: ['Fake News & Disinformation', 'Internal Security Threats', 'IT Rules 2021 Amendments', 'Social Media Intermediary Liability', 'Cyber Propaganda & Mob Lynching']
+  },
+  {
+    year: 2026,
+    questionNumber: 10,
+    marks: 10,
+    subjectId: 'gs3-sec',
+    text: 'Ladakh is strategically located between China and Pakistan. As a measure to win hearts and minds of locals, discuss the Border Area Development Programmes (BADP) by the Central Government and civic actions by the Army. Also discuss demand of promulgation of provision of the Sixth Schedule of constitution for Ladakh.',
+    tags: ['Ladakh Strategic Border Security', 'Border Area Development Programme (BADP)', 'Operation Sadbhavana (Army Civic Action)', 'Sixth Schedule Demand for Ladakh', 'LAC and Indo-China Border']
+  },
+  {
+    year: 2026,
+    questionNumber: 11,
+    marks: 15,
+    subjectId: 'gs3-inf',
+    text: "Explain the key challenges for India's energy security. What measures do you suggest for ensuring energy security along with economic growth and sustainability ?",
+    tags: ['Energy Security Dilemma', 'Fossil Fuel Import Dependency', 'Renewable Energy Integration (500 GW)', 'Green Hydrogen Mission', 'Clean Energy Transition']
+  },
+  {
+    year: 2026,
+    questionNumber: 12,
+    marks: 15,
+    subjectId: 'gs3-eco',
+    text: 'How are startups in India promoting entrepreneurship, innovation and employment ? Discuss the global and domestic challenges in their working and suggest suitable measures to overcome these challenges.',
+    tags: ['Startup India Ecosystem', 'Venture Capital & Funding Winter', 'Innovation & Patents (IPR)', 'Employment Generation in Tech', 'DeepTech and AgriTech Startups']
+  },
+  {
+    year: 2026,
+    questionNumber: 13,
+    marks: 15,
+    subjectId: 'gs3-agr',
+    text: 'How Indian agriculture has been transformed from food scarcity to food surplus level ? Explain the various government policies implemented for diversification of Indian agriculture.',
+    tags: ['Agricultural Transformation in India', 'Green Revolution to Ever-Green Revolution', 'Crop Diversification Scheme', 'Horticulture & Animal Husbandry', 'National Food Security']
+  },
+  {
+    year: 2026,
+    questionNumber: 14,
+    marks: 15,
+    subjectId: 'gs3-agr',
+    text: 'Discuss the different types of subsidies and supports provided by the Government of India to agricultural sector. Examine the related issues pertaining to Agreement on Agriculture of World Trade Organisation (WTO).',
+    tags: ['Agricultural Subsidies (Fertilizer, Power, MSP)', 'WTO Agreement on Agriculture (AoA)', 'Amber Box Subsidies & Peace Clause', 'Public Stockholding for Food Security', 'Trade Distorting Support Debates']
+  },
+  {
+    year: 2026,
+    questionNumber: 15,
+    marks: 15,
+    subjectId: 'gs3-sci',
+    text: "Mention salient features of 'Mission Drishti'. Discuss the imaging techniques used in the satellite launched on 3rd May 2026. Why it is being considered world's first satellite of its kind ?",
+    tags: ['Mission Drishti Space Technology', 'Hyperspectral Satellite Imaging', 'Synthetic Aperture Radar (SAR)', 'ISRO Earth Observation', 'High-Resolution Surveillance']
+  },
+  {
+    year: 2026,
+    questionNumber: 16,
+    marks: 15,
+    subjectId: 'gs3-sci',
+    text: 'What is agentic Artificial Intelligence (AI) ? Explain its working. Describe its applications with suitable examples. Discuss the advantages, risks and challenges associated with agentic AI systems.',
+    tags: ['Agentic Artificial Intelligence (AI)', 'Autonomous AI Agents & Reasoning', 'Autonomous Decision-Making Systems', 'AI Ethics & Alignment Problem', 'Generative and Agentic Models']
+  },
+  {
+    year: 2026,
+    questionNumber: 17,
+    marks: 15,
+    subjectId: 'gs3-env',
+    text: 'What are the challenges to solid waste management in India ? Discuss the governmental policy framework on solid waste management. Discuss the success/failure cases of Delhi and Indore cities highlighting the salient feature of their solid waste management initiatives.',
+    tags: ['Solid Waste Management Rules 2016', 'Indore Cleanest City Model', 'Ghazipur Landfill Crisis in Delhi', 'Segregation at Source & Bioremediation', 'Circular Economy in Waste']
+  },
+  {
+    year: 2026,
+    questionNumber: 18,
+    marks: 15,
+    subjectId: 'gs3-dis',
+    text: '"Community participation is the cornerstone of effective disaster management". Analyse this statement with suitable examples from India. Also discuss the challenges to community participation and measures to strengthen it.',
+    tags: ['Community Based Disaster Risk Management (CBDRM)', 'Aapda Mitra Scheme', 'Local Resilience & First Responders', 'Early Warning Dissemination', 'Odisha Cyclone Preparedness Model']
+  },
+  {
+    year: 2026,
+    questionNumber: 19,
+    marks: 15,
+    subjectId: 'gs3-sec',
+    text: 'Separatist movements have been one of the major factors contributing to militancy and instability in Jammu & Kashmir (J & K). Bring out actions taken by the Government to bring J & K into national mainstream. Discuss pre and post abrogation status of Articles 370 and 35A. Also bring out positive impacts of abrogation of both articles in mainstreaming the state.',
+    tags: ['Abrogation of Article 370 & 35A', 'Jammu & Kashmir Internal Security', 'Counter-Infiltration & Anti-Terror Operations', 'Grassroots Democracy (DDC Elections)', 'Development & Tourism in J&K']
+  },
+  {
+    year: 2026,
+    questionNumber: 20,
+    marks: 15,
+    subjectId: 'gs3-sec',
+    text: 'Discuss counterfeit currency and money laundering as major sources of terror funding in India. State the actions being taken at International level to check these menaces. Highlight the role of Financial Action Task Force (FATF) and methods of compliance by its member states in preventing terror funding.',
+    tags: ['Terror Financing & Fake Indian Currency Notes (FICN)', 'Prevention of Money Laundering Act (PMLA)', 'Financial Action Task Force (FATF)', 'Grey List / Black List Compliance', 'Cross-Border Hawala Networks']
+  },
+
+  // 2025
+  {
+    year: 2025,
+    questionNumber: 1,
+    marks: 10,
+    subjectId: 'gs3-eco',
+    text: 'Distinguish between the Human Development Index (HDI) and the Inequality-adjusted Human Development Index (IHDI) with special reference to India. Why is the IHDI considered a better indicator of inclusive growth ?',
+    tags: ['Human Development Index (HDI)', 'Inequality-Adjusted HDI (IHDI)', 'UNDP Human Development Report', 'Inclusive Growth Metrics', 'Regional and Gender Disparities in India']
+  },
+  {
+    year: 2025,
+    questionNumber: 2,
+    marks: 10,
+    subjectId: 'gs3-eco',
+    text: 'What are the challenges before the Indian economy when the world is moving away from free trade and multilateralism to protectionism and bilateralism ? How can these challenges be met ?',
+    tags: ['De-Globalisation & Protectionism', 'WTO Multilateral Order Crisis', 'Bilateral Free Trade Agreements (FTAs)', 'Supply Chain Resilience Initiative (SCRI)', 'Export Competitiveness for India']
+  },
+  {
+    year: 2025,
+    questionNumber: 3,
+    marks: 10,
+    subjectId: 'gs3-agr',
+    text: 'Explain the factors influencing the decision of the farmers on the selection of high value crops in India.',
+    tags: ['High Value Agriculture (HVA)', 'Crop Diversification Decisions', 'Market Price Volatility & MSP Influence', 'Irrigation and Cold Storage Availability', 'Contract Farming Options']
+  },
+  {
+    year: 2025,
+    questionNumber: 4,
+    marks: 10,
+    subjectId: 'gs3-agr',
+    text: 'Elaborate the scope and significance of supply chain management of agricultural commodities in India.',
+    tags: ['Agricultural Supply Chain Management', 'Post-Harvest Losses Mitigation', 'Cold Chain Infrastructure (PMKSY)', 'Farm-to-Fork Integration', 'Agri Logistics Bottlenecks']
+  },
+  {
+    year: 2025,
+    questionNumber: 5,
+    marks: 10,
+    subjectId: 'gs3-sci',
+    text: 'The fusion energy programme in India has steadily evolved over the past few decades. Mention India\'s contributions to the international fusion energy project - International Thermonuclear Experimental Reactor (ITER). What will be the implications of the success of this project for the future of global energy ?',
+    tags: ['Nuclear Fusion Energy', 'ITER Project (Cadaranche France)', 'Cryostat & In-Wall Shielding by India', 'Tokamak Technology', 'Limitless Clean Energy Potential']
+  },
+  {
+    year: 2025,
+    questionNumber: 6,
+    marks: 10,
+    subjectId: 'gs3-sci',
+    text: 'How can India achieve energy independence through clean technology by 2047 ? How can biotechnology can play a crucial role in this endeavour ?',
+    tags: ['Energy Independence 2047', 'Clean Energy Technologies', 'Biofuels & Second Generation Ethanol (2G)', 'Bio-Hydrogen & Microbial Fuel Cells', 'National Bioenergy Programme']
+  },
+  {
+    year: 2025,
+    questionNumber: 7,
+    marks: 10,
+    subjectId: 'gs3-env',
+    text: 'What is Carbon Capture, Utilization and Storage (CCUS) ? What is the potential role of CCUS in tackling climate change ?',
+    tags: ['Carbon Capture Utilization & Storage (CCUS)', 'Decarbonization of Heavy Industries', 'Carbon Sequestration Technologies', 'Net-Zero Target by 2070', 'Climate Change Mitigation']
+  },
+  {
+    year: 2025,
+    questionNumber: 8,
+    marks: 10,
+    subjectId: 'gs3-dis',
+    text: 'Seawater intrusion in the coastal aquifers is a major concern in India. What are the causes of seawater intrusion and the remedial measures to combat this hazard ?',
+    tags: ['Seawater Intrusion in Coastal Aquifers', 'Over-extraction of Groundwater', 'Coastal Hydrogeology Hazard', 'Artificial Aquifer Recharge', 'Saline Water Ingress Management']
+  },
+  {
+    year: 2025,
+    questionNumber: 9,
+    marks: 10,
+    subjectId: 'gs3-sec',
+    text: 'Terrorism is a global scourge. How has it manifested in India ? Elaborate with contemporary examples. What are the counter measures adopted by the State ? Explain.',
+    tags: ['Cross-Border Terrorism in India', 'Proxy Warfare and Lone Wolf Attacks', 'National Investigation Agency (NIA)', 'NATGRID & Multi-Agency Centre (MAC)', 'Unlawful Activities Prevention Act (UAPA)']
+  },
+  {
+    year: 2025,
+    questionNumber: 10,
+    marks: 10,
+    subjectId: 'gs3-sec',
+    text: 'The Government of India recently stated that Left Wing Extremism (LWE) will be eliminated by 2026. What do you understand by LWE and how are the people affected by it ? What measures have been taken by the government to eliminate LWE ?',
+    tags: ['Left Wing Extremism (Naxalism)', 'SAMADHAN Strategy', 'Security Related Expenditure (SRE)', 'Civic Action in Red Corridor', 'Surrender and Rehabilitation Policy']
+  },
+  {
+    year: 2025,
+    questionNumber: 11,
+    marks: 15,
+    subjectId: 'gs3-eco',
+    text: 'Explain how the Fiscal Health Index (FHI) can be used as a tool for assessing the fiscal performance of states in India. In what way would it encourage the states to adopt prudent and sustainable fiscal policies ?',
+    tags: ['Fiscal Health Index (FHI)', 'State Government Debt & Deficits (FRBM)', 'Fiscal Prudence and Sustainability', 'Off-Budget Borrowings Regulation', 'Finance Commission Recommendations']
+  },
+  {
+    year: 2025,
+    questionNumber: 12,
+    marks: 15,
+    subjectId: 'gs3-eco',
+    text: 'Discuss the rationale of the Production Linked Incentive (PLI) scheme. What are its achievements ? In what way can the functioning and outcomes of the scheme be improved ?',
+    tags: ['Production Linked Incentive (PLI) Scheme', 'Champion Sectors Manufacturing', 'Import Substitution & Export Promotion', 'Domestic Value Addition Challenges', 'Atmanirbhar Bharat Abhiyan']
+  },
+  {
+    year: 2025,
+    questionNumber: 13,
+    marks: 15,
+    subjectId: 'gs3-agr',
+    text: 'Examine the factors responsible for depleting groundwater in India. What are the steps taken by the government to mitigate such depletion of groundwater ?',
+    tags: ['Groundwater Depletion in India', 'Subsidized Electricity & Tube Well Boom', 'Atal Bhujal Yojana (ABHY)', 'Jal Jeevan Mission & Rainwater Harvesting', 'Crop Water Budgeting']
+  },
+  {
+    year: 2025,
+    questionNumber: 14,
+    marks: 15,
+    subjectId: 'gs3-agr',
+    text: 'Examine the scope of the food processing industries in India. Elaborate the measures taken by the government in the food processing industries for generating employment opportunities.',
+    tags: ['Food Processing Sector Scope', 'PM Kisan SAMPADA Yojana', 'Mega Food Parks Scheme', 'Rural Non-Farm Employment', 'Value Addition to Agri Commodities']
+  },
+  {
+    year: 2025,
+    questionNumber: 15,
+    marks: 15,
+    subjectId: 'gs3-sci',
+    text: 'How does nanotechnology offer significant advancements in the field of agriculture ? How can this technology help to uplift the socio-economic status of farmers ?',
+    tags: ['Nanotechnology in Agriculture', 'Nano-Urea & Nano-DAP Fertilizers', 'Nano-Pesticides and Targeted Delivery', 'Precision Farming & Soil Sensor Tech', 'Farmer Income Enhancement']
+  },
+  {
+    year: 2025,
+    questionNumber: 16,
+    marks: 15,
+    subjectId: 'gs3-sci',
+    text: 'India aims to become a semiconductor manufacturing hub. What are the challenges faced by the semiconductor industry in India ? Mention the salient features of the India Semiconductor Mission.',
+    tags: ['India Semiconductor Mission (ISM)', 'Semiconductor Fab Setup Challenges', 'Clean Room Infrastructure & Water Supply', 'Global Chip Supply Chains (CHIPS Act)', 'Silicon Fab Investments']
+  },
+  {
+    year: 2025,
+    questionNumber: 17,
+    marks: 15,
+    subjectId: 'gs3-env',
+    text: 'Mineral resources are fundamental to the country\'s economy and these are exploited by mining. Why is mining considered an environmental hazard ? Explain the remedial measures required to reduce the environmental hazard due to mining.',
+    tags: ['Mining Environmental Hazards', 'Acid Mine Drainage & Tailings Dams', 'District Mineral Foundation (DMF)', 'Sustainable Sand Mining Guidelines', 'Mine Closure & Ecological Reclamation']
+  },
+  {
+    year: 2025,
+    questionNumber: 18,
+    marks: 15,
+    subjectId: 'gs3-env',
+    text: 'Write a review on India\'s climate commitments under the Paris Agreement (2015) and mention how these have been further strengthened in COP26 (2021). In this direction, how has the first Nationally Determined Contribution intended by India been updated in 2022 ?',
+    tags: ['Paris Agreement Climate Commitments', 'Panchamrit Targets at COP26', 'Updated Nationally Determined Contributions (NDC 2022)', '45% Emissions Intensity Reduction', '50% Non-Fossil Electric Capacity']
+  },
+  {
+    year: 2025,
+    questionNumber: 19,
+    marks: 15,
+    subjectId: 'gs3-sec',
+    text: 'What are the major challenges to internal security and peace process in the North-Eastern States ? Map the various peace accords and agreements initiated by the government in the past decade.',
+    tags: ['North-East Internal Security Accords', 'Bodo Peace Accord & Karbi Anglong Pact', 'ULFA Tripartite Peace Agreement', 'Bru-Reang Settlement', 'AFSPA Partial Withdrawal & Boundary Disputes']
+  },
+  {
+    year: 2025,
+    questionNumber: 20,
+    marks: 15,
+    subjectId: 'gs3-sec',
+    text: 'Why is maritime security vital to protect India\'s sea trade ? Discuss maritime and coastal security challenges and the way forward.',
+    tags: ['Maritime Security Architecture', 'Indian Ocean Sea Lines of Communication (SLOCs)', 'Coastal Surveillance Network (CSN)', 'Piracy in Gulf of Aden', 'Indian Navy Blue Water Capabilities']
+  }
+];
+
+fs.writeFileSync(
+  path.join(__dirname, 'data/gs3_new.json'),
+  JSON.stringify(gs3New, null, 2),
+  'utf8'
+);
+console.log('Saved gs3_new.json');

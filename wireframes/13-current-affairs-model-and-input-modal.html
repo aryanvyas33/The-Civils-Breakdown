@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model Intake, Scoring Sandbox & Mobile Focus | Wireframe</title>
+  
+  <!-- Fonts matching The UPSC Breakdown App -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RETRO OS SYSTEM TOKENS ── */
+    :root {
+      --bg:          #F8F5EE;
+      --grid:        #D3D0C5;
+      --border:      #2A2A2A;
+      --window:      #F4F1E1;
+      --accent:      #E26A59;
+      --folder:      #FFD25A;
+      --emerald:     #50E3C2;
+      --mint-dark:   #0D9488;
+      --mint-bg:     #E6F9F4;
+      --teal:        #4A90E2;
+      --teal-bg:     #EDF5FF;
+      --amber:       #F5A623;
+      --amber-bg:    #FFF8E7;
+      --gs1:         #7C8B71;
+      --gs2:         #E09F71;
+      --gs3:         #6C91BF;
+      --gs4:         #C47B89;
+      --shadow-xs:   1.5px 1.5px 0px #2A2A2A;
+      --shadow-sm:   2.5px 2.5px 0px #2A2A2A;
+      --shadow-md:   4px 4px 0px #2A2A2A;
+      --shadow-lg:   6px 6px 0px #2A2A2A;
+      --font-code:   'Space Mono', monospace;
+      --font-pixel:  'VT323', monospace;
+      --font-sans:   'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-code);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 25px 25px;
+      color: var(--border);
+      min-height: 100vh;
+      padding-bottom: 90px;
+      line-height: 1.45;
+    }
+
+    /* ── TOP BANNER ── */
+    .wireframe-banner {
+      background: var(--border);
+      color: #FFF;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .wireframe-banner a {
+      color: var(--folder);
+      text-decoration: underline;
+      margin-left: 8px;
+      font-weight: bold;
+    }
+
+    /* ── NAVBAR ── */
+    .retro-navbar {
+      background: var(--window);
+      border-bottom: 4px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-pixel);
+      font-size: 1.3rem;
+      position: sticky;
+      top: 33px;
+      z-index: 90;
+      box-shadow: 0px 4px 0px rgba(42,42,42,0.12);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--border);
+      font-weight: bold;
+    }
+    .nav-logo-mark {
+      background: var(--border);
+      color: #FFF;
+      padding: 2px 8px;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .main-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* ── RETRO WINDOW ── */
+    .retro-window {
+      background: var(--window);
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-md);
+      border-radius: 4px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .retro-window-header {
+      background: var(--border);
+      color: #FFF;
+      padding: 8px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-pixel);
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+    }
+    .window-controls {
+      display: flex;
+      gap: 6px;
+    }
+    .win-btn {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #FFF;
+      display: inline-block;
+      background: transparent;
+    }
+    .win-btn.close { background: var(--accent); border-color: var(--border); }
+    .win-btn.min { background: var(--folder); border-color: var(--border); }
+    .win-btn.max { background: var(--emerald); border-color: var(--border); }
+
+    /* ── TWO-COLUMN SPLIT ── */
+    .sandbox-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+    @media (max-width: 990px) {
+      .sandbox-split-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── SCORING SIMULATOR FORM ── */
+    .form-pane {
+      background: #FFF;
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+    }
+    .form-title {
+      font-family: var(--font-pixel);
+      font-size: 1.6rem;
+      border-bottom: 2px dashed var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .input-group {
+      margin-bottom: 14px;
+    }
+    .input-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .retro-text-input {
+      width: 100%;
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border: 2px solid var(--border);
+      background: #FFF9E6; /* Yellow-shaded input like spreadsheet */
+      color: #0d1b2a;
+      outline: none;
+    }
+    .retro-text-input:focus {
+      background: #FFF;
+      border-color: var(--accent);
+    }
+
+    /* Criteria Radio Buttons Group */
+    .criteria-block {
+      background: #FAF8F2;
+      border: 1.5px solid var(--border);
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .criteria-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .criteria-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--border);
+    }
+    .criteria-weight-tag {
+      font-size: 0.7rem;
+      background: #E5E1D4;
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      font-weight: bold;
+    }
+    .criteria-desc {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .score-buttons-row {
+      display: flex;
+      gap: 8px;
+    }
+    .score-radio-btn {
+      flex: 1;
+      padding: 6px 8px;
+      border: 2px solid var(--border);
+      background: #FFF;
+      font-family: var(--font-pixel);
+      font-size: 1.15rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.1s;
+      user-select: none;
+    }
+    .score-radio-btn:hover { background: #F0ECE1; }
+    .score-radio-btn.selected {
+      background: var(--border);
+      color: #FFF;
+      box-shadow: 2px 2px 0px var(--accent);
+    }
+
+    /* ── LIVE MODEL CALCULATION OUTPUT CARD ── */
+    .output-card {
+      background: var(--window);
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+      position: sticky;
+      top: 95px;
+    }
+    .output-h3 {
+      font-family: var(--font-pixel);
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      border-bottom: 2px dashed var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+    .metric-hero-box {
+      background: #FFF;
+      border: 3px solid var(--border);
+      padding: 14px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .prob-large-gauge {
+      font-family: var(--font-pixel);
+      font-size: 3.8rem;
+      line-height: 1;
+      font-weight: bold;
+      color: var(--mint-dark);
+      margin-bottom: 4px;
+    }
+    .band-callout {
+      font-family: var(--font-pixel);
+      font-size: 1.6rem;
+      padding: 4px 12px;
+      border: 2px solid var(--border);
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .band-callout.band-a { background: var(--emerald); color: var(--border); }
+    .band-callout.band-b { background: var(--teal); color: #FFF; }
+    .band-callout.band-c { background: var(--amber); color: var(--border); }
+    .band-callout.dropped { background: #F87171; color: #FFF; }
+
+    /* Gatekeeper Banner */
+    .gate-warning {
+      background: #FEE2E2;
+      border: 2px solid #DC2626;
+      color: #991B1B;
+      padding: 10px;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .gate-warning.active { display: block; }
+
+    /* ── MOBILE CARD DECK SIMULATOR ── */
+    .mobile-simulator-section {
+      background: #FFF;
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+      margin-top: 30px;
+    }
+    .mobile-frame-wrapper {
+      max-width: 420px;
+      margin: 20px auto;
+      border: 8px solid var(--border);
+      border-radius: 28px;
+      background: var(--bg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    .mobile-notch {
+      background: var(--border);
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .notch-bar {
+      width: 70px;
+      height: 4px;
+      background: #555;
+      border-radius: 2px;
+    }
+    .mobile-content {
+      padding: 16px;
+      min-height: 520px;
+      max-height: 580px;
+      overflow-y: auto;
+    }
+    .mobile-quick-card {
+      background: var(--window);
+      border: 2px solid var(--border);
+      box-shadow: 3px 3px 0px var(--border);
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    /* Slider styling */
+    .retro-slider {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BANNER -->
+  <div class="wireframe-banner">
+    <div>
+      <span style="background: var(--accent); color: #FFF; padding: 1px 8px; font-family: var(--font-pixel); font-size: 1.05rem;">
+        MOCKUP COMPONENT 2
+      </span>
+      <span style="margin-left: 8px;">TOPIC INGESTION &amp; SCORING SANDBOX (MODEL LOGIC INSPECTOR)</span>
+    </div>
+    <div>
+      <a href="12-current-affairs-priority-tracker.html">&larr; BACK TO MAIN CURRENT AFFAIRS MATRIX</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="retro-navbar">
+    <a href="12-current-affairs-priority-tracker.html" class="nav-brand">
+      <div class="nav-logo-mark">&#9650; PB</div>
+      <span>THE_UPSC_BREAKDOWN // SCORING SANDBOX</span>
+    </a>
+    <div style="font-size: 1.05rem; color: #555;">
+      UPSC MAINS 2027 CALIBRATION ENGINE
+    </div>
+  </nav>
+
+  <main class="main-container">
+
+    <!-- INTRO HEADER -->
+    <header style="margin-bottom: 24px;">
+      <h1 style="font-family: var(--font-pixel); font-size: 2.8rem; text-transform: uppercase; line-height: 1.1; margin-bottom: 8px;">
+        TOPIC INTAKE &amp; <span style="color: var(--accent);">PROBABILITY SCORING ENGINE</span>
+      </h1>
+      <p style="font-family: var(--font-sans); font-size: 0.95rem; color: #444; max-width: 960px;">
+        Test and ingest monthly current affairs issues. When you input the 8 criteria scores, the engine calculates the <strong>Priority Index (0-100)</strong>, runs it through the calibrated <strong>logistic curve</strong>, assigns the <strong>Band (A / B / C)</strong>, and prescribes exact answer-writing prep depth.
+      </p>
+    </header>
+
+    <!-- TWO-COLUMN WORKBENCH: FORM ON LEFT, REAL-TIME OUTPUT ON RIGHT -->
+    <div class="sandbox-split-grid">
+      
+      <!-- LEFT: INTAKE & 8-FACTOR FORM -->
+      <div class="form-pane">
+        <div class="form-title">
+          <span>&#9998; STEP 1: TOPIC METADATA &amp; GATEKEEPER</span>
+          <span style="font-size: 0.85rem; color: #666; font-family: var(--font-code);">[BLUE/YELLOW CELLS]</span>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Mains-Style Theme Title:</label>
+          <input type="text" id="inTopicTitle" class="retro-text-input" value="Fiscal federalism after the 16th Finance Commission (2026-31)" oninput="updateLiveCalculation()" />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <label class="input-label">Paper Target:</label>
+            <select id="inPaper" class="retro-text-input" onchange="updateLiveCalculation()">
+              <option value="GS1">GS1 (Society, Geography, History)</option>
+              <option value="GS2" selected>GS2 (Polity, Governance, IR)</option>
+              <option value="GS3">GS3 (Economy, Env, S&T, Security)</option>
+              <option value="GS4">GS4 (Ethics, Probity)</option>
+            </select>
+          </div>
+          <div>
+            <label class="input-label">Tracking Month:</label>
+            <select id="inMonth" class="retro-text-input">
+              <option selected>Apr 2026</option>
+              <option>May 2026</option>
+              <option>Jun 2026</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Official Syllabus Anchor:</label>
+          <input type="text" id="inAnchor" class="retro-text-input" value="Union and States: functions, federal structure, devolution of powers and finances to local levels" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Static / Conceptual Core (Arts, Acts, Judgments):</label>
+          <input type="text" id="inStaticCore" class="retro-text-input" value="Art 280, 270, 275; 41% divisible pool; cesses and surcharges; local-body grants; GST" />
+        </div>
+
+        <!-- GATEKEEPER PASS CHECK -->
+        <div style="background: #FFF9E6; border: 2px solid var(--border); padding: 12px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-weight: 700; font-size: 0.85rem;">PASSES CSE GATE? (Y/N)</span>
+              <div style="font-family: var(--font-sans); font-size: 0.75rem; color: #666;">
+                Rule: If N, row is marked 'DROPPED' regardless of score.
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="score-radio-btn selected" id="btnGateY" onclick="setGate('Y')">YES (PASS)</button>
+              <button type="button" class="score-radio-btn" id="btnGateN" onclick="setGate('N')">NO (DROP)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: THE 8 PARAMETER RATINGS -->
+        <div class="form-title">
+          <span>&#9881; STEP 2: RATE THE 8 PARAMETERS (0 = ABSENT, 1 = PARTIAL, 2 = STRONG)</span>
+        </div>
+
+        <!-- Param 1: Syllabus Anchor -->
+        <div class="criteria-block" id="blockP1">
+          <div class="criteria-header">
+            <span class="criteria-title">1. Syllabus Anchor</span>
+            <span class="criteria-weight-tag">Weight: 8% (0.08)</span>
+          </div>
+          <div class="criteria-desc">Maps cleanly to a specific syllabus line. Serves largely as qualification gate.</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(0, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(0, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(0, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+        <!-- Param 2: Persistence -->
+        <div class="criteria-block" id="blockP2">
+          <div class="criteria-header">
+            <span class="criteria-title">2. Persistence</span>
+            <span class="criteria-weight-tag">Weight: 14% (0.14)</span>
+          </div>
+          <div class="criteria-desc">Structural issue recurring over months/years giving setters ample lead time.</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(1, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(1, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(1, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+        <!-- Param 3: Institutional Footprint -->
+        <div class="criteria-block" id="blockP3">
+          <div class="criteria-header">
+            <span class="criteria-title">3. Institutional / Legal Footprint</span>
+            <span class="criteria-weight-tag">Weight: 12% (0.12)</span>
+          </div>
+          <div class="criteria-desc">Concrete Act, SC verdict, committee report, scheme, or regulation.</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(2, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(2, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(2, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+        <!-- Param 4: Multidimensional -->
+        <div class="criteria-block" id="blockP4">
+          <div class="criteria-header">
+            <span class="criteria-title">4. Multidimensionality</span>
+            <span class="criteria-weight-tag">Weight: 10% (0.10)</span>
+          </div>
+          <div class="criteria-desc">Social, economic, political, environmental, tech, ethical dimensions (4+ angles = 2).</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(3, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(3, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(3, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+        <!-- Param 5: Contestability -->
+        <div class="criteria-block" id="blockP5">
+          <div class="criteria-header">
+            <span class="criteria-title">5. Contestability</span>
+            <span class="criteria-weight-tag">Weight: 10% (0.10)</span>
+          </div>
+          <div class="criteria-desc">Genuine two-sided policy debate suitable for 'Critically Analyze' directive words.</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(4, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(4, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(4, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+        <!-- Param 6: Govt Priority -->
+        <div class="criteria-block" id="blockP6">
+          <div class="criteria-header">
+            <span class="criteria-title">6. Govt Priority &amp; India's Stake</span>
+            <span class="criteria-weight-tag">Weight: 14% (0.14)</span>
+          </div>
+          <div class="criteria-desc">Viksit Bharat 2047 pillars, national security, or macro-strategic economic impact.</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(5, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(5, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(5, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+        <!-- Param 7: Usable Evidence -->
+        <div class="criteria-block" id="blockP7">
+          <div class="criteria-header">
+            <span class="criteria-title">7. Usable Evidence</span>
+            <span class="criteria-weight-tag">Weight: 6% (0.06)</span>
+          </div>
+          <div class="criteria-desc">Specific indices, report findings, data trends, or case studies ready to cite.</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(6, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(6, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(6, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+        <!-- Param 8: PYQ Recurrence -->
+        <div class="criteria-block" id="blockP8" style="border: 2px solid var(--accent); background: #FFF8F6;">
+          <div class="criteria-header">
+            <span class="criteria-title" style="color: var(--accent);">&#9733; 8. PYQ Recurrence (Highest Impact)</span>
+            <span class="criteria-weight-tag" style="background: var(--accent); color: #FFF;">Weight: 26% (0.26)</span>
+          </div>
+          <div class="criteria-desc">Same theme or close variant asked in Mains in the last 8-10 years (verified in Vault).</div>
+          <div class="score-buttons-row">
+            <div class="score-radio-btn" onclick="setScore(7, 0)">0 (Absent)</div>
+            <div class="score-radio-btn" onclick="setScore(7, 1)">1 (Partial)</div>
+            <div class="score-radio-btn selected" onclick="setScore(7, 2)">2 (Strong)</div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <!-- RIGHT: REAL-TIME ENGINE OUTPUT CARD -->
+      <div>
+        <div class="output-card">
+          <div class="output-h3">// MODEL LIVE PREDICTION</div>
+
+          <!-- Gate Dropped Alert -->
+          <div class="gate-warning" id="gateDropWarning">
+            <strong>&#9940; TOPIC STATUS: DROPPED</strong><br />
+            This topic failed the CSE gate criteria. It is excluded from the Priority Index, rankings, and Band calculations.
+          </div>
+
+          <div class="metric-hero-box" id="metricHeroContainer">
+            <div style="font-size: 0.75rem; font-weight: 700; color: #555; text-transform: uppercase;">Estimated P(Asked in Mains 2027)</div>
+            <div class="prob-large-gauge" id="outProb">81.8%</div>
+            <div class="band-callout band-a" id="outBand">BAND A // MUST COVER</div>
+            
+            <div style="height: 10px; background: #E5E1D4; border: 1.5px solid var(--border); margin: 10px auto; max-width: 240px; overflow: hidden;">
+              <div id="outProbFill" style="height: 100%; width: 81.8%; background: var(--emerald); transition: width 0.2s;"></div>
+            </div>
+            
+            <div style="font-size: 0.72rem; color: #666;" id="outCurveEquation">
+              Logistic: a = -1.5, b = 0.6 | Index: 100/100
+            </div>
+          </div>
+
+          <!-- Score Breakdown Table -->
+          <div style="background: #FFF; border: 2px solid var(--border); padding: 12px; margin-bottom: 16px; font-size: 0.8rem;">
+            <div style="display: flex; justify-content: space-between; padding-bottom: 6px; border-bottom: 1px dotted #CCC;">
+              <span>Raw Score Sum:</span>
+              <strong style="font-family: var(--font-code);" id="outRawTotal">16 / 16</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dotted #CCC;">
+              <span>Score Tier (Thresholds):</span>
+              <strong id="outTier">Tier 1 (12-16)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding-top: 6px;">
+              <span>Weighted Index (0-100):</span>
+              <strong style="color: var(--mint-dark); font-size: 0.95rem;" id="outIndex">100 / 100</strong>
+            </div>
+          </div>
+
+          <!-- Suggested Prep Depth -->
+          <div style="background: #FAF8F2; border: 2px solid var(--border); padding: 12px; margin-bottom: 16px;">
+            <div style="font-weight: 700; font-size: 0.78rem; color: #555; text-transform: uppercase; margin-bottom: 4px;">
+              Suggested Preparation Action:
+            </div>
+            <div style="font-family: var(--font-code); font-size: 0.85rem; font-weight: bold; color: var(--border);" id="outPrepAction">
+              Full note + 2 practised answers + data/case
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button type="button" class="score-radio-btn selected" style="padding: 10px; font-size: 1.25rem;" onclick="simulateAddTopic()">
+              &#10003; SAVE &amp; COMMIT TOPIC TO APRIL 2026 TRACKER
+            </button>
+            <button type="button" class="score-radio-btn" style="padding: 6px; font-size: 1rem;" onclick="resetFormToSample()">
+              &#8634; RESET FORM TO DEFAULT
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COMPONENT 3: MOBILE INTERFACE PREVIEW -->
+    <section class="mobile-simulator-section">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--border); padding-bottom: 10px;">
+        <div>
+          <h2 style="font-family: var(--font-pixel); font-size: 2rem; text-transform: uppercase;">
+            &#128241; MOBILE VIEWPORT PREVIEW (RESPONSIVE USER EXPERIENCE)
+          </h2>
+          <p style="font-family: var(--font-sans); font-size: 0.85rem; color: #555;">
+            How aspirants review their daily current affairs priority list on handheld devices:
+          </p>
+        </div>
+        <span class="info-pill highlight" style="font-size: 0.75rem;">MOBILE OPTIMIZED</span>
+      </div>
+
+      <!-- Simulated Phone Frame -->
+      <div class="mobile-frame-wrapper">
+        <div class="mobile-notch">
+          <div class="notch-bar"></div>
+        </div>
+
+        <div class="mobile-content">
+          <!-- Mobile Brand Bar -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 12px;">
+            <span style="font-family: var(--font-pixel); font-size: 1.2rem; font-weight: bold;">THE_UPSC_BREAKDOWN</span>
+            <span style="background: var(--accent); color: #FFF; font-size: 0.65rem; padding: 1px 4px; font-weight: bold;">CSE 2027</span>
+          </div>
+
+          <!-- Mobile Quick Filter Chips -->
+          <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 12px;">
+            <span style="background: var(--border); color: #FFF; font-size: 0.7rem; padding: 2px 8px; font-weight: bold; white-space: nowrap;">ALL (23)</span>
+            <span style="background: var(--emerald); color: var(--border); font-size: 0.7rem; padding: 2px 8px; font-weight: bold; white-space: nowrap;">BAND A (14)</span>
+            <span style="background: #FFF; border: 1px solid var(--border); font-size: 0.7rem; padding: 2px 8px; font-weight: bold; white-space: nowrap;">GS2 (10)</span>
+            <span style="background: #FFF; border: 1px solid var(--border); font-size: 0.7rem; padding: 2px 8px; font-weight: bold; white-space: nowrap;">GS3 (11)</span>
+          </div>
+
+          <!-- Mobile Card 1 -->
+          <div class="mobile-quick-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-family: var(--font-pixel); font-size: 1.1rem; background: var(--folder); padding: 0 4px; border: 1px solid var(--border);">RANK #1</span>
+              <span style="font-family: var(--font-pixel); font-size: 1.1rem; color: var(--mint-dark); font-weight: bold;">81.8% P(ASKED)</span>
+            </div>
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">
+              Fiscal federalism after the 16th Finance Commission (2026-31)
+            </div>
+            <div style="font-size: 0.7rem; color: #555; margin-bottom: 8px;">
+              GS2 · Arts 280, 270, 275 · Divisible pool
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #CCC; padding-top: 6px;">
+              <span style="background: var(--mint-bg); color: var(--mint-dark); font-size: 0.65rem; font-weight: bold; padding: 1px 6px;">BAND A · FULL NOTE</span>
+              <span style="font-size: 0.7rem; font-weight: bold; color: var(--border); text-decoration: underline;">VIEW AUDIT &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Mobile Card 2 -->
+          <div class="mobile-quick-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-family: var(--font-pixel); font-size: 1.1rem; background: var(--folder); padding: 0 4px; border: 1px solid var(--border);">RANK #2</span>
+              <span style="font-family: var(--font-pixel); font-size: 1.1rem; color: var(--mint-dark); font-weight: bold;">79.9% P(ASKED)</span>
+            </div>
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">
+              India's NDC 2031-35: ambition, climate finance and carbon markets
+            </div>
+            <div style="font-size: 0.7rem; color: #555; margin-bottom: 8px;">
+              GS3 · Paris Agreement · CBDR-RC · Art 6
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #CCC; padding-top: 6px;">
+              <span style="background: var(--mint-bg); color: var(--mint-dark); font-size: 0.65rem; font-weight: bold; padding: 1px 6px;">BAND A · FULL NOTE</span>
+              <span style="font-size: 0.7rem; font-weight: bold; color: var(--border); text-decoration: underline;">VIEW AUDIT &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Mobile Card 3 -->
+          <div class="mobile-quick-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-family: var(--font-pixel); font-size: 1.1rem; background: #FFF; padding: 0 4px; border: 1px solid var(--border);">RANK #15</span>
+              <span style="font-family: var(--font-pixel); font-size: 1.1rem; color: var(--teal); font-weight: bold;">41.1% P(ASKED)</span>
+            </div>
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">
+              UN Security Council paralysis and reform: Hormuz resolution vetoes
+            </div>
+            <div style="font-size: 0.7rem; color: #555; margin-bottom: 8px;">
+              GS2 · UN Charter Ch V &amp; VII · Art 27 veto · G4
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #CCC; padding-top: 6px;">
+              <span style="background: var(--teal-bg); color: var(--teal); font-size: 0.65rem; font-weight: bold; padding: 1px 6px;">BAND B · 1-PAGE NOTE</span>
+              <span style="font-size: 0.7rem; font-weight: bold; color: var(--border); text-decoration: underline;">VIEW AUDIT &rarr;</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Weights matching the user's Probability Model
+    const WEIGHTS = [0.08, 0.14, 0.12, 0.10, 0.10, 0.14, 0.06, 0.26];
+    const CONST_A = -1.5;
+    const CONST_B = 0.6;
+
+    let currentScores = [2, 2, 2, 2, 2, 2, 2, 2];
+    let passesGate = "Y";
+
+    function setGate(val) {
+      passesGate = val;
+      document.getElementById('btnGateY').classList.toggle('selected', val === 'Y');
+      document.getElementById('btnGateN').classList.toggle('selected', val === 'N');
+      updateLiveCalculation();
+    }
+
+    function setScore(paramIndex, val) {
+      currentScores[paramIndex] = val;
+      const blockId = `blockP${paramIndex + 1}`;
+      const block = document.getElementById(blockId);
+      const btns = block.querySelectorAll('.score-radio-btn');
+      btns.forEach((b, i) => {
+        b.classList.toggle('selected', i === val);
+      });
+      updateLiveCalculation();
+    }
+
+    function updateLiveCalculation() {
+      const dropWarning = document.getElementById('gateDropWarning');
+      const metricHero = document.getElementById('metricHeroContainer');
+
+      if (passesGate === "N") {
+        dropWarning.classList.add('active');
+        document.getElementById('outBand').className = 'band-callout dropped';
+        document.getElementById('outBand').innerText = 'STATUS: DROPPED';
+        document.getElementById('outProb').innerText = 'N/A';
+        document.getElementById('outProbFill').style.width = '0%';
+        document.getElementById('outIndex').innerText = 'EXCLUDED';
+        document.getElementById('outPrepAction').innerText = 'Do not allocate note-making time. Theme dropped by gate criteria.';
+        return;
+      }
+
+      dropWarning.classList.remove('active');
+
+      // 1. Raw Score Sum (/16)
+      const rawSum = currentScores.reduce((a, b) => a + b, 0);
+      document.getElementById('outRawTotal').innerText = `${rawSum} / 16`;
+
+      // 2. Score Tier
+      let tierStr = "Tier 3 (<8)";
+      if (rawSum >= 12) tierStr = "Tier 1 (12-16)";
+      else if (rawSum >= 8) tierStr = "Tier 2 (8-11)";
+      document.getElementById('outTier').innerText = tierStr;
+
+      // 3. Priority Index (0-100)
+      // SUM(score / 2 * weight) * 100, clamped 0 to 100
+      let weightedSum = 0;
+      for (let i = 0; i < 8; i++) {
+        weightedSum += (currentScores[i] / 2.0) * WEIGHTS[i];
+      }
+      let rawIndex = Math.round(weightedSum * 100);
+      let finalIndex = Math.max(0, Math.min(100, rawIndex));
+      document.getElementById('outIndex').innerText = `${finalIndex} / 100`;
+
+      // 4. Logistic Probability Calculation:
+      // P(asked) = 1 / (1 + exp( -( a + b * (Index - 50) / 10 ) ))
+      const logit = CONST_A + CONST_B * ((finalIndex - 50) / 10.0);
+      const prob = 1.0 / (1.0 + Math.exp(-logit));
+      const probPct = (prob * 100).toFixed(1);
+
+      document.getElementById('outProb').innerText = `${probPct}%`;
+      document.getElementById('outProbFill').style.width = `${probPct}%`;
+      document.getElementById('outCurveEquation').innerText = `Logistic: a = -1.5, b = 0.6 | Index: ${finalIndex}/100`;
+
+      // 5. Band and Action
+      const outBand = document.getElementById('outBand');
+      const outPrep = document.getElementById('outPrepAction');
+
+      if (prob >= 0.50) {
+        outBand.className = 'band-callout band-a';
+        outBand.innerText = 'BAND A // MUST COVER (HIGH YIELD)';
+        document.getElementById('outProb').style.color = 'var(--mint-dark)';
+        document.getElementById('outProbFill').style.background = 'var(--emerald)';
+        outPrep.innerText = 'Full note + 2 practised answers + data/case studies';
+      } else if (prob >= 0.25) {
+        outBand.className = 'band-callout band-b';
+        outBand.innerText = 'BAND B // TARGETED PREP';
+        document.getElementById('outProb').style.color = 'var(--teal)';
+        document.getElementById('outProbFill').style.background = 'var(--teal)';
+        outPrep.innerText = '1-page note + 1 practised 10-marker answer';
+      } else {
+        outBand.className = 'band-callout band-c';
+        outBand.innerText = 'BAND C // HEADLINE AWARENESS';
+        document.getElementById('outProb').style.color = 'var(--amber)';
+        document.getElementById('outProbFill').style.background = 'var(--amber)';
+        outPrep.innerText = 'Headline awareness only. Bullet points; do not make full note.';
+      }
+    }
+
+    function simulateAddTopic() {
+      alert("SUCCESS: Topic successfully scored and added to April 2026 Live Cohort with computed priority!");
+    }
+
+    function resetFormToSample() {
+      currentScores = [2, 2, 2, 2, 2, 2, 2, 2];
+      passesGate = "Y";
+      for (let i = 0; i < 8; i++) {
+        setScore(i, 2);
+      }
+      setGate("Y");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateLiveCalculation();
+    });
+  </script>
+</body>
+</html>

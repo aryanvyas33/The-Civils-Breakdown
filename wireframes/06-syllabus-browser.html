@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — Syllabus Browser Feature</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'DM Sans', sans-serif; background: #f0f2f5; }
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .nav-tab { cursor: pointer; transition: all 0.2s; }
+    .nav-tab.active { background: #0d1b2a; color: white; }
+    .nav-tab:not(.active):hover { background: #e8ecf0; }
+    .pointer-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); transform: translateY(-1px); }
+    .pointer-card { transition: all 0.2s; }
+    .note-editor { display: none; }
+    .note-editor.open { display: block; }
+    .breadcrumb-sep { color: #94a3b8; }
+    .coverage-bar { background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+    .coverage-fill { height: 6px; border-radius: 99px; }
+    .annotation { position: absolute; background: #fef3c7; border: 1px dashed #d97706; color: #92400e; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px; pointer-events: none; }
+    .new-badge { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 99px; letter-spacing: 0.05em; }
+    select, textarea { outline: none; }
+    textarea:focus { border-color: #d4a029 !important; box-shadow: 0 0 0 3px rgba(212,160,41,0.15); }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gs1: '#2563eb', gs2: '#059669', gs3: '#d97706', gs4: '#7c3aed', essay: '#dc2626',
+            accent: '#d4a029', primary: '#0d1b2a',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen py-8 px-4">
+
+  <!-- ============================================================ -->
+  <!-- TOP NAV: Screen Switcher -->
+  <!-- ============================================================ -->
+  <div class="max-w-5xl mx-auto mb-6">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 text-lg">📐</div>
+        <div>
+          <h1 class="font-bold text-gray-900 text-base">Wireframe Mockups — Syllabus Browser Feature</h1>
+          <p class="text-xs text-gray-500">Paper → Syllabus → Pointer → Questions → Notes &nbsp;|&nbsp; Click a screen tab to navigate</p>
+        </div>
+        <span class="ml-auto text-xs font-bold text-gray-400 uppercase tracking-wider">Not Implemented</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="showScreen('s1')" id="tab-s1" class="nav-tab active px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200">
+          🗂️ Screen 1: /syllabus Overview
+        </button>
+        <button onclick="showScreen('s2')" id="tab-s2" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200">
+          📄 Screen 2: /syllabus/gs2 (Paper)
+        </button>
+        <button onclick="showScreen('s3')" id="tab-s3" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200">
+          📌 Screen 3: /syllabus/gs2/con (Subject)
+        </button>
+        <button onclick="showScreen('s4')" id="tab-s4" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200">
+          📝 Screen 4: Pointer + Notes View
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 1: /syllabus — Overview -->
+  <!-- ============================================================ -->
+  <div id="s1" class="screen active max-w-5xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+
+      <!-- Navbar -->
+      <nav class="border-b border-gray-100 px-6 py-3 flex items-center justify-between bg-white">
+        <span class="font-bold text-gray-900 text-base">PYQ Vault</span>
+        <div class="flex items-center gap-6 text-sm text-gray-500 font-medium">
+          <span>Home</span>
+          <span>Papers</span>
+          <span class="text-amber-600 font-bold border-b-2 border-amber-500 pb-0.5 flex items-center gap-1.5">
+            Syllabus
+            <span class="new-badge">NEW</span>
+          </span>
+          <span>Saved</span>
+        </div>
+      </nav>
+
+      <div class="p-8">
+        <!-- Header -->
+        <div class="text-center mb-10 max-w-2xl mx-auto">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold mb-3">
+            📚 UPSC Official Syllabus Structure
+          </span>
+          <h1 class="text-3xl font-bold text-gray-900 mb-3">Browse by Syllabus Pointer</h1>
+          <p class="text-gray-500 text-sm leading-relaxed">Navigate the <em>exact</em> UPSC syllabus structure. Every bullet point → all questions ever asked on it → add your own notes. Find coverage gaps instantly.</p>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="flex flex-wrap justify-center gap-4 mb-10">
+          <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl border border-gray-200 text-sm">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            <span class="font-semibold text-gray-700">5 Papers</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl border border-gray-200 text-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="font-semibold text-gray-700">28 Subjects</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl border border-gray-200 text-sm">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span class="font-semibold text-gray-700">~90 Syllabus Pointers</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl border border-gray-200 text-sm">
+            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+            <span class="font-semibold text-gray-700">1,100+ Questions Mapped</span>
+          </div>
+        </div>
+
+        <!-- Paper Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- GS1 Card -->
+          <div onclick="showScreen('s2')" class="pointer-card cursor-pointer border-t-4 border-t-blue-500 border border-gray-200 rounded-2xl p-6 bg-white">
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center font-bold text-blue-600 text-xl">GS1</div>
+              <span class="text-xs font-bold text-gray-400 bg-gray-50 border border-gray-200 px-3 py-1 rounded-lg">7 Subjects · 22 Pointers</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-lg mb-1">GS Paper 1</h3>
+            <p class="text-xs text-gray-500 mb-4">Indian Heritage, History, Geography & Society</p>
+            <div class="space-y-1.5 mb-5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Heritage & Culture</span>
+                <span class="font-semibold text-blue-600">6 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Modern History</span>
+                <span class="font-semibold text-blue-600">5 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Geography</span>
+                <span class="font-semibold text-blue-600">4 pointers</span>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-gray-100">
+              <button class="w-full py-2 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-700 rounded-xl text-sm font-semibold transition-all">Explore GS1 Syllabus →</button>
+            </div>
+          </div>
+
+          <!-- GS2 Card (Highlighted as example) -->
+          <div onclick="showScreen('s2')" class="pointer-card cursor-pointer border-t-4 border-t-emerald-500 border-2 border-emerald-200 rounded-2xl p-6 bg-white relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-3 py-0.5 rounded-full">👆 Click to explore</div>
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center font-bold text-emerald-600 text-xl">GS2</div>
+              <span class="text-xs font-bold text-gray-400 bg-gray-50 border border-gray-200 px-3 py-1 rounded-lg">5 Subjects · 18 Pointers</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-lg mb-1">GS Paper 2</h3>
+            <p class="text-xs text-gray-500 mb-4">Polity, Governance, Social Justice & IR</p>
+            <div class="space-y-1.5 mb-5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Constitution & Polity</span>
+                <span class="font-semibold text-emerald-600">8 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Governance & Civil Services</span>
+                <span class="font-semibold text-emerald-600">4 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">International Relations</span>
+                <span class="font-semibold text-emerald-600">3 pointers</span>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-gray-100">
+              <button class="w-full py-2 bg-emerald-600 text-white rounded-xl text-sm font-semibold">Explore GS2 Syllabus →</button>
+            </div>
+          </div>
+
+          <!-- GS3 Card -->
+          <div class="pointer-card cursor-pointer border-t-4 border-t-amber-500 border border-gray-200 rounded-2xl p-6 bg-white">
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center font-bold text-amber-600 text-xl">GS3</div>
+              <span class="text-xs font-bold text-gray-400 bg-gray-50 border border-gray-200 px-3 py-1 rounded-lg">7 Subjects · 24 Pointers</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-lg mb-1">GS Paper 3</h3>
+            <p class="text-xs text-gray-500 mb-4">Economy, Environment, Science & Security</p>
+            <div class="space-y-1.5 mb-5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Indian Economy</span>
+                <span class="font-semibold text-amber-600">6 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Environment & Biodiversity</span>
+                <span class="font-semibold text-amber-600">5 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Internal Security</span>
+                <span class="font-semibold text-amber-600">4 pointers</span>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-gray-100">
+              <button class="w-full py-2 bg-amber-50 hover:bg-amber-600 hover:text-white text-amber-700 rounded-xl text-sm font-semibold transition-all">Explore GS3 Syllabus →</button>
+            </div>
+          </div>
+
+          <!-- GS4 Card -->
+          <div class="pointer-card cursor-pointer border-t-4 border-t-purple-500 border border-gray-200 rounded-2xl p-6 bg-white">
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center font-bold text-purple-600 text-xl">GS4</div>
+              <span class="text-xs font-bold text-gray-400 bg-gray-50 border border-gray-200 px-3 py-1 rounded-lg">5 Subjects · 15 Pointers</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-lg mb-1">GS Paper 4</h3>
+            <p class="text-xs text-gray-500 mb-4">Ethics, Integrity & Aptitude</p>
+            <div class="space-y-1.5 mb-5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Ethics & Human Interface</span>
+                <span class="font-semibold text-purple-600">5 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Emotional Intelligence</span>
+                <span class="font-semibold text-purple-600">3 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Case Studies</span>
+                <span class="font-semibold text-purple-600">2 pointers</span>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-gray-100">
+              <button class="w-full py-2 bg-purple-50 hover:bg-purple-600 hover:text-white text-purple-700 rounded-xl text-sm font-semibold transition-all">Explore GS4 Syllabus →</button>
+            </div>
+          </div>
+
+          <!-- Essay Card -->
+          <div class="pointer-card cursor-pointer border-t-4 border-t-red-500 border border-gray-200 rounded-2xl p-6 bg-white">
+            <div class="flex justify-between items-start mb-4">
+              <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center font-bold text-red-600 text-base">Essay</div>
+              <span class="text-xs font-bold text-gray-400 bg-gray-50 border border-gray-200 px-3 py-1 rounded-lg">8 Themes · 11 Pointers</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-lg mb-1">Essay Paper</h3>
+            <p class="text-xs text-gray-500 mb-4">Philosophical, Social, Political & Economic Essays</p>
+            <div class="space-y-1.5 mb-5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Philosophy & Abstract</span>
+                <span class="font-semibold text-red-600">3 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Society & Social Justice</span>
+                <span class="font-semibold text-red-600">2 pointers</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-gray-600">Governance & Polity</span>
+                <span class="font-semibold text-red-600">2 pointers</span>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-gray-100">
+              <button class="w-full py-2 bg-red-50 hover:bg-red-600 hover:text-white text-red-700 rounded-xl text-sm font-semibold transition-all">Explore Essay Syllabus →</button>
+            </div>
+          </div>
+
+          <!-- Coverage Summary Card -->
+          <div class="border border-dashed border-gray-300 rounded-2xl p-6 bg-gradient-to-br from-gray-50 to-white flex flex-col justify-center items-center text-center">
+            <div class="text-3xl mb-3">📊</div>
+            <h3 class="font-bold text-gray-700 text-base mb-2">Your Coverage Dashboard</h3>
+            <p class="text-xs text-gray-500 mb-4">Track which syllabus pointers you've studied across all papers.</p>
+            <div class="w-full space-y-2 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-500 w-24 text-right">GS1</span>
+                <div class="coverage-bar flex-1 h-2"><div class="coverage-fill bg-blue-400" style="width:35%"></div></div>
+                <span class="text-xs font-semibold text-gray-600">35%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-500 w-24 text-right">GS2</span>
+                <div class="coverage-bar flex-1 h-2"><div class="coverage-fill bg-emerald-400" style="width:60%"></div></div>
+                <span class="text-xs font-semibold text-gray-600">60%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-500 w-24 text-right">GS3</span>
+                <div class="coverage-bar flex-1 h-2"><div class="coverage-fill bg-amber-400" style="width:20%"></div></div>
+                <span class="text-xs font-semibold text-gray-600">20%</span>
+              </div>
+            </div>
+            <span class="text-xs text-gray-400 italic">Based on questions viewed per pointer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 2: /syllabus/gs2 — Paper Page -->
+  <!-- ============================================================ -->
+  <div id="s2" class="screen max-w-5xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+      <nav class="border-b border-gray-100 px-6 py-3 flex items-center justify-between bg-white">
+        <span class="font-bold text-gray-900">PYQ Vault</span>
+        <div class="flex items-center gap-6 text-sm text-gray-500 font-medium">
+          <span>Home</span><span>Papers</span>
+          <span class="text-amber-600 font-bold border-b-2 border-amber-500 pb-0.5">Syllabus</span>
+          <span>Saved</span>
+        </div>
+      </nav>
+
+      <div class="p-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 text-sm mb-6">
+          <span onclick="showScreen('s1')" class="text-emerald-600 font-semibold cursor-pointer hover:underline">Syllabus</span>
+          <span class="breadcrumb-sep">›</span>
+          <span class="text-gray-900 font-bold">GS Paper 2</span>
+        </div>
+
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-8">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center font-bold text-emerald-600 text-2xl">GS2</div>
+            <div>
+              <h1 class="text-2xl font-bold text-gray-900">GS Paper 2 — Syllabus Breakdown</h1>
+              <p class="text-sm text-gray-500">Polity, Governance, Social Justice & International Relations</p>
+            </div>
+          </div>
+          <div class="text-right text-sm text-gray-500">
+            <div class="font-bold text-gray-900 text-xl">253</div>
+            <div>Total Questions</div>
+          </div>
+        </div>
+
+        <!-- Subjects with Accordion Pointers -->
+        <div class="space-y-4">
+
+          <!-- Subject 1: Constitution & Polity -->
+          <div class="border-2 border-emerald-200 rounded-2xl overflow-hidden">
+            <div onclick="toggleAccordion('acc1')" class="cursor-pointer px-6 py-4 bg-emerald-50 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="font-bold text-gray-900">Constitution & Polity</span>
+                <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-lg border border-emerald-200">8 pointers · 89 questions</span>
+              </div>
+              <span id="acc1-icon" class="text-gray-400 text-lg select-none">▼</span>
+            </div>
+            <div id="acc1" class="px-6 py-4 space-y-2 border-t border-emerald-100">
+              <!-- Pointer rows -->
+              <div onclick="showScreen('s3')" class="pointer-card cursor-pointer flex items-center justify-between p-3 rounded-xl border border-gray-100 hover:border-emerald-300 bg-white">
+                <div>
+                  <div class="font-semibold text-gray-800 text-sm">Historical Underpinnings & Salient Features</div>
+                  <div class="text-xs text-gray-400 mt-0.5">Preamble, basic structure, philosophical roots</div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">12 Qs</span>
+                  <span class="text-gray-300">›</span>
+                </div>
+              </div>
+              <div onclick="showScreen('s3')" class="pointer-card cursor-pointer flex items-center justify-between p-3 rounded-xl border border-gray-100 hover:border-emerald-300 bg-white">
+                <div>
+                  <div class="font-semibold text-gray-800 text-sm">Fundamental Rights</div>
+                  <div class="text-xs text-gray-400 mt-0.5">Art 12-35, writs, judicial review, reasonable restrictions</div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">8 Qs</span>
+                  <span class="text-gray-300">›</span>
+                </div>
+              </div>
+              <div onclick="showScreen('s3')" class="pointer-card cursor-pointer flex items-center justify-between p-3 rounded-xl border border-gray-100 hover:border-emerald-300 bg-white">
+                <div>
+                  <div class="font-semibold text-gray-800 text-sm">DPSP & Fundamental Duties</div>
+                  <div class="text-xs text-gray-400 mt-0.5">Art 36-51, harmony with FRs, Art 51A</div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">7 Qs</span>
+                  <span class="text-gray-300">›</span>
+                </div>
+              </div>
+              <div onclick="showScreen('s3')" class="pointer-card cursor-pointer flex items-center justify-between p-3 rounded-xl border border-emerald-300 bg-emerald-50/50">
+                <div>
+                  <div class="font-semibold text-emerald-900 text-sm flex items-center gap-2">
+                    Federalism & Centre-State Relations
+                    <span class="text-xs bg-amber-100 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full font-bold">🔥 High Freq</span>
+                  </div>
+                  <div class="text-xs text-emerald-700 mt-0.5">Art 245-263, Sarkaria, Punchhi, ISC, GST Council, cooperative federalism</div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg border border-emerald-300">14 Qs</span>
+                  <span class="text-emerald-500">›</span>
+                </div>
+              </div>
+              <div class="pointer-card cursor-pointer flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white opacity-70">
+                <div>
+                  <div class="font-semibold text-gray-800 text-sm flex items-center gap-2">
+                    Separation of Powers & Judiciary
+                    <span class="text-xs bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded-full font-bold">⚠ 0 direct Qs</span>
+                  </div>
+                  <div class="text-xs text-gray-400 mt-0.5">Judicial independence, collegium, NJAC, judicial overreach</div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-lg border border-red-200">Gap!</span>
+                  <span class="text-gray-300">›</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subject 2: Governance (Collapsed) -->
+          <div class="border border-gray-200 rounded-2xl overflow-hidden">
+            <div onclick="toggleAccordion('acc2')" class="cursor-pointer px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+              <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                <span class="font-bold text-gray-700">Governance & Civil Services</span>
+                <span class="text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-0.5 rounded-lg border border-gray-200">4 pointers · 52 questions</span>
+              </div>
+              <span id="acc2-icon" class="text-gray-400 text-lg select-none">›</span>
+            </div>
+            <div id="acc2" class="px-6 py-4 space-y-2 border-t border-gray-100 hidden">
+              <div class="flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white">
+                <div class="font-semibold text-gray-700 text-sm">E-Governance & Digital India</div>
+                <span class="text-xs font-bold text-gray-500 bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200">15 Qs</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white">
+                <div class="font-semibold text-gray-700 text-sm">RTI, Transparency & Accountability</div>
+                <span class="text-xs font-bold text-gray-500 bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200">18 Qs</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subject 3: Social Justice (Collapsed) -->
+          <div class="border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="cursor-pointer px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+              <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                <span class="font-bold text-gray-700">Social Justice & Welfare</span>
+                <span class="text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-0.5 rounded-lg border border-gray-200">4 pointers · 61 questions</span>
+              </div>
+              <span class="text-gray-400 text-lg">›</span>
+            </div>
+          </div>
+
+          <!-- Subject 4: IR (Collapsed) -->
+          <div class="border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="cursor-pointer px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+              <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                <span class="font-bold text-gray-700">International Relations</span>
+                <span class="text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-0.5 rounded-lg border border-gray-200">3 pointers · 51 questions</span>
+              </div>
+              <span class="text-gray-400 text-lg">›</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 3: /syllabus/gs2/con — Subject (Pointer Grid) -->
+  <!-- ============================================================ -->
+  <div id="s3" class="screen max-w-5xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+      <nav class="border-b border-gray-100 px-6 py-3 flex items-center justify-between bg-white">
+        <span class="font-bold text-gray-900">PYQ Vault</span>
+        <div class="flex items-center gap-6 text-sm text-gray-500 font-medium">
+          <span>Home</span><span>Papers</span>
+          <span class="text-amber-600 font-bold border-b-2 border-amber-500 pb-0.5">Syllabus</span>
+          <span>Saved</span>
+        </div>
+      </nav>
+
+      <div class="p-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 text-sm mb-6 flex-wrap">
+          <span onclick="showScreen('s1')" class="text-emerald-600 font-semibold cursor-pointer hover:underline">Syllabus</span>
+          <span class="breadcrumb-sep">›</span>
+          <span onclick="showScreen('s2')" class="text-emerald-600 font-semibold cursor-pointer hover:underline">GS Paper 2</span>
+          <span class="breadcrumb-sep">›</span>
+          <span class="text-gray-900 font-bold">Constitution & Polity</span>
+        </div>
+
+        <!-- Header -->
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 mb-8">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">GS2 · Subject</span>
+              <h1 class="text-2xl font-bold text-gray-900 mt-1 mb-2">Constitution & Polity</h1>
+              <p class="text-sm text-gray-600 max-w-2xl leading-relaxed">Historical underpinnings, salient features, amendments; Fundamental Rights, DPSP, Fundamental Duties; Federalism, separation of powers, dispute redressal mechanisms; Parliament, State Legislatures, constitutional bodies.</p>
+            </div>
+            <div class="text-right ml-6 shrink-0">
+              <div class="text-2xl font-bold text-emerald-700">89</div>
+              <div class="text-xs text-gray-500">Questions</div>
+              <div class="text-lg font-bold text-emerald-600 mt-1">8</div>
+              <div class="text-xs text-gray-500">Pointers</div>
+            </div>
+          </div>
+          <!-- Coverage bar -->
+          <div class="mt-4">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-semibold text-gray-600">Your Coverage (questions viewed)</span>
+              <span class="text-xs font-bold text-emerald-700">5 of 8 pointers explored</span>
+            </div>
+            <div class="coverage-bar h-2"><div class="coverage-fill bg-emerald-500" style="width:62%"></div></div>
+          </div>
+        </div>
+
+        <!-- Pointer Cards Grid -->
+        <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">Syllabus Pointers (8)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Pointer Card 1 -->
+          <div class="pointer-card cursor-pointer border border-gray-200 rounded-2xl p-5 bg-white hover:border-emerald-400">
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pointer 1</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">12 Questions</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-sm mb-1.5">Historical Underpinnings & Salient Features</h3>
+            <p class="text-xs text-gray-500 leading-relaxed mb-3">Preamble, basic structure doctrine, philosophical foundations, CA process, sources of constitution.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-1">
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2013</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2016</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">+4</span>
+              </div>
+              <span class="text-xs text-emerald-600 font-semibold">Explore →</span>
+            </div>
+          </div>
+
+          <!-- Pointer Card 2 -->
+          <div class="pointer-card cursor-pointer border border-gray-200 rounded-2xl p-5 bg-white hover:border-emerald-400">
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pointer 2</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">8 Questions</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-sm mb-1.5">Fundamental Rights</h3>
+            <p class="text-xs text-gray-500 leading-relaxed mb-3">Art 12–35, types of writs, constitutional morality, right to privacy, reasonable restrictions.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-1">
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2015</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2019</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">+3</span>
+              </div>
+              <span class="text-xs text-emerald-600 font-semibold">Explore →</span>
+            </div>
+          </div>
+
+          <!-- Pointer Card 3 — HIGHLIGHTED (Federalism) -->
+          <div onclick="showScreen('s4')" class="pointer-card cursor-pointer border-2 border-emerald-400 rounded-2xl p-5 bg-emerald-50/30 hover:border-emerald-600">
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Pointer 4 · 🔥 Most Asked</span>
+              <span class="text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2.5 py-1 rounded-lg">14 Questions</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-sm mb-1.5">Federalism & Centre-State Relations</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-3">Art 245–263, Sarkaria & Punchhi Commissions, ISC, GST Council, Governor's role, cooperative federalism, devolution.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-1">
+                <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">2014</span>
+                <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">2018</span>
+                <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">+7</span>
+              </div>
+              <span class="text-xs text-emerald-700 font-bold">👆 Click to open →</span>
+            </div>
+          </div>
+
+          <!-- Pointer Card 4 — Coverage Gap -->
+          <div class="pointer-card cursor-pointer border border-dashed border-red-300 rounded-2xl p-5 bg-red-50/30">
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-xs font-bold text-red-500 uppercase tracking-wider">Pointer 5 · ⚠ Coverage Gap</span>
+              <span class="text-xs font-bold text-red-600 bg-red-50 border border-red-200 px-2.5 py-1 rounded-lg">0 Direct Qs</span>
+            </div>
+            <h3 class="font-bold text-gray-700 text-sm mb-1.5">Separation of Powers & Judicial Independence</h3>
+            <p class="text-xs text-gray-400 leading-relaxed mb-3">Collegium, NJAC, judicial activism, PIL, judicial overreach vs. judicial accountability.</p>
+            <div class="text-xs text-red-500 font-semibold">No direct PYQs yet — potential exam area</div>
+          </div>
+
+          <!-- Pointer Card 5 -->
+          <div class="pointer-card cursor-pointer border border-gray-200 rounded-2xl p-5 bg-white hover:border-emerald-400">
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pointer 6</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">11 Questions</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-sm mb-1.5">Parliament, State Legislatures & Anti-Defection</h3>
+            <p class="text-xs text-gray-500 leading-relaxed mb-3">Powers, privileges, committees, speaker's role, anti-defection law, joint sessions.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-1">
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2017</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2021</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">+4</span>
+              </div>
+              <span class="text-xs text-emerald-600 font-semibold">Explore →</span>
+            </div>
+          </div>
+
+          <!-- Pointer Card 6 -->
+          <div class="pointer-card cursor-pointer border border-gray-200 rounded-2xl p-5 bg-white hover:border-emerald-400">
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pointer 7</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">9 Questions</span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-sm mb-1.5">Constitutional & Statutory Bodies</h3>
+            <p class="text-xs text-gray-500 leading-relaxed mb-3">Election Commission, CAG, Finance Commission, UPSC, NHRC, regulatory bodies, tribunals.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-1">
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2016</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">2022</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">+3</span>
+              </div>
+              <span class="text-xs text-emerald-600 font-semibold">Explore →</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 4: /syllabus/gs2/con/fed — Pointer + Questions + Notes -->
+  <!-- ============================================================ -->
+  <div id="s4" class="screen max-w-5xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+      <nav class="border-b border-gray-100 px-6 py-3 flex items-center justify-between bg-white">
+        <span class="font-bold text-gray-900">PYQ Vault</span>
+        <div class="flex items-center gap-6 text-sm text-gray-500 font-medium">
+          <span>Home</span><span>Papers</span>
+          <span class="text-amber-600 font-bold border-b-2 border-amber-500 pb-0.5">Syllabus</span>
+          <span>Saved</span>
+        </div>
+      </nav>
+
+      <div class="p-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 text-sm mb-6 flex-wrap">
+          <span onclick="showScreen('s1')" class="text-emerald-600 font-semibold cursor-pointer hover:underline">Syllabus</span>
+          <span class="breadcrumb-sep">›</span>
+          <span onclick="showScreen('s2')" class="text-emerald-600 font-semibold cursor-pointer hover:underline">GS Paper 2</span>
+          <span class="breadcrumb-sep">›</span>
+          <span onclick="showScreen('s3')" class="text-emerald-600 font-semibold cursor-pointer hover:underline">Constitution & Polity</span>
+          <span class="breadcrumb-sep">›</span>
+          <span class="text-gray-900 font-bold">Federalism & Centre-State Relations</span>
+        </div>
+
+        <!-- Pointer Header -->
+        <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-6 mb-6">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">GS2 → Constitution & Polity → Pointer 4</span>
+              <h1 class="text-xl font-bold text-gray-900 mt-1">Federalism & Centre-State Relations</h1>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-amber-800 bg-amber-100 border border-amber-200 px-3 py-1 rounded-full">🔥 High Frequency</span>
+            </div>
+          </div>
+
+          <!-- Official Syllabus Text -->
+          <div class="bg-white/70 border border-emerald-200 rounded-xl p-4 mb-4">
+            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">📜 Official UPSC Syllabus Text</span>
+            <p class="text-sm text-gray-700 italic leading-relaxed">"Constitutional scheme of Centre-State relations; distribution of legislative powers; local governments; devolution of powers and finances up to local levels and challenges therein."</p>
+          </div>
+
+          <!-- Stats Row -->
+          <div class="flex flex-wrap gap-4 mb-4">
+            <div class="flex items-center gap-2 text-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="font-bold text-gray-900">14 Questions</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <span class="text-gray-600">Years: 2013, 2014, 2016, 2018, 2019, 2021, 2022, 2024, 2026</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              <span class="text-gray-600">Marks: Mix of 10M & 15M</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm text-emerald-700">
+              <span>📝</span>
+              <span class="font-semibold">2 notes added</span>
+            </div>
+          </div>
+
+          <!-- Coverage Bar -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-semibold text-gray-600">Year Coverage (9 of 14 years)</span>
+              <span class="text-xs font-bold text-emerald-700">64%</span>
+            </div>
+            <div class="coverage-bar h-2.5"><div class="coverage-fill bg-emerald-500" style="width:64%"></div></div>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="flex items-center gap-3 mb-6 flex-wrap">
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Filter:</span>
+          <div class="flex gap-2 flex-wrap">
+            <button class="text-xs px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold">All Years</button>
+            <button class="text-xs px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 font-medium hover:bg-gray-50">2026</button>
+            <button class="text-xs px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 font-medium hover:bg-gray-50">2024</button>
+            <button class="text-xs px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 font-medium hover:bg-gray-50">2022</button>
+            <button class="text-xs px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 font-medium hover:bg-gray-50">2021</button>
+          </div>
+          <div class="ml-auto flex items-center gap-2">
+            <span class="text-xs text-gray-500">Sort:</span>
+            <select class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 font-medium text-gray-700 bg-white">
+              <option>Newest First</option>
+              <option>Oldest First</option>
+              <option>Marks: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Questions List -->
+        <div class="space-y-4">
+
+          <!-- Question Card 1 — with existing note -->
+          <div class="border border-gray-200 rounded-2xl overflow-hidden">
+            <!-- Question Header -->
+            <div class="p-5 bg-white">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">GS2 · 2026</span>
+                  <span class="text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 px-2.5 py-0.5 rounded-full">Q.8</span>
+                  <span class="text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 px-2.5 py-0.5 rounded-full">15 Marks</span>
+                </div>
+                <button class="text-xs text-gray-400 hover:text-amber-600 flex items-center gap-1">🔖 Save</button>
+              </div>
+              <p class="text-sm text-gray-900 font-medium leading-relaxed">"Cooperative federalism has become the new normal in India's governance. Critically examine with reference to the GST Council and Finance Commission."</p>
+              <div class="flex gap-1.5 mt-3 flex-wrap">
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">GST Council</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">Finance Commission</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">Cooperative Federalism</span>
+              </div>
+            </div>
+
+            <!-- Notes Section — HAS NOTE -->
+            <div class="border-t border-dashed border-amber-200 bg-amber-50/40">
+              <button onclick="toggleNote('n1')" class="w-full px-5 py-3 text-left flex items-center justify-between text-xs font-semibold text-amber-800 hover:bg-amber-50/60 transition-colors">
+                <span class="flex items-center gap-2">
+                  <span>📝</span>
+                  <span>Your Notes</span>
+                  <span class="text-amber-600 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-full text-[10px]">Has note · saved 2h ago</span>
+                </span>
+                <span id="n1-icon">▼</span>
+              </button>
+              <div id="n1" class="note-editor open px-5 pb-4">
+                <div id="n1-preview" class="bg-white border border-amber-200 rounded-xl p-3 text-xs text-gray-700 leading-relaxed mb-2">
+                  <strong>Key Points:</strong><br>
+                  - Bommai case 1994 is the landmark on federalism<br>
+                  - GST Council: Art 279A — unanimous decisions, centre has 1/3 voting power<br>
+                  - 15th FC devolution: 41% to states (Gadgil formula reformed)<br>
+                  - Critique: "cooperative" but centre holds power strings (Governor, Art 356)
+                </div>
+                <div class="flex gap-2">
+                  <button onclick="editNote('n1')" class="text-xs px-3 py-1.5 bg-white border border-amber-300 text-amber-800 rounded-lg font-semibold hover:bg-amber-50">✏️ Edit</button>
+                  <button class="text-xs px-3 py-1.5 bg-white border border-red-200 text-red-600 rounded-lg font-semibold hover:bg-red-50">🗑️ Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question Card 2 — no note yet -->
+          <div class="border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="p-5 bg-white">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">GS2 · 2024</span>
+                  <span class="text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 px-2.5 py-0.5 rounded-full">Q.5</span>
+                  <span class="text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 px-2.5 py-0.5 rounded-full">10 Marks</span>
+                </div>
+                <button class="text-xs text-amber-500 flex items-center gap-1">🔖 Saved</button>
+              </div>
+              <p class="text-sm text-gray-900 font-medium leading-relaxed">"The role of the Governor has become controversial in inter-governmental relations. Comment on constitutional provisions and recent judicial observations."</p>
+              <div class="flex gap-1.5 mt-3 flex-wrap">
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">Governor</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">Art 153-167</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">Centre-State</span>
+              </div>
+            </div>
+
+            <!-- Notes Section — ADDING NOTE -->
+            <div class="border-t border-dashed border-gray-200">
+              <button onclick="toggleNote('n2')" class="w-full px-5 py-3 text-left flex items-center justify-between text-xs font-semibold text-gray-500 hover:bg-gray-50 transition-colors">
+                <span class="flex items-center gap-2">
+                  <span>📝</span>
+                  <span>Add your notes</span>
+                </span>
+                <span id="n2-icon">+</span>
+              </button>
+              <div id="n2" class="note-editor px-5 pb-4">
+                <textarea id="n2-textarea" rows="4" placeholder="Write your notes here... Key cases, arguments, memory hooks, answer outline..." class="w-full text-xs text-gray-700 border border-amber-300 rounded-xl p-3 resize-none bg-amber-50/30 placeholder-gray-400 leading-relaxed mb-2"></textarea>
+                <div class="flex items-center gap-2">
+                  <button onclick="saveNote('n2')" class="text-xs px-4 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold transition-colors">💾 Save Note</button>
+                  <button onclick="toggleNote('n2')" class="text-xs px-3 py-1.5 border border-gray-200 text-gray-500 rounded-lg font-medium hover:bg-gray-50">Cancel</button>
+                  <span class="text-xs text-gray-400 ml-auto">Auto-saves on blur · Stored locally</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question Card 3 — older year -->
+          <div class="border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="p-5 bg-white">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">GS2 · 2021</span>
+                  <span class="text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 px-2.5 py-0.5 rounded-full">Q.11</span>
+                  <span class="text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 px-2.5 py-0.5 rounded-full">15 Marks</span>
+                </div>
+                <button class="text-xs text-gray-400 hover:text-amber-600 flex items-center gap-1">🔖 Save</button>
+              </div>
+              <p class="text-sm text-gray-900 font-medium leading-relaxed">"The Sarkaria Commission's recommendations on Centre-State relations remain relevant today. Evaluate with examples from recent inter-governmental disputes."</p>
+              <div class="flex gap-1.5 mt-3 flex-wrap">
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">Sarkaria Commission</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">Punchhi Commission</span>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">ISC</span>
+              </div>
+            </div>
+            <div class="border-t border-dashed border-gray-200">
+              <button onclick="toggleNote('n3')" class="w-full px-5 py-3 text-left flex items-center justify-between text-xs font-semibold text-gray-500 hover:bg-gray-50 transition-colors">
+                <span class="flex items-center gap-2"><span>📝</span><span>Add your notes</span></span>
+                <span id="n3-icon">+</span>
+              </button>
+              <div id="n3" class="note-editor px-5 pb-4">
+                <textarea rows="4" placeholder="Write your notes here..." class="w-full text-xs text-gray-700 border border-amber-300 rounded-xl p-3 resize-none bg-amber-50/30 placeholder-gray-400 leading-relaxed mb-2"></textarea>
+                <div class="flex items-center gap-2">
+                  <button class="text-xs px-4 py-1.5 bg-amber-500 text-white rounded-lg font-bold">💾 Save Note</button>
+                  <button onclick="toggleNote('n3')" class="text-xs px-3 py-1.5 border border-gray-200 text-gray-500 rounded-lg font-medium">Cancel</button>
+                  <span class="text-xs text-gray-400 ml-auto">Stored locally in browser</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Load more -->
+          <div class="text-center py-2">
+            <button class="text-sm font-semibold text-emerald-600 hover:text-emerald-800 border border-emerald-200 px-6 py-2.5 rounded-xl hover:bg-emerald-50 transition-all">
+              Load 11 more questions ↓
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- JavaScript -->
+  <!-- ============================================================ -->
+  <script>
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      const tab = document.getElementById('tab-' + id);
+      if (tab) tab.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      const icon = document.getElementById(id + '-icon');
+      el.classList.toggle('hidden');
+      icon.textContent = el.classList.contains('hidden') ? '›' : '▼';
+    }
+
+    function toggleNote(id) {
+      const editor = document.getElementById(id);
+      const icon = document.getElementById(id + '-icon');
+      editor.classList.toggle('open');
+      if (editor.classList.contains('open')) {
+        icon.textContent = '▲';
+        const ta = document.getElementById(id + '-textarea');
+        if (ta) ta.focus();
+      } else {
+        icon.textContent = id === 'n1' ? '▼' : '+';
+      }
+    }
+
+    function editNote(id) {
+      const preview = document.getElementById(id + '-preview');
+      if (preview) {
+        const content = preview.innerText;
+        preview.style.display = 'none';
+        const ta = document.createElement('textarea');
+        ta.rows = 5;
+        ta.value = content;
+        ta.className = 'w-full text-xs text-gray-700 border border-amber-300 rounded-xl p-3 resize-none bg-amber-50/30 leading-relaxed mb-2';
+        preview.parentNode.insertBefore(ta, preview);
+        ta.focus();
+      }
+    }
+
+    function saveNote(id) {
+      const ta = document.getElementById(id + '-textarea');
+      if (ta && ta.value.trim()) {
+        // Simulate save
+        ta.style.borderColor = '#059669';
+        setTimeout(() => {
+          ta.style.borderColor = '';
+        }, 1000);
+      }
+    }
+  </script>
+
+</body>
+</html>
