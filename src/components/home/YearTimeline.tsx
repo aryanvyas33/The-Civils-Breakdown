@@ -39,7 +39,7 @@ export default function YearTimeline() {
       
       const thumbW = thumbEl.offsetWidth || 28;
       const travel = trackEl.clientWidth - thumbW;
-      const x = scrollPercentage * travel;
+      const x = Math.max(0, Math.min(scrollPercentage * travel, travel));
       
       thumbEl.style.transform = `translateY(-50%) translateX(${x}px)`;
 
@@ -79,6 +79,16 @@ export default function YearTimeline() {
 
     scrollEl.addEventListener('scroll', updateScrollbar, { passive: true });
     window.addEventListener('resize', updateScrollbar);
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        updateScrollbar();
+      });
+      resizeObserver.observe(scrollEl);
+      resizeObserver.observe(trackEl);
+    }
+
     updateScrollbar();
 
     const handleWheel = (e: WheelEvent) => {
@@ -89,11 +99,14 @@ export default function YearTimeline() {
       }
     };
     scrollEl.addEventListener('wheel', handleWheel, { passive: false });
+    trackEl.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
       scrollEl.removeEventListener('scroll', updateScrollbar);
       window.removeEventListener('resize', updateScrollbar);
       scrollEl.removeEventListener('wheel', handleWheel);
+      trackEl.removeEventListener('wheel', handleWheel);
+      resizeObserver?.disconnect();
     };
   }, []);
 
@@ -126,36 +139,94 @@ export default function YearTimeline() {
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  const onTrackMouseDown = (e: React.MouseEvent) => {
+  const onTrackPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
     if (!scrollRef.current || !trackRef.current || !thumbRef.current) return;
+
     const track = trackRef.current;
     const scrollEl = scrollRef.current;
-    
-    const rect = track.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const thumbW = thumbRef.current.offsetWidth || 28;
-    const travel = track.clientWidth - thumbW;
-    
-    const boundedX = Math.max(0, Math.min(x - thumbW / 2, travel));
-    const percentage = boundedX / travel;
-    
-    const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
-    scrollEl.scrollLeft = percentage * maxScroll;
+    const thumb = thumbRef.current;
 
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      const moveX = moveEvent.clientX - rect.left;
-      const boundedMoveX = Math.max(0, Math.min(moveX - thumbW / 2, travel));
-      const movePercent = boundedMoveX / travel;
-      scrollEl.scrollLeft = movePercent * maxScroll;
+    e.preventDefault();
+
+    // Disable CSS transition for 1:1 finger tracking during dragging
+    thumb.style.transition = 'none';
+
+    const rect = track.getBoundingClientRect();
+    const thumbW = thumb.offsetWidth || 28;
+    const travel = track.clientWidth - thumbW;
+    const maxScroll = Math.max(0, scrollEl.scrollWidth - scrollEl.clientWidth);
+
+    // Current position of the thumb in track
+    const currentScrollPct = maxScroll > 0 ? scrollEl.scrollLeft / maxScroll : 0;
+    const currentThumbX = currentScrollPct * travel;
+
+    const touchXInTrack = e.clientX - rect.left;
+    let grabOffset = 0;
+
+    // If starting interaction on or directly beside thumb, preserve grab offset to avoid jumping
+    if (touchXInTrack >= currentThumbX - 8 && touchXInTrack <= currentThumbX + thumbW + 8) {
+      grabOffset = touchXInTrack - (currentThumbX + thumbW / 2);
+    }
+
+    const updateFromClientX = (clientX: number) => {
+      const currentRect = track.getBoundingClientRect();
+      const currentTravel = track.clientWidth - thumbW;
+      if (currentTravel <= 0) return;
+
+      const x = clientX - currentRect.left;
+      const boundedX = Math.max(0, Math.min(x - grabOffset - thumbW / 2, currentTravel));
+      const percentage = boundedX / currentTravel;
+      const targetScroll = percentage * (scrollEl.scrollWidth - scrollEl.clientWidth);
+      scrollEl.scrollLeft = targetScroll;
     };
-    
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+
+    updateFromClientX(e.clientX);
+
+    const pointerId = e.pointerId;
+    const targetElement = e.currentTarget;
+
+    try {
+      targetElement.setPointerCapture(pointerId);
+    } catch {}
+
+    const handlePointerMove = (moveEvent: PointerEvent) => {
+      if (moveEvent.pointerId !== pointerId) return;
+      moveEvent.preventDefault();
+      updateFromClientX(moveEvent.clientX);
     };
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+
+    const handlePointerUp = (upEvent: PointerEvent) => {
+      if (upEvent.pointerId !== pointerId) return;
+      try {
+        targetElement.releasePointerCapture(pointerId);
+      } catch {}
+      thumb.style.transition = '';
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: false });
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (!scrollRef.current) return;
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      scrollByDelta(-150);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      scrollByDelta(150);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      scrollToYear(years[0] || 2013);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      scrollToYear(latestYear);
+    }
   };
 
   const scrollByDelta = (delta: number) => {
@@ -328,23 +399,37 @@ export default function YearTimeline() {
 
           {/* Comet Scrubber Track */}
           <div className="mt-6 px-2 sm:px-6">
-            <div className="flex items-center justify-between text-[11px] font-space text-retro-border/70 mb-2">
+            <div className="flex items-center justify-between text-[11px] font-space text-retro-border/70 mb-1">
               <span className="flex items-center gap-1 font-bold">
-                <Compass className="w-3.5 h-3.5" /> Drag slider or use mouse wheel to scroll timeline:
+                <Compass className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Drag slider or use mouse wheel to scroll timeline:</span>
+                <span className="sm:hidden">Drag slider or scroll timeline:</span>
               </span>
               <span className="font-vt text-sm">2013 ➔ 2026</span>
             </div>
 
+            {/* Mobile touch-expanded hit container (52px tall touch area, touch-action: none) */}
             <div 
-              className="comet-track cursor-pointer border-2 border-retro-border shadow-retro-sm" 
-              ref={trackRef}
-              onMouseDown={onTrackMouseDown}
+              className="py-3 touch-none select-none cursor-pointer sm:cursor-grab active:cursor-grabbing outline-none focus-visible:ring-2 focus-visible:ring-retro-accent rounded-full"
+              style={{ touchAction: 'none' }}
+              onPointerDown={onTrackPointerDown}
+              role="slider"
+              tabIndex={0}
+              aria-label="Timeline year scrubber"
+              aria-valuemin={years[0] || 2013}
+              aria-valuemax={latestYear}
+              onKeyDown={onKeyDown}
             >
-              <div className="star-field"></div>
-              <div className="comet-head cursor-grab active:cursor-grabbing" ref={thumbRef}>
-                <div className="comet-glow" ref={glowRef}></div>
-                <div className="comet-tail" ref={tailRef}></div>
-                <div className="comet-nucleus"></div>
+              <div 
+                className="comet-track border-2 border-retro-border shadow-retro-sm pointer-events-none" 
+                ref={trackRef}
+              >
+                <div className="star-field"></div>
+                <div className="comet-head" ref={thumbRef}>
+                  <div className="comet-glow" ref={glowRef}></div>
+                  <div className="comet-tail" ref={tailRef}></div>
+                  <div className="comet-nucleus"></div>
+                </div>
               </div>
             </div>
           </div>

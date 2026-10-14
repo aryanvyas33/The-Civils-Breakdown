@@ -3,6 +3,10 @@ import { Question, SearchResult, FilterOptions } from '@/types';
 import { getAllQuestions, getAllTags, getAllSubjects } from './data';
 import { highlightQuestionKeywords } from './highlight';
 import { getAllQuestionCardBadges } from './cardBadges';
+import {
+  preprocessSearchQuery,
+  UPSC_ACRONYM_MAP,
+} from './searchQuery';
 
 export interface SearchableQuestion extends Question {
   aiMicroThemes: string[];
@@ -12,7 +16,7 @@ export interface SearchableQuestion extends Question {
   aiStakeholders: string[];
 }
 
-const fuseOptions: IFuseOptions<SearchableQuestion> = {
+const fallbackFuseOptions: IFuseOptions<SearchableQuestion> = {
   keys: [
     { name: 'text', weight: 0.40 },
     { name: 'aiCoreConcepts', weight: 0.25 },
@@ -24,15 +28,15 @@ const fuseOptions: IFuseOptions<SearchableQuestion> = {
     { name: 'subjectName', weight: 0.05 },
     { name: 'aiDirective', weight: 0.05 },
   ],
-  threshold: 0.35,
+  threshold: 0.25,
   includeScore: true,
   includeMatches: true,
-  minMatchCharLength: 2,
-  useExtendedSearch: true,
+  minMatchCharLength: 4,
+  useExtendedSearch: false,
   ignoreLocation: true,
 };
 
-let fuseInstance: Fuse<SearchableQuestion> | null = null;
+let fallbackFuseInstance: Fuse<SearchableQuestion> | null = null;
 let enrichedQuestionsCache: SearchableQuestion[] | null = null;
 
 export function getEnrichedQuestions(): SearchableQuestion[] {
@@ -54,11 +58,11 @@ export function getEnrichedQuestions(): SearchableQuestion[] {
 }
 
 export function getSearchEngine(): Fuse<SearchableQuestion> {
-  if (!fuseInstance) {
+  if (!fallbackFuseInstance) {
     const questions = getEnrichedQuestions();
-    fuseInstance = new Fuse(questions, fuseOptions);
+    fallbackFuseInstance = new Fuse(questions, fallbackFuseOptions);
   }
-  return fuseInstance;
+  return fallbackFuseInstance;
 }
 
 export interface SearchOutput {
@@ -82,8 +86,8 @@ export function searchQuestions(
     return qDirective.includes(filterLower) || filterLower.includes(qDirective);
   };
 
+  // Case 1: Empty Query
   if (!query || query.trim() === '') {
-    // If no query, calculate paper breakdown across questions matching year, subject, and directive filters
     const baseForBreakdown = allEnrichedQuestions.filter((q) => {
       if (filters?.year && q.year !== filters.year) return false;
       if (filters?.subject && q.subjectId.toLowerCase() !== filters.subject.toLowerCase()) return false;
@@ -143,14 +147,86 @@ export function searchQuestions(
     };
   }
 
-  const fuse = getSearchEngine();
-  const rawResults = fuse.search(query.trim());
+  // Case 2: Query Provided -> Hybrid Search Execution
+  const preprocessed = preprocessSearchQuery(query);
+  const rawMatches: Array<{ question: SearchableQuestion; rawScore: number }> = [];
 
-  // Extract query terms for highlight matching
-  const searchTerms = query
-    .toLowerCase()
-    .split(/\s+/)
-    .filter((t) => t.length >= 2);
+  // Stage 2: Deterministic lexical whole-word & multi-field scoring
+  for (const q of allEnrichedQuestions) {
+    const textFields = [
+      { text: q.text || '', weight: 12 },
+      { text: (q.aiCoreConcepts || []).join(' '), weight: 9 },
+      { text: (q.aiMicroThemes || []).join(' '), weight: 9 },
+      { text: (q.tags || []).join(' '), weight: 7 },
+      { text: (q.keywords || []).join(' '), weight: 6 },
+      { text: q.aiPrimaryAnchor || '', weight: 4 },
+      { text: q.subjectName || '', weight: 3 },
+      { text: q.aiDirective || '', weight: 2 },
+      { text: (q.aiStakeholders || []).join(' '), weight: 2 },
+    ];
+
+    const fullBlob = textFields.map((f) => f.text).join(' ');
+    let score = 0;
+
+    // 1. Exact phrase match bonus
+    if (preprocessed.phraseRegex.test(q.text)) {
+      score += 150;
+    } else if (preprocessed.phraseRegex.test(fullBlob)) {
+      score += 90;
+    }
+
+    // 2. Token match checks
+    let tokensMatched = 0;
+    for (const matcher of preprocessed.matchers) {
+      let matchedTokenOnAnyField = false;
+      for (const field of textFields) {
+        if (!field.text) continue;
+        if (matcher.regexes.some((r) => r.test(field.text))) {
+          score += field.weight;
+          matchedTokenOnAnyField = true;
+        }
+      }
+      if (matchedTokenOnAnyField) {
+        tokensMatched++;
+      }
+    }
+
+    // 3. Match criteria
+    const totalTokens = preprocessed.tokensToUse.length;
+    let isMatch = false;
+
+    if (totalTokens === 1) {
+      isMatch = tokensMatched >= 1;
+    } else if (totalTokens === 2) {
+      isMatch = tokensMatched === 2;
+    } else {
+      isMatch = tokensMatched >= Math.ceil(totalTokens * 0.7);
+    }
+
+    if (isMatch) {
+      if (tokensMatched === totalTokens) {
+        score += 60;
+      }
+      rawMatches.push({ question: q, rawScore: score });
+    }
+  }
+
+  // Stage 3: Guardrailed typo fallback if 0 matches from Stage 2
+  if (rawMatches.length === 0) {
+    const validTokens = preprocessed.substantiveTokens.filter((t) => t.length >= 4);
+    if (validTokens.length > 0) {
+      const fuse = getSearchEngine();
+      const fuseResults = fuse.search(validTokens.join(' '));
+      fuseResults.forEach((fr) => {
+        rawMatches.push({
+          question: fr.item,
+          rawScore: (1 - (fr.score || 0)) * 100,
+        });
+      });
+    }
+  }
+
+  const maxScore = rawMatches.length > 0 ? Math.max(...rawMatches.map((m) => m.rawScore)) : 1;
 
   const mappedResults: SearchResult[] = [];
   const paperBreakdown: Record<string, number> = {
@@ -162,12 +238,10 @@ export function searchQuestions(
     essay: 0,
   };
   const syllabusBreakdown: Record<string, number> = {};
-
-  // Tag frequency accumulator for related keywords
   const tagCounts = new Map<string, number>();
 
-  for (const item of rawResults) {
-    const q = item.item;
+  for (const item of rawMatches) {
+    const q = item.question;
     const pid = q.paperId.toLowerCase();
 
     // Check directive filter before incrementing breakdown
@@ -191,9 +265,9 @@ export function searchQuestions(
       continue;
     }
 
-    // Collect related tags after year & subject scope are constrained
+    // Collect related tags
     for (const tag of q.tags) {
-      if (!searchTerms.some((st) => tag.toLowerCase().includes(st))) {
+      if (!preprocessed.tokensToUse.some((st) => tag.toLowerCase().includes(st))) {
         tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
       }
     }
@@ -208,13 +282,20 @@ export function searchQuestions(
       continue;
     }
 
-    // Keyword highlighting: highlight both searchTerms and core syllabus concepts
-    const highlighted = highlightQuestionKeywords(q.text, q.tags, q.keywords, searchTerms);
+    // Keyword highlighting: highlight both query terms (including acronym expansions) and syllabus concepts
+    const highlighted = highlightQuestionKeywords(
+      q.text,
+      q.tags,
+      q.keywords,
+      preprocessed.highlightTerms
+    );
+
+    const normalizedRelevance = Math.min(1, Math.max(0.15, item.rawScore / maxScore));
 
     mappedResults.push({
       question: q,
-      relevanceScore: 1 - (item.score || 0),
-      matchedKeywords: searchTerms,
+      relevanceScore: normalizedRelevance,
+      matchedKeywords: preprocessed.tokensToUse,
       highlightedText: highlighted,
     });
   }
@@ -224,9 +305,11 @@ export function searchQuestions(
     mappedResults.sort((a, b) => b.question.year - a.question.year || a.question.questionNumber - b.question.questionNumber);
   } else if (filters?.sortBy === 'year-asc') {
     mappedResults.sort((a, b) => a.question.year - b.question.year || a.question.questionNumber - b.question.questionNumber);
+  } else if (filters?.sortBy === 'marks-desc') {
+    mappedResults.sort((a, b) => b.question.marks - a.question.marks);
   } else {
     // Default relevance
-    mappedResults.sort((a, b) => b.relevanceScore - a.relevanceScore);
+    mappedResults.sort((a, b) => b.relevanceScore - a.relevanceScore || b.question.year - a.question.year);
   }
 
   const sortedTags = Array.from(tagCounts.entries())
@@ -264,6 +347,14 @@ export function getAutocompleteSuggestions(query: string, limit: number = 6): st
   };
 
   const pool: string[] = [];
+
+  // Acronym and synonym mappings
+  for (const [acronym, expansions] of Object.entries(UPSC_ACRONYM_MAP)) {
+    pool.push(acronym.toUpperCase());
+    for (const exp of expansions) {
+      pool.push(exp);
+    }
+  }
 
   // Tags
   const allTags = getAllTags();
