@@ -347,6 +347,87 @@ details[open] summary ~ * {
   50% { box-shadow: 0 0 12px rgba(250,204,21,1), 0 0 28px rgba(250,204,21,0.7); transform: scale(1.05); }
 }
 
+/* Scrubber Milestone Pips */
+.comet-pip-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  pointer-events: none;
+  z-index: 5;
+}
+.comet-pip {
+  width: 2px;
+  height: 6px;
+  border-radius: 99px;
+  background: rgba(250, 204, 21, 0.25);
+  transition: all 0.15s ease-out;
+}
+.comet-pip.milestone {
+  width: 3px;
+  height: 10px;
+  background: rgba(250, 204, 21, 0.55);
+}
+.comet-pip.active {
+  background: #FACC15;
+  box-shadow: 0 0 8px #FACC15, 0 0 16px rgba(250, 204, 21, 0.6);
+  transform: scaleY(1.6);
+}
+
+/* Floating Retro HUD Tooltip */
+.comet-hud-pill {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1), transform 0.05s linear;
+  will-change: transform, opacity;
+}
+.comet-hud-pill.visible {
+  opacity: 1;
+}
+.comet-hud-inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #030712;
+  color: #FFFFFF;
+  border: 2px solid #FACC15;
+  padding: 3px 10px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0px #2A2A2A;
+  white-space: nowrap;
+}
+.comet-hud-arrow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #FACC15;
+}
+
+/* Timeline Active Node Glow & Highlight */
+.timeline-node-active .timeline-node-dot {
+  background: #FACC15 !important;
+  border-color: #030712 !important;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.9) !important;
+  transform: scale(1.25) !important;
+}
+.timeline-node-active .timeline-node-year {
+  color: #D97706 !important;
+  font-weight: 800 !important;
+}
+
+
 /* Marquee Ticker */
 .marquee-strip {
   background: #181B1D;

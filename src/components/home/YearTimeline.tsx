@@ -16,11 +16,42 @@ export default function YearTimeline() {
   const thumbRef = useRef<HTMLDivElement>(null);
   const tailRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+  const hudRef = useRef<HTMLDivElement>(null);
+  const hudYearRef = useRef<HTMLSpanElement>(null);
+  const hudCountRef = useRef<HTMLSpanElement>(null);
+  const hudTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const lastHapticIndexRef = useRef<number>(-1);
 
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+
+  const showHud = () => {
+    if (hudRef.current) {
+      if (hudTimerRef.current) clearTimeout(hudTimerRef.current);
+      hudRef.current.classList.add('visible');
+    }
+  };
+
+  const hideHudDelayed = (delay = 500) => {
+    if (hudTimerRef.current) clearTimeout(hudTimerRef.current);
+    hudTimerRef.current = setTimeout(() => {
+      hudRef.current?.classList.remove('visible');
+    }, delay);
+  };
+
+  const triggerHaptic = (type: 'tick' | 'lock' = 'tick') => {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try {
+        if (type === 'tick') {
+          navigator.vibrate(6);
+        } else {
+          navigator.vibrate([8, 16, 8]);
+        }
+      } catch {}
+    }
+  };
 
   useEffect(() => {
     const scrollEl = scrollRef.current;
@@ -28,6 +59,9 @@ export default function YearTimeline() {
     const thumbEl = thumbRef.current;
     const tailEl = tailRef.current;
     const glowEl = glowRef.current;
+    const hudEl = hudRef.current;
+    const hudYearEl = hudYearRef.current;
+    const hudCountEl = hudCountRef.current;
     if (!scrollEl || !trackEl || !thumbEl) return;
 
     let lastScrollLeft = scrollEl.scrollLeft;
@@ -42,6 +76,43 @@ export default function YearTimeline() {
       const x = Math.max(0, Math.min(scrollPercentage * travel, travel));
       
       thumbEl.style.transform = `translateY(-50%) translateX(${x}px)`;
+
+      // Identify active year from current scroll position
+      const closestIndex = Math.max(0, Math.min(years.length - 1, Math.round(scrollPercentage * (years.length - 1))));
+      const activeYear = years[closestIndex] || latestYear;
+
+      // Update Floating HUD Pill position & content
+      if (hudEl && hudYearEl && hudCountEl) {
+        const thumbCenter = x + thumbW / 2;
+        const pillHalfW = (hudEl.offsetWidth || 78) / 2;
+        const trackW = trackEl.clientWidth;
+        const clampedX = Math.max(pillHalfW, Math.min(thumbCenter, trackW - pillHalfW));
+        
+        hudEl.style.left = `${clampedX}px`;
+        hudYearEl.textContent = String(activeYear);
+        hudCountEl.textContent = `${yearCounts[activeYear] || 88} Qs`;
+      }
+
+      // Update Stardust Milestone Pips
+      const pips = trackEl.querySelectorAll('.comet-pip');
+      pips.forEach((pip, idx) => {
+        if (idx === closestIndex) {
+          pip.classList.add('active');
+        } else {
+          pip.classList.remove('active');
+        }
+      });
+
+      // Synchronize active year highlight in timeline node row
+      const nodes = scrollEl.querySelectorAll('[data-year-node]');
+      nodes.forEach((node) => {
+        const nodeYear = Number(node.getAttribute('data-year-node'));
+        if (nodeYear === activeYear) {
+          node.classList.add('timeline-node-active');
+        } else {
+          node.classList.remove('timeline-node-active');
+        }
+      });
 
       if (tailEl && glowEl) {
         const delta = scrollEl.scrollLeft - lastScrollLeft;
@@ -96,6 +167,8 @@ export default function YearTimeline() {
       if (e.deltaY !== 0) {
         e.preventDefault();
         scrollEl.scrollLeft += e.deltaY;
+        showHud();
+        hideHudDelayed(600);
       }
     };
     scrollEl.addEventListener('wheel', handleWheel, { passive: false });
@@ -148,6 +221,7 @@ export default function YearTimeline() {
     const thumb = thumbRef.current;
 
     e.preventDefault();
+    showHud();
 
     // Disable CSS transition for 1:1 finger tracking during dragging
     thumb.style.transition = 'none';
@@ -179,6 +253,14 @@ export default function YearTimeline() {
       const percentage = boundedX / currentTravel;
       const targetScroll = percentage * (scrollEl.scrollWidth - scrollEl.clientWidth);
       scrollEl.scrollLeft = targetScroll;
+
+      // Haptic tick when crossing year boundary
+      const currentYearIdx = Math.max(0, Math.min(years.length - 1, Math.round(percentage * (years.length - 1))));
+      if (currentYearIdx !== lastHapticIndexRef.current) {
+        lastHapticIndexRef.current = currentYearIdx;
+        const isBoundary = currentYearIdx === 0 || currentYearIdx === years.length - 1;
+        triggerHaptic(isBoundary ? 'lock' : 'tick');
+      }
     };
 
     updateFromClientX(e.clientX);
@@ -190,9 +272,24 @@ export default function YearTimeline() {
       targetElement.setPointerCapture(pointerId);
     } catch {}
 
+    // Velocity tracking for flick momentum
+    let lastX = e.clientX;
+    let lastTime = performance.now();
+    let velocity = 0;
+
     const handlePointerMove = (moveEvent: PointerEvent) => {
       if (moveEvent.pointerId !== pointerId) return;
       moveEvent.preventDefault();
+
+      const now = performance.now();
+      const dt = now - lastTime;
+      if (dt > 8) {
+        velocity = (moveEvent.clientX - lastX) / dt;
+        lastX = moveEvent.clientX;
+        lastTime = now;
+      }
+
+      showHud();
       updateFromClientX(moveEvent.clientX);
     };
 
@@ -202,9 +299,30 @@ export default function YearTimeline() {
         targetElement.releasePointerCapture(pointerId);
       } catch {}
       thumb.style.transition = '';
+      hideHudDelayed(400);
+
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
       window.removeEventListener('pointercancel', handlePointerUp);
+
+      // Flick Momentum or Magnetic Snap to Year
+      const currentTravel = track.clientWidth - thumbW;
+      const scrollMax = Math.max(0, scrollEl.scrollWidth - scrollEl.clientWidth);
+      const currentPct = scrollMax > 0 ? scrollEl.scrollLeft / scrollMax : 0;
+
+      if (Math.abs(velocity) > 0.35 && currentTravel > 0) {
+        // High-velocity flick: project ahead by 180ms of momentum
+        const flickThrow = velocity * 180;
+        const currentX = currentPct * currentTravel;
+        const projectedX = currentX + flickThrow;
+        const projectedPct = Math.max(0, Math.min(1, projectedX / currentTravel));
+        const targetIdx = Math.round(projectedPct * (years.length - 1));
+        scrollToYear(years[targetIdx]);
+      } else {
+        // Normal release: magnetically snap to nearest year
+        const nearestIdx = Math.round(currentPct * (years.length - 1));
+        scrollToYear(years[nearestIdx]);
+      }
     };
 
     window.addEventListener('pointermove', handlePointerMove, { passive: false });
@@ -214,6 +332,8 @@ export default function YearTimeline() {
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (!scrollRef.current) return;
+    showHud();
+    hideHudDelayed(800);
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
       scrollByDelta(-150);
@@ -241,6 +361,8 @@ export default function YearTimeline() {
       const scrollEl = scrollRef.current;
       const targetPos = (yearIndex / (years.length - 1)) * (scrollEl.scrollWidth - scrollEl.clientWidth);
       scrollEl.scrollTo({ left: targetPos, behavior: 'smooth' });
+      showHud();
+      hideHudDelayed(800);
     }
   };
 
@@ -349,6 +471,7 @@ export default function YearTimeline() {
                       return (
                         <Link
                           key={year}
+                          data-year-node={year}
                           href={`/search?year=${year}`}
                           onClick={(e) => {
                             if (isDragging) e.preventDefault();
@@ -358,7 +481,7 @@ export default function YearTimeline() {
                         >
                           {/* Year Label */}
                           <span
-                            className={`font-vt text-lg md:text-xl mb-2 transition-colors ${
+                            className={`timeline-node-year font-vt text-lg md:text-xl mb-2 transition-colors ${
                               isLatest
                                 ? 'bg-retro-accent text-white px-2 py-0.5 border-2 border-retro-border font-bold shadow-retro-sm'
                                 : 'text-retro-border group-hover:text-retro-accent font-bold'
@@ -369,7 +492,7 @@ export default function YearTimeline() {
 
                           {/* Node Circle */}
                           <div
-                            className={`w-6 h-6 border-3 border-retro-border transition-all z-10 flex items-center justify-center ${
+                            className={`timeline-node-dot w-6 h-6 border-3 border-retro-border transition-all z-10 flex items-center justify-center ${
                               isLatest
                                 ? 'bg-retro-accent shadow-retro-sm scale-110'
                                 : 'bg-white group-hover:bg-retro-folder group-hover:scale-110'
@@ -410,7 +533,7 @@ export default function YearTimeline() {
 
             {/* Mobile touch-expanded hit container (52px tall touch area, touch-action: none) */}
             <div 
-              className="py-3 touch-none select-none cursor-pointer sm:cursor-grab active:cursor-grabbing outline-none focus-visible:ring-2 focus-visible:ring-retro-accent rounded-full"
+              className="relative py-3 touch-none select-none cursor-pointer sm:cursor-grab active:cursor-grabbing outline-none focus-visible:ring-2 focus-visible:ring-retro-accent rounded-full"
               style={{ touchAction: 'none' }}
               onPointerDown={onTrackPointerDown}
               role="slider"
@@ -420,11 +543,36 @@ export default function YearTimeline() {
               aria-valuemax={latestYear}
               onKeyDown={onKeyDown}
             >
+              {/* Floating Retro HUD Tooltip Pill */}
+              <div ref={hudRef} className="comet-hud-pill">
+                <div className="comet-hud-inner">
+                  <span ref={hudYearRef} className="font-vt text-base text-retro-accent font-bold">2026</span>
+                  <span className="text-[10px] text-white/40">|</span>
+                  <span ref={hudCountRef} className="font-space text-[11px] text-white font-medium">88 Qs</span>
+                </div>
+                <div className="comet-hud-arrow"></div>
+              </div>
+
               <div 
                 className="comet-track border-2 border-retro-border shadow-retro-sm pointer-events-none" 
                 ref={trackRef}
               >
                 <div className="star-field"></div>
+                
+                {/* Stardust Milestone Pips */}
+                <div className="comet-pip-container">
+                  {years.map((year, idx) => {
+                    const isMilestone = year === 2013 || year === 2020 || year === latestYear;
+                    return (
+                      <div 
+                        key={year}
+                        data-year-index={idx}
+                        className={`comet-pip ${isMilestone ? 'milestone' : ''}`}
+                      />
+                    );
+                  })}
+                </div>
+
                 <div className="comet-head" ref={thumbRef}>
                   <div className="comet-glow" ref={glowRef}></div>
                   <div className="comet-tail" ref={tailRef}></div>
