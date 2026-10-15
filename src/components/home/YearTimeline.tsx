@@ -483,7 +483,7 @@ export default function YearTimeline() {
                           <span
                             className={`timeline-node-year font-vt text-lg md:text-xl mb-2 transition-colors ${
                               isLatest
-                                ? 'bg-retro-accent text-white px-2 py-0.5 border-2 border-retro-border font-bold shadow-retro-sm'
+                                ? 'bg-retro-accent !text-white px-2 py-0.5 border-2 border-retro-border font-bold shadow-retro-sm'
                                 : 'text-retro-border group-hover:text-retro-accent font-bold'
                             }`}
                           >

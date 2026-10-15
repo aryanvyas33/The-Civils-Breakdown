@@ -422,8 +422,13 @@ details[open] summary ~ * {
   box-shadow: 0 0 12px rgba(250, 204, 21, 0.9) !important;
   transform: scale(1.25) !important;
 }
-.timeline-node-active .timeline-node-year {
-  color: #D97706 !important;
+.timeline-node-active .timeline-node-year:not(.bg-retro-accent) {
+  color: #E26A59 !important;
+  font-weight: 800 !important;
+}
+.timeline-node-year.bg-retro-accent,
+.timeline-node-active .timeline-node-year.bg-retro-accent {
+  color: #FFFFFF !important;
   font-weight: 800 !important;
 }
 
