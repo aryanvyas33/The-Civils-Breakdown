@@ -61,7 +61,7 @@ const SLIDES: SlideData[] = [
   {
     number: '05',
     title: 'Current Affairs Priority Engine (Mains 2027)',
-    desc: 'Cut through monthly current affairs noise. 59 shortlisted contemporary dossiers scored against 14 years of past papers across 8 calibrated parameters to calculate the exact probability P(asked in Mains 2027).',
+    desc: 'Cut through monthly current affairs noise. 76 shortlisted contemporary dossiers scored against 14 years of past papers across 8 calibrated parameters to calculate the exact probability P(asked in Mains 2027).',
     points: [
       '8-parameter predictive scoring model with logistic probability calibration',
       'Actionable triage bands: Band A (Must-Cover Deep Dives) vs Band B/C (Quick Reads)',
@@ -514,7 +514,7 @@ export default function FeatureShowcase() {
                       href="/current-affairs"
                       className="font-vt text-sm sm:text-base bg-retro-border text-white hover:bg-retro-accent px-2.5 py-0.5 font-bold transition-colors shadow-[1px_1px_0px_#000] inline-flex items-center gap-1"
                     >
-                      <span>LAUNCH TRACKER (59 DOSSIERS) →</span>
+                      <span>LAUNCH TRACKER (76 DOSSIERS) →</span>
                     </Link>
                   </div>
                 </div>

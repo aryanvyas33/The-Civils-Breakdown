@@ -121,7 +121,7 @@ export default function StudyPathCards() {
             </h3>
 
             <p className="font-space text-xs sm:text-sm text-retro-border/85 leading-relaxed mb-6">
-              Cut through monthly magazine bloat. 59 contemporary themes ranked by an 8-parameter probability model. Focus on Band A must-covers and cross-paper linkages.
+              Cut through monthly magazine bloat. 76 contemporary themes ranked by an 8-parameter probability model. Focus on Band A must-covers and cross-paper linkages.
             </p>
           </div>
 
