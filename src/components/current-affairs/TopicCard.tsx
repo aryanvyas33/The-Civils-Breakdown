@@ -42,35 +42,179 @@ export default function TopicCard({
 
   return (
     <div
-      className={`bg-white border-[3px] border-[#2A2A2A] shadow-[4px_4px_0px_#2A2A2A] rounded-sm grid grid-cols-[52px_1fr_auto] sm:grid-cols-[64px_1fr_auto] transition-all overflow-hidden ${
-        isDone ? 'opacity-65 bg-[#FAF9F5]' : 'hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#2A2A2A]'
+      className={`bg-white border-[3px] border-[#2A2A2A] shadow-[3px_3px_0px_#2A2A2A] sm:shadow-[4px_4px_0px_#2A2A2A] rounded-sm transition-all overflow-hidden ${
+        isDone ? 'opacity-70 bg-[#FAF9F5]' : 'hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#2A2A2A]'
       }`}
     >
-      {/* 1. Left Rank Column */}
-      <div className="bg-[#F4F1E1] border-r-2 border-[#2A2A2A] flex flex-col items-center justify-center p-2 sm:p-4 text-center">
-        <span
-          className={`font-vt text-2xl sm:text-3xl leading-none ${
-            topic.rank <= 3 ? 'text-[#E26A59]' : 'text-[#2A2A2A]'
-          }`}
-        >
-          #{topic.rank}
-        </span>
-        <span className="font-mono text-[0.58rem] sm:text-[0.62rem] text-[#777] mt-1 font-bold">
-          RANK
-        </span>
-        <span className="font-mono text-[0.55rem] sm:text-[0.58rem] bg-[#2A2A2A] text-white px-1 sm:px-1.5 py-0.5 mt-2 rounded-xs font-bold">
-          {topic.monthShort}
-        </span>
+      {/* ── DESKTOP VIEW: Preserved 3-Column Layout (100% Unchanged) ── */}
+      <div className="hidden sm:grid sm:grid-cols-[64px_1fr_auto] w-full">
+        {/* 1. Left Rank Column */}
+        <div className="bg-[#F4F1E1] border-r-2 border-[#2A2A2A] flex flex-col items-center justify-center p-4 text-center">
+          <span
+            className={`font-vt text-3xl leading-none ${
+              topic.rank <= 3 ? 'text-[#E26A59]' : 'text-[#2A2A2A]'
+            }`}
+          >
+            #{topic.rank}
+          </span>
+          <span className="font-mono text-[0.62rem] text-[#777] mt-1 font-bold">
+            RANK
+          </span>
+          <span className="font-mono text-[0.58rem] bg-[#2A2A2A] text-white px-1.5 py-0.5 mt-2 rounded-xs font-bold">
+            {topic.monthShort}
+          </span>
+        </div>
+
+        {/* 2. Middle Content Body */}
+        <div className="p-4 flex flex-col gap-2.5">
+          {/* Top Tags Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            {/* Paper Switcher Group */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="font-mono text-[0.68rem] text-[#666] font-bold uppercase mr-1">
+                Select Paper Angle:
+              </span>
+              {topic.papers.map((p) => {
+                const isActive = p === activePaper;
+                const isPrimary = p === topic.primaryPaper;
+                return (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => onSelectPaper(p)}
+                    className={`font-mono text-xs font-bold px-2 py-0.5 border-[1.5px] border-[#2A2A2A] transition-all cursor-pointer ${
+                      isActive
+                        ? 'text-white shadow-none'
+                        : 'bg-white text-[#2A2A2A] hover:bg-[#F0ECE0] shadow-[1px_1px_0px_#2A2A2A]'
+                    }`}
+                    style={
+                      isActive
+                        ? { backgroundColor: PAPER_COLORS[p]?.activeBg || '#2A2A2A' }
+                        : {}
+                    }
+                  >
+                    {p}
+                    {isPrimary ? ' (Primary)' : ''}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Metric info & effort badge */}
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[0.68rem] text-[#555] font-bold">
+                Index: {topic.index} | P: {topic.prob}
+              </span>
+              <span className="font-mono text-[0.7rem] font-bold px-2 py-0.5 bg-[#D1FAF0] text-[#0D9488] border-[1.5px] border-[#0D9488] shadow-[1px_1px_0px_#2A2A2A]">
+                ★ {topic.effort}
+              </span>
+            </div>
+          </div>
+
+          {/* Topic Title */}
+          <h3
+            className={`font-sans text-lg font-bold text-[#2A2A2A] leading-snug ${
+              isDone ? 'line-through text-[#666]' : ''
+            }`}
+          >
+            {topic.title}
+          </h3>
+
+          {/* Syllabus Pointer Box */}
+          <div className="bg-[#FAF8F2] border-[1.5px] border-[#2A2A2A] border-l-4 border-l-[#FFD25A] p-2.5 text-xs">
+            <div className="font-mono text-[0.68rem] font-bold text-[#555] uppercase mb-1 flex justify-between items-center">
+              <span>OFFICIAL SYLLABUS POINTER // {activePaper}</span>
+              <span className="text-[0.62rem] text-[#888] font-normal">
+                Matches official UPSC syllabus
+              </span>
+            </div>
+            <div className="font-sans font-semibold text-[#2A2A2A] text-[0.82rem] leading-relaxed">
+              {syllabusText}
+            </div>
+          </div>
+
+          {/* Plain English Exam Hook */}
+          <div
+            className="text-sm text-[#444] font-sans leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: angleText }}
+          />
+
+          {/* Delta Update Banner (if topic received subsequent development) */}
+          {topic.recentUpdate && (
+            <UpdateBanner
+              topicId={topic.id}
+              update={topic.recentUpdate}
+              isReviewed={isUpdateDone}
+              onToggleReview={onToggleUpdateDone}
+            />
+          )}
+        </div>
+
+        {/* 3. Right Done Action Column */}
+        <div className="border-l-2 border-[#2A2A2A] bg-[#F4F1E1] flex flex-col items-center justify-center p-4 gap-1.5 shrink-0">
+          <button
+            type="button"
+            onClick={onToggleDone}
+            title={isDone ? 'Mark as not done' : 'Mark this topic as done (+100 XP)'}
+            className={`w-11 h-11 border-2 border-[#2A2A2A] font-vt text-3xl flex items-center justify-center cursor-pointer transition-all shadow-[2px_2px_0px_#2A2A2A] ${
+              isDone
+                ? 'bg-[#50E3C2] text-[#2A2A2A]'
+                : 'bg-white text-[#2A2A2A] hover:bg-[#E0FFF8]'
+            }`}
+          >
+            {isDone ? '✔' : '☐'}
+          </button>
+          <span className="font-mono text-[0.65rem] font-bold text-[#666] uppercase whitespace-nowrap">
+            {isDone ? 'DONE' : 'Mark Done'}
+          </span>
+        </div>
       </div>
 
-      {/* 2. Middle Content Body */}
-      <div className="p-3 sm:p-4 flex flex-col gap-2.5">
-        {/* Top Tags Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          {/* Paper Switcher Group */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="font-mono text-[0.65rem] sm:text-[0.68rem] text-[#666] font-bold uppercase mr-1">
-              Select Paper Angle:
+      {/* ── MOBILE VIEW: Full-Width Retro Dossier Card (Reclaims 106px Width) ── */}
+      <div className="sm:hidden flex flex-col w-full">
+        {/* Retro Header Window Bar */}
+        <div className="bg-[#F4F1E1] border-b-2 border-[#2A2A2A] px-3 py-2 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span
+              className={`font-vt text-2xl leading-none font-bold ${
+                topic.rank <= 3 ? 'text-[#E26A59]' : 'text-[#2A2A2A]'
+              }`}
+            >
+              #{topic.rank}
+            </span>
+            <span className="font-mono text-[10px] bg-[#2A2A2A] text-white px-1.5 py-0.5 rounded-xs font-bold">
+              {topic.monthShort}
+            </span>
+            <span className="font-mono text-[11px] text-[#555] font-bold">
+              P: {topic.prob}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488]">
+              ★ {topic.effort}
+            </span>
+            <span className="font-vt text-sm text-[#888]">
+              C:\CA\{String(topic.id).padStart(2, '0')}.DOS
+            </span>
+          </div>
+        </div>
+
+        {/* Full-Width Mobile Card Body */}
+        <div className="p-3 flex flex-col gap-2.5">
+          {/* Topic Title */}
+          <h3
+            className={`font-sans text-[15px] font-bold text-[#2A2A2A] leading-snug ${
+              isDone ? 'line-through text-[#666]' : ''
+            }`}
+          >
+            {topic.title}
+          </h3>
+
+          {/* Horizontal Paper Angle Selector Ribbon */}
+          <div className="flex items-center gap-1.5 overflow-x-auto hide-scroll py-0.5">
+            <span className="font-mono text-[10px] text-[#666] font-bold uppercase shrink-0">
+              ANGLE:
             </span>
             {topic.papers.map((p) => {
               const isActive = p === activePaper;
@@ -80,7 +224,7 @@ export default function TopicCard({
                   key={p}
                   type="button"
                   onClick={() => onSelectPaper(p)}
-                  className={`font-mono text-[0.7rem] sm:text-xs font-bold px-2 py-0.5 border-[1.5px] border-[#2A2A2A] transition-all cursor-pointer ${
+                  className={`shrink-0 font-mono text-[11px] font-bold px-2 py-1 border-[1.5px] border-[#2A2A2A] transition-all cursor-pointer ${
                     isActive
                       ? 'text-white shadow-none'
                       : 'bg-white text-[#2A2A2A] hover:bg-[#F0ECE0] shadow-[1px_1px_0px_#2A2A2A]'
@@ -98,73 +242,57 @@ export default function TopicCard({
             })}
           </div>
 
-          {/* Metric info & effort badge */}
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-[0.62rem] sm:text-[0.68rem] text-[#555] font-bold">
-              Index: {topic.index} | P: {topic.prob}
-            </span>
-            <span className="font-mono text-[0.65rem] sm:text-[0.7rem] font-bold px-2 py-0.5 bg-[#D1FAF0] text-[#0D9488] border-[1.5px] border-[#0D9488] shadow-[1px_1px_0px_#2A2A2A]">
-              ★ {topic.effort}
-            </span>
+          {/* Official Syllabus Pointer Box (100% Width) */}
+          <div className="bg-[#FAF8F2] border-[1.5px] border-[#2A2A2A] border-l-4 border-l-[#FFD25A] p-2.5 text-xs">
+            <div className="font-mono text-[10px] font-bold text-[#555] uppercase mb-1 flex justify-between items-center">
+              <span>OFFICIAL SYLLABUS // {activePaper}</span>
+              <span className="text-[10px] text-[#0D9488] font-bold">MATCH</span>
+            </div>
+            <div className="font-sans font-semibold text-[#2A2A2A] text-[13px] leading-relaxed">
+              {syllabusText}
+            </div>
           </div>
-        </div>
 
-        {/* Topic Title */}
-        <h3
-          className={`font-sans text-base sm:text-lg font-bold text-[#2A2A2A] leading-snug ${
-            isDone ? 'line-through text-[#666]' : ''
-          }`}
-        >
-          {topic.title}
-        </h3>
-
-        {/* Syllabus Pointer Box */}
-        <div className="bg-[#FAF8F2] border-[1.5px] border-[#2A2A2A] border-l-4 border-l-[#FFD25A] p-2 sm:p-2.5 text-xs">
-          <div className="font-mono text-[0.65rem] sm:text-[0.68rem] font-bold text-[#555] uppercase mb-1 flex justify-between items-center">
-            <span>OFFICIAL SYLLABUS POINTER // {activePaper}</span>
-            <span className="text-[0.62rem] text-[#888] font-normal hidden sm:inline">
-              Matches official UPSC syllabus
-            </span>
-          </div>
-          <div className="font-sans font-semibold text-[#2A2A2A] text-xs sm:text-[0.82rem] leading-relaxed">
-            {syllabusText}
-          </div>
-        </div>
-
-        {/* Plain English Exam Hook */}
-        <div
-          className="text-xs sm:text-sm text-[#444] font-sans leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: angleText }}
-        />
-
-        {/* Delta Update Banner (if topic received subsequent development) */}
-        {topic.recentUpdate && (
-          <UpdateBanner
-            topicId={topic.id}
-            update={topic.recentUpdate}
-            isReviewed={isUpdateDone}
-            onToggleReview={onToggleUpdateDone}
+          {/* Plain English Exam Hook (Full Width, Relaxed Reading) */}
+          <div
+            className="text-[13px] text-[#444] font-sans leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: angleText }}
           />
-        )}
-      </div>
 
-      {/* 3. Right Done Action Column */}
-      <div className="border-l-2 border-[#2A2A2A] bg-[#F4F1E1] flex flex-col items-center justify-center p-2 sm:p-4 gap-1.5 shrink-0">
-        <button
-          type="button"
-          onClick={onToggleDone}
-          title={isDone ? 'Mark as not done' : 'Mark this topic as done (+100 XP)'}
-          className={`w-9 h-9 sm:w-11 sm:h-11 border-2 border-[#2A2A2A] font-vt text-2xl sm:text-3xl flex items-center justify-center cursor-pointer transition-all shadow-[2px_2px_0px_#2A2A2A] ${
-            isDone
-              ? 'bg-[#50E3C2] text-[#2A2A2A]'
-              : 'bg-white text-[#2A2A2A] hover:bg-[#E0FFF8]'
-          }`}
-        >
-          {isDone ? '✔' : '☐'}
-        </button>
-        <span className="font-mono text-[0.58rem] sm:text-[0.65rem] font-bold text-[#666] uppercase whitespace-nowrap">
-          {isDone ? 'DONE' : 'Mark Done'}
-        </span>
+          {/* Delta Subsequent Update Banner */}
+          {topic.recentUpdate && (
+            <UpdateBanner
+              topicId={topic.id}
+              update={topic.recentUpdate}
+              isReviewed={isUpdateDone}
+              onToggleReview={onToggleUpdateDone}
+            />
+          )}
+        </div>
+
+        {/* Full-Width Mobile Action Footer */}
+        <div className="bg-[#F4F1E1] border-t-2 border-[#2A2A2A] px-3 py-2 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold">
+            {isDone ? (
+              <span className="text-[#0D9488] flex items-center gap-1">✔ MASTERED (+100 XP)</span>
+            ) : (
+              <span className="text-[#666] flex items-center gap-1">● NOT COMPLETED</span>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={onToggleDone}
+            title={isDone ? 'Mark as not done' : 'Mark this topic as done (+100 XP)'}
+            className={`px-3 py-1.5 border-2 border-[#2A2A2A] font-vt text-lg flex items-center gap-1.5 cursor-pointer transition-all ${
+              isDone
+                ? 'bg-[#50E3C2] text-[#2A2A2A] shadow-none translate-x-[1px] translate-y-[1px]'
+                : 'bg-white text-[#2A2A2A] hover:bg-[#E0FFF8] shadow-[2px_2px_0px_#2A2A2A]'
+            }`}
+          >
+            <span className="text-xl leading-none">{isDone ? '✔' : '☐'}</span>
+            <span className="font-mono text-xs font-bold uppercase">{isDone ? 'DONE' : 'MARK DONE'}</span>
+          </button>
+        </div>
       </div>
     </div>
   );

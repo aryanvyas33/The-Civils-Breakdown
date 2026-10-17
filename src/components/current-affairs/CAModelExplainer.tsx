@@ -10,16 +10,17 @@ export default function CAModelExplainer() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-3.5 px-4 bg-[#F4F1E1] border-none text-[#2A2A2A] font-vt text-xl flex justify-between items-center cursor-pointer hover:bg-[#EAE6D6] transition-colors"
+        className="w-full py-3 px-3 sm:py-3.5 sm:px-4 bg-[#F4F1E1] border-none text-[#2A2A2A] font-vt text-lg sm:text-xl flex justify-between items-center cursor-pointer hover:bg-[#EAE6D6] transition-colors"
       >
-        <span className="flex items-center gap-2 text-left">
-          💡 HOW DOES OUR PRIORITY MODEL WORK?
-          <span className="font-space text-[0.62rem] font-bold bg-[#FFD25A] text-[#2A2A2A] px-1.5 py-0.5 border border-[#2A2A2A]">
-            1-MIN READ
+        <span className="flex items-center gap-1.5 sm:gap-2 text-left">
+          <span className="hidden sm:inline">💡 HOW DOES OUR PRIORITY MODEL WORK?</span>
+          <span className="sm:hidden">💡 HOW DOES PRIORITY SCORING WORK?</span>
+          <span className="font-space text-[0.62rem] font-bold bg-[#FFD25A] text-[#2A2A2A] px-1.5 py-0.5 border border-[#2A2A2A] shrink-0">
+            1-MIN
           </span>
         </span>
-        <span className="font-space text-xs font-bold text-[#666]">
-          {isOpen ? '▲ CLICK TO COLLAPSE' : '▼ CLICK TO EXPAND'}
+        <span className="font-space text-xs font-bold text-[#666] shrink-0 ml-1">
+          {isOpen ? '▲ COLLAPSE' : '▼ EXPAND'}
         </span>
       </button>
 

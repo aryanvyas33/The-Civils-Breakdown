@@ -126,24 +126,24 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
       <header className="mb-6">
         <div className="update-status-pill">
           <div className="pulse-dot" />
-          <span className="font-bold">
+          <span className="font-bold text-[11px] sm:text-xs">
             MODEL UPDATED TILL: <strong>SEPTEMBER 2026</strong> (LIVE 2027 MAINS COHORT)
           </span>
         </div>
 
-        <h1 className="font-vt text-4xl sm:text-5xl text-[#2A2A2A] tracking-wide leading-none mb-2">
+        <h1 className="font-vt text-3xl sm:text-4xl md:text-5xl text-[#2A2A2A] tracking-wide leading-none mb-2 mt-2">
           THIS CYCLE&apos;S <span className="text-[#E26A59]">MUST-COVER</span> TOPICS{' '}
-          <span className="text-xl sm:text-2xl text-[#666] font-mono">// JAN–SEP 2026</span>
+          <span className="text-base sm:text-xl md:text-2xl text-[#666] font-mono block sm:inline mt-1 sm:mt-0">// JAN–SEP 2026</span>
         </h1>
 
-        <p className="text-sm sm:text-base text-[#444] font-sans max-w-3xl leading-relaxed mb-4">
+        <p className="text-xs sm:text-base text-[#444] font-sans max-w-3xl leading-relaxed mb-3 sm:mb-4">
           Our probability engine has evaluated <strong>{topics.length} current affairs themes</strong> across 9
           months (January – September 2026) for Mains 2027. We&apos;ve done the scoring — just master
           them in order.
         </p>
 
-        {/* Metadata Chips Bar */}
-        <div className="flex flex-wrap gap-2 text-xs font-mono">
+        {/* Desktop Metadata Chips Bar (Preserved 100% Unchanged) */}
+        <div className="hidden sm:flex flex-wrap gap-2 text-xs font-mono">
           <span className="bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488] px-2 py-1 font-bold shadow-[1px_1px_0px_#2A2A2A]">
             ★ {bandATotal} Must-Cover Topics (Band A)
           </span>
@@ -158,6 +158,22 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
           </span>
           <span className="bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2 py-1 font-medium shadow-[1px_1px_0px_#2A2A2A]">
             ↻ Next Refresh: October 2026 Digest
+          </span>
+        </div>
+
+        {/* Mobile-Only Swipeable Metadata Chips Tray */}
+        <div className="sm:hidden smart-tag-tray py-1">
+          <span className="shrink-0 bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488] px-2.5 py-1 text-[11px] font-mono font-bold shadow-[1px_1px_0px_#2A2A2A]">
+            ★ {bandATotal} Must-Cover (Band A)
+          </span>
+          <span className="shrink-0 bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2.5 py-1 text-[11px] font-mono font-medium shadow-[1px_1px_0px_#2A2A2A]">
+            📖 {topics.filter((t) => t.band !== 'bandA').length} Quick Reads (Band B/C)
+          </span>
+          <span className="shrink-0 bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2.5 py-1 text-[11px] font-mono font-medium shadow-[1px_1px_0px_#2A2A2A]">
+            📅 Jan–Sep 2026 ({topics.length} Total)
+          </span>
+          <span className="shrink-0 bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2.5 py-1 text-[11px] font-mono font-medium shadow-[1px_1px_0px_#2A2A2A]">
+            ↻ Next: Oct 2026
           </span>
         </div>
       </header>
@@ -178,9 +194,14 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
       {tierFilter !== 'quickReads' && (
         <section className="mb-10">
           <div className="flex items-center gap-2.5 py-2 mb-4 border-b-2 border-dashed border-[#2A2A2A]">
-            <div className="w-3.5 h-3.5 bg-[#50E3C2] border-2 border-[#2A2A2A]" />
-            <h2 className="font-vt text-2xl text-[#2A2A2A] uppercase tracking-wide">
-              BAND A: MUST-COVER TOPICS ({bandATopics.length} SHOWN / {bandATotal} TOTAL) — BUILD FULL NOTES &amp; PRACTISE ANSWERS
+            <div className="w-3.5 h-3.5 bg-[#50E3C2] border-2 border-[#2A2A2A] shrink-0" />
+            <h2 className="font-vt text-xl sm:text-2xl text-[#2A2A2A] uppercase tracking-wide">
+              <span className="hidden sm:inline">
+                BAND A: MUST-COVER TOPICS ({bandATopics.length} SHOWN / {bandATotal} TOTAL) — BUILD FULL NOTES &amp; PRACTISE ANSWERS
+              </span>
+              <span className="sm:hidden">
+                BAND A: MUST-COVER TOPICS ({bandATopics.length}/{bandATotal})
+              </span>
             </h2>
           </div>
 
@@ -213,13 +234,18 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
           <button
             type="button"
             onClick={() => setQuickReadsOpen(!quickReadsOpen)}
-            className="w-full py-3 px-4 bg-[#F4F1E1] border-[3px] border-[#2A2A2A] shadow-[3px_3px_0px_#2A2A2A] font-vt text-xl flex justify-between items-center cursor-pointer hover:bg-[#EAE6D6] transition-colors"
+            className="w-full py-2.5 sm:py-3 px-3 sm:px-4 bg-[#F4F1E1] border-[3px] border-[#2A2A2A] shadow-[2px_2px_0px_#2A2A2A] sm:shadow-[3px_3px_0px_#2A2A2A] font-vt text-lg sm:text-xl flex justify-between items-center cursor-pointer hover:bg-[#EAE6D6] transition-colors"
           >
-            <span>
-              📖 QUICK READS (BAND B &amp; C) — {quickTopics.length} Secondary Topics (1-Page Note Only)
+            <span className="text-left">
+              <span className="hidden sm:inline">
+                📖 QUICK READS (BAND B &amp; C) — {quickTopics.length} Secondary Topics (1-Page Note Only)
+              </span>
+              <span className="sm:hidden">
+                📖 QUICK READS (BAND B &amp; C) — {quickTopics.length} Topics
+              </span>
             </span>
-            <span className="font-space text-xs font-bold text-[#666]">
-              {quickReadsOpen ? '▲ COLLAPSE LIST' : '▼ SHOW LIST'}
+            <span className="font-space text-xs font-bold text-[#666] shrink-0 ml-2">
+              {quickReadsOpen ? '▲ COLLAPSE' : '▼ SHOW LIST'}
             </span>
           </button>
 

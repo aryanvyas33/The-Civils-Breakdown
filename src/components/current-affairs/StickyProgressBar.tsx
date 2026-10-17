@@ -30,7 +30,8 @@ export default function StickyProgressBar({
       className="sticky-bar"
     >
       <span className="sticky-label text-base sm:text-xl font-vt text-[#2A2A2A]">
-        CA PROGRESS:
+        <span className="hidden sm:inline">CA PROGRESS:</span>
+        <span className="sm:hidden">CA:</span>
       </span>
 
       <div className="sticky-rail">
@@ -40,7 +41,7 @@ export default function StickyProgressBar({
         />
       </div>
 
-      <div className="sticky-pct text-xs sm:text-sm font-mono flex flex-wrap items-center gap-1 sm:gap-2">
+      <div className="sticky-pct text-[11px] sm:text-sm font-mono flex flex-wrap items-center gap-1 sm:gap-2 shrink-0">
         <span className="font-bold text-[#2A2A2A]">
           {pts.toFixed(1)} / {maxPts.toFixed(1)} pts ({pct}%)
         </span>

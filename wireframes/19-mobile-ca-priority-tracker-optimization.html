@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wireframe 19: Mobile Current Affairs Priority Tracker Optimization | The Civils Breakdown</title>
+  
+  <!-- Fonts matching The Civils Breakdown App -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:          #F8F5EE;
+      --grid:        #D3D0C5;
+      --border:      #2A2A2A;
+      --window:      #F4F1E1;
+      --accent:      #E26A59;
+      --folder:      #FFD25A;
+      --emerald:     #50E3C2;
+      --mint:        #0D9488;
+      --teal:        #4A90E2;
+      --amber:       #F5A623;
+      --gs1:         #D97706;
+      --gs2:         #2563EB;
+      --gs3:         #059669;
+      --gs4:         #7C3AED;
+      --shadow-sm:   2px 2px 0px #2A2A2A;
+      --shadow-md:   3px 3px 0px #2A2A2A;
+      --shadow-lg:   5px 5px 0px #2A2A2A;
+      --font-pixel:  'VT323', monospace;
+      --font-mono:   'Space Mono', monospace;
+      --font-sans:   'DM Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: #12151A;
+      color: #E6EDF3;
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      padding: 0;
+    }
+
+    /* ── TOP WIREFRAME NAV BANNER ── */
+    .wf-topbar {
+      background: #1B2129;
+      color: #FFF;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+    }
+    .wf-badge {
+      background: var(--accent);
+      color: #FFF;
+      padding: 2px 8px;
+      font-family: var(--font-pixel);
+      font-size: 1.15rem;
+      font-weight: bold;
+      border: 1px solid #FFF;
+      margin-right: 10px;
+    }
+    .wf-view-toggles {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .wf-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFF;
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+    .wf-btn.active, .wf-btn:hover {
+      background: var(--folder);
+      color: var(--border);
+      font-weight: bold;
+      border-color: #FFF;
+    }
+
+    /* ── STAGE WRAPPER ── */
+    .stage {
+      max-width: 1400px;
+      margin: 24px auto;
+      padding: 0 20px 60px;
+    }
+
+    .stage-intro {
+      background: #1C222B;
+      border: 2px solid #30363D;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border-radius: 4px;
+    }
+    .stage-intro h1 {
+      font-family: var(--font-pixel);
+      font-size: 2rem;
+      color: var(--folder);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .stage-intro p {
+      font-size: 0.88rem;
+      color: #8B949E;
+      line-height: 1.5;
+    }
+
+    /* ── COMPARISON LAYOUT ── */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 950px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .simulator-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .col-header {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-header .pill {
+      padding: 2px 8px;
+      border-radius: 2px;
+      font-size: 0.68rem;
+    }
+    .pill-red { background: #FF4757; color: white; }
+    .pill-green { background: #2ED573; color: #12151A; }
+
+    /* ── REALISTIC PHONE CHASSIS ── */
+    .phone-device {
+      width: 390px;
+      height: 780px;
+      background: #000;
+      border-radius: 46px;
+      padding: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 0 4px #333;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Notch / Dynamic Island */
+    .phone-notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 24px;
+      background: #000;
+      border-radius: 14px;
+      z-index: 100;
+    }
+
+    /* Phone Screen Outer */
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--border);
+      border-radius: 36px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Status Bar */
+    .phone-status-bar {
+      height: 44px;
+      padding: 12px 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: #2A2A2A;
+      z-index: 90;
+      flex-shrink: 0;
+    }
+
+    /* App Nav */
+    .phone-app-nav {
+      background: var(--window);
+      border-bottom: 3px solid var(--border);
+      padding: 6px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-pixel);
+      font-size: 1.15rem;
+      z-index: 80;
+      flex-shrink: 0;
+      box-shadow: 0 2px 0 rgba(42,42,42,0.08);
+    }
+    .phone-app-brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: bold;
+    }
+    .brand-box {
+      background: var(--border);
+      color: #FFF;
+      padding: 0 5px;
+      font-size: 0.95rem;
+    }
+
+    /* Scrollable Container inside Phone */
+    .phone-scroll-content {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 10px 12px 140px; /* leaves room for sticky progress + mobile nav dock */
+      -webkit-overflow-scrolling: touch;
+    }
+    .phone-scroll-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .phone-scroll-content::-webkit-scrollbar-thumb {
+      background: #D3D0C5;
+      border-radius: 2px;
+    }
+
+    /* Mobile Bottom Dock */
+    .phone-mobile-dock {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: rgba(244, 241, 225, 0.98);
+      backdrop-filter: blur(8px);
+      border-top: 3px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 85;
+      padding: 4px 6px;
+    }
+    .dock-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: var(--font-pixel);
+      font-size: 0.85rem;
+      color: rgba(42,42,42,0.65);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .dock-tab.active {
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .dock-tab svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2.2;
+    }
+
+    /* Sticky CA Progress Bar in Simulator */
+    .phone-sticky-bar {
+      position: absolute;
+      bottom: 52px; /* Sits precisely above phone-mobile-dock */
+      left: 0;
+      right: 0;
+      background: var(--window);
+      border-top: 3px solid var(--border);
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 80;
+      box-shadow: 0 -3px 0 rgba(42, 42, 42, 0.1);
+    }
+    .sticky-bar-problem {
+      bottom: 0px !important; /* Overlaps bottom nav in Before view */
+      z-index: 150 !important;
+    }
+    .phone-sticky-label {
+      font-family: var(--font-pixel);
+      font-size: 1.15rem;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    .phone-sticky-rail {
+      flex: 1;
+      height: 10px;
+      background: #EAE6D6;
+      border: 1.5px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .phone-sticky-fill {
+      height: 100%;
+      background-color: var(--emerald);
+      width: 74%;
+      transition: width 0.3s ease;
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.4) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.4) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 14px 14px;
+    }
+    .phone-sticky-pct {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      white-space: nowrap;
+      color: var(--border);
+    }
+
+    /* ── CALLOUT BADGES ── */
+    .problem-callout {
+      background: #FFF0F0;
+      border: 2px dashed #E26A59;
+      color: #C0392B;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .solution-callout {
+      background: #EDFBF7;
+      border: 2px solid var(--mint);
+      color: #0D9488;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── STYLING: BEFORE SIMULATOR (CURRENT STATE) ── */
+    .before-header-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 8px 0;
+    }
+    .before-header-chips span {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 3px 6px;
+      font-size: 0.6rem;
+      font-family: var(--font-mono);
+      white-space: normal;
+      box-shadow: 1px 1px 0 #2A2A2A;
+    }
+
+    .before-filter-wrap {
+      background: white;
+      border: 2px solid var(--border);
+      padding: 8px;
+      margin-bottom: 12px;
+      box-shadow: 2px 2px 0 var(--border);
+    }
+    .before-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+    .before-filter-btn {
+      font-family: var(--font-pixel);
+      font-size: 0.85rem;
+      padding: 3px 6px;
+      border: 1.5px solid var(--border);
+      background: var(--window);
+      white-space: normal;
+      cursor: pointer;
+    }
+    .before-filter-btn.active {
+      background: var(--border);
+      color: white;
+    }
+
+    /* 3-Column Topic Card in Before */
+    .before-topic-card {
+      background: white;
+      border: 2px solid var(--border);
+      box-shadow: 3px 3px 0 var(--border);
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 48px 1fr 48px;
+      overflow: hidden;
+    }
+    .before-rank-col {
+      background: var(--window);
+      border-right: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
+    .before-middle-col {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+    .before-action-col {
+      background: var(--window);
+      border-left: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
+
+    /* ── STYLING: AFTER SIMULATOR (OPTIMIZED STATE) ── */
+
+    /* 1. Optimized Header & Swipeable Metadata Carousel */
+    .opt-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #D1FAF0;
+      border: 1.5px solid var(--mint);
+      padding: 2px 8px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: bold;
+      color: var(--mint);
+      margin-bottom: 4px;
+      box-shadow: 1px 1px 0 var(--border);
+    }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--mint);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .opt-title {
+      font-family: var(--font-pixel);
+      font-size: 1.85rem;
+      line-height: 1;
+      color: var(--border);
+      margin-bottom: 2px;
+    }
+    .opt-title span { color: var(--accent); }
+    .opt-sub {
+      font-size: 0.78rem;
+      color: #555;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    /* Swipeable Header Chips Tray with Edge Fade */
+    .opt-chips-tray {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+      scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+      mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    }
+    .opt-chips-tray::-webkit-scrollbar { display: none; }
+    .opt-chip {
+      flex-shrink: 0;
+      background: white;
+      border: 1.5px solid var(--border);
+      box-shadow: 2px 2px 0 var(--border);
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .opt-chip.active {
+      background: #D1FAF0;
+      border-color: var(--mint);
+      color: var(--mint);
+    }
+
+    /* 2. Optimized Filter Tray (Horizontal Snap Ribbons) */
+    .opt-filter-card {
+      background: white;
+      border: 2px solid var(--border);
+      box-shadow: 2px 2px 0 var(--border);
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .opt-filter-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: bold;
+      color: #666;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .opt-filter-snap-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+      mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    }
+    .opt-filter-snap-row::-webkit-scrollbar { display: none; }
+    .opt-filter-pill {
+      flex-shrink: 0;
+      font-family: var(--font-pixel);
+      font-size: 1.05rem;
+      padding: 2px 10px;
+      border: 1.5px solid var(--border);
+      background: var(--window);
+      color: var(--border);
+      cursor: pointer;
+      box-shadow: 1px 1px 0 var(--border);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .opt-filter-pill.active {
+      background: var(--border);
+      color: white;
+      box-shadow: none;
+      transform: translate(1px, 1px);
+    }
+    .opt-filter-pill.gs1.active { background: var(--gs1); }
+    .opt-filter-pill.gs2.active { background: var(--gs2); }
+    .opt-filter-pill.gs3.active { background: var(--gs3); }
+    .opt-filter-pill.gs4.active { background: var(--gs4); }
+    .opt-filter-pill.must-cover.active { background: var(--mint); }
+    .opt-filter-pill.quick.active { background: var(--teal); }
+    .opt-filter-pill.delta.active { background: var(--amber); color: #2A2A2A; font-weight: bold; }
+
+    /* 3. Re-architected Full-Width Dossier Card */
+    .opt-card {
+      background: white;
+      border: 2.5px solid var(--border);
+      box-shadow: 3px 3px 0 var(--border);
+      margin-bottom: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+    .opt-card.is-done {
+      background: #F9F8F3;
+      opacity: 0.75;
+      border-color: #777;
+    }
+    .opt-card-header {
+      background: var(--window);
+      border-bottom: 2px solid var(--border);
+      padding: 5px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+    }
+    .opt-card-header .left-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .opt-rank-tag {
+      font-family: var(--font-pixel);
+      font-size: 1.25rem;
+      line-height: 1;
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .opt-month-tag {
+      background: var(--border);
+      color: white;
+      font-size: 0.58rem;
+      padding: 1px 4px;
+      font-weight: bold;
+      border-radius: 2px;
+    }
+    .opt-effort-tag {
+      background: #D1FAF0;
+      color: var(--mint);
+      border: 1px solid var(--mint);
+      padding: 1px 6px;
+      font-weight: bold;
+      font-size: 0.62rem;
+    }
+    .opt-prob-tag {
+      font-size: 0.62rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .opt-card-body {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .opt-card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--border);
+      font-family: var(--font-sans);
+    }
+    .opt-card.is-done .opt-card-title {
+      text-decoration: line-through;
+      color: #666;
+    }
+
+    /* Paper Angle Selector (Tactile Carousel) */
+    .opt-angle-selector {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #FAF8F2;
+      border: 1px solid #DDD;
+      padding: 4px 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .opt-angle-selector::-webkit-scrollbar { display: none; }
+    .opt-angle-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: bold;
+      color: #777;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .opt-angle-btn {
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: bold;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--border);
+      cursor: pointer;
+      box-shadow: 1px 1px 0 var(--border);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .opt-angle-btn.active {
+      color: white;
+      box-shadow: none;
+      transform: translate(1px, 1px);
+    }
+
+    /* Syllabus Pointer Box (Full Width) */
+    .opt-syllabus-box {
+      background: #FAF8F2;
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--folder);
+      padding: 6px 8px;
+    }
+    .opt-syllabus-header {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: bold;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .opt-syllabus-text {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--border);
+      line-height: 1.35;
+    }
+
+    /* Analytical Hook */
+    .opt-hook-text {
+      font-size: 0.78rem;
+      color: #333;
+      line-height: 1.45;
+      background: #FFF;
+      padding: 2px 0;
+    }
+
+    /* Subsequent Delta Update Banner */
+    .opt-update-banner {
+      background: #FFF8E7;
+      border: 1.5px solid var(--amber);
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 2px;
+    }
+    .opt-update-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--amber);
+      color: #2A2A2A;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: bold;
+      padding: 1px 5px;
+      width: fit-content;
+    }
+    .opt-update-text {
+      font-size: 0.72rem;
+      color: #333;
+      line-height: 1.35;
+    }
+    .opt-update-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      border-top: 1px dashed rgba(245, 166, 35, 0.5);
+      padding-top: 4px;
+    }
+    .opt-update-btn {
+      background: white;
+      border: 1.5px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: bold;
+      padding: 3px 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 1px 1px 0 var(--border);
+    }
+    .opt-update-btn.reviewed {
+      background: #D1FAF0;
+      border-color: var(--mint);
+      color: var(--mint);
+    }
+
+    /* Full-Width Mobile Action Footer Bar */
+    .opt-card-footer {
+      background: var(--window);
+      border-top: 2px solid var(--border);
+      padding: 6px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .opt-status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: bold;
+      color: #666;
+    }
+    .opt-status-indicator.done {
+      color: var(--mint);
+    }
+    .opt-done-toggle-btn {
+      background: white;
+      border: 2px solid var(--border);
+      box-shadow: 2px 2px 0 var(--border);
+      padding: 5px 12px;
+      font-family: var(--font-pixel);
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      min-height: 36px;
+    }
+    .opt-done-toggle-btn.is-done {
+      background: var(--emerald);
+      color: var(--border);
+      box-shadow: none;
+      transform: translate(1px, 1px);
+    }
+
+    /* Floating XP Micro-burst in Simulator */
+    .sim-xp-burst {
+      position: absolute;
+      font-family: var(--font-pixel);
+      font-size: 1.5rem;
+      color: var(--mint);
+      text-shadow: 1px 1px 0 #FFF, -1px -1px 0 #FFF, 2px 2px 0 var(--border);
+      pointer-events: none;
+      z-index: 200;
+      animation: simXpFloat 0.85s ease-out forwards;
+      font-weight: bold;
+    }
+    @keyframes simXpFloat {
+      0% { opacity: 1; transform: translateY(0) scale(0.9); }
+      50% { opacity: 1; transform: translateY(-24px) scale(1.2); }
+      100% { opacity: 0; transform: translateY(-50px) scale(1); }
+    }
+
+    /* 4. Section Headers */
+    .opt-section-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+      margin: 10px 0 8px;
+      border-bottom: 2px dashed var(--border);
+    }
+    .opt-section-header .square {
+      width: 10px;
+      height: 10px;
+      background: var(--emerald);
+      border: 1.5px solid var(--border);
+    }
+    .opt-section-header h2 {
+      font-family: var(--font-pixel);
+      font-size: 1.35rem;
+      color: var(--border);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    /* Quick Reads Accordion Bar */
+    .opt-accordion-btn {
+      width: 100%;
+      background: var(--window);
+      border: 2px solid var(--border);
+      box-shadow: 2px 2px 0 var(--border);
+      padding: 8px 10px;
+      font-family: var(--font-pixel);
+      font-size: 1.15rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    /* Quick Read Item */
+    .opt-quick-item {
+      background: white;
+      border: 1.5px solid var(--border);
+      box-shadow: 1.5px 1.5px 0 var(--border);
+      padding: 6px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .opt-quick-item.is-done {
+      background: #F9F8F3;
+      opacity: 0.7;
+    }
+    .opt-quick-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .opt-quick-meta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+    }
+    .opt-quick-title {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--border);
+      line-height: 1.25;
+    }
+    .opt-quick-btn {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--border);
+      background: white;
+      font-family: var(--font-pixel);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 1px 1px 0 var(--border);
+    }
+    .opt-quick-btn.is-done {
+      background: var(--emerald);
+      color: var(--border);
+      box-shadow: none;
+    }
+
+    /* Explainer Accordion in Phone */
+    .opt-explainer-btn {
+      width: 100%;
+      background: white;
+      border: 2px solid var(--border);
+      box-shadow: 2px 2px 0 var(--border);
+      padding: 8px 10px;
+      font-family: var(--font-pixel);
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .opt-explainer-content {
+      background: white;
+      border: 2px solid var(--border);
+      border-top: none;
+      padding: 8px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      font-size: 0.74rem;
+      line-height: 1.4;
+    }
+    .opt-param-pill {
+      background: #FAF8F2;
+      border: 1px solid var(--border);
+      padding: 4px 6px;
+      margin-top: 4px;
+      border-left: 3px solid var(--emerald);
+    }
+
+    /* Annotation Labels */
+    .annotation-box {
+      background: #1B2129;
+      border: 1px solid #30363D;
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #C9D1D9;
+      max-width: 390px;
+    }
+    .annotation-box strong { color: var(--folder); }
+    .annotation-box ul { padding-left: 16px; margin-top: 6px; }
+    .annotation-box li { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP WIREFRAME NAV BANNER ── -->
+  <header class="wf-topbar">
+    <div style="display: flex; align-items: center;">
+      <span class="wf-badge">WIREFRAME 19</span>
+      <span style="font-weight: bold; color: #FFF;">MOBILE CURRENT AFFAIRS PRIORITY TRACKER OPTIMIZATION</span>
+      <span style="color: #8B949E; margin-left: 10px; font-size: 0.68rem;">// 6-INCH SCREEN AUDIT &amp; UX SPEC</span>
+    </div>
+    <div class="wf-view-toggles">
+      <button class="wf-btn active" id="btnSideBySide" onclick="setMode('side-by-side')">Side-by-Side</button>
+      <button class="wf-btn" id="btnOnlyOptimized" onclick="setMode('only-optimized')">Optimized View Only</button>
+      <button class="wf-btn" id="btnOnlyBefore" onclick="setMode('only-before')">Before View Only</button>
+    </div>
+  </header>
+
+  <!-- ── STAGE ── -->
+  <main class="stage">
+    
+    <div class="stage-intro">
+      <h1>C:\CIVILS\CURRENT_AFFAIRS_MOBILE_AUDIT.EXE</h1>
+      <p>
+        <strong>Problem Statement:</strong> In <code>/current-affairs</code>, the 3-column desktop layout (<code>52px Rank Col | Middle Body | 52px Done Action Col</code>) consumes 106px of horizontal width. On a 360px–390px phone screen, this leaves barely <strong>230px</strong> for topic titles, official syllabus boxes, multi-paper angle switchers, and delta updates. Furthermore, the filter buttons wrap across 4–5 jagged rows, and the sticky progress bar can clash with the mobile bottom navigation dock.
+        <br /><br />
+        <strong>Architectural Solution (Wireframe 19):</strong> Re-architect the mobile topic card into a dedicated <strong>Full-Width Retro DOS Dossier Card</strong> with an authentic top metadata bar and a thumb-friendly bottom action footer. Transform the filter bar into <strong>Horizontal Snap Pill Trays</strong> with edge-fade masks, stack the sticky progress bar seamlessly at <code>bottom: 54px</code> above the mobile dock, and streamline Quick Reads for zero-fatigue library reading.
+      </p>
+    </div>
+
+    <!-- COMPARISON STAGE -->
+    <div class="comparison-grid" id="comparisonGrid">
+
+      <!-- ── COLUMN 1: CURRENT STATE (BEFORE) ── -->
+      <div class="simulator-column" id="colBefore">
+        <div class="col-header">
+          <span class="pill pill-red">CURRENT STATE (BEFORE)</span>
+          <span>3-Column Squeeze &amp; Cramped Filters</span>
+        </div>
+
+        <div class="problem-callout" style="max-width: 390px;">
+          ⚠️ 106px wasted on side rails. Only 230px left for reading text!
+        </div>
+
+        <!-- Phone Simulator: Before -->
+        <div class="phone-device">
+          <div class="phone-notch"></div>
+          
+          <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="phone-status-bar">
+              <span>9:41</span>
+              <span>5G 📶 98%</span>
+            </div>
+
+            <!-- App Nav -->
+            <div class="phone-app-nav">
+              <div class="phone-app-brand">
+                <span class="brand-box">TCB</span>
+                <span>CIVILS BREAKDOWN</span>
+              </div>
+              <span style="font-size: 0.85rem; font-family: var(--font-mono);">[MENU]</span>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="phone-scroll-content">
+              
+              <!-- Hero Header in Before -->
+              <div style="margin-bottom: 10px;">
+                <div style="font-family: var(--font-pixel); font-size: 1.8rem; line-height: 1; color: var(--border);">
+                  THIS CYCLE'S <span style="color: var(--accent);">MUST-COVER</span> TOPICS
+                </div>
+                <div style="font-size: 0.72rem; color: #666; margin-top: 3px;">
+                  Our probability engine evaluated 76 themes across 9 months.
+                </div>
+
+                <!-- Cluttered Chips Wrapping into 4-5 Rows -->
+                <div class="before-header-chips">
+                  <span>★ 45 Must-Cover (Band A)</span>
+                  <span>📖 28 Quick-Read (Band B)</span>
+                  <span>👁 3 Headline Awareness</span>
+                  <span>📅 Jan–Sep 2026 (76 Total)</span>
+                  <span>↻ Refresh: Oct 2026</span>
+                </div>
+              </div>
+
+              <!-- Filter Bar Wrapping Awkwardly -->
+              <div class="before-filter-wrap">
+                <div style="font-family: var(--font-mono); font-size: 0.6rem; font-weight: bold; color: #666; margin-bottom: 3px;">
+                  SELECT GS PAPER (WRAPPING CLUTTER):
+                </div>
+                <div class="before-filter-row">
+                  <div class="before-filter-btn active">ALL PAPERS (76)</div>
+                  <div class="before-filter-btn">GS1 (16 LINKED)</div>
+                  <div class="before-filter-btn">GS2 (42 PRIMARY)</div>
+                  <div class="before-filter-btn">GS3 (32 PRIMARY)</div>
+                  <div class="before-filter-btn">GS4 / ETHICS (38 LINKED)</div>
+                </div>
+
+                <div style="font-family: var(--font-mono); font-size: 0.6rem; font-weight: bold; color: #666; margin-bottom: 3px;">
+                  PRIORITY TIER:
+                </div>
+                <div class="before-filter-row">
+                  <div class="before-filter-btn active">ALL TIERS (76)</div>
+                  <div class="before-filter-btn">★ MUST-COVER ONLY (45)</div>
+                  <div class="before-filter-btn">📖 QUICK READS (31)</div>
+                  <div class="before-filter-btn">⚡ HAS DELTA UPDATES (2)</div>
+                </div>
+              </div>
+
+              <!-- Section Title -->
+              <div style="font-family: var(--font-pixel); font-size: 1.15rem; color: #2A2A2A; border-bottom: 2px dashed #2A2A2A; padding-bottom: 3px; margin-bottom: 8px;">
+                BAND A: MUST-COVER TOPICS (45 SHOWN)
+              </div>
+
+              <!-- Topic Card 1 (3-Column Layout: Squeezed) -->
+              <div class="before-topic-card">
+                <!-- Rank Col -->
+                <div class="before-rank-col">
+                  <span style="font-family: var(--font-pixel); font-size: 1.5rem; color: var(--accent); line-height: 1;">#1</span>
+                  <span style="font-size: 0.55rem; font-family: var(--font-mono); font-weight: bold; color: #777;">RANK</span>
+                  <span style="font-size: 0.52rem; font-family: var(--font-mono); background: #2A2A2A; color: white; padding: 1px 3px; margin-top: 4px;">SEP</span>
+                </div>
+
+                <!-- Middle Content: Heavily Cramped! -->
+                <div class="before-middle-col">
+                  <!-- Paper Switcher wrapping awkwardly -->
+                  <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+                    <span style="font-size: 0.58rem; font-family: var(--font-mono); font-weight: bold; color: #777;">ANGLE:</span>
+                    <span style="font-size: 0.58rem; background: var(--gs2); color: white; padding: 1px 4px; border: 1px solid #2A2A2A;">GS2 (Primary)</span>
+                    <span style="font-size: 0.58rem; background: white; padding: 1px 4px; border: 1px solid #2A2A2A;">GS3</span>
+                    <span style="font-size: 0.58rem; background: white; padding: 1px 4px; border: 1px solid #2A2A2A;">GS4</span>
+                  </div>
+
+                  <div style="font-size: 0.62rem; font-family: var(--font-mono); color: #555;">
+                    Index: 9.4 | P: 0.94 | ★ High Effort
+                  </div>
+
+                  <div style="font-weight: bold; font-size: 0.82rem; line-height: 1.25;">
+                    E-Courts Mission Mode Project Phase III (Cabinet Approval)
+                  </div>
+
+                  <!-- Narrow Syllabus Box -->
+                  <div style="background: #FAF8F2; border: 1px solid #2A2A2A; border-left: 3px solid var(--folder); padding: 4px; font-size: 0.65rem;">
+                    <div style="font-weight: bold; color: #555; font-size: 0.55rem;">OFFICIAL SYLLABUS // GS2</div>
+                    <div>Structure, organization &amp; functioning of the Judiciary</div>
+                  </div>
+
+                  <div style="font-size: 0.7rem; color: #444; line-height: 1.35;">
+                    Phase III introduces open digital judiciary, digital records management, and AI assistance for docket backlog reduction.
+                  </div>
+                </div>
+
+                <!-- Right Action Col -->
+                <div class="before-action-col">
+                  <div style="width: 32px; height: 32px; border: 1.5px solid #2A2A2A; background: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-pixel); font-size: 1.3rem;">
+                    ☐
+                  </div>
+                  <span style="font-size: 0.52rem; font-family: var(--font-mono); margin-top: 3px;">MARK</span>
+                </div>
+              </div>
+
+              <!-- Topic Card 2 (With Delta Update in cramped col) -->
+              <div class="before-topic-card">
+                <div class="before-rank-col">
+                  <span style="font-family: var(--font-pixel); font-size: 1.5rem; color: var(--accent); line-height: 1;">#2</span>
+                  <span style="font-size: 0.55rem; font-family: var(--font-mono); font-weight: bold; color: #777;">RANK</span>
+                  <span style="font-size: 0.52rem; font-family: var(--font-mono); background: #2A2A2A; color: white; padding: 1px 3px; margin-top: 4px;">AUG</span>
+                </div>
+
+                <div class="before-middle-col">
+                  <div style="font-weight: bold; font-size: 0.82rem; line-height: 1.25;">
+                    Digital Personal Data Protection (DPDP) Act Rules &amp; Consent Framework
+                  </div>
+                  <div style="background: #FFF8E7; border: 1px solid var(--amber); padding: 4px; font-size: 0.65rem;">
+                    <span style="background: var(--amber); color: #2A2A2A; font-size: 0.55rem; font-weight: bold; padding: 1px 3px;">⚡ AUG DEVELOPMENT</span>
+                    <div style="margin-top: 2px;">Data Protection Board notification &amp; cross-border data transfer rules draft released.</div>
+                  </div>
+                </div>
+
+                <div class="before-action-col">
+                  <div style="width: 32px; height: 32px; border: 1.5px solid #2A2A2A; background: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-pixel); font-size: 1.3rem;">
+                    ☐
+                  </div>
+                  <span style="font-size: 0.52rem; font-family: var(--font-mono); margin-top: 3px;">MARK</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Sticky Bar Problem: Clashing with bottom nav -->
+            <div class="phone-sticky-bar sticky-bar-problem">
+              <span class="phone-sticky-label">CA:</span>
+              <div class="phone-sticky-rail">
+                <div class="phone-sticky-fill"></div>
+              </div>
+              <span class="phone-sticky-pct">45/60.5 pts (74%)</span>
+            </div>
+
+            <!-- Overlapped Mobile Dock in Before -->
+            <div class="phone-mobile-dock" style="opacity: 0.4;">
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Home</span></div>
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Explore</span></div>
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Search</span></div>
+              <div class="dock-tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span>CA</span></div>
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg><span>Vault</span></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="annotation-box">
+          <strong>Identified Mobile UX Flaws:</strong>
+          <ul>
+            <li><strong>32% screen loss:</strong> 106px out of 336px consumed by side rails.</li>
+            <li><strong>Filter exhaustion:</strong> Filters wrap into 5 jagged rows, pushing content below fold.</li>
+            <li><strong>Dock collision:</strong> Fixed bottom progress bar obscures bottom navigation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── COLUMN 2: OPTIMIZED DESIGN (AFTER / WIREFRAME 19) ── -->
+      <div class="simulator-column" id="colOptimized">
+        <div class="col-header">
+          <span class="pill pill-green">OPTIMIZED DESIGN (AFTER)</span>
+          <span>Full-Width DOS Dossier &amp; Snap Trays</span>
+        </div>
+
+        <div class="solution-callout" style="max-width: 390px;">
+          ✨ 100% full card width. Try tapping filters &amp; [MARK DONE]!
+        </div>
+
+        <!-- Phone Simulator: After -->
+        <div class="phone-device" id="phoneSimAfter">
+          <div class="phone-notch"></div>
+          
+          <div class="phone-screen">
+            <!-- Status Bar -->
+            <div class="phone-status-bar">
+              <span>9:41</span>
+              <span>5G 📶 100%</span>
+            </div>
+
+            <!-- App Nav -->
+            <div class="phone-app-nav">
+              <div class="phone-app-brand">
+                <span class="brand-box">TCB</span>
+                <span>CIVILS BREAKDOWN</span>
+              </div>
+              <span style="font-size: 0.85rem; font-family: var(--font-pixel); background: #EAE6D6; padding: 1px 6px; border: 1px solid #2A2A2A;">LIVE '27</span>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="phone-scroll-content" id="simScrollArea">
+              
+              <!-- 1. Hero Header -->
+              <div style="margin-bottom: 8px;">
+                <div class="opt-hero-badge">
+                  <div class="pulse-dot"></div>
+                  <span>UPDATED: SEPTEMBER 2026 // LIVE MAINS COHORT</span>
+                </div>
+
+                <div class="opt-title">
+                  THIS CYCLE'S <span>MUST-COVER</span> TOPICS
+                </div>
+                
+                <p class="opt-sub">
+                  Our probability engine evaluated <strong>76 themes</strong> across 9 months (Jan–Sep 2026). Master them in priority order.
+                </p>
+
+                <!-- Swipeable Header Metadata Carousel (Edge-Fade Mask) -->
+                <div class="opt-chips-tray">
+                  <div class="opt-chip active">
+                    <span>★ 45 Must-Cover (Band A)</span>
+                  </div>
+                  <div class="opt-chip">
+                    <span>📖 31 Quick Reads (Band B/C)</span>
+                  </div>
+                  <div class="opt-chip">
+                    <span>📅 Jan–Sep 2026 (76 Total)</span>
+                  </div>
+                  <div class="opt-chip">
+                    <span>↻ Next: Oct '26 Digest</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Model Explainer Accordion (Compact Mobile) -->
+              <button type="button" class="opt-explainer-btn" onclick="toggleSimExplainer()">
+                <span style="display: flex; align-items: center; gap: 6px;">
+                  💡 HOW DOES PRIORITY SCORING WORK?
+                  <span style="font-family: var(--font-mono); font-size: 0.6rem; background: var(--folder); padding: 1px 4px; border: 1px solid var(--border);">1-MIN</span>
+                </span>
+                <span id="explainerToggleIcon" style="font-family: var(--font-mono); font-size: 0.65rem; color: #666;">▼ EXPAND</span>
+              </button>
+
+              <div id="simExplainerBody" class="opt-explainer-content" style="display: none;">
+                <p style="margin-bottom: 6px; color: #333;">
+                  Shortlisted monthly themes are evaluated across <strong>8 calibrated parameters</strong> (0–2 scale), calculating a weighted <strong>Priority Index (0–100)</strong> mapped via logistic probability.
+                </p>
+                <div class="opt-param-pill">
+                  <strong>🎯 1. PYQ Recurrence (26% Weight):</strong> Strongest predictor of Mains reappearance.
+                </div>
+                <div class="opt-param-pill">
+                  <strong>🇮🇳 2. Govt Priority &amp; India's Stake (14%):</strong> Viksit Bharat pillars &amp; national security.
+                </div>
+                <div class="opt-param-pill">
+                  <strong>⏳ 3. Persistence (14%):</strong> Structural debates spanning months vs. single-day news.
+                </div>
+                <div class="opt-param-pill">
+                  <strong>🏛️ 4. Legal / Institutional Footprint (12%):</strong> Enacted Acts &amp; SC bench rulings.
+                </div>
+              </div>
+
+              <!-- 3. Touch-Friendly Filter Snap Trays -->
+              <div class="opt-filter-card">
+                <!-- GS Paper Filter Tray -->
+                <div>
+                  <div class="opt-filter-label">
+                    <span>📚 SELECT GS PAPER ANGLE:</span>
+                    <span style="color: var(--accent); font-size: 0.58rem;">SWIPE ➔</span>
+                  </div>
+                  <div class="opt-filter-snap-row" id="simPaperFilters">
+                    <button class="opt-filter-pill active" onclick="setSimPaperFilter('all', this)">ALL PAPERS (76)</button>
+                    <button class="opt-filter-pill gs1" onclick="setSimPaperFilter('GS1', this)">GS1 (16)</button>
+                    <button class="opt-filter-pill gs2" onclick="setSimPaperFilter('GS2', this)">GS2 (42)</button>
+                    <button class="opt-filter-pill gs3" onclick="setSimPaperFilter('GS3', this)">GS3 (32)</button>
+                    <button class="opt-filter-pill gs4" onclick="setSimPaperFilter('GS4', this)">GS4 (38)</button>
+                  </div>
+                </div>
+
+                <!-- Priority Tier Filter Tray -->
+                <div style="margin-top: 4px;">
+                  <div class="opt-filter-label">
+                    <span>⚖️ PRIORITY TIER:</span>
+                    <span style="color: var(--accent); font-size: 0.58rem;">SWIPE ➔</span>
+                  </div>
+                  <div class="opt-filter-snap-row" id="simTierFilters">
+                    <button class="opt-filter-pill active" onclick="setSimTierFilter('all', this)">ALL TIERS (76)</button>
+                    <button class="opt-filter-pill must-cover" onclick="setSimTierFilter('bandA', this)">★ MUST-COVER (45)</button>
+                    <button class="opt-filter-pill quick" onclick="setSimTierFilter('quickReads', this)">📖 QUICK READS (31)</button>
+                    <button class="opt-filter-pill delta" onclick="setSimTierFilter('hasUpdates', this)">⚡ HAS UPDATES (2)</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 1: Must-Cover Topics (Band A) -->
+              <div id="simBandASection">
+                <div class="opt-section-header">
+                  <div class="square"></div>
+                  <h2>BAND A: MUST-COVER TOPICS (<span id="simCountShown">45</span>/45)</h2>
+                </div>
+
+                <!-- Card 1: E-Courts Project Phase III -->
+                <div class="opt-card" id="cardTopic1">
+                  <!-- Retro Window Header -->
+                  <div class="opt-card-header">
+                    <div class="left-meta">
+                      <span class="opt-rank-tag">#1</span>
+                      <span class="opt-month-tag">SEP '26</span>
+                      <span class="opt-prob-tag">P: 0.94</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px;">
+                      <span class="opt-effort-tag">★ HIGH EFFORT</span>
+                      <span style="font-family: var(--font-pixel); font-size: 0.95rem; color: #888;">C:\CA\01.DOS</span>
+                    </div>
+                  </div>
+
+                  <!-- Full-Width Card Body -->
+                  <div class="opt-card-body">
+                    <!-- Title -->
+                    <div class="opt-card-title">
+                      E-Courts Mission Mode Project Phase III (Cabinet Approval)
+                    </div>
+
+                    <!-- Multi-Paper Angle Selector Ribbon -->
+                    <div class="opt-angle-selector">
+                      <span class="opt-angle-label">EXAM ANGLE:</span>
+                      <button class="opt-angle-btn active" style="background: var(--gs2);" onclick="switchTopicAngle(1, 'GS2', this)">GS2 (Primary)</button>
+                      <button class="opt-angle-btn" onclick="switchTopicAngle(1, 'GS3', this)">GS3</button>
+                      <button class="opt-angle-btn" onclick="switchTopicAngle(1, 'GS4', this)">GS4</button>
+                    </div>
+
+                    <!-- Official Syllabus Pointer (Full Width) -->
+                    <div class="opt-syllabus-box">
+                      <div class="opt-syllabus-header">
+                        <span id="topic1SyllabusLabel">OFFICIAL SYLLABUS // GS2</span>
+                        <span style="color: var(--mint);">EXACT MATCH</span>
+                      </div>
+                      <div class="opt-syllabus-text" id="topic1SyllabusText">
+                        Structure, organization &amp; functioning of the Judiciary and Ministries/Departments of Government
+                      </div>
+                    </div>
+
+                    <!-- Analytical Exam Hook -->
+                    <div class="opt-hook-text" id="topic1HookText">
+                      Phase III marks a paradigm shift from computerisation to a paperless, open, and interoperable digital justice system. <strong>Focus on:</strong> Digital infrastructure equity, AI integration for pending case backlog reduction, and privacy concerns in open access records.
+                    </div>
+                  </div>
+
+                  <!-- Full-Width Mobile Action Footer -->
+                  <div class="opt-card-footer">
+                    <div class="opt-status-indicator" id="statusTopic1">
+                      <span>● NOT STARTED</span>
+                      <span style="color: #999;">(WORTH +100 XP)</span>
+                    </div>
+                    <button type="button" class="opt-done-toggle-btn" id="btnDoneTopic1" onclick="toggleSimDone(1, event)">
+                      <span id="iconTopic1">☐</span>
+                      <span id="labelTopic1">MARK DONE</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Card 2: DPDP Act Rules & Consent Architecture -->
+                <div class="opt-card" id="cardTopic2">
+                  <div class="opt-card-header">
+                    <div class="left-meta">
+                      <span class="opt-rank-tag">#2</span>
+                      <span class="opt-month-tag">AUG '26</span>
+                      <span class="opt-prob-tag">P: 0.92</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px;">
+                      <span class="opt-effort-tag">★ HIGH EFFORT</span>
+                      <span style="font-family: var(--font-pixel); font-size: 0.95rem; color: #888;">C:\CA\02.DOS</span>
+                    </div>
+                  </div>
+
+                  <div class="opt-card-body">
+                    <div class="opt-card-title">
+                      Digital Personal Data Protection (DPDP) Act Rules &amp; Consent Framework
+                    </div>
+
+                    <div class="opt-angle-selector">
+                      <span class="opt-angle-label">EXAM ANGLE:</span>
+                      <button class="opt-angle-btn active" style="background: var(--gs2);" onclick="switchTopicAngle(2, 'GS2', this)">GS2 (Primary)</button>
+                      <button class="opt-angle-btn" onclick="switchTopicAngle(2, 'GS3', this)">GS3</button>
+                      <button class="opt-angle-btn" onclick="switchTopicAngle(2, 'GS4', this)">GS4</button>
+                    </div>
+
+                    <div class="opt-syllabus-box">
+                      <div class="opt-syllabus-header">
+                        <span id="topic2SyllabusLabel">OFFICIAL SYLLABUS // GS2</span>
+                        <span style="color: var(--mint);">EXACT MATCH</span>
+                      </div>
+                      <div class="opt-syllabus-text" id="topic2SyllabusText">
+                        Government policies and interventions for development in various sectors and issues arising out of their design and implementation.
+                      </div>
+                    </div>
+
+                    <div class="opt-hook-text" id="topic2HookText">
+                      Crucial test of the delicate balance between state surveillance exemptions under Section 17 and individual fundamental right to privacy (Justice K.S. Puttaswamy judgment).
+                    </div>
+
+                    <!-- Delta Subsequent Update Banner -->
+                    <div class="opt-update-banner" id="bannerTopic2">
+                      <div class="opt-update-badge">
+                        <span>⚡ NEW DEVELOPMENT // AUGUST 2026</span>
+                      </div>
+                      <div class="opt-update-text">
+                        Draft notification issued for Data Protection Board (DPB) composition and cross-border blacklisted jurisdictions.
+                      </div>
+                      <div class="opt-update-action">
+                        <span style="font-family: var(--font-mono); font-size: 0.6rem; color: #666;">SUBSEQUENT UPDATE REVIEW</span>
+                        <button type="button" class="opt-update-btn" id="btnUpdate2" onclick="toggleSimUpdate(2, event)">
+                          <span id="iconUpdate2">☐</span>
+                          <span id="labelUpdate2">MARK REVIEWED (+50 XP)</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="opt-card-footer">
+                    <div class="opt-status-indicator" id="statusTopic2">
+                      <span>● NOT STARTED</span>
+                      <span style="color: #999;">(WORTH +100 XP)</span>
+                    </div>
+                    <button type="button" class="opt-done-toggle-btn" id="btnDoneTopic2" onclick="toggleSimDone(2, event)">
+                      <span id="iconTopic2">☐</span>
+                      <span id="labelTopic2">MARK DONE</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Section 2: Quick Reads (Band B & C) -->
+              <div id="simQuickSection">
+                <button type="button" class="opt-accordion-btn" onclick="toggleSimQuickReads()">
+                  <span>📖 QUICK READS (BAND B &amp; C) — 31 TOPICS</span>
+                  <span id="quickToggleIcon" style="font-family: var(--font-mono); font-size: 0.65rem; color: #666;">▼ SHOW LIST</span>
+                </button>
+
+                <div id="simQuickList" style="display: none;">
+                  <div style="background: #EDF5FF; border: 1px solid #4A90E2; padding: 6px 8px; font-size: 0.7rem; color: #1E40AF; margin-top: 6px;">
+                    <strong>Band B Strategy:</strong> Concise 1-page summaries with 3 bulleted arguments and 1 statutory/data anchor.
+                  </div>
+
+                  <!-- Quick Read Item 1 -->
+                  <div class="opt-quick-item" id="quickItem1">
+                    <div class="opt-quick-left">
+                      <div class="opt-quick-meta">
+                        <span style="font-family: var(--font-pixel); font-size: 1.15rem; color: var(--border);">#46</span>
+                        <span style="background: #E8F4FD; color: #1D4ED8; padding: 1px 4px; font-weight: bold; border: 1px solid #3B82F6;">GS3</span>
+                        <span style="background: #EEE; padding: 1px 4px;">SEP</span>
+                        <span style="color: #666;">P: 0.44</span>
+                        <span style="background: #DCEEFF; color: #4A90E2; padding: 1px 4px; font-weight: bold;">QUICK READ</span>
+                      </div>
+                      <div class="opt-quick-title">National Electricity Plan (Transmission 2022–2032)</div>
+                      <div style="font-size: 0.65rem; color: #666;">Core: Inter-regional renewable transmission corridors.</div>
+                    </div>
+                    <button type="button" class="opt-quick-btn" id="btnQuick1" onclick="toggleSimQuick(1, event)">
+                      ☐
+                    </button>
+                  </div>
+
+                  <!-- Quick Read Item 2 -->
+                  <div class="opt-quick-item" id="quickItem2">
+                    <div class="opt-quick-left">
+                      <div class="opt-quick-meta">
+                        <span style="font-family: var(--font-pixel); font-size: 1.15rem; color: var(--border);">#47</span>
+                        <span style="background: #FFF5E5; color: #946700; padding: 1px 4px; font-weight: bold; border: 1px solid #D97706;">GS1</span>
+                        <span style="background: #EEE; padding: 1px 4px;">AUG</span>
+                        <span style="color: #666;">P: 0.38</span>
+                        <span style="background: #FFF3D0; color: #946700; padding: 1px 4px; font-weight: bold;">HEADLINE</span>
+                      </div>
+                      <div class="opt-quick-title">Heatwave Vulnerability &amp; Urban Heat Island Index</div>
+                      <div style="font-size: 0.65rem; color: #666;">Core: Urban microclimate adaptation &amp; cool roof policy.</div>
+                    </div>
+                    <button type="button" class="opt-quick-btn" id="btnQuick2" onclick="toggleSimQuick(2, event)">
+                      ☐
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Optimized Sticky Progress Bar: Floats at bottom: 52px above Mobile Dock -->
+            <div class="phone-sticky-bar" id="simStickyBar">
+              <span class="phone-sticky-label">CA PROGRESS:</span>
+              <div class="phone-sticky-rail">
+                <div class="phone-sticky-fill" id="simProgressBarFill"></div>
+              </div>
+              <span class="phone-sticky-pct" id="simProgressText">45.0/60.5 pts (74%)</span>
+            </div>
+
+            <!-- Pinned Mobile Dock: Permanently anchored at bottom -->
+            <div class="phone-mobile-dock">
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Home</span></div>
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Explore</span></div>
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Search</span></div>
+              <div class="dock-tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span>CA Priority</span></div>
+              <div class="dock-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg><span>My Vault</span></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="annotation-box">
+          <strong>Wireframe 19 Enhancements:</strong>
+          <ul>
+            <li><strong>100% Reading Width:</strong> Eliminated side columns on mobile. Full width for syllabus box and exam hooks.</li>
+            <li><strong>Thumb-Friendly Filters:</strong> Horizontal snap trays with edge fade — zero vertical wrapping!</li>
+            <li><strong>Elevated Action Footer:</strong> Wide tactile <code>[MARK DONE]</code> button with live XP bursts.</li>
+            <li><strong>Double-Decker Docking:</strong> Progress bar floats at <code>bottom: 52px</code> right above bottom navigation.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ── SIMULATOR INTERACTIVITY SCRIPT ── -->
+  <script>
+    let simScore = 45.0;
+    const maxScore = 60.5;
+    let card1Done = false;
+    let card2Done = false;
+    let update2Reviewed = false;
+    let quick1Done = false;
+    let quick2Done = false;
+
+    // View Toggles
+    function setMode(mode) {
+      const grid = document.getElementById('comparisonGrid');
+      const colBefore = document.getElementById('colBefore');
+      const colOpt = document.getElementById('colOptimized');
+      const btnSide = document.getElementById('btnSideBySide');
+      const btnOpt = document.getElementById('btnOnlyOptimized');
+      const btnBef = document.getElementById('btnOnlyBefore');
+
+      btnSide.classList.remove('active');
+      btnOpt.classList.remove('active');
+      btnBef.classList.remove('active');
+
+      if (mode === 'side-by-side') {
+        grid.style.gridTemplateColumns = '1fr 1fr';
+        colBefore.style.display = 'flex';
+        colOpt.style.display = 'flex';
+        btnSide.classList.add('active');
+      } else if (mode === 'only-optimized') {
+        grid.style.gridTemplateColumns = '1fr';
+        colBefore.style.display = 'none';
+        colOpt.style.display = 'flex';
+        btnOpt.classList.add('active');
+      } else if (mode === 'only-before') {
+        grid.style.gridTemplateColumns = '1fr';
+        colBefore.style.display = 'flex';
+        colOpt.style.display = 'none';
+        btnBef.classList.add('active');
+      }
+    }
+
+    // Toggle Explainer Accordion
+    function toggleSimExplainer() {
+      const body = document.getElementById('simExplainerBody');
+      const icon = document.getElementById('explainerToggleIcon');
+      if (body.style.display === 'none') {
+        body.style.display = 'block';
+        icon.innerText = '▲ COLLAPSE';
+      } else {
+        body.style.display = 'none';
+        icon.innerText = '▼ EXPAND';
+      }
+    }
+
+    // Toggle Quick Reads Accordion
+    function toggleSimQuickReads() {
+      const body = document.getElementById('simQuickList');
+      const icon = document.getElementById('quickToggleIcon');
+      if (body.style.display === 'none') {
+        body.style.display = 'block';
+        icon.innerText = '▲ HIDE LIST';
+      } else {
+        body.style.display = 'none';
+        icon.innerText = '▼ SHOW LIST';
+      }
+    }
+
+    // Paper Filter Simulation
+    function setSimPaperFilter(paper, btn) {
+      document.querySelectorAll('#simPaperFilters .opt-filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const card1 = document.getElementById('cardTopic1');
+      const card2 = document.getElementById('cardTopic2');
+      const countEl = document.getElementById('simCountShown');
+
+      if (paper === 'GS1') {
+        card1.style.display = 'none';
+        card2.style.display = 'none';
+        countEl.innerText = '16';
+      } else if (paper === 'GS2') {
+        card1.style.display = 'flex';
+        card2.style.display = 'flex';
+        countEl.innerText = '42';
+      } else if (paper === 'GS3') {
+        card1.style.display = 'flex';
+        card2.style.display = 'flex';
+        countEl.innerText = '32';
+      } else if (paper === 'GS4') {
+        card1.style.display = 'flex';
+        card2.style.display = 'flex';
+        countEl.innerText = '38';
+      } else {
+        card1.style.display = 'flex';
+        card2.style.display = 'flex';
+        countEl.innerText = '45';
+      }
+    }
+
+    // Tier Filter Simulation
+    function setSimTierFilter(tier, btn) {
+      document.querySelectorAll('#simTierFilters .opt-filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const bandASec = document.getElementById('simBandASection');
+      const quickSec = document.getElementById('simQuickSection');
+
+      if (tier === 'bandA') {
+        bandASec.style.display = 'block';
+        quickSec.style.display = 'none';
+      } else if (tier === 'quickReads') {
+        bandASec.style.display = 'none';
+        quickSec.style.display = 'block';
+        document.getElementById('simQuickList').style.display = 'block';
+      } else if (tier === 'hasUpdates') {
+        bandASec.style.display = 'block';
+        document.getElementById('cardTopic1').style.display = 'none';
+        document.getElementById('cardTopic2').style.display = 'flex';
+        quickSec.style.display = 'none';
+      } else {
+        bandASec.style.display = 'block';
+        document.getElementById('cardTopic1').style.display = 'flex';
+        document.getElementById('cardTopic2').style.display = 'flex';
+        quickSec.style.display = 'block';
+      }
+    }
+
+    // Switch Topic Angle
+    function switchTopicAngle(topicId, paper, btn) {
+      const container = btn.parentElement;
+      container.querySelectorAll('.opt-angle-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.background = 'white';
+      });
+      btn.classList.add('active');
+
+      const colors = { GS1: '#D97706', GS2: '#2563EB', GS3: '#059669', GS4: '#7C3AED' };
+      btn.style.background = colors[paper] || '#2A2A2A';
+
+      if (topicId === 1) {
+        const label = document.getElementById('topic1SyllabusLabel');
+        const text = document.getElementById('topic1SyllabusText');
+        const hook = document.getElementById('topic1HookText');
+
+        if (paper === 'GS2') {
+          label.innerText = 'OFFICIAL SYLLABUS // GS2';
+          text.innerText = 'Structure, organization & functioning of the Judiciary and Ministries/Departments of Government';
+          hook.innerHTML = 'Phase III introduces open digital justice, records management, and AI assistance for docket backlog reduction.';
+        } else if (paper === 'GS3') {
+          label.innerText = 'OFFICIAL SYLLABUS // GS3';
+          text.innerText = 'Science & Technology- developments and their applications and effects in everyday life; IT and Computers.';
+          hook.innerHTML = 'Cloud architecture, open-source APIs, interoperable criminal justice systems (ICJS), and cybersecurity protocols.';
+        } else if (paper === 'GS4') {
+          label.innerText = 'OFFICIAL SYLLABUS // GS4';
+          text.innerText = 'Public/Civil service values and Ethics in Public administration: Transparency, accountability and ethical AI governance.';
+          hook.innerHTML = 'Algorithmic bias in judicial decision support, digital divide in access to justice for marginalized citizens.';
+        }
+      }
+    }
+
+    // Spawn Floating XP
+    function spawnSimulatorXp(e, text) {
+      const simPhone = document.getElementById('phoneSimAfter');
+      const burst = document.createElement('div');
+      burst.className = 'sim-xp-burst';
+      burst.innerText = text;
+
+      const rect = simPhone.getBoundingClientRect();
+      const x = e.clientX ? (e.clientX - rect.left - 20) : 150;
+      const y = e.clientY ? (e.clientY - rect.top - 20) : 400;
+
+      burst.style.left = Math.max(20, Math.min(280, x)) + 'px';
+      burst.style.top = Math.max(100, Math.min(650, y)) + 'px';
+
+      simPhone.appendChild(burst);
+      setTimeout(() => burst.remove(), 850);
+    }
+
+    // Update Progress Bar
+    function updateProgressUI() {
+      const pct = Math.round((simScore / maxScore) * 100);
+      document.getElementById('simProgressBarFill').style.width = Math.min(100, pct) + '%';
+      document.getElementById('simProgressText').innerText = simScore.toFixed(1) + '/' + maxScore.toFixed(1) + ' pts (' + pct + '%)';
+    }
+
+    // Toggle Done for Card 1 & Card 2
+    function toggleSimDone(topicId, e) {
+      if (topicId === 1) {
+        card1Done = !card1Done;
+        const card = document.getElementById('cardTopic1');
+        const btn = document.getElementById('btnDoneTopic1');
+        const icon = document.getElementById('iconTopic1');
+        const label = document.getElementById('labelTopic1');
+        const status = document.getElementById('statusTopic1');
+
+        if (card1Done) {
+          card.classList.add('is-done');
+          btn.classList.add('is-done');
+          icon.innerText = '✔';
+          label.innerText = 'COMPLETED';
+          status.innerHTML = '<span style="color: var(--mint);">✔ MASTERED</span>';
+          simScore += 1.0;
+          spawnSimulatorXp(e, '+100 XP');
+        } else {
+          card.classList.remove('is-done');
+          btn.classList.remove('is-done');
+          icon.innerText = '☐';
+          label.innerText = 'MARK DONE';
+          status.innerHTML = '<span>● NOT STARTED</span> <span style="color: #999;">(WORTH +100 XP)</span>';
+          simScore = Math.max(0, simScore - 1.0);
+        }
+      } else if (topicId === 2) {
+        card2Done = !card2Done;
+        const card = document.getElementById('cardTopic2');
+        const btn = document.getElementById('btnDoneTopic2');
+        const icon = document.getElementById('iconTopic2');
+        const label = document.getElementById('labelTopic2');
+        const status = document.getElementById('statusTopic2');
+
+        if (card2Done) {
+          card.classList.add('is-done');
+          btn.classList.add('is-done');
+          icon.innerText = '✔';
+          label.innerText = 'COMPLETED';
+          status.innerHTML = '<span style="color: var(--mint);">✔ MASTERED</span>';
+          simScore += 1.0;
+          spawnSimulatorXp(e, '+100 XP');
+        } else {
+          card.classList.remove('is-done');
+          btn.classList.remove('is-done');
+          icon.innerText = '☐';
+          label.innerText = 'MARK DONE';
+          status.innerHTML = '<span>● NOT STARTED</span> <span style="color: #999;">(WORTH +100 XP)</span>';
+          simScore = Math.max(0, simScore - 1.0);
+        }
+      }
+      updateProgressUI();
+    }
+
+    // Toggle Delta Update Review
+    function toggleSimUpdate(topicId, e) {
+      update2Reviewed = !update2Reviewed;
+      const btn = document.getElementById('btnUpdate2');
+      const icon = document.getElementById('iconUpdate2');
+      const label = document.getElementById('labelUpdate2');
+
+      if (update2Reviewed) {
+        btn.classList.add('reviewed');
+        icon.innerText = '✔';
+        label.innerText = 'REVIEWED';
+        spawnSimulatorXp(e, '+50 XP');
+      } else {
+        btn.classList.remove('reviewed');
+        icon.innerText = '☐';
+        label.innerText = 'MARK REVIEWED (+50 XP)';
+      }
+    }
+
+    // Toggle Quick Read Done
+    function toggleSimQuick(itemId, e) {
+      if (itemId === 1) {
+        quick1Done = !quick1Done;
+        const item = document.getElementById('quickItem1');
+        const btn = document.getElementById('btnQuick1');
+        if (quick1Done) {
+          item.classList.add('is-done');
+          btn.classList.add('is-done');
+          btn.innerText = '✔';
+          simScore += 0.5;
+          spawnSimulatorXp(e, '+50 XP');
+        } else {
+          item.classList.remove('is-done');
+          btn.classList.remove('is-done');
+          btn.innerText = '☐';
+          simScore = Math.max(0, simScore - 0.5);
+        }
+      } else if (itemId === 2) {
+        quick2Done = !quick2Done;
+        const item = document.getElementById('quickItem2');
+        const btn = document.getElementById('btnQuick2');
+        if (quick2Done) {
+          item.classList.add('is-done');
+          btn.classList.add('is-done');
+          btn.innerText = '✔';
+          simScore += 0.5;
+          spawnSimulatorXp(e, '+50 XP');
+        } else {
+          item.classList.remove('is-done');
+          btn.classList.remove('is-done');
+          btn.innerText = '☐';
+          simScore = Math.max(0, simScore - 0.5);
+        }
+      }
+      updateProgressUI();
+    }
+  </script>
+</body>
+</html>

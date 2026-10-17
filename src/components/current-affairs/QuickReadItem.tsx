@@ -22,8 +22,8 @@ export default function QuickReadItem({
         isDone ? 'opacity-65 bg-[#FAF9F5]' : 'hover:-translate-y-0.5'
       }`}
     >
-      {/* Left Content Area */}
-      <div className="flex-1 flex flex-col gap-1.5">
+      {/* Desktop Content Area (Preserved Unchanged) */}
+      <div className="hidden sm:flex flex-1 flex-col gap-1.5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-vt text-xl text-[#2A2A2A] font-bold">
             #{topic.rank}
@@ -58,6 +58,45 @@ export default function QuickReadItem({
         <div className="text-xs text-[#555] font-sans">
           <strong>Mains Focus / Static Core:</strong> {topic.staticCore} —{' '}
           <em className="text-[#666]">{topic.prepDepth}</em>
+        </div>
+      </div>
+
+      {/* Mobile-Only Structured Content Area */}
+      <div className="sm:hidden flex-1 flex flex-col gap-1">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="font-vt text-lg text-[#2A2A2A] font-bold">
+            #{topic.rank}
+          </span>
+          <span className="font-mono text-[10px] font-bold bg-[#E8F4FD] text-[#1D4ED8] px-1 py-0.5 border border-[#3B82F6]">
+            {topic.primaryPaper}
+          </span>
+          <span className="font-mono text-[10px] font-bold bg-[#EEE] text-[#333] px-1 py-0.5 border border-[#CCC]">
+            {topic.month}
+          </span>
+          <span className="font-mono text-[10px] text-[#666]">
+            P: {topic.prob}
+          </span>
+          <span
+            className={`font-mono text-[9px] font-bold px-1 py-0.5 border ${
+              isBandC
+                ? 'bg-[#FFF3D0] text-[#946700] border-[#F5A623]'
+                : 'bg-[#DCEEFF] text-[#4A90E2] border-[#4A90E2]'
+            }`}
+          >
+            {isBandC ? 'HEADLINE' : 'QUICK'}
+          </span>
+        </div>
+
+        <div
+          className={`font-sans font-bold text-[13px] text-[#2A2A2A] leading-snug ${
+            isDone ? 'line-through text-[#666]' : ''
+          }`}
+        >
+          {topic.title}
+        </div>
+
+        <div className="text-[11px] text-[#555] font-sans leading-tight">
+          <strong>Static Core:</strong> {topic.staticCore}
         </div>
       </div>
 
