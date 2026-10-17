@@ -9,13 +9,19 @@
 }
 
 body {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-dm-sans);
   background-color: #F8F5EE;
   background-image: 
     linear-gradient(to right, #D3D0C5 1px, transparent 1px),
     linear-gradient(to bottom, #D3D0C5 1px, transparent 1px);
   background-size: 25px 25px;
   color: #2A2A2A;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-reading {
+  font-family: var(--font-dm-sans);
+  letter-spacing: -0.01em;
 }
 
 @layer components {
@@ -39,6 +45,19 @@ body {
     font-family: 'VT323', monospace;
     font-size: 1.2rem;
     letter-spacing: 1px;
+    min-height: 38px;
+  }
+
+  .window-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    flex: 1;
+    margin-right: 8px;
   }
 
   .window-controls {
@@ -415,6 +434,37 @@ details[open] summary ~ * {
   border-top: 5px solid #FACC15;
 }
 
+/* Mobile-Elevated HUD Pill (Clears finger touch completely by 48px) */
+.comet-hud-pill.mobile-elevated {
+  top: -24px !important;
+  transform: translate(-50%, -100%) !important;
+}
+.comet-hud-pill.mobile-elevated .comet-hud-arrow {
+  bottom: -11px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 11px solid #FACC15;
+}
+
+/* Mobile Horizontal Tray with Gradient Fade Mask */
+.smart-tag-tray {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+.smart-tag-tray::-webkit-scrollbar {
+  display: none;
+}
+.smart-tag-tray {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Timeline Active Node Glow & Highlight */
 .timeline-node-active .timeline-node-dot {
   background: #FACC15 !important;
@@ -539,6 +589,14 @@ details[open] summary ~ * {
   gap: 16px;
   z-index: 150;
   box-shadow: 0 -3px 0 rgba(42, 42, 42, 0.10);
+}
+
+@media (max-width: 767px) {
+  .sticky-bar {
+    bottom: 54px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
 }
 
 .sticky-label {

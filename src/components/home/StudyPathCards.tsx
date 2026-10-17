@@ -36,7 +36,7 @@ export default function StudyPathCards() {
               <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 -translate-y-0.5 transition-all text-retro-border" />
             </h3>
 
-            <p className="font-space text-xs sm:text-sm text-retro-border/85 leading-relaxed mb-6">
+            <p className="font-sans text-xs sm:text-sm text-retro-border/90 leading-relaxed mb-6">
               Deconstruct the official UPSC syllabus line-by-line. Inspect what has been asked from every single syllabus pointer and subtopic across GS1–4 and Essay.
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function StudyPathCards() {
               <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 -translate-y-0.5 transition-all text-retro-border" />
             </h3>
 
-            <p className="font-space text-xs sm:text-sm text-retro-border/85 leading-relaxed mb-6">
+            <p className="font-sans text-xs sm:text-sm text-retro-border/90 leading-relaxed mb-6">
               Spot repeated themes across a 14-year horizon. Leverage syllabus micro-themes, directives, and recurring structural templates for maximum marks return.
             </p>
           </div>
@@ -120,7 +120,7 @@ export default function StudyPathCards() {
               <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 -translate-y-0.5 transition-all text-retro-border" />
             </h3>
 
-            <p className="font-space text-xs sm:text-sm text-retro-border/85 leading-relaxed mb-6">
+            <p className="font-sans text-xs sm:text-sm text-retro-border/90 leading-relaxed mb-6">
               Cut through monthly magazine bloat. 76 contemporary themes ranked by an 8-parameter probability model. Focus on Band A must-covers and cross-paper linkages.
             </p>
           </div>

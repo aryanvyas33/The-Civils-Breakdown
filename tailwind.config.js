@@ -12,6 +12,9 @@ module.exports = {
         space: ['"Space Mono"', 'monospace'],
         vt: ['"VT323"', 'monospace'],
       },
+      borderWidth: {
+        '3': '3px',
+      },
       boxShadow: {
         'retro': '6px 6px 0px rgba(42, 42, 42, 1)',
         'retro-sm': '3px 3px 0px rgba(42, 42, 42, 1)',

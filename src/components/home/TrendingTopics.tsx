@@ -47,23 +47,27 @@ const FILTER_TABS = [
 
 export default function TrendingTopics() {
   const [activeTab, setActiveTab] = useState<typeof FILTER_TABS[number]['id']>('all');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const filteredThemes = TRENDING_THEMES.filter((theme) => {
     if (activeTab === 'all') return true;
     return theme.paper === activeTab || theme.paper === 'all';
   });
 
+  const topThemes = filteredThemes.slice(0, 5);
+
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 w-full">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20 w-full">
       <div className="retro-container bg-retro-window border-4">
         
         {/* Terminal Header */}
         <div className="window-header bg-retro-border">
-          <div className="flex items-center gap-2 font-vt text-lg text-white">
-            <Tag className="w-4 h-4 text-retro-folder" />
-            <span>C:\INDEX\HIGH_YIELD_THEMES.DB</span>
+          <div className="window-title font-vt text-lg text-white">
+            <Tag className="w-4 h-4 text-retro-folder shrink-0" />
+            <span className="hidden sm:inline">C:\INDEX\HIGH_YIELD_THEMES.DB</span>
+            <span className="sm:hidden">INDEX\HIGH_YIELD.DB</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <span className="hidden sm:inline text-xs font-vt uppercase text-white/80">
               Corpus: 14 Years (2013-2026)
             </span>
@@ -71,10 +75,10 @@ export default function TrendingTopics() {
           </div>
         </div>
 
-        <div className="p-6 sm:p-8">
+        <div className="p-4 sm:p-6 md:p-8">
           
           {/* Header & Description */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b-2 border-retro-border gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 pb-4 border-b-2 border-retro-border gap-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="retro-tag text-[11px] bg-retro-folder text-retro-border">RECURRING PATTERNS</span>
@@ -83,8 +87,8 @@ export default function TrendingTopics() {
               <h2 className="font-vt text-3xl sm:text-4xl uppercase text-retro-border flex items-center gap-2">
                 <span>Trending & High-Yield Micro-Themes</span>
               </h2>
-              <p className="font-space text-xs sm:text-sm text-retro-border/80 mt-1 max-w-2xl">
-                Topics that recur across papers and years. Click any theme to instantly query all matching questions, marks weightage, and year distributions.
+              <p className="font-sans text-xs sm:text-sm text-retro-border/90 mt-1 max-w-2xl leading-relaxed">
+                Topics that recur across papers and years. Tap any theme to instantly query matching questions, marks weightage, and year distributions.
               </p>
             </div>
 
@@ -99,7 +103,7 @@ export default function TrendingTopics() {
           </div>
 
           {/* Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-6 hide-scroll">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-4 hide-scroll">
             <span className="font-vt text-sm font-bold text-retro-border uppercase flex items-center gap-1 mr-1">
               <Filter className="w-3.5 h-3.5" /> Filter:
             </span>
@@ -122,8 +126,46 @@ export default function TrendingTopics() {
             })}
           </div>
 
-          {/* Themes Badges Cloud */}
-          <div className="flex flex-wrap gap-2.5 sm:gap-3">
+          {/* Mobile Tier 1: Horizontal Snap Tray with Gradient Fade Mask */}
+          <div className="sm:hidden mb-3">
+            <div className="text-[11px] font-space text-retro-border/70 mb-1 flex items-center justify-between">
+              <span>PRIORITY SWIPE TRAY:</span>
+              <span className="font-vt text-sm uppercase text-retro-accent">SWIPE RIGHT →</span>
+            </div>
+            <div className="smart-tag-tray py-1">
+              {topThemes.map((theme) => (
+                <Link
+                  key={theme.name}
+                  href={`/search?q=${encodeURIComponent(theme.name)}`}
+                  className="flex-shrink-0 group relative inline-flex items-center gap-2 px-3 py-2 bg-white border-2 border-retro-border shadow-retro-sm scroll-snap-start"
+                >
+                  <span className="font-sans text-xs font-semibold text-retro-border group-hover:text-retro-accent transition-colors whitespace-nowrap">
+                    {theme.name}
+                  </span>
+                  {theme.hyi && (
+                    <span className="text-[10px] font-vt px-1.5 py-0.2 bg-retro-bg border border-retro-border text-retro-border">
+                      HYI {theme.hyi}
+                    </span>
+                  )}
+                  <span className="text-[9px] font-space font-bold px-1 py-0.2 uppercase bg-retro-border text-white">
+                    {theme.paperLabel}
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            {/* Expand / Collapse Button for Mobile */}
+            <button
+              type="button"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="w-full mt-2 bg-white border-2 border-dashed border-retro-border py-2 px-3 font-vt text-base uppercase text-retro-border flex items-center justify-center gap-2 hover:bg-retro-window transition-colors cursor-pointer"
+            >
+              <span>{isExpanded ? '▲ COLLAPSE THEMES' : `▼ SHOW ALL ${filteredThemes.length} THEMES`}</span>
+            </button>
+          </div>
+
+          {/* Desktop Full Cloud OR Expanded Mobile Cloud */}
+          <div className={`${isExpanded ? 'flex' : 'hidden'} sm:flex flex-wrap gap-2.5 sm:gap-3`}>
             {filteredThemes.map((theme) => {
               return (
                 <Link
@@ -133,7 +175,7 @@ export default function TrendingTopics() {
                     theme.highlight ? 'shadow-retro-sm border-retro-border' : 'shadow-none'
                   }`}
                 >
-                  <span className="font-space text-xs sm:text-sm font-bold text-retro-border group-hover:text-retro-accent transition-colors">
+                  <span className="font-sans text-xs sm:text-sm font-semibold text-retro-border group-hover:text-retro-accent transition-colors">
                     {theme.name}
                   </span>
                   
@@ -152,9 +194,9 @@ export default function TrendingTopics() {
           </div>
 
           {/* Footer note inside terminal */}
-          <div className="mt-8 pt-4 border-t border-dashed border-retro-border flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-space text-retro-border/70 gap-2">
+          <div className="mt-6 pt-4 border-t border-dashed border-retro-border flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-sans text-retro-border/80 gap-2">
             <span>💡 Pro-tip: Questions with HYI &gt; 90 have appeared in at least 5 different examination cycles.</span>
-            <Link href="/search?q=sustainable+development" className="text-retro-border font-bold hover:underline">
+            <Link href="/search?q=sustainable+development" className="text-retro-border font-bold hover:underline font-space">
               Try searching "Sustainable Development" →
             </Link>
           </div>

@@ -4,6 +4,7 @@ import SearchBar from '@/components/search/SearchBar';
 import MarqueeTicker from '@/components/home/MarqueeTicker';
 import FeatureShowcase from '@/components/home/FeatureShowcase';
 import StudyPathCards from '@/components/home/StudyPathCards';
+import TrendingTopics from '@/components/home/TrendingTopics';
 import YearTimeline from '@/components/home/YearTimeline';
 import { getStats } from '@/lib/data';
 import { Terminal, Zap } from 'lucide-react';
@@ -192,7 +193,10 @@ export default function HomePage() {
       {/* 4. Choose Your Study Approach */}
       <StudyPathCards />
 
-      {/* 5. Chronological Year Timeline Archive (2013-2026) */}
+      {/* 5. Trending & High-Yield Micro-Themes Cloud */}
+      <TrendingTopics />
+
+      {/* 6. Chronological Year Timeline Archive (2013-2026) */}
       <YearTimeline />
 
     </div>

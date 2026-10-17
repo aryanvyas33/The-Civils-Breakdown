@@ -151,7 +151,10 @@ export default function QuestionCard({
         
         {/* Fake Window Header */}
         <div className={`window-header ${headerBgClass} relative z-10 pointer-events-none`}>
-          <span>C:\UPSC\{question.paperId.toUpperCase()}\{question.year}\RELATED.txt</span>
+          <div className="window-title font-vt text-lg">
+            <span className="hidden sm:inline">C:\UPSC\{question.paperId.toUpperCase()}\{question.year}\RELATED.txt</span>
+            <span className="sm:hidden">{question.paperId.toUpperCase()}&apos;{String(question.year).slice(-2)} // RELATED</span>
+          </div>
         </div>
 
         <div className="p-4 flex flex-col flex-grow relative z-10 pointer-events-none">
@@ -172,7 +175,7 @@ export default function QuestionCard({
           </div>
 
           <p
-            className="text-sm font-space font-bold text-retro-border line-clamp-3 mb-4 flex-grow leading-relaxed"
+            className="text-[14px] sm:text-sm font-sans font-medium text-retro-border line-clamp-3 mb-4 flex-grow leading-relaxed"
             dangerouslySetInnerHTML={{
               __html: isEssay ? `&ldquo;${highlighted}&rdquo;` : highlighted,
             }}
@@ -234,8 +237,11 @@ export default function QuestionCard({
         
         {/* Fake Window Header */}
         <div className={`window-header ${headerBgClass} relative z-10 pointer-events-none`}>
-          <span>C:\UPSC\{question.paperId.toUpperCase()}\{question.year}\Q-{question.questionNumber}.txt</span>
-          <div className="window-controls pointer-events-auto">
+          <div className="window-title font-vt text-lg">
+            <span className="hidden sm:inline">C:\UPSC\{question.paperId.toUpperCase()}\{question.year}\Q-{question.questionNumber}.txt</span>
+            <span className="sm:hidden">{question.paperId.toUpperCase()}&apos;{String(question.year).slice(-2)} // Q.{question.questionNumber}</span>
+          </div>
+          <div className="window-controls pointer-events-auto shrink-0">
             <div className="window-btn"></div>
             <div className="window-btn"></div>
             <div className="window-btn close"></div>
@@ -272,7 +278,7 @@ export default function QuestionCard({
                 highlightedText || highlightQuestionKeywords(question.text, question.tags, question.keywords);
               return (
                 <h3
-                  className={`text-base md:text-lg font-space font-bold text-retro-border leading-snug group-hover/card:text-retro-accent transition-colors ${
+                  className={`text-[15px] sm:text-base md:text-lg font-sans font-medium text-retro-border leading-relaxed tracking-normal group-hover/card:text-retro-accent transition-colors ${
                     isEssay ? 'italic' : ''
                   }`}
                   dangerouslySetInnerHTML={{
@@ -284,21 +290,21 @@ export default function QuestionCard({
           </div>
 
           <div className="flex items-center justify-between mt-2 pt-3 border-t-2 border-dashed border-retro-border relative z-20 pointer-events-auto overflow-hidden gap-2">
-            <div className="flex overflow-x-auto hide-scroll snap-x items-center gap-1.5 pb-1">
+            <div className="flex-1 min-w-0 overflow-x-auto hide-scroll flex items-center gap-1.5 pb-1">
               {primaryAnchor && (
-                <span className="retro-tag bg-retro-window">
+                <span className="retro-tag bg-retro-window shrink-0">
                   {primaryAnchor}
                 </span>
               )}
               {microThemes.length > 0 && (
-                <span className="retro-tag bg-retro-folder">
+                <span className="retro-tag bg-retro-folder shrink-0">
                   💡 {microThemes[0]}
                 </span>
               )}
               {question.tags.slice(0, 3).map((tag, i) => {
                 const colors = ['bg-retro-gs4 text-white', 'bg-retro-gs1', 'bg-[#FFD1D1] text-retro-accent border-retro-accent'];
                 return (
-                <span key={tag} className={`retro-tag ${eliteTags.has(tag.toLowerCase()) ? 'bg-retro-accent text-white' : colors[i % colors.length]}`}>
+                <span key={tag} className={`retro-tag shrink-0 ${eliteTags.has(tag.toLowerCase()) ? 'bg-retro-accent text-white' : colors[i % colors.length]}`}>
                   {eliteTags.has(tag.toLowerCase()) ? '🔥 Elite: ' : ''}{tag}
                 </span>
                 );
@@ -384,7 +390,7 @@ export default function QuestionCard({
               highlightedText || highlightQuestionKeywords(question.text, question.tags, question.keywords);
             return (
               <p
-                className={`font-space font-bold leading-relaxed text-sm md:text-base text-retro-border group-hover/q:text-retro-accent transition-colors ${
+                className={`font-sans font-medium leading-relaxed text-[15px] sm:text-base text-retro-border group-hover/q:text-retro-accent transition-colors ${
                   isEssay ? 'italic' : ''
                 }`}
                 dangerouslySetInnerHTML={{
@@ -396,16 +402,16 @@ export default function QuestionCard({
         </div>
 
         <div className="flex items-center justify-between pt-3 border-t-2 border-dashed border-retro-border relative z-20 pointer-events-auto overflow-hidden gap-2">
-          <div className="flex overflow-x-auto hide-scroll snap-x items-center gap-1.5 pb-1">
+          <div className="flex-1 min-w-0 overflow-x-auto hide-scroll flex items-center gap-1.5 pb-1">
             {microThemes.length > 0 && (
-              <span className="retro-tag bg-retro-folder">
+              <span className="retro-tag bg-retro-folder shrink-0">
                 💡 {microThemes[0]}
               </span>
             )}
             {question.tags.slice(1, 3).map((tag, i) => {
               const colors = ['bg-retro-gs4 text-white', 'bg-retro-gs1', 'bg-[#FFD1D1] text-retro-accent border-retro-accent'];
               return (
-              <span key={tag} className={`retro-tag ${eliteTags.has(tag.toLowerCase()) ? 'bg-retro-accent text-white' : colors[i % colors.length]}`}>
+              <span key={tag} className={`retro-tag shrink-0 ${eliteTags.has(tag.toLowerCase()) ? 'bg-retro-accent text-white' : colors[i % colors.length]}`}>
                 {eliteTags.has(tag.toLowerCase()) ? '🔥 Elite: ' : ''}{tag}
               </span>
               );

@@ -26,6 +26,19 @@ export default function YearTimeline() {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isGridModalOpen, setIsGridModalOpen] = useState(false);
+  const [activeEra, setActiveEra] = useState<'all' | 'recent' | 'foundation'>('recent');
+
+  useEffect(() => {
+    if (!isGridModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsGridModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isGridModalOpen]);
 
   const showHud = () => {
     if (hudRef.current) {
@@ -38,6 +51,7 @@ export default function YearTimeline() {
     if (hudTimerRef.current) clearTimeout(hudTimerRef.current);
     hudTimerRef.current = setTimeout(() => {
       hudRef.current?.classList.remove('visible');
+      hudRef.current?.classList.remove('mobile-elevated');
     }, delay);
   };
 
@@ -221,6 +235,11 @@ export default function YearTimeline() {
     const thumb = thumbRef.current;
 
     e.preventDefault();
+    if (e.pointerType === 'touch') {
+      hudRef.current?.classList.add('mobile-elevated');
+    } else {
+      hudRef.current?.classList.remove('mobile-elevated');
+    }
     showHud();
 
     // Disable CSS transition for 1:1 finger tracking during dragging
@@ -372,30 +391,39 @@ export default function YearTimeline() {
         
         {/* Window Header */}
         <div className="window-header bg-retro-border">
-          <div className="flex items-center gap-2 font-vt text-lg text-white">
-            <History className="w-4 h-4 text-retro-folder" />
-            <span>C:\TIMELINE\2013_2026_ARCHIVE.EXE</span>
+          <div className="window-title font-vt text-lg text-white">
+            <History className="w-4 h-4 text-retro-folder shrink-0" />
+            <span className="hidden sm:inline">C:\TIMELINE\2013_2026_ARCHIVE.EXE</span>
+            <span className="sm:hidden">TIMELINE\2013-26.EXE</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <span className="text-xs font-vt uppercase text-white/80 hidden sm:inline">
               14 Annual Exam Cycles
             </span>
+            <button
+              type="button"
+              onClick={() => setIsGridModalOpen(true)}
+              className="retro-badge text-[11px] font-vt uppercase bg-retro-folder text-retro-border sm:hidden hover:opacity-90 cursor-pointer"
+              title="Open full year grid"
+            >
+              ▦ Grid
+            </button>
             <div className="window-btn bg-white"></div>
             <div className="window-btn close"></div>
           </div>
         </div>
 
-        <div className="p-6 sm:p-8">
+        <div className="p-4 sm:p-6 md:p-8">
           
           {/* Timeline Title & Jump Bar */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b-2 border-retro-border gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 pb-4 border-b-2 border-retro-border gap-4">
             <div>
               <span className="retro-tag text-[11px] mb-2 inline-block">CHRONOLOGICAL VAULT</span>
               <h2 className="font-vt text-3xl sm:text-4xl uppercase text-retro-border flex items-center gap-2">
                 <span>Browse Question Papers by Year</span>
               </h2>
-              <p className="font-space text-xs sm:text-sm text-retro-border/80 mt-1 max-w-xl">
-                Observe paper evolution, trend shifts from 2013 syllabus revamps to 2026 recent examinations.
+              <p className="font-sans text-xs sm:text-sm text-retro-border/90 mt-1 max-w-xl leading-relaxed">
+                Observe paper evolution and syllabus trend shifts from 2013 revamps to 2026 recent examinations.
               </p>
             </div>
 
@@ -406,27 +434,45 @@ export default function YearTimeline() {
               </span>
               <button
                 type="button"
-                onClick={() => scrollToYear(latestYear)}
+                onClick={() => {
+                  scrollToYear(latestYear);
+                  setActiveEra('recent');
+                }}
                 className="retro-badge bg-retro-accent text-white text-xs font-vt uppercase hover:opacity-90 cursor-pointer"
               >
                 Latest (2026)
               </button>
               <button
                 type="button"
-                onClick={() => scrollToYear(2020)}
+                onClick={() => {
+                  scrollToYear(2020);
+                  setActiveEra('recent');
+                }}
                 className="retro-badge bg-white text-retro-border text-xs font-vt uppercase hover:bg-retro-window cursor-pointer"
               >
                 2020
               </button>
               <button
                 type="button"
-                onClick={() => scrollToYear(2013)}
+                onClick={() => {
+                  scrollToYear(2013);
+                  setActiveEra('foundation');
+                }}
                 className="retro-badge bg-white text-retro-border text-xs font-vt uppercase hover:bg-retro-window cursor-pointer"
               >
                 2013 Start
               </button>
 
-              <div className="flex items-center gap-1 ml-2 border-l-2 border-retro-border pl-2">
+              <button
+                type="button"
+                onClick={() => setIsGridModalOpen(true)}
+                className="inline-flex items-center gap-1 retro-badge bg-retro-folder text-retro-border text-xs font-vt uppercase hover:opacity-90 cursor-pointer"
+                title="Open 4x4 Year Grid"
+              >
+                <span>▦ Grid</span>
+              </button>
+
+              <div className="flex items-center gap-1 ml-1 border-l-2 border-retro-border pl-2">
                 <button
                   type="button"
                   onClick={() => scrollByDelta(-300)}
@@ -447,6 +493,59 @@ export default function YearTimeline() {
             </div>
           </div>
 
+          {/* Era Quick Segmented Switcher for 6-inch Mobile & Library Readers */}
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <div className="inline-flex bg-[#EAE6D6] border-2 border-retro-border p-1 gap-1 rounded w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveEra('recent');
+                  scrollToYear(latestYear);
+                }}
+                className={`flex-1 sm:flex-initial px-3 py-1 font-vt text-sm sm:text-base uppercase transition-all cursor-pointer ${
+                  activeEra === 'recent'
+                    ? 'bg-retro-border text-white shadow-[1px_1px_0px_rgba(0,0,0,0.2)] font-bold'
+                    : 'text-retro-border hover:bg-white/60'
+                }`}
+              >
+                Recent (2020–26)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveEra('foundation');
+                  scrollToYear(2013);
+                }}
+                className={`flex-1 sm:flex-initial px-3 py-1 font-vt text-sm sm:text-base uppercase transition-all cursor-pointer ${
+                  activeEra === 'foundation'
+                    ? 'bg-retro-border text-white shadow-[1px_1px_0px_rgba(0,0,0,0.2)] font-bold'
+                    : 'text-retro-border hover:bg-white/60'
+                }`}
+              >
+                Foundations (2013–19)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveEra('all');
+                  scrollToYear(2020);
+                }}
+                className={`hidden sm:inline-block px-3 py-1 font-vt text-sm sm:text-base uppercase transition-all cursor-pointer ${
+                  activeEra === 'all'
+                    ? 'bg-retro-border text-white shadow-[1px_1px_0px_rgba(0,0,0,0.2)] font-bold'
+                    : 'text-retro-border hover:bg-white/60'
+                }`}
+              >
+                All (14Y)
+              </button>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-1 text-xs font-space text-retro-border/70">
+              <span className="w-2 h-2 rounded-full bg-retro-accent animate-pulse" />
+              <span>14 Years Indexed</span>
+            </div>
+          </div>
+
           {/* Interactive Scroll Container */}
           <div className="relative">
             <div 
@@ -455,7 +554,7 @@ export default function YearTimeline() {
               onMouseLeave={onMouseLeave}
               onMouseUp={onMouseUp}
               onMouseMove={onMouseMove}
-              className="relative w-full overflow-x-auto hide-scroll py-8 cursor-grab active:cursor-grabbing select-none"
+              className="relative w-full overflow-x-auto hide-scroll py-8 cursor-grab active:cursor-grabbing select-none snap-x snap-mandatory scroll-p-6"
             >
               <div className="min-w-max px-4">
                 <div className="relative flex items-center">
@@ -477,7 +576,7 @@ export default function YearTimeline() {
                             if (isDragging) e.preventDefault();
                           }}
                           onDragStart={(e) => e.preventDefault()}
-                          className="group flex flex-col items-center cursor-pointer select-none"
+                          className="group flex flex-col items-center cursor-pointer select-none snap-center min-w-[68px] sm:min-w-0"
                         >
                           {/* Year Label */}
                           <span
@@ -584,6 +683,64 @@ export default function YearTimeline() {
 
         </div>
       </div>
+
+      {/* 4x4 Year Grid Modal Drawer for Instant Mobile Year Jumps */}
+      {isGridModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
+          onClick={() => setIsGridModalOpen(false)}
+        >
+          <div 
+            className="retro-container bg-retro-window border-4 max-w-sm w-full p-0 shadow-retro-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="window-header bg-retro-border flex justify-between items-center text-white">
+              <span className="font-vt text-lg">C:\YEARS\QUICK_JUMP_GRID.EXE</span>
+              <button
+                type="button"
+                onClick={() => setIsGridModalOpen(false)}
+                className="window-btn close cursor-pointer"
+                aria-label="Close year grid"
+              />
+            </div>
+            <div className="p-4">
+              <div className="text-xs font-sans text-retro-border/90 mb-3 font-medium">
+                Select an exam cycle to navigate instantly without scrubbing:
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {years.map((year) => {
+                  const isLatest = year === latestYear;
+                  return (
+                    <button
+                      key={year}
+                      type="button"
+                      onClick={() => {
+                        scrollToYear(year);
+                        setIsGridModalOpen(false);
+                      }}
+                      className={`p-2 border-2 border-retro-border flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
+                        isLatest
+                          ? 'bg-retro-accent text-white shadow-retro-sm font-bold'
+                          : 'bg-white hover:bg-retro-folder text-retro-border shadow-[1px_1px_0px_#2A2A2A]'
+                      }`}
+                    >
+                      <span className="font-vt text-lg leading-none">{year}</span>
+                      <span className="font-space text-[9px] opacity-80">{yearCounts[year] || 88}Q</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsGridModalOpen(false)}
+                className="w-full mt-4 retro-btn bg-white text-center text-sm py-1.5 hover:bg-retro-border hover:text-white"
+              >
+                CLOSE WINDOW [ESC]
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
