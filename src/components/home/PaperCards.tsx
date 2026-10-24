@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { getStats } from '@/lib/data';
-import { Folder, ArrowRight, Sparkles } from 'lucide-react';
+import { Folder, ArrowRight } from 'lucide-react';
 
 interface PaperConfig {
   id: string;
@@ -145,8 +145,7 @@ export default function PaperCards() {
                     </p>
 
                     <div className="mb-6">
-                      <div className="text-[10px] font-space font-bold text-retro-border/70 uppercase mb-2 flex items-center gap-1">
-                        <Sparkles className="w-3 h-3 text-retro-border" />
+                      <div className="text-[10px] font-space font-bold text-retro-border/70 uppercase mb-2">
                         <span>Syllabus Domains</span>
                       </div>
                       <div className="flex flex-wrap gap-1.5">
@@ -211,8 +210,7 @@ export default function PaperCards() {
                     </p>
 
                     <div className="mb-6">
-                      <div className="text-[10px] font-space font-bold text-retro-border/70 uppercase mb-2 flex items-center gap-1">
-                        <Sparkles className="w-3 h-3 text-retro-border" />
+                      <div className="text-[10px] font-space font-bold text-retro-border/70 uppercase mb-2">
                         <span>Syllabus Domains</span>
                       </div>
                       <div className="flex flex-wrap gap-1.5">

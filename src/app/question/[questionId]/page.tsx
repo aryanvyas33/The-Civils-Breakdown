@@ -22,7 +22,6 @@ import {
   ChevronLeft,
   ChevronRight,
   TrendingUp,
-  Sparkles,
   Layers,
   ArrowRight,
 } from 'lucide-react';
@@ -370,7 +369,6 @@ function QuestionDetailContent() {
                 }`}
                 title="Toggle keyword highlighting in question statement"
               >
-                <Sparkles className="w-3.5 h-3.5 text-accent" />
                 <span>Keywords {highlightKeywords ? 'Highlighted' : 'Off'}</span>
               </button>
 
@@ -544,7 +542,6 @@ function QuestionDetailContent() {
       <section className="retro-container bg-white p-6 space-y-6">
         <div className="border-b-4 border-retro-border pb-4">
           <h2 className="text-2xl font-vt font-bold text-retro-border flex items-center gap-2 mb-2 uppercase tracking-widest">
-            <Sparkles className="w-6 h-6 text-retro-accent" />
             <span>Connected Questions Across All Papers</span>
           </h2>
           <p className="font-space text-sm text-retro-border font-bold">

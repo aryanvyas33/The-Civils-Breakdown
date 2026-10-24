@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Question, SyllabusPointer, Subject } from '@/types';
 import QuestionCard from '@/components/question/QuestionCard';
-import { Layers, Sparkles } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import MetaNoteEditor from './MetaNoteEditor';
 import AggregatedNotesList from './AggregatedNotesList';
 import { getAllNotes, NoteEntry } from '@/lib/notes';
@@ -224,8 +224,7 @@ export default function ExploreContent({
           {/* AI Micro-Themes in this Topic */}
           {activeMicroThemes.length > 0 && (
             <div className="mt-6">
-              <div className="font-space text-xs font-bold uppercase mb-2 flex items-center gap-1 text-retro-accent">
-                <Sparkles className="w-3.5 h-3.5" strokeWidth={3} />
+              <div className="font-space text-xs font-bold uppercase mb-2 text-retro-accent">
                 Micro-Themes:
               </div>
               <div className="flex flex-wrap gap-2">

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Play, Pause, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface SlideData {
   number: string;
@@ -138,8 +138,7 @@ export default function FeatureShowcase() {
         {/* Header Row */}
         <div className="flex flex-col sm:flex-row justify-between sm:items-end mb-10 pb-4 border-b-2 border-dashed border-[#4A5568] gap-4">
           <div>
-            <div className="font-vt text-xl text-retro-folder tracking-wide flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4" />
+            <div className="font-vt text-xl text-retro-folder tracking-wide">
               <span>CORE WORKFLOW ENGINE</span>
             </div>
             <h2 className="font-vt text-3xl sm:text-5xl uppercase tracking-tight text-white mt-0.5">

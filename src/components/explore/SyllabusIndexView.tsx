@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Paper, SyllabusPointer, Subject, Question, SearchResult } from '@/types';
-import { Search, BookOpen, X, Sparkles, HelpCircle } from 'lucide-react';
+import { Search, BookOpen, X, HelpCircle } from 'lucide-react';
 import QuestionCard from '@/components/question/QuestionCard';
 import { searchQuestions, getAutocompleteSuggestions } from '@/lib/search';
 import { getQuestionCardBadges } from '@/lib/cardBadges';
@@ -437,8 +437,7 @@ export default function SyllabusIndexView({
                 className="absolute left-0 right-0 top-full mt-2 bg-retro-window border-4 border-retro-border shadow-[6px_6px_0px_#2A2A2A] z-50 py-1 max-h-72 overflow-y-auto custom-scrollbar"
               >
                 <div className="px-3 py-1.5 text-[10px] font-space font-bold uppercase text-retro-border/60 border-b-2 border-retro-border/20 flex justify-between items-center sticky top-0 bg-retro-window z-10">
-                  <span className="flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-retro-accent" />
+                  <span>
                     Predictive Topics &amp; Keywords ({paper.id.toUpperCase()})
                   </span>
                   <span className="font-vt text-xs tracking-wider">

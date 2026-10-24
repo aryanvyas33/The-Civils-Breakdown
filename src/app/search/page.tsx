@@ -10,7 +10,6 @@ import {
   SlidersHorizontal,
   ChevronDown,
   ChevronUp,
-  Sparkles,
   BarChart3,
   Calendar,
   X,
@@ -387,8 +386,7 @@ function SearchContent() {
                 className="absolute left-0 right-0 top-full mt-2 bg-retro-window border-4 border-retro-border shadow-[6px_6px_0px_#2A2A2A] z-50 py-1 max-h-72 overflow-y-auto custom-scrollbar"
               >
                 <div className="px-3 py-1.5 text-[10px] font-space font-bold uppercase text-retro-border/60 border-b-2 border-retro-border/20 flex justify-between items-center sticky top-0 bg-retro-window z-10">
-                  <span className="flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-retro-accent" />
+                  <span>
                     Predictive Topics &amp; Keywords
                   </span>
                   <span className="font-vt text-xs tracking-wider">
@@ -433,8 +431,7 @@ function SearchContent() {
 
           {/* Quick Micro-Theme Exploration Chips */}
           <div className="flex flex-wrap items-center gap-2 -mt-2 text-xs">
-            <span className="text-retro-border font-space font-bold flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-retro-accent" />
+            <span className="text-retro-border font-space font-bold">
               <span>Explore Micro-Themes:</span>
             </span>
             {[
@@ -654,7 +651,6 @@ function SearchContent() {
           {searchData.relatedKeywords.length > 0 && (
             <div className="retro-container p-5 bg-retro-window border-4 border-retro-border">
               <h3 className="font-vt text-xl font-bold text-retro-border uppercase tracking-widest mb-4 flex items-center gap-2 border-b-2 border-dashed border-retro-border pb-2">
-                <Sparkles className="w-5 h-5 text-retro-accent" />
                 <span>Related Keywords</span>
               </h3>
               <div className="flex flex-wrap gap-2">

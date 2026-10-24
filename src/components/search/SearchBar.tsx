@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, X, Sparkles } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 
 interface SearchBarProps {
   initialQuery?: string;
@@ -244,8 +244,7 @@ export default function SearchBar({
       {/* Autocomplete dropdown */}
       {isOpen && suggestions.length > 0 && (
         <div id="hero-suggestions-list" role="listbox" className="absolute left-0 right-0 top-full mt-3 bg-retro-window border-4 border-retro-border shadow-retro-lg z-50 overflow-hidden divide-y-2 divide-retro-border">
-          <div className="px-4 py-2 bg-retro-folder border-b-2 border-retro-border text-sm font-vt text-retro-border uppercase tracking-widest flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4" />
+          <div className="px-4 py-2 bg-retro-folder border-b-2 border-retro-border text-sm font-vt text-retro-border uppercase tracking-widest flex items-center">
             <span>Suggested Topics</span>
           </div>
           {suggestions.map((item, idx) => (
