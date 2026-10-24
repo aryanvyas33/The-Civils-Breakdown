@@ -10,6 +10,7 @@ export interface ClientEnv {
   firebaseStorageBucket: string;
   firebaseMessagingSenderId: string;
   firebaseAppId: string;
+  recaptchaSiteKey?: string;
 }
 
 export interface ServerEnv {
@@ -39,6 +40,7 @@ export const clientEnv: ClientEnv = {
   firebaseStorageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || '',
   firebaseMessagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '',
   firebaseAppId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '',
+  recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
 };
 
 export const serverEnv: ServerEnv = {

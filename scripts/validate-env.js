@@ -27,8 +27,9 @@ const placeholderKeys = [];
 for (const key of expectedKeys) {
   const value = process.env[key];
   if (!value || value.trim() === '') {
-    // Only flag client-critical keys as errors; optional server keys are warnings
-    if (key.startsWith('NEXT_PUBLIC_')) {
+    // Only flag client-critical keys as errors; optional keys are non-blocking
+    const OPTIONAL_CLIENT_KEYS = ['NEXT_PUBLIC_RECAPTCHA_SITE_KEY', 'NEXT_PUBLIC_FIREBASE_APPCHECK_DEBUG_TOKEN'];
+    if (key.startsWith('NEXT_PUBLIC_') && !OPTIONAL_CLIENT_KEYS.includes(key)) {
       missingKeys.push(key);
     }
   } else if (

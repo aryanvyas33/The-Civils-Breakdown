@@ -3,14 +3,40 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     
-    // User profile document and subcollections
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // User profile document
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if isOwner(userId);
       
-      // All user vault subcollections (bookmarks, notes, metaNotes)
-      match /{allSubcollections=**} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
+      // Bookmarks collection in vault
+      match /vault/bookmarks {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && request.resource.data.questionIds is list
+          && request.resource.data.questionIds.size() <= 3000;
+      }
+      
+      // Question Notes collection
+      match /notes/{questionId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && (!('content' in request.resource.data) || request.resource.data.content is string)
+          && (!('content' in request.resource.data) || request.resource.data.content.size() <= 50000)
+          && (!('answerText' in request.resource.data) || request.resource.data.answerText == null || request.resource.data.answerText is string)
+          && (!('answerText' in request.resource.data) || request.resource.data.answerText == null || request.resource.data.answerText.size() <= 100000);
+      }
+
+      // Meta Notes collection (subject/pointer notes)
+      match /metaNotes/{metaId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && (!('content' in request.resource.data) || request.resource.data.content is string)
+          && (!('content' in request.resource.data) || request.resource.data.content.size() <= 50000);
       }
     }
   }
 }
+
