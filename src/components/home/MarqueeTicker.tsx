@@ -10,7 +10,7 @@ export default function MarqueeTicker() {
     '★ BAND A MUST-COVER · MULTI-PAPER SYLLABUS ANGLES',
     '★ REDUCE AI DEPENDENCY: STRUCTURE YOUR INTELLECT',
     '★ NOTE-MAKING TOOL COMING SOON TO YOUR VAULT',
-    '★ OFFICIAL CONTACT: thecivilsbreakdown@gmail.com',
+    '★ OFFICIAL CONTACT: theupscbreakdown@gmail.com',
   ];
 
   return (

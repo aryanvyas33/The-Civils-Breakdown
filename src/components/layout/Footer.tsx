@@ -6,7 +6,7 @@ import { Mail, Check, Copy } from 'lucide-react';
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
-  const contactEmail = 'thecivilsbreakdown@gmail.com';
+  const contactEmail = 'theupscbreakdown@gmail.com';
 
   const handleCopyEmail = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
