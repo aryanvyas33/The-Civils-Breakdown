@@ -47,7 +47,7 @@ export default function HomePage() {
 
             {/* Value Proposition Description */}
             <p className="text-sm sm:text-base text-retro-border/90 leading-relaxed max-w-2xl bg-white/80 p-3 border-2 border-dashed border-retro-border font-medium shadow-[2px_2px_0px_#2A2A2A]">
-              Generative AI outputs generic prose. UPSC rewards <b>framework-driven thinking</b>. Search 14 years of past papers across GS1–GS4 and Essay, identify recurring micro-themes, and build mental models to tackle unpredictable mains questions with absolute clarity.
+              The Civils Breakdown takes 14 years of UPSC Mains papers (GS1 to GS4 and Essay) and turns them into searchable, data driven frameworks. You can identify the themes that keep reappearing, work out the trends in the syllabus and train your mind to write answers that are properly structured and are likely to score high.
             </p>
 
             {/* Main Interactive Search */}
