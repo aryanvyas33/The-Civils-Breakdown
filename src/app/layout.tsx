@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import MobileNav from '@/components/layout/MobileNav';
 import AuthModal from '@/components/auth/AuthModal';
 import AuthSyncManager from '@/components/auth/AuthSyncManager';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://thecivilsbreakdown.com'),
@@ -56,6 +57,7 @@ export default function RootLayout({
         <MobileNav />
         <AuthModal />
         <AuthSyncManager />
+        <Analytics />
       </body>
     </html>
   );
