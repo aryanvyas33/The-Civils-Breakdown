@@ -31,6 +31,12 @@ export default function SavedQuestionsPage() {
 
   useEffect(() => {
     updateData();
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('tab') === 'notes' || window.location.hash === '#notes') {
+        setActiveTab('notes');
+      }
+    }
     window.addEventListener('pyq-bookmarks-updated', updateData);
     window.addEventListener('pyq-notes-updated', updateData);
     window.addEventListener('pyq-meta-notes-updated', updateData);

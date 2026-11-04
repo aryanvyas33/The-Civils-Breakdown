@@ -52,7 +52,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-surface text-bodytext antialiased">
         <Navbar />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow pb-16 md:pb-0">{children}</main>
         <Footer />
         <MobileNav />
         <AuthModal />

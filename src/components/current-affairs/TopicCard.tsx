@@ -44,6 +44,7 @@ export default function TopicCard({
 
   return (
     <div
+      id={`topic-${topic.id}`}
       className={`bg-white border-[3px] border-[#2A2A2A] shadow-[3px_3px_0px_#2A2A2A] sm:shadow-[4px_4px_0px_#2A2A2A] rounded-sm transition-all overflow-hidden ${
         isDone ? 'opacity-70 bg-[#FAF9F5]' : 'hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#2A2A2A]'
       }`}

@@ -362,7 +362,7 @@ function QuestionDetailContent() {
               {/* Keyword Highlight Toggle */}
               <button
                 onClick={() => setHighlightKeywords(!highlightKeywords)}
-                className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs ${
+                className={`px-3 py-1 text-xs font-semibold rounded-full border transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs shrink-0 ${
                   highlightKeywords
                     ? 'bg-amber-100 text-amber-900 border-amber-300 font-bold'
                     : 'bg-surface text-muted border-bordercolor hover:text-primary'
@@ -372,23 +372,23 @@ function QuestionDetailContent() {
                 <span>Keywords {highlightKeywords ? 'Highlighted' : 'Off'}</span>
               </button>
 
-              {/* Color Legend when highlighting is enabled */}
+              {/* Color Legend when highlighting is enabled (Scrollable on mobile) */}
               {highlightKeywords && (
                 <div
-                  className="flex flex-wrap items-center gap-2.5 px-3 py-1 bg-surface/90 border border-bordercolor rounded-full text-xs transition-opacity duration-200 shadow-2xs"
+                  className="flex items-center gap-2.5 px-3 py-1 bg-surface/90 border border-bordercolor rounded-full text-xs transition-opacity duration-200 shadow-2xs overflow-x-auto hide-scroll whitespace-nowrap"
                   title="Highlight Types: Amber for Concepts/Statutes, Blue for Directives, Green for Institutions/Stakeholders"
                 >
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1.5 shrink-0">
                     <span className="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-600/40 shadow-2xs shrink-0" />
                     <span className="font-semibold text-primary text-[11px]">Concept / Statute</span>
                   </span>
-                  <span className="text-bordercolor font-light">•</span>
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="text-bordercolor font-light shrink-0">•</span>
+                  <span className="inline-flex items-center gap-1.5 shrink-0">
                     <span className="inline-block w-2.5 h-2.5 rounded-full bg-blue-500 border border-blue-700/40 shadow-2xs shrink-0" />
                     <span className="font-bold text-blue-900 text-[11px]">Directive</span>
                   </span>
-                  <span className="text-bordercolor font-light">•</span>
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="text-bordercolor font-light shrink-0">•</span>
+                  <span className="inline-flex items-center gap-1.5 shrink-0">
                     <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 border border-emerald-700/40 shadow-2xs shrink-0" />
                     <span className="font-bold text-emerald-900 text-[11px]">Institution / Stakeholder</span>
                   </span>
@@ -397,10 +397,10 @@ function QuestionDetailContent() {
             </div>
           </div>
 
-          {/* Full Question Text with highlighted keywords */}
+          {/* Full Question Text with readable font on mobile, Space Mono on desktop */}
           {highlightKeywords ? (
             <h1
-              className={`text-xl md:text-2xl text-retro-border font-space font-bold leading-relaxed mb-6 ${
+              className={`text-[15px] sm:text-xl md:text-2xl text-retro-border font-sans sm:font-space font-medium sm:font-bold leading-relaxed mb-5 ${
                 question.paperId === 'essay' ? 'italic' : ''
               }`}
               dangerouslySetInnerHTML={{
@@ -409,7 +409,7 @@ function QuestionDetailContent() {
             />
           ) : (
             <h1
-              className={`text-xl md:text-2xl text-retro-border font-space font-bold leading-relaxed mb-6 ${
+              className={`text-[15px] sm:text-xl md:text-2xl text-retro-border font-sans sm:font-space font-medium sm:font-bold leading-relaxed mb-5 ${
                 question.paperId === 'essay' ? 'italic' : ''
               }`}
             >
@@ -493,10 +493,10 @@ function QuestionDetailContent() {
           </div>
 
           {/* Action Buttons: Copy, Share, Bookmark */}
-          <div className="flex items-center gap-6 pt-6 border-t-2 border-dashed border-retro-border mt-2">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-6 pt-4 sm:pt-6 border-t-2 border-dashed border-retro-border mt-2">
             <button
               onClick={handleCopyText}
-              className="retro-btn shadow-none bg-white hover:bg-retro-window hover:-translate-y-1 hover:shadow-[2px_2px_0px_#2A2A2A] flex items-center gap-1.5 text-xs font-bold transition-all"
+              className="retro-btn py-2 px-3 shadow-none bg-white hover:bg-retro-window active:translate-y-0.5 hover:shadow-[2px_2px_0px_#2A2A2A] flex items-center gap-1.5 text-xs font-bold transition-all cursor-pointer"
             >
               {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
               <span>{copied ? 'COPIED' : 'COPY'}</span>
@@ -504,7 +504,7 @@ function QuestionDetailContent() {
 
             <button
               onClick={handleShare}
-              className="retro-btn shadow-none bg-white hover:bg-retro-window hover:-translate-y-1 hover:shadow-[2px_2px_0px_#2A2A2A] flex items-center gap-1.5 text-xs font-bold transition-all"
+              className="retro-btn py-2 px-3 shadow-none bg-white hover:bg-retro-window active:translate-y-0.5 hover:shadow-[2px_2px_0px_#2A2A2A] flex items-center gap-1.5 text-xs font-bold transition-all cursor-pointer"
             >
               {shared ? <Check className="w-4 h-4 text-green-600" /> : <Share2 className="w-4 h-4" />}
               <span>{shared ? 'SHARED' : 'SHARE'}</span>
@@ -512,7 +512,7 @@ function QuestionDetailContent() {
 
             <button
               onClick={handleBookmarkToggle}
-              className={`retro-btn hover:-translate-y-1 hover:shadow-[2px_2px_0px_#2A2A2A] flex items-center gap-1.5 text-xs font-bold transition-all ${
+              className={`retro-btn py-2 px-3 hover:shadow-[2px_2px_0px_#2A2A2A] active:translate-y-0.5 flex items-center gap-1.5 text-xs font-bold transition-all cursor-pointer ${
                 bookmarked ? 'bg-retro-accent text-white shadow-none' : 'shadow-none bg-white hover:bg-retro-window'
               }`}
             >
