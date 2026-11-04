@@ -148,9 +148,10 @@ export default function TopicCard({
           </div>
 
           {/* Plain English Exam Hook */}
-          <div className="text-sm text-[#444] font-sans leading-relaxed">
-            {angleText}
-          </div>
+          <div
+            className="text-sm text-[#444] font-sans leading-relaxed [&>strong]:text-[#2A2A2A] [&>strong]:font-bold [&>em]:italic"
+            dangerouslySetInnerHTML={{ __html: angleText }}
+          />
 
           {/* Delta Update Banner (if topic received subsequent development) */}
           {topic.recentUpdate && (
@@ -273,9 +274,10 @@ export default function TopicCard({
           </div>
 
           {/* Plain English Exam Hook (Full Width, Relaxed Reading) */}
-          <div className="text-[13px] text-[#444] font-sans leading-relaxed">
-            {angleText}
-          </div>
+          <div
+            className="text-[13px] text-[#444] font-sans leading-relaxed [&>strong]:text-[#2A2A2A] [&>strong]:font-bold [&>em]:italic"
+            dangerouslySetInnerHTML={{ __html: angleText }}
+          />
 
           {/* Delta Subsequent Update Banner */}
           {topic.recentUpdate && (
