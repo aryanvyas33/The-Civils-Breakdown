@@ -406,12 +406,15 @@ function main() {
 
     const papers = getConnectedPapers(tObj);
 
+    const isNew = month.toLowerCase().includes('oct') || monthShort.toLowerCase().includes('oct');
+
     const item = {
       id: num,
       rank,
       paperRank,
       month,
       monthShort,
+      isNew,
       title,
       primaryPaper: paper,
       papers,

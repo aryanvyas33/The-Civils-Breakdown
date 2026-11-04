@@ -5,6 +5,7 @@
     "paperRank": 1,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Fiscal federalism after the 16th Finance Commission (2026-31)",
     "primaryPaper": "GS2",
     "papers": [
@@ -39,6 +40,7 @@
     "paperRank": 1,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Inflation re-acceleration and the RBI's 'calibrated tightening': a rate hike after two years",
     "primaryPaper": "GS3",
     "papers": [
@@ -68,6 +70,7 @@
     "paperRank": 2,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "India's NDC 2031-35: ambition, climate finance and carbon markets",
     "primaryPaper": "GS3",
     "papers": [
@@ -105,6 +108,7 @@
     "paperRank": 2,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "From MGNREGA to VB-G RAM G: rural employment guarantee, cost-sharing and federal risk",
     "primaryPaper": "GS2",
     "papers": [
@@ -134,6 +138,7 @@
     "paperRank": 3,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Labour codes in operation: central rules, gig-worker social security and Centre-State implementation",
     "primaryPaper": "GS3",
     "papers": [
@@ -166,6 +171,7 @@
     "paperRank": 3,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Indus Waters Treaty in abeyance: the Court of Arbitration award and trans-boundary water diplomacy",
     "primaryPaper": "GS2",
     "papers": [
@@ -195,6 +201,7 @@
     "paperRank": 1,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Women's reservation: implementation timeline and decoupling from delimitation",
     "primaryPaper": "GS1",
     "papers": [
@@ -227,6 +234,7 @@
     "paperRank": 4,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "West Asia conflict and India's strategic, energy and diaspora interests",
     "primaryPaper": "GS2",
     "papers": [
@@ -259,6 +267,7 @@
     "paperRank": 4,
     "month": "Jul 2026",
     "monthShort": "Jul",
+    "isNew": false,
     "title": "Ex-post-facto environmental clearance: the Supreme Court's limited route and the rule of law",
     "primaryPaper": "GS3",
     "papers": [
@@ -291,6 +300,7 @@
     "paperRank": 5,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Kharif MSP 2026-27 and the price-support debate",
     "primaryPaper": "GS3",
     "papers": [
@@ -317,6 +327,7 @@
     "paperRank": 5,
     "month": "Jun 2026",
     "monthShort": "Jun",
+    "isNew": false,
     "title": "Antyodaya entitlements: the draft NFSA amendment and the rights-based welfare debate",
     "primaryPaper": "GS2",
     "papers": [
@@ -349,6 +360,7 @@
     "paperRank": 6,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Electoral roll revision: ECI's powers, citizenship and the franchise (SIR)",
     "primaryPaper": "GS2",
     "papers": [
@@ -378,6 +390,7 @@
     "paperRank": 7,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "India's trade strategy: FTAs (NZ, EU, UK) and export-competitiveness support",
     "primaryPaper": "GS2",
     "papers": [
@@ -407,6 +420,7 @@
     "paperRank": 6,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "El Nino, below-normal monsoon and farm-input security (fertiliser)",
     "primaryPaper": "GS3",
     "papers": [
@@ -436,6 +450,7 @@
     "paperRank": 7,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Illegal immigration and demographic change: the Navlekar committee, citizenship and border management",
     "primaryPaper": "GS3",
     "papers": [
@@ -471,6 +486,7 @@
     "paperRank": 8,
     "month": "Sep 2026",
     "monthShort": "Sep",
+    "isNew": false,
     "title": "BRICS 2026 in New Delhi: the New Delhi Declaration and India's multilateral positioning",
     "primaryPaper": "GS2",
     "papers": [
@@ -497,6 +513,7 @@
     "paperRank": 9,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Quad at a crossroads: maritime surveillance, critical minerals and strategic autonomy",
     "primaryPaper": "GS2",
     "papers": [
@@ -526,6 +543,7 @@
     "paperRank": 8,
     "month": "Jul 2026",
     "monthShort": "Jul",
+    "isNew": false,
     "title": "Farm support architecture: PM-KISAN extension, urea investment policy and fertiliser self-reliance",
     "primaryPaper": "GS3",
     "papers": [
@@ -555,6 +573,7 @@
     "paperRank": 9,
     "month": "Jan 2026",
     "monthShort": "Jan",
+    "isNew": false,
     "title": "Employment quality, female labour participation and gig work: what the Economic Survey shows",
     "primaryPaper": "GS3",
     "papers": [
@@ -587,6 +606,7 @@
     "paperRank": 10,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Delimitation, Census and federal balance after the failed 131st Amendment",
     "primaryPaper": "GS2",
     "papers": [
@@ -619,6 +639,7 @@
     "paperRank": 2,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Census 2027: digital enumeration, caste data and demographic transition",
     "primaryPaper": "GS1",
     "papers": [
@@ -648,6 +669,7 @@
     "paperRank": 11,
     "month": "Aug 2026",
     "monthShort": "Aug",
+    "isNew": false,
     "title": "Parliament's functioning and legislative scrutiny: decade-low productivity and Bills passed without debate",
     "primaryPaper": "GS2",
     "papers": [
@@ -677,6 +699,7 @@
     "paperRank": 12,
     "month": "Jan 2026",
     "monthShort": "Jan",
+    "isNew": false,
     "title": "India-EU FTA: market access, CBAM and the sensitive-sector carve-outs",
     "primaryPaper": "GS2",
     "papers": [
@@ -706,6 +729,7 @@
     "paperRank": 13,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Social-assistance pensions reset: NSAP becomes the Pradhan Mantri Samajik Sahayata Yojana",
     "primaryPaper": "GS2",
     "papers": [
@@ -738,6 +762,7 @@
     "paperRank": 14,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Children's right to go online: the Supreme Court's CSEAM framework and the rejection of blanket age bans",
     "primaryPaper": "GS2",
     "papers": [
@@ -767,6 +792,7 @@
     "paperRank": 10,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Energy security amid Hormuz disruption: import dependence, SPR and diversification",
     "primaryPaper": "GS3",
     "papers": [
@@ -793,6 +819,7 @@
     "paperRank": 15,
     "month": "Jun 2026",
     "monthShort": "Jun",
+    "isNew": false,
     "title": "Examination integrity: NEET-UG 2026 leak, the NTA and the Public Examinations Amendment Act",
     "primaryPaper": "GS2",
     "papers": [
@@ -822,6 +849,7 @@
     "paperRank": 16,
     "month": "Jul 2026",
     "monthShort": "Jul",
+    "isNew": false,
     "title": "India's Indo-Pacific and economic-security partnerships: Japan, Indonesia, Australia, New Zealand",
     "primaryPaper": "GS2",
     "papers": [
@@ -851,6 +879,7 @@
     "paperRank": 11,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Great Nicobar project: strategic development versus tribal rights and ecology",
     "primaryPaper": "GS3",
     "papers": [
@@ -886,6 +915,7 @@
     "paperRank": 17,
     "month": "Jul 2026",
     "monthShort": "Jul",
+    "isNew": false,
     "title": "Simultaneous elections: the 129th Amendment Bill and JPC scrutiny",
     "primaryPaper": "GS2",
     "papers": [
@@ -912,6 +942,7 @@
     "paperRank": 12,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Left Wing Extremism: lessons from the Naxal-free declaration",
     "primaryPaper": "GS3",
     "papers": [
@@ -944,6 +975,7 @@
     "paperRank": 13,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Nuclear power expansion to 100 GW by 2047: private entry, liability and safety",
     "primaryPaper": "GS3",
     "papers": [
@@ -973,6 +1005,7 @@
     "paperRank": 18,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Prolonged pre-trial detention and UAPA bail: liberty versus national security",
     "primaryPaper": "GS2",
     "papers": [
@@ -1002,6 +1035,7 @@
     "paperRank": 19,
     "month": "Aug 2026",
     "monthShort": "Aug",
+    "isNew": false,
     "title": "MMDR Amendment Act 2026: mineral taxation and Union-State fiscal federalism",
     "primaryPaper": "GS2",
     "papers": [
@@ -1031,6 +1065,7 @@
     "paperRank": 20,
     "month": "Aug 2026",
     "monthShort": "Aug",
+    "isNew": false,
     "title": "Tribunals Reforms Bill 2026: National Tribunals Commission and executive-judiciary balance",
     "primaryPaper": "GS2",
     "papers": [
@@ -1060,6 +1095,7 @@
     "paperRank": 14,
     "month": "Feb 2026",
     "monthShort": "Feb",
+    "isNew": false,
     "title": "Union Budget 2026-27: fiscal consolidation, debt sustainability and the quality of spending",
     "primaryPaper": "GS3",
     "papers": [
@@ -1089,6 +1125,7 @@
     "paperRank": 15,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Data Protection Board still not functional: the DPDP Act's missing institution",
     "primaryPaper": "GS3",
     "papers": [
@@ -1121,6 +1158,7 @@
     "paperRank": 21,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "The right to protest and policing: Delhi's anti-CEC protests, mass detentions and shutdowns",
     "primaryPaper": "GS2",
     "papers": [
@@ -1153,6 +1191,7 @@
     "paperRank": 16,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "IDBI Bank sale to Fairfax: strategic disinvestment, foreign control and bank governance",
     "primaryPaper": "GS3",
     "papers": [
@@ -1182,6 +1221,7 @@
     "paperRank": 17,
     "month": "Feb 2026",
     "monthShort": "Feb",
+    "isNew": false,
     "title": "India AI Impact Summit 2026: New Delhi Declaration and the shape of India's AI governance",
     "primaryPaper": "GS3",
     "papers": [
@@ -1214,6 +1254,7 @@
     "paperRank": 22,
     "month": "Jan 2026",
     "monthShort": "Jan",
+    "isNew": false,
     "title": "UGC equity regulations 2026: caste discrimination on campus and the Supreme Court's stay",
     "primaryPaper": "GS2",
     "papers": [
@@ -1246,6 +1287,7 @@
     "paperRank": 23,
     "month": "Sep 2026",
     "monthShort": "Sep",
+    "isNew": false,
     "title": "Election Commission's independence: the appointment law before a Constitution Bench",
     "primaryPaper": "GS2",
     "papers": [
@@ -1275,6 +1317,7 @@
     "paperRank": 18,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Semiconductors and electronics manufacturing: ISM 2.0, mobile-phone scheme and strategic-sector policy",
     "primaryPaper": "GS3",
     "papers": [
@@ -1304,6 +1347,7 @@
     "paperRank": 24,
     "month": "Jun 2026",
     "monthShort": "Jun",
+    "isNew": false,
     "title": "Regulating foreign-funded NGOs: FCRA Amendment Rules 2026 and civil-society space",
     "primaryPaper": "GS2",
     "papers": [
@@ -1339,6 +1383,7 @@
     "paperRank": 25,
     "month": "Jun 2026",
     "monthShort": "Jun",
+    "isNew": false,
     "title": "Religious freedom and constitutional morality: the nine-judge Sabarimala reference",
     "primaryPaper": "GS2",
     "papers": [
@@ -1368,6 +1413,7 @@
     "paperRank": 26,
     "month": "Mar 2026",
     "monthShort": "Mar",
+    "isNew": false,
     "title": "Scheduled Caste status and religious conversion: Chinthada Anand v. State of Andhra Pradesh",
     "primaryPaper": "GS2",
     "papers": [
@@ -1400,6 +1446,7 @@
     "paperRank": 27,
     "month": "Feb 2026",
     "monthShort": "Feb",
+    "isNew": false,
     "title": "Citizenship (Amendment) Act 2019 challenge: secularism, Article 14 and the Assam question",
     "primaryPaper": "GS2",
     "papers": [
@@ -1429,6 +1476,7 @@
     "paperRank": 28,
     "month": "Jan 2026",
     "monthShort": "Jan",
+    "isNew": false,
     "title": "Central agencies versus State police: ED v. State of West Bengal and the federal limits of investigation",
     "primaryPaper": "GS2",
     "papers": [
@@ -1455,6 +1503,7 @@
     "paperRank": 29,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Reservation in local bodies: the Supreme Court rejects Andhra Pradesh's 34% BC quota",
     "primaryPaper": "GS2",
     "papers": [
@@ -1484,6 +1533,7 @@
     "paperRank": 19,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Human spaceflight and commercial space: Gaganyaan progress",
     "primaryPaper": "GS3",
     "papers": [
@@ -1510,6 +1560,7 @@
     "paperRank": 30,
     "month": "Mar 2026",
     "monthShort": "Mar",
+    "isNew": false,
     "title": "Jal Jeevan Mission extended to 2028: from tap connections to service delivery",
     "primaryPaper": "GS2",
     "papers": [
@@ -1545,6 +1596,7 @@
     "paperRank": 31,
     "month": "Feb 2026",
     "monthShort": "Feb",
+    "isNew": false,
     "title": "Urban Challenge Fund and municipal finance: market-linked urban renewal",
     "primaryPaper": "GS2",
     "papers": [
@@ -1577,6 +1629,7 @@
     "paperRank": 20,
     "month": "Jul 2026",
     "monthShort": "Jul",
+    "isNew": false,
     "title": "MSME ecosystem: credit guarantees, the TReDS mandate and the MSME Development (Amendment) Bill",
     "primaryPaper": "GS3",
     "papers": [
@@ -1606,6 +1659,7 @@
     "paperRank": 21,
     "month": "Jun 2026",
     "monthShort": "Jun",
+    "isNew": false,
     "title": "AI in the justice system: draft Supreme Court AI rules, hallucinated citations and accountability",
     "primaryPaper": "GS3",
     "papers": [
@@ -1638,6 +1692,7 @@
     "paperRank": 32,
     "month": "Mar 2026",
     "monthShort": "Mar",
+    "isNew": false,
     "title": "Transgender Persons (Protection of Rights) Amendment 2026: identity, self-identification and the medical board",
     "primaryPaper": "GS2",
     "papers": [
@@ -1670,6 +1725,7 @@
     "paperRank": 33,
     "month": "Jan 2026",
     "monthShort": "Jan",
+    "isNew": false,
     "title": "Justice Varma inquiry: impeachment procedure, the Speaker's role and judicial accountability",
     "primaryPaper": "GS2",
     "papers": [
@@ -1699,6 +1755,7 @@
     "paperRank": 34,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Neighbourhood and Indian Ocean diplomacy: Sri Lanka, Myanmar, Mauritius, Seychelles, diaspora",
     "primaryPaper": "GS2",
     "papers": [
@@ -1725,6 +1782,7 @@
     "paperRank": 22,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "GST process reform: decriminalising tax offences, arrest powers and compliance",
     "primaryPaper": "GS3",
     "papers": [
@@ -1754,6 +1812,7 @@
     "paperRank": 35,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Judicial pendency and the ordinance route: raising Supreme Court strength to 38",
     "primaryPaper": "GS2",
     "papers": [
@@ -1780,6 +1839,7 @@
     "paperRank": 23,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Integrated Transport and Logistics Authority: coordinating multimodal infrastructure",
     "primaryPaper": "GS3",
     "papers": [
@@ -1806,6 +1866,7 @@
     "paperRank": 24,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Oil shocks, rupee defence and macro-stability: inflation, external sector, capital-flow measures",
     "primaryPaper": "GS3",
     "papers": [
@@ -1835,6 +1896,7 @@
     "paperRank": 36,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "UN Security Council paralysis and reform: Hormuz resolution vetoes",
     "primaryPaper": "GS2",
     "papers": [
@@ -1861,6 +1923,7 @@
     "paperRank": 25,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Critical minerals security: partnerships, domestic mining and recycling",
     "primaryPaper": "GS3",
     "papers": [
@@ -1890,6 +1953,7 @@
     "paperRank": 26,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Extreme heat, record power demand and climate adaptation",
     "primaryPaper": "GS3",
     "papers": [
@@ -1925,6 +1989,7 @@
     "paperRank": 37,
     "month": "Jun 2026",
     "monthShort": "Jun",
+    "isNew": false,
     "title": "Three-language formula, language politics and federal education policy",
     "primaryPaper": "GS2",
     "papers": [
@@ -1951,6 +2016,7 @@
     "paperRank": 27,
     "month": "Feb 2026",
     "monthShort": "Feb",
+    "isNew": false,
     "title": "New GDP series: base year 2022-23, double deflation and statistical credibility",
     "primaryPaper": "GS3",
     "papers": [
@@ -1980,6 +2046,7 @@
     "paperRank": 28,
     "month": "Sep 2026",
     "monthShort": "Sep",
+    "isNew": false,
     "title": "Money mules and banking fraud: the SC order and RBI's draft KYC amendment",
     "primaryPaper": "GS3",
     "papers": [
@@ -2012,6 +2079,7 @@
     "paperRank": 38,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Decriminalisation and trust-based regulation: Jan Vishwas 2026",
     "primaryPaper": "GS2",
     "papers": [
@@ -2041,6 +2109,7 @@
     "paperRank": 29,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Defence acquisitions and indigenisation: DAC approvals, SSBN and air defence",
     "primaryPaper": "GS3",
     "papers": [
@@ -2067,6 +2136,7 @@
     "paperRank": 39,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Drug pricing and trade margins: the cancer-medicine ceiling and DPCO's retail margin",
     "primaryPaper": "GS2",
     "papers": [
@@ -2099,6 +2169,7 @@
     "paperRank": 30,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Maritime State Development Council and the Indian Ports Act 2025: cooperative federalism in ports",
     "primaryPaper": "GS3",
     "papers": [
@@ -2128,6 +2199,7 @@
     "paperRank": 40,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Online gaming regulation: Rules 2026, addiction and Centre-State competence",
     "primaryPaper": "GS2",
     "papers": [
@@ -2157,6 +2229,7 @@
     "paperRank": 31,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Digital payments: UPI scale, security rules and regulation",
     "primaryPaper": "GS3",
     "papers": [
@@ -2186,6 +2259,7 @@
     "paperRank": 32,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Opening insurance to 100% FDI: access, penetration and policyholder protection",
     "primaryPaper": "GS3",
     "papers": [
@@ -2215,6 +2289,7 @@
     "paperRank": 41,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Antimicrobial resistance: the global action plan 2026-36 and India's response",
     "primaryPaper": "GS2",
     "papers": [
@@ -2244,6 +2319,7 @@
     "paperRank": 42,
     "month": "Jul 2026",
     "monthShort": "Jul",
+    "isNew": false,
     "title": "National symbols, free speech and duty: the Vande Mataram amendment to the National Honour Act",
     "primaryPaper": "GS2",
     "papers": [
@@ -2273,6 +2349,7 @@
     "paperRank": 33,
     "month": "Sep 2026",
     "monthShort": "Sep",
+    "isNew": false,
     "title": "Stubble burning and NCR air quality: the draft compensation Rules",
     "primaryPaper": "GS3",
     "papers": [
@@ -2302,6 +2379,7 @@
     "paperRank": 43,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Legislative privilege versus free speech: the seven-judge reference on Article 194",
     "primaryPaper": "GS2",
     "papers": [
@@ -2331,6 +2409,7 @@
     "paperRank": 34,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Land Warfare Doctrine 2026: drones, AI and multi-domain operations, with the CISF's functional restructuring",
     "primaryPaper": "GS3",
     "papers": [
@@ -2363,6 +2442,7 @@
     "paperRank": 44,
     "month": "Mar 2026",
     "monthShort": "Mar",
+    "isNew": false,
     "title": "Nine-judge reference on 'industry': Bangalore Water Supply v. Rajappa reconsidered",
     "primaryPaper": "GS2",
     "papers": [
@@ -2392,6 +2472,7 @@
     "paperRank": 35,
     "month": "Mar 2026",
     "monthShort": "Mar",
+    "isNew": false,
     "title": "Central Armed Police Forces (General Administration) Bill 2026: IPS deputation and cadre control",
     "primaryPaper": "GS3",
     "papers": [
@@ -2421,6 +2502,7 @@
     "paperRank": 45,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Professional-course fees fixed before admission: B.C. Roy Engineering College v. State of West Bengal",
     "primaryPaper": "GS2",
     "papers": [
@@ -2450,6 +2532,7 @@
     "paperRank": 46,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Autonomous territorial arrangements: Frontier Nagaland Territorial Authority Act and the expanded Ladakh hill councils",
     "primaryPaper": "GS2",
     "papers": [
@@ -2476,6 +2559,7 @@
     "paperRank": 47,
     "month": "Mar 2026",
     "monthShort": "Mar",
+    "isNew": false,
     "title": "End-of-life decisions: Harish Rana and passive euthanasia",
     "primaryPaper": "GS2",
     "papers": [
@@ -2505,6 +2589,7 @@
     "paperRank": 36,
     "month": "Jan 2026",
     "monthShort": "Jan",
+    "isNew": false,
     "title": "Environmental regulation reset: Solid Waste Management Rules 2026, the EP Fund and the consent regime",
     "primaryPaper": "GS3",
     "papers": [
@@ -2534,6 +2619,7 @@
     "paperRank": 37,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "RBI's record surplus transfer, forex management and fiscal arithmetic",
     "primaryPaper": "GS3",
     "papers": [
@@ -2563,6 +2649,7 @@
     "paperRank": 38,
     "month": "Jul 2026",
     "monthShort": "Jul",
+    "isNew": false,
     "title": "Securities Markets Code 2025: consolidating securities law and limits on SEBI's delegated powers",
     "primaryPaper": "GS3",
     "papers": [
@@ -2592,6 +2679,7 @@
     "paperRank": 48,
     "month": "Aug 2026",
     "monthShort": "Aug",
+    "isNew": false,
     "title": "Renaming Kerala as Keralam: Article 3, state reorganisation and linguistic identity",
     "primaryPaper": "GS2",
     "papers": [
@@ -2618,6 +2706,7 @@
     "paperRank": 49,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Custodial violence, police accountability and the death penalty: Sathankulam verdict",
     "primaryPaper": "GS2",
     "papers": [
@@ -2647,6 +2736,7 @@
     "paperRank": 39,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "India's Model BIT overhaul: investor protection versus regulatory space",
     "primaryPaper": "GS3",
     "papers": [
@@ -2673,6 +2763,7 @@
     "paperRank": 40,
     "month": "Apr 2026",
     "monthShort": "Apr",
+    "isNew": false,
     "title": "Industrial and public safety failures: firecracker factory blasts",
     "primaryPaper": "GS3",
     "papers": [
@@ -2705,6 +2796,7 @@
     "paperRank": 41,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "CAFE norms 2027-32: fuel-economy standards and passenger-vehicle decarbonisation",
     "primaryPaper": "GS3",
     "papers": [
@@ -2734,6 +2826,7 @@
     "paperRank": 50,
     "month": "May 2026",
     "monthShort": "May",
+    "isNew": false,
     "title": "Strategic partnerships with Europe and the Nordics: Italy, Netherlands, Nordic summit",
     "primaryPaper": "GS2",
     "papers": [
@@ -2763,6 +2856,7 @@
     "paperRank": 42,
     "month": "Oct 2026",
     "monthShort": "Oct",
+    "isNew": true,
     "title": "Container manufacturing and port-led growth: the Rs 10,000 crore Container Manufacturing Promotion Scheme",
     "primaryPaper": "GS3",
     "papers": [

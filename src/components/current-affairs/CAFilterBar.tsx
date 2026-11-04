@@ -23,9 +23,12 @@ export default function CAFilterBar({
   const gs2Count = topics ? topics.filter((t) => t.primaryPaper === 'GS2').length : 42;
   const gs3Count = topics ? topics.filter((t) => t.primaryPaper === 'GS3').length : 32;
   const gs4Count = topics ? topics.filter((t) => t.papers.includes('GS4')).length : 38;
-  const bandACount = topics ? topics.filter((t) => t.band === 'bandA').length : 45;
-  const quickCount = topics ? topics.filter((t) => t.band !== 'bandA').length : 31;
+  const bandACount = topics ? topics.filter((t) => t.band === 'bandA').length : 52;
+  const quickCount = topics ? topics.filter((t) => t.band !== 'bandA').length : 42;
   const updatesCount = topics ? topics.filter((t) => Boolean(t.recentUpdate)).length : 2;
+  const newCount = topics
+    ? topics.filter((t) => t.isNew || (t.month && t.month.toLowerCase().includes('oct'))).length
+    : 18;
 
   return (
     <section className="bg-white border-[3px] border-[#2A2A2A] shadow-[2px_2px_0px_#2A2A2A] p-2.5 sm:p-3.5 mb-6">
@@ -141,6 +144,18 @@ export default function CAFilterBar({
             }`}
           >
             ⚡ HAS DELTA UPDATES ({updatesCount})
+          </button>
+          <button
+            type="button"
+            onClick={() => onTierChange('new')}
+            className={`font-vt text-lg px-3 py-1 border-2 border-[#2A2A2A] transition-all cursor-pointer flex items-center gap-1.5 ${
+              tierFilter === 'new'
+                ? 'bg-[#E26A59] text-white shadow-none'
+                : 'bg-[#FFF0ED] text-[#E26A59] hover:bg-[#FFE3DC] shadow-[2px_2px_0px_#2A2A2A]'
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-[#E26A59] animate-ping" />
+            ★ OCT 2026 NEW ({newCount})
           </button>
         </div>
       </div>
@@ -262,6 +277,18 @@ export default function CAFilterBar({
               }`}
             >
               ⚡ HAS UPDATES ({updatesCount})
+            </button>
+            <button
+              type="button"
+              onClick={() => onTierChange('new')}
+              className={`shrink-0 font-vt text-base px-3 py-1 border-2 border-[#2A2A2A] transition-all cursor-pointer whitespace-nowrap min-h-[34px] flex items-center gap-1.5 ${
+                tierFilter === 'new'
+                  ? 'bg-[#E26A59] text-white shadow-none translate-x-[1px] translate-y-[1px]'
+                  : 'bg-[#FFF0ED] text-[#E26A59] shadow-[2px_2px_0px_#2A2A2A]'
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E26A59] animate-ping" />
+              ★ OCT NEW ({newCount})
             </button>
           </div>
         </div>

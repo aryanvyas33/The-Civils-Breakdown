@@ -40,6 +40,8 @@ export default function TopicCard({
     topic.paperAngles[topic.primaryPaper] ||
     'Focus on core conceptual dimensions, institutional frameworks, and policy impacts.';
 
+  const isNew = Boolean(topic.isNew || (topic.month && topic.month.toLowerCase().includes('oct')));
+
   return (
     <div
       className={`bg-white border-[3px] border-[#2A2A2A] shadow-[3px_3px_0px_#2A2A2A] sm:shadow-[4px_4px_0px_#2A2A2A] rounded-sm transition-all overflow-hidden ${
@@ -60,9 +62,15 @@ export default function TopicCard({
           <span className="font-mono text-[0.62rem] text-[#777] mt-1 font-bold">
             RANK
           </span>
-          <span className="font-mono text-[0.58rem] bg-[#2A2A2A] text-white px-1.5 py-0.5 mt-2 rounded-xs font-bold">
-            {topic.monthShort}
-          </span>
+          {isNew ? (
+            <span className="font-mono text-[0.58rem] bg-[#E26A59] text-white px-1.5 py-0.5 mt-2 rounded-xs font-bold shadow-[1px_1px_0px_#2A2A2A] flex items-center gap-0.5 whitespace-nowrap">
+              ★ NEW
+            </span>
+          ) : (
+            <span className="font-mono text-[0.58rem] bg-[#2A2A2A] text-white px-1.5 py-0.5 mt-2 rounded-xs font-bold">
+              {topic.monthShort}
+            </span>
+          )}
         </div>
 
         {/* 2. Middle Content Body */}
@@ -105,6 +113,12 @@ export default function TopicCard({
               <span className="font-mono text-[0.68rem] text-[#555] font-bold">
                 Index: {topic.index} | P: {topic.prob}
               </span>
+              {isNew && (
+                <span className="font-mono text-[0.68rem] font-bold px-2 py-0.5 bg-[#FFF0ED] text-[#E26A59] border-[1.5px] border-[#E26A59] shadow-[1px_1px_0px_#2A2A2A] inline-flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E26A59] animate-pulse" />
+                  ★ NEW (OCT)
+                </span>
+              )}
               <span className="font-mono text-[0.7rem] font-bold px-2 py-0.5 bg-[#D1FAF0] text-[#0D9488] border-[1.5px] border-[#0D9488] shadow-[1px_1px_0px_#2A2A2A]">
                 ★ {topic.effort}
               </span>
@@ -181,9 +195,15 @@ export default function TopicCard({
             >
               #{topic.rank}
             </span>
-            <span className="font-mono text-[10px] bg-[#2A2A2A] text-white px-1.5 py-0.5 rounded-xs font-bold">
-              {topic.monthShort}
-            </span>
+            {isNew ? (
+              <span className="font-mono text-[10px] bg-[#E26A59] text-white px-1.5 py-0.5 rounded-xs font-bold whitespace-nowrap">
+                ★ NEW
+              </span>
+            ) : (
+              <span className="font-mono text-[10px] bg-[#2A2A2A] text-white px-1.5 py-0.5 rounded-xs font-bold">
+                {topic.monthShort}
+              </span>
+            )}
             <span className="font-mono text-[11px] text-[#555] font-bold">
               P: {topic.prob}
             </span>

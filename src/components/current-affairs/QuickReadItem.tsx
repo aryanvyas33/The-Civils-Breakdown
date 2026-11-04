@@ -15,6 +15,7 @@ export default function QuickReadItem({
   onToggleDone,
 }: QuickReadItemProps) {
   const isBandC = topic.band === 'bandC';
+  const isNew = Boolean(topic.isNew || (topic.month && topic.month.toLowerCase().includes('oct')));
 
   return (
     <div
@@ -31,9 +32,16 @@ export default function QuickReadItem({
           <span className="font-mono text-[0.68rem] font-bold bg-[#E8F4FD] text-[#1D4ED8] px-1.5 py-0.5 border border-[#3B82F6]">
             {topic.primaryPaper}
           </span>
-          <span className="font-mono text-[0.65rem] font-bold bg-[#EEE] text-[#333] px-1.5 py-0.5 border border-[#CCC]">
-            {topic.month}
-          </span>
+          {isNew ? (
+            <span className="font-mono text-[0.65rem] font-bold bg-[#E26A59] text-white px-1.5 py-0.5 border border-[#2A2A2A] shadow-[1px_1px_0px_#2A2A2A] flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              NEW · {topic.month}
+            </span>
+          ) : (
+            <span className="font-mono text-[0.65rem] font-bold bg-[#EEE] text-[#333] px-1.5 py-0.5 border border-[#CCC]">
+              {topic.month}
+            </span>
+          )}
           <span
             className={`font-sans font-bold text-sm text-[#2A2A2A] ${
               isDone ? 'line-through text-[#666]' : ''
@@ -70,9 +78,15 @@ export default function QuickReadItem({
           <span className="font-mono text-[10px] font-bold bg-[#E8F4FD] text-[#1D4ED8] px-1 py-0.5 border border-[#3B82F6]">
             {topic.primaryPaper}
           </span>
-          <span className="font-mono text-[10px] font-bold bg-[#EEE] text-[#333] px-1 py-0.5 border border-[#CCC]">
-            {topic.month}
-          </span>
+          {isNew ? (
+            <span className="font-mono text-[10px] font-bold bg-[#E26A59] text-white px-1 py-0.5 border border-[#2A2A2A]">
+              NEW · {topic.month}
+            </span>
+          ) : (
+            <span className="font-mono text-[10px] font-bold bg-[#EEE] text-[#333] px-1 py-0.5 border border-[#CCC]">
+              {topic.month}
+            </span>
+          )}
           <span className="font-mono text-[10px] text-[#666]">
             P: {topic.prob}
           </span>

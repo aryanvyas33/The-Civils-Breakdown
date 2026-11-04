@@ -43,6 +43,7 @@ export interface CATopic {
   syllabusPointers: Partial<Record<GSPaper, string>>;
   paperAngles: Partial<Record<GSPaper, string>>;
   recentUpdate?: CATopicUpdate;
+  isNew?: boolean;          // true for newly added cohort (e.g. October 2026)
 }
 
 /**
@@ -84,4 +85,4 @@ export interface CAProgressMetrics {
 
 /** Filter options for the CA tracker view */
 export type CAPaperFilter = 'all' | GSPaper;
-export type CATierFilter = 'all' | 'bandA' | 'quickReads' | 'hasUpdates';
+export type CATierFilter = 'all' | 'bandA' | 'quickReads' | 'hasUpdates' | 'new';

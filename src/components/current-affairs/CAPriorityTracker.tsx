@@ -108,6 +108,7 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
     if (t.band !== 'bandA') return false;
     if (tierFilter === 'quickReads') return false;
     if (tierFilter === 'hasUpdates' && !t.recentUpdate) return false;
+    if (tierFilter === 'new' && !t.isNew && !(t.month && t.month.toLowerCase().includes('oct'))) return false;
     if (paperFilter !== 'all' && !t.papers.includes(paperFilter)) return false;
     return true;
   });
@@ -116,6 +117,7 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
     if (t.band === 'bandA') return false;
     if (tierFilter === 'bandA') return false;
     if (tierFilter === 'hasUpdates' && !t.recentUpdate) return false;
+    if (tierFilter === 'new' && !t.isNew && !(t.month && t.month.toLowerCase().includes('oct'))) return false;
     if (paperFilter !== 'all' && !t.papers.includes(paperFilter)) return false;
     return true;
   });
@@ -127,23 +129,27 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
         <div className="update-status-pill">
           <div className="pulse-dot" />
           <span className="font-bold text-[11px] sm:text-xs">
-            MODEL UPDATED TILL: <strong>SEPTEMBER 2026</strong> (LIVE 2027 MAINS COHORT)
+            MODEL UPDATED TILL: <strong>OCTOBER 2026</strong> (LIVE 2027 MAINS COHORT)
           </span>
         </div>
 
         <h1 className="font-vt text-3xl sm:text-4xl md:text-5xl text-[#2A2A2A] tracking-wide leading-none mb-2 mt-2">
           THIS CYCLE&apos;S <span className="text-[#E26A59]">MUST-COVER</span> TOPICS{' '}
-          <span className="text-base sm:text-xl md:text-2xl text-[#666] font-mono block sm:inline mt-1 sm:mt-0">// JAN–SEP 2026</span>
+          <span className="text-base sm:text-xl md:text-2xl text-[#666] font-mono block sm:inline mt-1 sm:mt-0">// JAN–OCT 2026</span>
         </h1>
 
         <p className="text-xs sm:text-base text-[#444] font-sans max-w-3xl leading-relaxed mb-3 sm:mb-4">
-          Our probability engine has evaluated <strong>{topics.length} current affairs themes</strong> across 9
-          months (January – September 2026) for Mains 2027. We&apos;ve done the scoring — just master
+          Our probability engine has evaluated <strong>{topics.length} current affairs themes</strong> across 10
+          months (January – October 2026) for Mains 2027. We&apos;ve done the scoring — just master
           them in order.
         </p>
 
         {/* Desktop Metadata Chips Bar (Preserved 100% Unchanged) */}
         <div className="hidden sm:flex flex-wrap gap-2 text-xs font-mono">
+          <span className="bg-[#FFF0ED] text-[#E26A59] border border-[#E26A59] px-2 py-1 font-bold shadow-[1px_1px_0px_#2A2A2A] flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E26A59] animate-ping" />
+            ★ 18 New October Additions
+          </span>
           <span className="bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488] px-2 py-1 font-bold shadow-[1px_1px_0px_#2A2A2A]">
             ★ {bandATotal} Must-Cover Topics (Band A)
           </span>
@@ -154,15 +160,18 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
             👁 {topics.filter((t) => t.band === 'bandC').length} Headline Awareness (Band C)
           </span>
           <span className="bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2 py-1 font-medium shadow-[1px_1px_0px_#2A2A2A]">
-            📅 Cycle: January 2026 – September 2026 ({topics.length} Total)
+            📅 Cycle: January 2026 – October 2026 ({topics.length} Total)
           </span>
           <span className="bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2 py-1 font-medium shadow-[1px_1px_0px_#2A2A2A]">
-            ↻ Next Refresh: October 2026 Digest
+            ↻ Next Refresh: November 2026 Digest
           </span>
         </div>
 
         {/* Mobile-Only Swipeable Metadata Chips Tray */}
         <div className="sm:hidden smart-tag-tray py-1">
+          <span className="shrink-0 bg-[#FFF0ED] text-[#E26A59] border border-[#E26A59] px-2.5 py-1 text-[11px] font-mono font-bold shadow-[1px_1px_0px_#2A2A2A]">
+            ★ 18 New (Oct)
+          </span>
           <span className="shrink-0 bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488] px-2.5 py-1 text-[11px] font-mono font-bold shadow-[1px_1px_0px_#2A2A2A]">
             ★ {bandATotal} Must-Cover (Band A)
           </span>
@@ -170,10 +179,10 @@ export default function CAPriorityTracker({ topics }: CAPriorityTrackerProps) {
             📖 {topics.filter((t) => t.band !== 'bandA').length} Quick Reads (Band B/C)
           </span>
           <span className="shrink-0 bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2.5 py-1 text-[11px] font-mono font-medium shadow-[1px_1px_0px_#2A2A2A]">
-            📅 Jan–Sep 2026 ({topics.length} Total)
+            📅 Jan–Oct 2026 ({topics.length} Total)
           </span>
           <span className="shrink-0 bg-white text-[#2A2A2A] border border-[#2A2A2A] px-2.5 py-1 text-[11px] font-mono font-medium shadow-[1px_1px_0px_#2A2A2A]">
-            ↻ Next: Oct 2026
+            ↻ Next: Nov 2026
           </span>
         </div>
       </header>
