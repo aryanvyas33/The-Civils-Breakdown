@@ -18,7 +18,7 @@ export default function CAFilterBar({
   onTierChange,
   topics,
 }: CAFilterBarProps) {
-  const total = topics ? topics.length : 76;
+  const total = topics ? topics.length : 94;
   const gs1Count = topics ? topics.filter((t) => t.papers.includes('GS1')).length : 16;
   const gs2Count = topics ? topics.filter((t) => t.primaryPaper === 'GS2').length : 42;
   const gs3Count = topics ? topics.filter((t) => t.primaryPaper === 'GS3').length : 32;

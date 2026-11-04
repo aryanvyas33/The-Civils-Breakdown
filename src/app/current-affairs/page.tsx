@@ -5,7 +5,7 @@ import CAPriorityTracker from '@/components/current-affairs/CAPriorityTracker';
 export const metadata: Metadata = {
   title: 'Current Affairs Priority Tracker — Mains 2027 | The Civils Breakdown',
   description:
-    '76 UPSC Mains 2027 current affairs themes evaluated by an 8-parameter priority model. Focus on Band A must-cover issues, multi-paper angles, and track prep completion.',
+    '94 UPSC Mains 2027 current affairs themes evaluated by an 8-parameter priority model. Focus on Band A must-cover issues, multi-paper angles, and track prep completion.',
   keywords: [
     'UPSC Current Affairs',
     'Mains 2027 Current Affairs',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Current Affairs Priority Tracker — The Civils Breakdown',
     description:
-      '76 high-probability UPSC Mains current affairs themes ranked by 8 objective parameters with multi-paper syllabus linking.',
+      '94 high-probability UPSC Mains current affairs themes ranked by 8 objective parameters with multi-paper syllabus linking.',
     type: 'website',
   },
 };

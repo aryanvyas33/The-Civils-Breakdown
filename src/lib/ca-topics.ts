@@ -85,7 +85,9 @@ export function calculateCAProgress(
   const updatesDone = updateTopics.filter((t) => updateDoneSet.has(t.id)).length;
 
   const pts = Number((bandADone * CA_WEIGHTS.bandA + quickDone * CA_WEIGHTS.bandBandC).toFixed(1));
-  const maxPts = CA_WEIGHTS.totalPts; // 60.5
+  const maxPts = Number(
+    (bandATopics.length * CA_WEIGHTS.bandA + quickTopics.length * CA_WEIGHTS.bandBandC).toFixed(1)
+  ) || CA_WEIGHTS.totalPts;
   const pct = maxPts > 0 ? Math.min(100, Math.round((pts / maxPts) * 100)) : 0;
 
   return {

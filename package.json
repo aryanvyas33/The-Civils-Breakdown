@@ -6,7 +6,8 @@
     "dev": "next dev",
     "prebuild": "node scripts/generate-card-badges.js && node scripts/validate-env.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "update:ca": "node scripts/build_ca_from_excel.js"
   },
   "dependencies": {
     "@google/genai": "^2.27.0",
@@ -20,6 +21,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwind-merge": "^2.5.4",
+    "xlsx": "^0.18.5",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
