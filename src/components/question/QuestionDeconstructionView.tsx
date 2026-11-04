@@ -27,7 +27,7 @@ export default function QuestionDeconstructionView({
   aiData,
   source = 'ai_generated',
 }: QuestionDeconstructionViewProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [mobileTab, setMobileTab] = useState<'directive' | 'entities' | 'limits' | 'demands' | 'notes'>('directive');
 
   const directiveWord = aiData?.deconstruction?.directive?.word || deconstruction.directives[0]?.phrase || 'EXAMINE';
@@ -45,31 +45,34 @@ export default function QuestionDeconstructionView({
       {/* Header bar with toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-retro-window transition-colors cursor-pointer border-b-2 border-retro-border"
+        className="w-full px-3.5 sm:px-5 py-3 sm:py-4 flex items-center justify-between text-left hover:bg-retro-window transition-colors cursor-pointer border-b-2 border-retro-border"
       >
-        <div className="flex items-center gap-3">
-          <div className="p-2 border-2 border-retro-border bg-retro-folder flex items-center justify-center shrink-0 shadow-retro-sm">
-            <BookOpen className="w-5 h-5 text-retro-border" />
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div className="p-1.5 sm:p-2 border-2 border-retro-border bg-retro-folder flex items-center justify-center shrink-0 shadow-retro-sm">
+            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-retro-border" />
           </div>
-          <div>
-            <div className="flex items-center gap-2 flex-wrap mb-1">
-              <h3 className="font-space font-bold text-lg text-retro-border">
-                UPSC Question Anatomy Framework
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 flex-wrap mb-0.5">
+              <h3 className="font-space font-bold text-sm sm:text-lg text-retro-border truncate">
+                Question Anatomy
               </h3>
+              <span className="text-[9px] bg-[#0D9488] text-white px-1.5 py-0.5 font-bold border border-retro-border shadow-[1px_1px_0px_#2A2A2A]">
+                AI ANALYSIS
+              </span>
               {source === 'curated' && (
-                <span className="retro-badge bg-retro-gs2 text-retro-border shadow-none py-0.5">
-                  Curated CSE Blueprint
+                <span className="retro-badge bg-retro-gs2 text-retro-border shadow-none py-0.2 text-[10px]">
+                  Curated
                 </span>
               )}
             </div>
-            <p className="font-space text-xs text-retro-border/80">
+            <p className="font-space text-[10px] sm:text-xs text-retro-border/80 hidden sm:block">
               Structural analysis of directives, primary entities, core demands, and note-making dimensions
             </p>
           </div>
         </div>
-        <div className="retro-btn text-xs py-1 px-3 shadow-none flex items-center gap-2 shrink-0 bg-white">
-          <span>{isOpen ? 'Collapse Anatomy' : 'View Full Anatomy'}</span>
-          {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        <div className="retro-btn text-[11px] sm:text-xs py-1 px-2.5 shadow-none flex items-center gap-1.5 shrink-0 bg-white ml-2">
+          <span>{isOpen ? 'Hide' : 'Show'}</span>
+          {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
         </div>
       </button>
 

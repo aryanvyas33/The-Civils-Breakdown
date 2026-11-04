@@ -210,15 +210,28 @@ function QuestionDetailContent() {
   }, [question, coreConceptInfo]);
 
   // Previous and Next questions in the same paper
-  const { prevQ, nextQ } = useMemo(() => {
-    if (!question) return { prevQ: null, nextQ: null };
+  const { prevQ, nextQ, qIndex, totalInPaper } = useMemo(() => {
+    if (!question) return { prevQ: null, nextQ: null, qIndex: 1, totalInPaper: 20 };
     const paperQuestions = getQuestionsByPaper(question.paperId);
     const index = paperQuestions.findIndex((q) => q.id === question.id);
     return {
       prevQ: index > 0 ? paperQuestions[index - 1] : null,
       nextQ: index < paperQuestions.length - 1 ? paperQuestions[index + 1] : null,
+      qIndex: index >= 0 ? index + 1 : 1,
+      totalInPaper: paperQuestions.length,
     };
   }, [question]);
+
+  const getRetroPaperBadge = (paperId: string) => {
+    switch (paperId.toLowerCase()) {
+      case 'gs1': return 'bg-retro-gs1 text-white';
+      case 'gs2': return 'bg-retro-gs2 text-white';
+      case 'gs3': return 'bg-retro-gs3 text-white';
+      case 'gs4': return 'bg-retro-gs4 text-white';
+      case 'essay': return 'bg-retro-essay text-white';
+      default: return 'bg-retro-border text-white';
+    }
+  };
 
   if (!question) {
     return (
@@ -305,9 +318,239 @@ function QuestionDetailContent() {
   const lowRelated = related.filter((r) => r.relevanceLevel === 'low');
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 w-full space-y-8">
-      {/* 1. Breadcrumb navigation */}
-      <nav className="text-sm font-medium text-muted flex items-center gap-2 flex-wrap" aria-label="Breadcrumb">
+    <div className="max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-8 w-full">
+      {/* ======================================================== */}
+      {/* MOBILE QUESTION VIEW (md:hidden) — Focused & Action-Ready */}
+      {/* ======================================================== */}
+      <div className="md:hidden flex flex-col w-full space-y-3 pb-8">
+        
+        {/* 1. Sticky Mobile Header */}
+        <div className="sticky top-[50px] z-30 bg-retro-window/98 backdrop-blur-md border-b-2 border-retro-border py-2 px-3 flex items-center justify-between shadow-[0_2px_4px_rgba(42,42,42,0.08)] -mx-3">
+          <Link
+            href={`/papers/${question.paperId}`}
+            className="flex items-center gap-1.5 font-vt text-base text-retro-border hover:text-retro-accent transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+            <span className="font-bold uppercase">{question.paperId.toUpperCase()}</span>
+            <span className="text-[10px] font-space text-retro-border/60">
+              Q{qIndex} of {totalInPaper}
+            </span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleCopyText}
+              className="p-1.5 border border-retro-border bg-white text-retro-border shadow-[1px_1px_0px_#2A2A2A] active:translate-y-0.5 transition-transform"
+              title="Copy question text"
+            >
+              {copied ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Copy className="w-3.5 h-3.5" />}
+            </button>
+            <button
+              onClick={handleShare}
+              className="p-1.5 border border-retro-border bg-white text-retro-border shadow-[1px_1px_0px_#2A2A2A] active:translate-y-0.5 transition-transform"
+              title="Share question"
+            >
+              <Share2 className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={handleBookmarkToggle}
+              className={`p-1.5 border border-retro-border shadow-[1px_1px_0px_#2A2A2A] active:translate-y-0.5 transition-transform ${
+                bookmarked ? 'bg-retro-accent text-white' : 'bg-white text-retro-border'
+              }`}
+              title={bookmarked ? 'Bookmarked' : 'Bookmark question'}
+            >
+              {bookmarked ? <BookmarkCheck className="w-3.5 h-3.5" /> : <Bookmark className="w-3.5 h-3.5" />}
+            </button>
+          </div>
+        </div>
+
+        {/* 2. Compact Metadata Badges */}
+        <div className="flex items-center gap-1.5 flex-wrap pt-1">
+          <span className={`px-2 py-0.5 font-vt text-xs uppercase border border-retro-border ${getRetroPaperBadge(question.paperId)}`}>
+            {question.paperId.toUpperCase()}
+          </span>
+          <span className="px-2 py-0.5 bg-white border border-retro-border font-vt text-xs font-bold text-retro-border">
+            {question.year}
+          </span>
+          <span className="px-2 py-0.5 bg-white border border-retro-border font-vt text-xs font-bold text-retro-border">
+            {question.paperId === 'essay' ? `Sec ${question.section || 'A'} · 125 Marks` : `${question.marks} Marks`}
+          </span>
+          <span className="px-2 py-0.5 bg-[#FFD1D1] text-retro-accent border border-retro-accent font-vt text-xs font-bold uppercase">
+            {aiData?.deconstruction?.directive?.word || deconstruction?.directives?.[0]?.phrase || 'EXAMINE'}
+          </span>
+          <span className="px-2 py-0.5 bg-retro-folder border border-retro-border font-vt text-xs font-bold text-retro-border uppercase truncate max-w-[130px]">
+            {question.subjectName}
+          </span>
+        </div>
+
+        {/* 3. The Readable Question Box */}
+        <div className="bg-white border-2 border-retro-border p-3.5 shadow-retro-sm">
+          {highlightKeywords ? (
+            <div
+              className={`font-sans text-[14px] leading-[1.7] text-retro-border font-medium ${
+                question.paperId === 'essay' ? 'italic' : ''
+              }`}
+              dangerouslySetInnerHTML={{
+                __html: question.paperId === 'essay' ? `&ldquo;${highlightedQuestionText}&rdquo;` : highlightedQuestionText,
+              }}
+            />
+          ) : (
+            <div
+              className={`font-sans text-[14px] leading-[1.7] text-retro-border font-medium ${
+                question.paperId === 'essay' ? 'italic' : ''
+              }`}
+            >
+              {question.paperId === 'essay' ? `"${question.text}"` : question.text}
+            </div>
+          )}
+
+          {/* Inline Keyword Mini-Legend */}
+          <div className="flex items-center justify-between pt-2 mt-3 border-t border-dashed border-retro-border/40 font-space text-[10px]">
+            <div className="flex items-center gap-2 overflow-x-auto hide-scroll">
+              <span className="text-retro-border/60 uppercase font-bold shrink-0">KEY:</span>
+              <span className="inline-flex items-center gap-1 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-amber-400 border border-amber-600/40" />
+                <span>Concept</span>
+              </span>
+              <span className="text-retro-border/40">•</span>
+              <span className="inline-flex items-center gap-1 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-blue-500 border border-blue-700/40" />
+                <span>Directive</span>
+              </span>
+              <span className="text-retro-border/40">•</span>
+              <span className="inline-flex items-center gap-1 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 border border-emerald-700/40" />
+                <span>Institution</span>
+              </span>
+            </div>
+            <button
+              onClick={() => setHighlightKeywords(!highlightKeywords)}
+              className="text-[9px] font-space font-bold px-1.5 py-0.5 border border-retro-border bg-retro-window shrink-0 ml-1.5 active:scale-95 transition-transform"
+            >
+              {highlightKeywords ? 'HL: ON' : 'HL: OFF'}
+            </button>
+          </div>
+        </div>
+
+        {/* 4. Syllabus Pointer & CA Context Card (if present) */}
+        {subject && (
+          <div className="bg-retro-window p-3 border-2 border-retro-border text-xs font-space">
+            <div className="flex items-center gap-1.5 text-retro-border font-bold mb-1">
+              <Layers className="w-3.5 h-3.5 text-retro-accent" />
+              <span>SYLLABUS POINTER</span>
+            </div>
+            <p className="text-retro-border/90 leading-relaxed font-bold">
+              {subject.description}
+            </p>
+          </div>
+        )}
+
+        {question.currentAffairsContext && (
+          <div className="bg-[#FFD1D1]/30 p-3 border-2 border-retro-accent text-xs font-space">
+            <div className="flex items-center gap-1.5 text-retro-accent font-bold mb-1">
+              <span className="w-2 h-2 rounded-full bg-retro-accent animate-pulse" />
+              <span>CONTEMPORARY PEG</span>
+            </div>
+            <p className="text-retro-border leading-relaxed font-bold">
+              {question.currentAffairsContext}
+            </p>
+          </div>
+        )}
+
+        {/* 5. UPSC Question Anatomy (Interactive Tabbed Framework) */}
+        {deconstruction && (
+          <QuestionDeconstructionView
+            deconstruction={deconstruction}
+            aiData={aiData}
+            source={deconstructionSource}
+          />
+        )}
+
+        {/* 6. Question Note Editor */}
+        <QuestionNoteEditor questionId={question.id} pointerId={question.pointerId} />
+
+        {/* 7. Swipeable Related Questions Carousel */}
+        {related.length > 0 && (
+          <div className="pt-2">
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-vt text-base uppercase tracking-wider text-retro-border font-bold flex items-center gap-1.5">
+                <span>🔗 RELATED QUESTIONS</span>
+                <span className="text-[10px] font-space text-retro-border/60">({related.length})</span>
+              </span>
+              <span className="text-[10px] font-space text-retro-border/60">
+                SWIPE →
+              </span>
+            </div>
+            <div className="flex gap-2.5 overflow-x-auto hide-scroll pb-2 -mx-3 px-3 snap-x">
+              {related.slice(0, 6).map((rel) => {
+                const relQ = rel.question;
+                return (
+                  <Link
+                    key={relQ.id}
+                    href={`/question/${relQ.id}`}
+                    className="snap-start shrink-0 w-[240px] bg-white border-2 border-retro-border p-3 shadow-retro-sm hover:bg-retro-window active:translate-y-0.5 transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-1.5">
+                        <span className={`px-1.5 py-0.2 font-vt text-xs font-bold uppercase ${getRetroPaperBadge(relQ.paperId)}`}>
+                          {relQ.paperId.toUpperCase()}
+                        </span>
+                        <span className="px-1.5 py-0.2 bg-white border border-retro-border font-vt text-xs text-retro-border">
+                          {relQ.year}
+                        </span>
+                        <span className="px-1.5 py-0.2 bg-white border border-retro-border font-vt text-xs text-retro-border">
+                          {relQ.marks}m
+                        </span>
+                      </div>
+                      <p className="font-sans text-[11px] leading-relaxed text-retro-border line-clamp-3 font-medium">
+                        {relQ.text}
+                      </p>
+                    </div>
+                    <div className="mt-2.5 pt-2 border-t border-dashed border-retro-border/40 font-vt text-xs text-retro-accent font-bold flex items-center justify-between">
+                      <span>READ QUESTION</span>
+                      <span>→</span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* 8. Prev / Next Navigation Buttons */}
+        <div className="flex gap-2 pt-3">
+          {prevQ ? (
+            <Link
+              href={`/question/${prevQ.id}`}
+              className="flex-1 bg-retro-border text-white text-center py-2.5 font-vt text-base tracking-wider hover:bg-retro-accent transition-colors border-2 border-retro-border shadow-retro-sm flex items-center justify-center gap-1.5"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>PREV Q.{prevQ.questionNumber}</span>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+
+          {nextQ ? (
+            <Link
+              href={`/question/${nextQ.id}`}
+              className="flex-1 bg-retro-accent text-white text-center py-2.5 font-vt text-base tracking-wider hover:opacity-90 transition-opacity border-2 border-retro-border shadow-retro-sm flex items-center justify-center gap-1.5"
+            >
+              <span>NEXT Q.{nextQ.questionNumber}</span>
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+        </div>
+
+      </div>
+
+      {/* ======================================================== */}
+      {/* DESKTOP QUESTION VIEW (hidden md:block) — Preserved 100%  */}
+      {/* ======================================================== */}
+      <div className="hidden md:block space-y-8">
+        {/* 1. Breadcrumb navigation */}
+        <nav className="text-sm font-medium text-muted flex items-center gap-2 flex-wrap" aria-label="Breadcrumb">
         <Link href="/" className="hover:text-primary transition-colors">
           Home
         </Link>
@@ -683,6 +926,7 @@ function QuestionDetailContent() {
         ) : (
           <div />
         )}
+      </div>
       </div>
     </div>
   );
