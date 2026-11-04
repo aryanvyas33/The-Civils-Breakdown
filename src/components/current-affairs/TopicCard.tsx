@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { CATopic, GSPaper } from '@/types';
 import UpdateBanner from './UpdateBanner';
 
@@ -12,6 +12,7 @@ interface TopicCardProps {
   onSelectPaper: (paper: GSPaper) => void;
   onToggleDone: (e: React.MouseEvent) => void;
   onToggleUpdateDone: (e: React.MouseEvent) => void;
+  mobileViewMode?: 'dossier' | 'compact';
 }
 
 const PAPER_COLORS: Record<GSPaper, { bg: string; text: string; activeBg: string }> = {
@@ -29,7 +30,11 @@ export default function TopicCard({
   onSelectPaper,
   onToggleDone,
   onToggleUpdateDone,
+  mobileViewMode = 'dossier',
 }: TopicCardProps) {
+  const [isCompactExpanded, setIsCompactExpanded] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(true);
+
   const activePaper = selectedPaper || topic.primaryPaper;
   const syllabusText =
     topic.syllabusPointers[activePaper] ||
@@ -185,135 +190,217 @@ export default function TopicCard({
         </div>
       </div>
 
-      {/* ── MOBILE VIEW: Full-Width Retro Dossier Card (Reclaims 106px Width) ── */}
+      {/* ── MOBILE VIEW: Compact Scan Mode vs Full Retro Dossier Card ── */}
       <div className="sm:hidden flex flex-col w-full">
-        {/* Retro Header Window Bar */}
-        <div className="bg-[#F4F1E1] border-b-2 border-[#2A2A2A] px-3 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span
-              className={`font-vt text-2xl leading-none font-bold ${
-                topic.rank <= 3 ? 'text-[#E26A59]' : 'text-[#2A2A2A]'
+        {mobileViewMode === 'compact' && !isCompactExpanded ? (
+          /* ── QUICK-SCAN COMPACT ROW (48px Height Revision Mode) ── */
+          <div className="p-2.5 flex items-center justify-between gap-2 bg-white">
+            <button
+              type="button"
+              onClick={() => setIsCompactExpanded(true)}
+              className="flex items-center gap-2 min-w-0 flex-1 text-left cursor-pointer"
+            >
+              <span
+                className={`font-vt text-xl leading-none font-bold shrink-0 ${
+                  topic.rank <= 3 ? 'text-[#E26A59]' : 'text-[#2A2A2A]'
+                }`}
+              >
+                #{topic.rank}
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span
+                    className={`font-sans text-[13px] font-bold leading-tight truncate ${
+                      isDone ? 'line-through text-[#777]' : 'text-[#2A2A2A]'
+                    }`}
+                  >
+                    {topic.title}
+                  </span>
+                  {isNew && (
+                    <span className="font-mono text-[9px] bg-[#E26A59] text-white px-1 py-0.2 rounded-xs font-bold shrink-0">
+                      ★ NEW
+                    </span>
+                  )}
+                  {topic.recentUpdate && (
+                    <span className="font-mono text-[9px] bg-[#F5A623] text-[#2A2A2A] px-1 py-0.2 rounded-xs font-bold shrink-0">
+                      ⚡ UPD
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#666] mt-0.5">
+                  <span className="font-bold text-[#0D9488] bg-[#D1FAF0] px-1 rounded-xs">
+                    {topic.primaryPaper}
+                  </span>
+                  <span>P: {topic.prob}</span>
+                  <span>★ {topic.effort}</span>
+                  <span className="text-[#888] underline ml-1">Dossier ▼</span>
+                </div>
+              </div>
+            </button>
+
+            {/* Right: Done Checkbox */}
+            <button
+              type="button"
+              onClick={onToggleDone}
+              title={isDone ? 'Mark as not done' : 'Mark this topic as done (+100 XP)'}
+              className={`w-9 h-9 border-2 border-[#2A2A2A] font-vt text-2xl flex items-center justify-center cursor-pointer shrink-0 transition-all ${
+                isDone
+                  ? 'bg-[#50E3C2] text-[#2A2A2A] shadow-none translate-x-[1px] translate-y-[1px]'
+                  : 'bg-white text-[#2A2A2A] hover:bg-[#E0FFF8] shadow-[1.5px_1.5px_0px_#2A2A2A]'
               }`}
             >
-              #{topic.rank}
-            </span>
-            {isNew ? (
-              <span className="font-mono text-[10px] bg-[#E26A59] text-white px-1.5 py-0.5 rounded-xs font-bold whitespace-nowrap">
-                ★ NEW
-              </span>
-            ) : (
-              <span className="font-mono text-[10px] bg-[#2A2A2A] text-white px-1.5 py-0.5 rounded-xs font-bold">
-                {topic.monthShort}
-              </span>
-            )}
-            <span className="font-mono text-[11px] text-[#555] font-bold">
-              P: {topic.prob}
-            </span>
+              {isDone ? '✔' : '☐'}
+            </button>
           </div>
-
-          <div className="flex items-center gap-1.5">
-            <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488]">
-              ★ {topic.effort}
-            </span>
-            <span className="font-vt text-sm text-[#888]">
-              C:\CA\{String(topic.id).padStart(2, '0')}.DOS
-            </span>
-          </div>
-        </div>
-
-        {/* Full-Width Mobile Card Body */}
-        <div className="p-3 flex flex-col gap-2.5">
-          {/* Topic Title */}
-          <h3
-            className={`font-sans text-[15px] font-bold text-[#2A2A2A] leading-snug ${
-              isDone ? 'line-through text-[#666]' : ''
-            }`}
-          >
-            {topic.title}
-          </h3>
-
-          {/* Horizontal Paper Angle Selector Ribbon */}
-          <div className="flex items-center gap-1.5 overflow-x-auto hide-scroll py-0.5">
-            <span className="font-mono text-[10px] text-[#666] font-bold uppercase shrink-0">
-              ANGLE:
-            </span>
-            {topic.papers.map((p) => {
-              const isActive = p === activePaper;
-              const isPrimary = p === topic.primaryPaper;
-              return (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => onSelectPaper(p)}
-                  className={`shrink-0 font-mono text-[11px] font-bold px-2 py-1 border-[1.5px] border-[#2A2A2A] transition-all cursor-pointer ${
-                    isActive
-                      ? 'text-white shadow-none'
-                      : 'bg-white text-[#2A2A2A] hover:bg-[#F0ECE0] shadow-[1px_1px_0px_#2A2A2A]'
+        ) : (
+          /* ── FULL DOSSIER CARD MODE ── */
+          <>
+            {/* Retro Header Window Bar */}
+            <div className="bg-[#F4F1E1] border-b-2 border-[#2A2A2A] px-3 py-2 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span
+                  className={`font-vt text-2xl leading-none font-bold ${
+                    topic.rank <= 3 ? 'text-[#E26A59]' : 'text-[#2A2A2A]'
                   }`}
-                  style={
-                    isActive
-                      ? { backgroundColor: PAPER_COLORS[p]?.activeBg || '#2A2A2A' }
-                      : {}
-                  }
                 >
-                  {p}
-                  {isPrimary ? ' (Primary)' : ''}
+                  #{topic.rank}
+                </span>
+                {isNew ? (
+                  <span className="font-mono text-[10px] bg-[#E26A59] text-white px-1.5 py-0.5 rounded-xs font-bold whitespace-nowrap">
+                    ★ NEW
+                  </span>
+                ) : (
+                  <span className="font-mono text-[10px] bg-[#2A2A2A] text-white px-1.5 py-0.5 rounded-xs font-bold">
+                    {topic.monthShort}
+                  </span>
+                )}
+                <span className="font-mono text-[11px] text-[#555] font-bold">
+                  P: {topic.prob}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 bg-[#D1FAF0] text-[#0D9488] border border-[#0D9488]">
+                  ★ {topic.effort}
+                </span>
+                {isCompactExpanded && (
+                  <button
+                    type="button"
+                    onClick={() => setIsCompactExpanded(false)}
+                    className="font-mono text-[10px] font-bold text-[#E26A59] underline cursor-pointer"
+                  >
+                    CLOSE ▲
+                  </button>
+                )}
+                <span className="font-vt text-sm text-[#888]">
+                  C:\CA\{String(topic.id).padStart(2, '0')}.DOS
+                </span>
+              </div>
+            </div>
+
+            {/* Full-Width Mobile Card Body */}
+            <div className="p-3 flex flex-col gap-2.5">
+              {/* Topic Title */}
+              <h3
+                className={`font-sans text-[15px] font-bold text-[#2A2A2A] leading-snug ${
+                  isDone ? 'line-through text-[#666]' : ''
+                }`}
+              >
+                {topic.title}
+              </h3>
+
+              {/* Horizontal Paper Angle Selector Ribbon */}
+              <div className="flex items-center gap-1.5 overflow-x-auto hide-scroll py-0.5">
+                <span className="font-mono text-[10px] text-[#666] font-bold uppercase shrink-0">
+                  ANGLE:
+                </span>
+                {topic.papers.map((p) => {
+                  const isActive = p === activePaper;
+                  const isPrimary = p === topic.primaryPaper;
+                  return (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => onSelectPaper(p)}
+                      className={`shrink-0 font-mono text-[11px] font-bold px-2 py-1 border-[1.5px] border-[#2A2A2A] transition-all cursor-pointer ${
+                        isActive
+                          ? 'text-white shadow-none'
+                          : 'bg-white text-[#2A2A2A] hover:bg-[#F0ECE0] shadow-[1px_1px_0px_#2A2A2A]'
+                      }`}
+                      style={
+                        isActive
+                          ? { backgroundColor: PAPER_COLORS[p]?.activeBg || '#2A2A2A' }
+                          : {}
+                      }
+                    >
+                      {p}
+                      {isPrimary ? ' (Primary)' : ''}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Official Syllabus Pointer Box (100% Width, Collapsible) */}
+              <div className="bg-[#FAF8F2] border-[1.5px] border-[#2A2A2A] border-l-4 border-l-[#FFD25A] p-2.5 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setIsSyllabusOpen(!isSyllabusOpen)}
+                  className="w-full font-mono text-[10px] font-bold text-[#555] uppercase mb-1 flex justify-between items-center cursor-pointer text-left"
+                >
+                  <span>OFFICIAL SYLLABUS // {activePaper}</span>
+                  <span className="text-[10px] text-[#0D9488] font-bold">
+                    {isSyllabusOpen ? '▲ HIDE' : '▼ SHOW MATCH'}
+                  </span>
                 </button>
-              );
-            })}
-          </div>
+                {isSyllabusOpen && (
+                  <div className="font-sans font-semibold text-[#2A2A2A] text-[13px] leading-relaxed mt-1">
+                    {syllabusText}
+                  </div>
+                )}
+              </div>
 
-          {/* Official Syllabus Pointer Box (100% Width) */}
-          <div className="bg-[#FAF8F2] border-[1.5px] border-[#2A2A2A] border-l-4 border-l-[#FFD25A] p-2.5 text-xs">
-            <div className="font-mono text-[10px] font-bold text-[#555] uppercase mb-1 flex justify-between items-center">
-              <span>OFFICIAL SYLLABUS // {activePaper}</span>
-              <span className="text-[10px] text-[#0D9488] font-bold">MATCH</span>
+              {/* Plain English Exam Hook (Full Width, Relaxed Reading) */}
+              <div
+                className="text-[13px] text-[#444] font-sans leading-relaxed [&>strong]:text-[#2A2A2A] [&>strong]:font-bold [&>em]:italic"
+                dangerouslySetInnerHTML={{ __html: angleText }}
+              />
+
+              {/* Delta Subsequent Update Banner */}
+              {topic.recentUpdate && (
+                <UpdateBanner
+                  topicId={topic.id}
+                  update={topic.recentUpdate}
+                  isReviewed={isUpdateDone}
+                  onToggleReview={onToggleUpdateDone}
+                />
+              )}
             </div>
-            <div className="font-sans font-semibold text-[#2A2A2A] text-[13px] leading-relaxed">
-              {syllabusText}
+
+            {/* Full-Width Mobile Action Footer */}
+            <div className="bg-[#F4F1E1] border-t-2 border-[#2A2A2A] px-3 py-2 flex items-center justify-between">
+              <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold">
+                {isDone ? (
+                  <span className="text-[#0D9488] flex items-center gap-1">✔ MASTERED (+100 XP)</span>
+                ) : (
+                  <span className="text-[#666] flex items-center gap-1">● NOT COMPLETED</span>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={onToggleDone}
+                title={isDone ? 'Mark as not done' : 'Mark this topic as done (+100 XP)'}
+                className={`px-3 py-1.5 border-2 border-[#2A2A2A] font-vt text-lg flex items-center gap-1.5 cursor-pointer transition-all ${
+                  isDone
+                    ? 'bg-[#50E3C2] text-[#2A2A2A] shadow-none translate-x-[1px] translate-y-[1px]'
+                    : 'bg-white text-[#2A2A2A] hover:bg-[#E0FFF8] shadow-[2px_2px_0px_#2A2A2A]'
+                }`}
+              >
+                <span className="text-xl leading-none">{isDone ? '✔' : '☐'}</span>
+                <span className="font-mono text-xs font-bold uppercase">{isDone ? 'DONE' : 'MARK DONE'}</span>
+              </button>
             </div>
-          </div>
-
-          {/* Plain English Exam Hook (Full Width, Relaxed Reading) */}
-          <div
-            className="text-[13px] text-[#444] font-sans leading-relaxed [&>strong]:text-[#2A2A2A] [&>strong]:font-bold [&>em]:italic"
-            dangerouslySetInnerHTML={{ __html: angleText }}
-          />
-
-          {/* Delta Subsequent Update Banner */}
-          {topic.recentUpdate && (
-            <UpdateBanner
-              topicId={topic.id}
-              update={topic.recentUpdate}
-              isReviewed={isUpdateDone}
-              onToggleReview={onToggleUpdateDone}
-            />
-          )}
-        </div>
-
-        {/* Full-Width Mobile Action Footer */}
-        <div className="bg-[#F4F1E1] border-t-2 border-[#2A2A2A] px-3 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold">
-            {isDone ? (
-              <span className="text-[#0D9488] flex items-center gap-1">✔ MASTERED (+100 XP)</span>
-            ) : (
-              <span className="text-[#666] flex items-center gap-1">● NOT COMPLETED</span>
-            )}
-          </div>
-          <button
-            type="button"
-            onClick={onToggleDone}
-            title={isDone ? 'Mark as not done' : 'Mark this topic as done (+100 XP)'}
-            className={`px-3 py-1.5 border-2 border-[#2A2A2A] font-vt text-lg flex items-center gap-1.5 cursor-pointer transition-all ${
-              isDone
-                ? 'bg-[#50E3C2] text-[#2A2A2A] shadow-none translate-x-[1px] translate-y-[1px]'
-                : 'bg-white text-[#2A2A2A] hover:bg-[#E0FFF8] shadow-[2px_2px_0px_#2A2A2A]'
-            }`}
-          >
-            <span className="text-xl leading-none">{isDone ? '✔' : '☐'}</span>
-            <span className="font-mono text-xs font-bold uppercase">{isDone ? 'DONE' : 'MARK DONE'}</span>
-          </button>
-        </div>
+          </>
+        )}
       </div>
     </div>
   );

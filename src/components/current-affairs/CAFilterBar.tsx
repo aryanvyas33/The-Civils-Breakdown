@@ -9,6 +9,10 @@ interface CAFilterBarProps {
   onPaperChange: (paper: CAPaperFilter) => void;
   onTierChange: (tier: CATierFilter) => void;
   topics?: CATopic[];
+  mobileViewMode?: 'dossier' | 'compact';
+  onViewModeChange?: (mode: 'dossier' | 'compact') => void;
+  statusFilter?: 'all' | 'pending' | 'done';
+  onStatusFilterChange?: (status: 'all' | 'pending' | 'done') => void;
 }
 
 export default function CAFilterBar({
@@ -17,6 +21,10 @@ export default function CAFilterBar({
   onPaperChange,
   onTierChange,
   topics,
+  mobileViewMode = 'dossier',
+  onViewModeChange,
+  statusFilter = 'all',
+  onStatusFilterChange,
 }: CAFilterBarProps) {
   const total = topics ? topics.length : 94;
   const gs1Count = topics ? topics.filter((t) => t.papers.includes('GS1')).length : 16;
@@ -160,8 +168,59 @@ export default function CAFilterBar({
         </div>
       </div>
 
-      {/* Mobile-Only Dual Horizontal Snap Pill Trays */}
+      {/* Mobile-Only Dual Horizontal Snap Pill Trays & View Controls */}
       <div className="sm:hidden flex flex-col gap-2.5">
+        {/* Mobile View Mode & Status Filter Row */}
+        <div className="flex items-center justify-between gap-1.5 pb-2 border-b border-[#2A2A2A]/20">
+          {/* Mode Switcher */}
+          <div className="flex items-center gap-1 bg-[#F4F1E1] p-0.5 border border-[#2A2A2A]">
+            <button
+              type="button"
+              onClick={() => onViewModeChange?.('dossier')}
+              className={`font-mono text-[10px] font-bold px-2 py-1 transition-all cursor-pointer ${
+                mobileViewMode === 'dossier'
+                  ? 'bg-[#2A2A2A] text-white shadow-none'
+                  : 'text-[#666] hover:text-[#2A2A2A]'
+              }`}
+            >
+              📋 DOSSIER
+            </button>
+            <button
+              type="button"
+              onClick={() => onViewModeChange?.('compact')}
+              className={`font-mono text-[10px] font-bold px-2 py-1 transition-all cursor-pointer ${
+                mobileViewMode === 'compact'
+                  ? 'bg-[#2A2A2A] text-white shadow-none'
+                  : 'text-[#666] hover:text-[#2A2A2A]'
+              }`}
+            >
+              📑 LIST
+            </button>
+          </div>
+
+          {/* Status Filter */}
+          <div className="flex items-center gap-1">
+            {(['all', 'pending', 'done'] as const).map((st) => {
+              const isActive = statusFilter === st;
+              const label = st === 'all' ? 'ALL' : st === 'pending' ? '⏳ PENDING' : '✔ DONE';
+              return (
+                <button
+                  key={st}
+                  type="button"
+                  onClick={() => onStatusFilterChange?.(st)}
+                  className={`font-mono text-[10px] font-bold px-2 py-1 border border-[#2A2A2A] transition-all cursor-pointer ${
+                    isActive
+                      ? 'bg-[#50E3C2] text-[#2A2A2A] shadow-none font-black'
+                      : 'bg-white text-[#666] hover:bg-[#F0ECE0]'
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* GS Paper Snap Tray */}
         <div>
           <div className="flex items-center justify-between text-[11px] font-mono text-[#666] font-bold uppercase mb-1">
